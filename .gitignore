@@ -102,5 +102,7 @@ Assets/TextMesh Pro/Examples & Extras.meta
 /Assets/AGXUnity
 /Assets/AGXUnity.meta
 ProjectSettings/Packages/com.algoryx.agxunity/
+Assets/agx.lfx
+Assets/agx.lfx.meta
 
 *.zip
