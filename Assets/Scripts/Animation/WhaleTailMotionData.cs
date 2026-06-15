@@ -2,6 +2,7 @@ using UnityEngine;
 using MotionDataPacketClass;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.InputSystem.XR;
 public class WhaleTailMotionData : MonoBehaviour
 {   
     CameraControls controls;
@@ -31,14 +32,26 @@ public class WhaleTailMotionData : MonoBehaviour
     private Quaternion bodyStartRot;
     private Quaternion tailStartRot;
 
+    private Dictionary<string,Quaternion> boneStart = new Dictionary<string,Quaternion>();
+
     private Quaternion bodyTargetRotation;
     private Quaternion tailTargetRotation;
     public bool useSlerp = true;
+    
+    void saveBoneStart()
+    {
+        foreach (GameObject bone_ in bonesList)
+        {
+            string cur_boneName = bone_.name;
+            boneStart.Add(cur_boneName,bone_.transform.localRotation);
+        }
+    }
 
     void Start()
     {
         LoadMotionDataCSV();
         findBones();
+        saveBoneStart();
 
     }
  void Awake()
@@ -119,6 +132,20 @@ public class WhaleTailMotionData : MonoBehaviour
    
     }
 
+
+
+    void updateTail(MotionDataPacket currentPacket)
+    {
+        
+        float equalUpdate = (currentPacket.fluking_signal/bonesList.Count); 
+        foreach (GameObject bone_ in bonesList)
+        {
+            Quaternion currentStart = boneStart[bone_.name];
+            bone_.transform.localRotation = Quaternion.Euler(equalUpdate, 0, 0) * currentStart;
+
+        }
+    }
+
   void FixedUpdate()
 {
 
@@ -168,15 +195,16 @@ public class WhaleTailMotionData : MonoBehaviour
             tailTargetRotation = tailRoot.transform.localRotation;
         }
 
+        updateTail(currentPacket);
         if (useSlerp)
         {
             bodyTargetRotation = Quaternion.Euler(currentPacket.body_signal, 0, 0) * bodyStartRot;
-            tailTargetRotation = Quaternion.Euler(currentPacket.fluking_signal*1.1f, 0, 0) * tailStartRot;
+            //tailTargetRotation = Quaternion.Euler(currentPacket.fluking_signal*1.1f, 0, 0) * tailStartRot;
         }
         else
         {
             bodyRoot.transform.rotation = Quaternion.Euler(currentPacket.body_signal, 0, 0) * bodyStartRot;
-            tailRoot.transform.localRotation = Quaternion.Euler(currentPacket.fluking_signal, 0, 0) * tailStartRot;
+            //tailRoot.transform.localRotation = Quaternion.Euler(currentPacket.fluking_signal, 0, 0) * tailStartRot;
         }
         // Set rotation target
         //bodyTargetRotation = Quaternion.Euler(currentPacket.body_signal, 0, 0) * bodyStartRot;

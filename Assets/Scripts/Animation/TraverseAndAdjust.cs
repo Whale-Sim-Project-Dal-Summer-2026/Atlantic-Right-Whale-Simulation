@@ -8,6 +8,7 @@ public class TraverseAndAdjust : MonoBehaviour
 
     public Transform stopObject;
 
+    private int boneCount; 
 
     float pitch, roll, yaw; 
     
@@ -46,4 +47,6 @@ public class TraverseAndAdjust : MonoBehaviour
     {
 
     }
+
+
 }
