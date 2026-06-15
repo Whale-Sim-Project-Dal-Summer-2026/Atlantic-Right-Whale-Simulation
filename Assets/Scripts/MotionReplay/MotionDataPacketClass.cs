@@ -39,6 +39,11 @@ public class MotionDataPacket
     /// Fluke signal <see langword="in"/> radians  
     /// </summary>
     public float fluking_signal;
+
+    /// <summary>
+    /// Body signal <see langword="in"/> radians  
+    /// </summary>
+    public float body_signal;
     
     /// <summary>
     /// <see langword="bool"/> <see langword="for"/> flagging <see langword="if"/> mouth <see langword="is"/> open <see langword="or"/>closed       
