@@ -492,6 +492,7 @@ MonoBehaviour:
   bodyRoot: {fileID: 1433728758}
   positionSmoothSpeed: 5
   rotationSmoothSpeed: 5
+  useSlerp: 0
 --- !u!1 &1620503880 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3845953901806290678, guid: 3bf820b5dafa87142b89077383b0492c, type: 3}

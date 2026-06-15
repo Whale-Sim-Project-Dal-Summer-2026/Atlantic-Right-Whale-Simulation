@@ -8,13 +8,13 @@ public class WhaleTailMotionData : MonoBehaviour
     public TextAsset csvData;
     public List<MotionDataPacket> motionDataPacketList = new List<MotionDataPacket>();
 
-    public List<Transform> bonesList = new List<Transform>();
+    public List<GameObject> bonesList = new List<GameObject>();
 
-    private int bodyRootIndex;
-    private int tailRootIndex;  
     private int counter = 0;
 
     public GameObject tailRoot;
+    public Transform tailStop;
+
     public GameObject bodyRoot; 
 
     public float positionSmoothSpeed = 5f;
@@ -33,10 +33,11 @@ public class WhaleTailMotionData : MonoBehaviour
 
     private Quaternion bodyTargetRotation;
     private Quaternion tailTargetRotation;
+    public bool useSlerp = true;
 
     void Start()
     {
-        LoadCSV();
+        LoadMotionDataCSV();
         findBones();
 
     }
@@ -61,7 +62,7 @@ public class WhaleTailMotionData : MonoBehaviour
         controls.Disable();
     }
 
-    void LoadCSV()
+    void LoadMotionDataCSV()
     {
         // Split file into lines 
         string[] lines = csvData.text.Split(new char[] { '\n', '\r' }, System.StringSplitOptions.RemoveEmptyEntries);
@@ -95,8 +96,27 @@ public class WhaleTailMotionData : MonoBehaviour
     }
     void findBones()
     {
-        
 
+        bonesList.Add(tailRoot);
+
+        GetAllChildren(tailRoot,bonesList);
+
+    }
+
+    void GetAllChildren(GameObject parent, List<GameObject> addingList){
+        foreach (Transform child in parent.transform){
+
+            if (child.name == "Colliders"|| child.name == "Collider"){ continue;}
+            addingList.Add(child.gameObject);
+
+            if (child == tailStop)
+            {
+                break;
+            }
+            // Recursively add this child's children
+            GetAllChildren(child.gameObject,addingList);
+        }
+   
     }
 
   void FixedUpdate()
@@ -106,12 +126,17 @@ public class WhaleTailMotionData : MonoBehaviour
 
     if (motionDataPacketList.Count == 0) return;
 
-    bodyRoot.transform.rotation = Quaternion.Slerp(bodyRoot.transform.rotation, bodyTargetRotation, Time.fixedDeltaTime);// * rotationSmoothSpeed);
+    if (useSlerp)
+    {
+        bodyRoot.transform.rotation = Quaternion.Slerp(bodyRoot.transform.rotation, bodyTargetRotation, Time.fixedDeltaTime * rotationSmoothSpeed);
+        tailRoot.transform.localRotation = Quaternion.Slerp(tailRoot.transform.localRotation, tailTargetRotation, Time.fixedDeltaTime * rotationSmoothSpeed);
+    }
+    //bodyRoot.transform.rotation = Quaternion.Slerp(bodyRoot.transform.rotation, bodyTargetRotation, Time.fixedDeltaTime);// * rotationSmoothSpeed);
 
     
     //bodyRoot.transform.rotation = Quaternion.Slerp(bodyRoot.transform.rotation, bodyTargetRotation, (Time.fixedDeltaTime*0.1f) * rotationSmoothSpeed);
 
-    tailRoot.transform.localRotation = Quaternion.Slerp(tailRoot.transform.localRotation, tailTargetRotation, Time.fixedDeltaTime);//* rotationSmoothSpeed);
+    //tailRoot.transform.localRotation = Quaternion.Slerp(tailRoot.transform.localRotation, tailTargetRotation, Time.fixedDeltaTime);//* rotationSmoothSpeed);
         
     
     // if (counter == 50)
@@ -143,13 +168,24 @@ public class WhaleTailMotionData : MonoBehaviour
             tailTargetRotation = tailRoot.transform.localRotation;
         }
 
+        if (useSlerp)
+        {
+            bodyTargetRotation = Quaternion.Euler(currentPacket.body_signal, 0, 0) * bodyStartRot;
+            tailTargetRotation = Quaternion.Euler(currentPacket.fluking_signal*1.1f, 0, 0) * tailStartRot;
+        }
+        else
+        {
+            bodyRoot.transform.rotation = Quaternion.Euler(currentPacket.body_signal, 0, 0) * bodyStartRot;
+            tailRoot.transform.localRotation = Quaternion.Euler(currentPacket.fluking_signal, 0, 0) * tailStartRot;
+        }
         // Set rotation target
-        bodyTargetRotation = Quaternion.Euler(currentPacket.body_signal, 0, 0) * bodyStartRot;
+        //bodyTargetRotation = Quaternion.Euler(currentPacket.body_signal, 0, 0) * bodyStartRot;
 
         //SCALING THE FLUKE AMOUNG TO MAKE THE MOTION HAVE MORE AMPLITUDE 
-        tailTargetRotation = Quaternion.Euler(currentPacket.fluking_signal*1.25f, 0, 0) * tailStartRot;
+        //tailTargetRotation = Quaternion.Euler(currentPacket.fluking_signal*1.1f, 0, 0) * tailStartRot;
 
-  
+        // bodyRoot.transform.rotation = Quaternion.Euler(currentPacket.body_signal, 0, 0) * bodyStartRot;
+        // tailRoot.transform.localRotation = Quaternion.Euler(currentPacket.fluking_signal, 0, 0) * tailStartRot;
         
         counter++;
         
@@ -165,11 +201,18 @@ public class WhaleTailMotionData : MonoBehaviour
     if (controls.Player.Reset.triggered){
 
         bodyRoot.transform.rotation = bodyStartRot;
-        tailRoot.transform.rotation = tailStartRot;
+        tailRoot.transform.localRotation = tailStartRot;
     
         currentItemIndex = 0;      
     }
 
 
 }
+
+
+
+
+
+
+
 }
