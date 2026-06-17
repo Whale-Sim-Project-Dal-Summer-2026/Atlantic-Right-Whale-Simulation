@@ -1,15 +1,13 @@
 using UnityEngine;
 using MotionDataPacketClass;
 using System.Collections.Generic;
-public class WhaleTailMotionData : MonoBehaviour
+public class WhaleFlukingMotionDriver: MonoBehaviour
 {   
     CameraControls controls;
-    public TextAsset csv_MotionData;
     public List<MotionDataPacket> motionDataPacketList = new List<MotionDataPacket>();
 
     public List<GameObject> bonesList = new List<GameObject>();
 
-    private int counter = 0;
 
     public GameObject tailRoot;
     public Transform tailStop;
@@ -35,6 +33,9 @@ public class WhaleTailMotionData : MonoBehaviour
     private Quaternion bodyTargetRotation;
     private Quaternion tailTargetRotation;
     public bool useSlerp;
+
+    [Header("Animation Settings")]
+    public AnimationSettings animationSettings;
     
     void saveBoneStart()
     {
@@ -74,7 +75,7 @@ public class WhaleTailMotionData : MonoBehaviour
     }
 
     void LoadMotionDataCSV(){
-        var loaded_CsvData = loadCSV(csv_MotionData,true);
+        var loaded_CsvData = loadCSV(animationSettings.MotionData_csv,animationSettings.MotionData_ContainsHeaders);
         string[][] motionData = loaded_CsvData.data;
 
         for (int i = 0;i<motionData.Length; i++)
@@ -96,34 +97,6 @@ public class WhaleTailMotionData : MonoBehaviour
                
                 motionDataPacketList.Add(dataPacket);
         }
-
-        // // Split file into lines 
-        // string[] lines = csvData.text.Split(new char[] { '\n', '\r' }, System.StringSplitOptions.RemoveEmptyEntries);
-
-        // for (int i = 1; i < lines.Length; i++)
-        // {
-        //     string[] values = lines[i].Split(',');
-
-        //     if (values.Length >= cols.Length) 
-        //     {
-        //         MotionDataPacket dataPacket = new MotionDataPacket();
-                
-        //         dataPacket.timestep = float.Parse(values[cols[0]]);
-        //         dataPacket.depth = float.Parse(values[cols[1]]);
-        //         dataPacket.head = float.Parse(values[cols[2]]) * Mathf.Rad2Deg;
-        //         dataPacket.pitch = -float.Parse(values[cols[3]]) * Mathf.Rad2Deg;
-        //         dataPacket.roll = float.Parse(values[cols[4]])* Mathf.Rad2Deg;
-        
-        //         if (values[cols[6]]=="NaN") { dataPacket.speed= 0.0f;}
-        //         else { dataPacket.speed = float.Parse(values[cols[5]]);}
-               
-        //         dataPacket.fluking_signal = float.Parse(values[cols[6]])* Mathf.Rad2Deg;
-        //         dataPacket.body_signal = float.Parse(values[cols[7]]) * Mathf.Rad2Deg;
-        //         dataPacket.MouthOpen = int.Parse(values[cols[8]]);
-               
-        //         motionDataPacketList.Add(dataPacket);
-        //     }
-        // }
         
         Debug.Log("Loaded " + motionDataPacketList.Count + " items from CSV.");
     }
@@ -258,12 +231,12 @@ public class WhaleTailMotionData : MonoBehaviour
         if (useSlerp)
         {
             bodyTargetRotation = Quaternion.Euler(currentPacket.body_signal, 0, 0) * bodyStartRot;
-            //tailTargetRotation = Quaternion.Euler(currentPacket.fluking_signal*1.1f, 0, 0) * tailStartRot;
+            tailTargetRotation = Quaternion.Euler(currentPacket.fluking_signal*1.1f, 0, 0) * tailStartRot;
         }
         else
         {
             bodyRoot.transform.rotation = Quaternion.Euler(currentPacket.body_signal, 0, 0) * bodyStartRot;
-            //tailRoot.transform.localRotation = Quaternion.Euler(currentPacket.fluking_signal, 0, 0) * tailStartRot;
+            tailRoot.transform.localRotation = Quaternion.Euler(currentPacket.fluking_signal, 0, 0) * tailStartRot;
         }
         // Set rotation target
         //bodyTargetRotation = Quaternion.Euler(currentPacket.body_signal, 0, 0) * bodyStartRot;
@@ -274,9 +247,7 @@ public class WhaleTailMotionData : MonoBehaviour
         // bodyRoot.transform.rotation = Quaternion.Euler(currentPacket.body_signal, 0, 0) * bodyStartRot;
         // tailRoot.transform.localRotation = Quaternion.Euler(currentPacket.fluking_signal, 0, 0) * tailStartRot;
         
-        counter++;
         
-
         // Move to the next index for the next frame
         currentItemIndex++;
     }
