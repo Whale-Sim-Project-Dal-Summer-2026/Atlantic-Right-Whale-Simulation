@@ -4,9 +4,9 @@ using System.Collections.Generic;
 public class WhaleFlukingMotionDriver: MonoBehaviour
 {   
     CameraControls controls;
-    public List<MotionDataPacket> motionDataPacketList = new List<MotionDataPacket>();
+    private List<MotionDataPacket> motionDataPacketList = new List<MotionDataPacket>();
 
-    public List<GameObject> bonesList = new List<GameObject>();
+    private List<GameObject> bonesList = new List<GameObject>();
 
 
     public GameObject tailRoot;
@@ -20,8 +20,6 @@ public class WhaleFlukingMotionDriver: MonoBehaviour
     //List of columns need for motion data packet
     private int[] cols = { 0, 1, 8, 9, 10, 12, 14, 15, 23 };
 
-    private int flukeSignal =  14;
-    private int bodyAngle = 15;
 
     private int currentItemIndex = 0;
 
@@ -80,22 +78,19 @@ public class WhaleFlukingMotionDriver: MonoBehaviour
 
         for (int i = 0;i<motionData.Length; i++)
         {
-                MotionDataPacket dataPacket = new MotionDataPacket();
-                
-                dataPacket.timestep = float.Parse(motionData[i][cols[0]]);
-                dataPacket.depth = float.Parse(motionData[i][cols[1]]);
-                dataPacket.head = float.Parse(motionData[i][cols[2]]) * Mathf.Rad2Deg;
-                dataPacket.pitch = -float.Parse(motionData[i][cols[3]]) * Mathf.Rad2Deg;
-                dataPacket.roll = float.Parse(motionData[i][cols[4]])* Mathf.Rad2Deg;
-        
-                if (motionData[i][cols[6]]=="NaN") { dataPacket.speed= 0.0f;}
-                else { dataPacket.speed = float.Parse(motionData[i][cols[5]]);}
-               
-                dataPacket.fluking_signal = float.Parse(motionData[i][cols[6]])* Mathf.Rad2Deg;
-                dataPacket.body_signal = float.Parse(motionData[i][cols[7]]) * Mathf.Rad2Deg;
-                dataPacket.MouthOpen = int.Parse(motionData[i][cols[8]]);
-               
-                motionDataPacketList.Add(dataPacket);
+            MotionDataPacket dataPacket = new MotionDataPacket {
+                timestep = float.Parse(motionData[i][cols[0]]),
+                depth = float.Parse(motionData[i][cols[1]]),
+                head = float.Parse(motionData[i][cols[2]]) * Mathf.Rad2Deg,
+                pitch = -float.Parse(motionData[i][cols[3]]) * Mathf.Rad2Deg,
+                roll = float.Parse(motionData[i][cols[4]]) * Mathf.Rad2Deg,
+                fluking_signal = float.Parse(motionData[i][cols[6]])* Mathf.Rad2Deg,
+                body_signal = float.Parse(motionData[i][cols[7]]) * Mathf.Rad2Deg,
+                MouthOpen = int.Parse(motionData[i][cols[8]]),
+                speed = motionData[i][cols[6]] == "NaN" ? 0.0f : float.Parse(motionData[i][cols[5]]);
+            };
+           
+            motionDataPacketList.Add(dataPacket);
         }
         
         Debug.Log("Loaded " + motionDataPacketList.Count + " items from CSV.");
