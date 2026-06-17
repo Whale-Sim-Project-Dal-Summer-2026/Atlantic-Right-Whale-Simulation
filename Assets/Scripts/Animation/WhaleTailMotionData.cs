@@ -1,12 +1,10 @@
 using UnityEngine;
 using MotionDataPacketClass;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.InputSystem.XR;
 public class WhaleTailMotionData : MonoBehaviour
 {   
     CameraControls controls;
-    public TextAsset csvData;
+    public TextAsset csv_MotionData;
     public List<MotionDataPacket> motionDataPacketList = new List<MotionDataPacket>();
 
     public List<GameObject> bonesList = new List<GameObject>();
@@ -36,7 +34,7 @@ public class WhaleTailMotionData : MonoBehaviour
 
     private Quaternion bodyTargetRotation;
     private Quaternion tailTargetRotation;
-    public bool useSlerp = true;
+    public bool useSlerp;
     
     void saveBoneStart()
     {
@@ -75,38 +73,99 @@ public class WhaleTailMotionData : MonoBehaviour
         controls.Disable();
     }
 
-    void LoadMotionDataCSV()
-    {
-        // Split file into lines 
-        string[] lines = csvData.text.Split(new char[] { '\n', '\r' }, System.StringSplitOptions.RemoveEmptyEntries);
+    void LoadMotionDataCSV(){
+        var loaded_CsvData = loadCSV(csv_MotionData,true);
+        string[][] motionData = loaded_CsvData.data;
 
-        for (int i = 1; i < lines.Length; i++)
+        for (int i = 0;i<motionData.Length; i++)
         {
-            string[] values = lines[i].Split(',');
-
-            if (values.Length >= cols.Length) 
-            {
                 MotionDataPacket dataPacket = new MotionDataPacket();
                 
-                dataPacket.timestep = float.Parse(values[cols[0]]);
-                dataPacket.depth = float.Parse(values[cols[1]]);
-                dataPacket.head = float.Parse(values[cols[2]]) * Mathf.Rad2Deg;
-                dataPacket.pitch = -float.Parse(values[cols[3]]) * Mathf.Rad2Deg;
-                dataPacket.roll = float.Parse(values[cols[4]])* Mathf.Rad2Deg;
+                dataPacket.timestep = float.Parse(motionData[i][cols[0]]);
+                dataPacket.depth = float.Parse(motionData[i][cols[1]]);
+                dataPacket.head = float.Parse(motionData[i][cols[2]]) * Mathf.Rad2Deg;
+                dataPacket.pitch = -float.Parse(motionData[i][cols[3]]) * Mathf.Rad2Deg;
+                dataPacket.roll = float.Parse(motionData[i][cols[4]])* Mathf.Rad2Deg;
         
-                if (values[cols[6]]=="NaN") { dataPacket.speed= 0.0f;}
-                else { dataPacket.speed = float.Parse(values[cols[5]]);}
+                if (motionData[i][cols[6]]=="NaN") { dataPacket.speed= 0.0f;}
+                else { dataPacket.speed = float.Parse(motionData[i][cols[5]]);}
                
-                dataPacket.fluking_signal = float.Parse(values[cols[6]])* Mathf.Rad2Deg;
-                dataPacket.body_signal = float.Parse(values[cols[7]]) * Mathf.Rad2Deg;
-                dataPacket.MouthOpen = int.Parse(values[cols[8]]);
+                dataPacket.fluking_signal = float.Parse(motionData[i][cols[6]])* Mathf.Rad2Deg;
+                dataPacket.body_signal = float.Parse(motionData[i][cols[7]]) * Mathf.Rad2Deg;
+                dataPacket.MouthOpen = int.Parse(motionData[i][cols[8]]);
                
                 motionDataPacketList.Add(dataPacket);
-            }
         }
+
+        // // Split file into lines 
+        // string[] lines = csvData.text.Split(new char[] { '\n', '\r' }, System.StringSplitOptions.RemoveEmptyEntries);
+
+        // for (int i = 1; i < lines.Length; i++)
+        // {
+        //     string[] values = lines[i].Split(',');
+
+        //     if (values.Length >= cols.Length) 
+        //     {
+        //         MotionDataPacket dataPacket = new MotionDataPacket();
+                
+        //         dataPacket.timestep = float.Parse(values[cols[0]]);
+        //         dataPacket.depth = float.Parse(values[cols[1]]);
+        //         dataPacket.head = float.Parse(values[cols[2]]) * Mathf.Rad2Deg;
+        //         dataPacket.pitch = -float.Parse(values[cols[3]]) * Mathf.Rad2Deg;
+        //         dataPacket.roll = float.Parse(values[cols[4]])* Mathf.Rad2Deg;
+        
+        //         if (values[cols[6]]=="NaN") { dataPacket.speed= 0.0f;}
+        //         else { dataPacket.speed = float.Parse(values[cols[5]]);}
+               
+        //         dataPacket.fluking_signal = float.Parse(values[cols[6]])* Mathf.Rad2Deg;
+        //         dataPacket.body_signal = float.Parse(values[cols[7]]) * Mathf.Rad2Deg;
+        //         dataPacket.MouthOpen = int.Parse(values[cols[8]]);
+               
+        //         motionDataPacketList.Add(dataPacket);
+        //     }
+        // }
         
         Debug.Log("Loaded " + motionDataPacketList.Count + " items from CSV.");
     }
+
+    // maybe refactor into a class???
+    private (string[][] data ,Dictionary<string,int> columnIndices) loadCSV(TextAsset csvFile,bool hasHeaders){
+        
+        // dict for getting the index of a column from its name
+        Dictionary<string,int> columnIndices = new Dictionary<string, int>();
+
+        int rowCount;
+        //sets start index for saving csvData
+        int startIndex = 0;
+
+        string[] lines = csvFile.text.Split(new char[] { '\n', '\r' }, System.StringSplitOptions.RemoveEmptyEntries);
+        rowCount = lines.Length; 
+    
+        // Gets columns from csv if present
+        if (hasHeaders){
+            string[] headers = lines[0].Split(',');
+            for (int i = 0; i < headers.Length; i++){columnIndices[headers[i].Trim()] = i;}
+            startIndex++;
+            rowCount--;
+        } 
+
+        string[][] outputData = new string[rowCount][];
+
+        for (int i = startIndex; i < lines.Length; i++){
+            string[] currentRowValues = lines[i].Split(',');
+
+            if (currentRowValues.Length >= cols.Length){
+
+                if (hasHeaders){outputData[i-1] = currentRowValues;} 
+                else {outputData[i] = currentRowValues;}
+            }
+        }
+        
+        return (outputData,columnIndices);
+    }
+
+
+
     void findBones()
     {
 
