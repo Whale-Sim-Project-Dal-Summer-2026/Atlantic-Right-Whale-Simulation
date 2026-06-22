@@ -1,6 +1,9 @@
 using UnityEngine;
 using MotionDataPacketClass;
 using System.Collections.Generic;
+using FlukeWaveAmplitudeLookUpClass;
+using System;
+
 public class WhaleFlukingMotionDriver: MonoBehaviour
 {   
     CameraControls controls;
@@ -17,10 +20,8 @@ public class WhaleFlukingMotionDriver: MonoBehaviour
     public float positionSmoothSpeed = 5f;
     public float rotationSmoothSpeed = 5f;
 
-    //List of columns need for motion data packet
-    private int[] cols = { 0, 1, 8, 9, 10, 12, 14, 15, 23 };
 
-
+    FlukeWaveAmplitudeLookUp lookUp;
     private int currentItemIndex = 0;
 
     private Quaternion bodyStartRot;
@@ -34,6 +35,36 @@ public class WhaleFlukingMotionDriver: MonoBehaviour
 
     [Header("Animation Settings")]
     public AnimationSettings animationSettings;
+
+    public bool updateAmpFreq = false; 
+
+    [Header("Tweaking Parameters")]
+    public double amplitude = 0.0101001492483101;
+    public double frequency = 0.142049987510281;
+    public float wave_offset;
+
+    public float phaseShiftPerUnit = 0.8f; 
+
+    // update to be around normal limits of whale tail movement 
+    public List<float> boneMaxAngles = new List<float>
+{
+    0.1f, 
+    0.1f, 
+    0.1f, 
+    0.1f, 
+    0.1f, 
+    0.1f, 
+    0.1f, 
+    0.1f, 
+    0.1f, 
+    0.1f, 
+    0.1f, 
+    0.1f, 
+    0.1f, 
+    0.1f, 
+    0.1f
+};
+public float boneLength = 0.1f;
     
     void saveBoneStart()
     {
@@ -47,12 +78,13 @@ public class WhaleFlukingMotionDriver: MonoBehaviour
     void Start()
     {
         LoadMotionDataCSV();
+        loadFlukeWaveAmplitudeLookUpCSV();
         findBones();
         saveBoneStart();
 
     }
- void Awake()
-    {
+ void Awake(){
+
         tailStartRot = tailRoot.transform.localRotation;
         bodyStartRot = bodyRoot.transform.rotation;
 
@@ -62,32 +94,31 @@ public class WhaleFlukingMotionDriver: MonoBehaviour
         controls = new CameraControls();
     }
 
-    void OnEnable()
-    {
+    void OnEnable(){
         controls.Enable();
     }
 
-    void OnDisable()
-    {
+    void OnDisable(){
         controls.Disable();
     }
 
     void LoadMotionDataCSV(){
         var loaded_CsvData = loadCSV(animationSettings.MotionData_csv,animationSettings.MotionData_ContainsHeaders);
         string[][] motionData = loaded_CsvData.data;
+        Dictionary<string,int> columnIndices= loaded_CsvData.columnIndices;
 
         for (int i = 0;i<motionData.Length; i++)
         {
             MotionDataPacket dataPacket = new MotionDataPacket {
-                timestep = float.Parse(motionData[i][cols[0]]),
-                depth = float.Parse(motionData[i][cols[1]]),
-                head = float.Parse(motionData[i][cols[2]]) * Mathf.Rad2Deg,
-                pitch = -float.Parse(motionData[i][cols[3]]) * Mathf.Rad2Deg,
-                roll = float.Parse(motionData[i][cols[4]]) * Mathf.Rad2Deg,
-                fluking_signal = float.Parse(motionData[i][cols[6]])* Mathf.Rad2Deg,
-                body_signal = float.Parse(motionData[i][cols[7]]) * Mathf.Rad2Deg,
-                MouthOpen = int.Parse(motionData[i][cols[8]]),
-                speed = motionData[i][cols[6]] == "NaN" ? 0.0f : float.Parse(motionData[i][cols[5]]);
+                timestep = float.Parse(motionData[i][columnIndices["Date"]]),
+                depth = float.Parse(motionData[i][columnIndices["Depth"]]),
+                head = float.Parse(motionData[i][columnIndices["head"]]) * Mathf.Rad2Deg,
+                pitch = -float.Parse(motionData[i][columnIndices["pitch"]]) * Mathf.Rad2Deg,
+                roll = float.Parse(motionData[i][columnIndices["roll"]]) * Mathf.Rad2Deg,
+                fluking_signal = float.Parse(motionData[i][columnIndices["fluking_signal"]])* Mathf.Rad2Deg,
+                body_signal = float.Parse(motionData[i][columnIndices["body_orientation"]]) * Mathf.Rad2Deg,
+                MouthOpen = int.Parse(motionData[i][columnIndices["MouthOpen"]]),
+                speed = motionData[i][columnIndices["speed"]] == "NaN" ? 0.0f : float.Parse(motionData[i][columnIndices["speed"]])
             };
            
             motionDataPacketList.Add(dataPacket);
@@ -95,9 +126,18 @@ public class WhaleFlukingMotionDriver: MonoBehaviour
         
         Debug.Log("Loaded " + motionDataPacketList.Count + " items from CSV.");
     }
+    void loadFlukeWaveAmplitudeLookUpCSV(){
+        var loaded_CsvData = loadCSV(animationSettings.FlukeAmpLookUp_csv,animationSettings.FlukeAmp_ContainsHeaders);
+        string[][] csvData = loaded_CsvData.data;
+        Dictionary<string,int> columnIndices= loaded_CsvData.columnIndices;
+
+        lookUp = new FlukeWaveAmplitudeLookUp(csvData,columnIndices);
+
+        Debug.Log("Loaded Fluke Wave Amplitude LookUp with " + lookUp.Count() + " entries.");
+    }
 
     // maybe refactor into a class???
-    private (string[][] data ,Dictionary<string,int> columnIndices) loadCSV(TextAsset csvFile,bool hasHeaders){
+    (string[][] data ,Dictionary<string,int> columnIndices) loadCSV(TextAsset csvFile,bool hasHeaders){
         
         // dict for getting the index of a column from its name
         Dictionary<string,int> columnIndices = new Dictionary<string, int>();
@@ -122,7 +162,7 @@ public class WhaleFlukingMotionDriver: MonoBehaviour
         for (int i = startIndex; i < lines.Length; i++){
             string[] currentRowValues = lines[i].Split(',');
 
-            if (currentRowValues.Length >= cols.Length){
+            if (currentRowValues.Length >= columnIndices.Count){
 
                 if (hasHeaders){outputData[i-1] = currentRowValues;} 
                 else {outputData[i] = currentRowValues;}
@@ -133,7 +173,7 @@ public class WhaleFlukingMotionDriver: MonoBehaviour
     }
 
 
-
+    //---------------TAIL ANIMATION---------------------
     void findBones()
     {
 
@@ -142,7 +182,8 @@ public class WhaleFlukingMotionDriver: MonoBehaviour
         GetAllChildren(tailRoot,bonesList);
 
     }
-
+    // this could be jumped into whale class? then build the tail bones inside that and then this can be used to call for update
+//-- keeps timer static and on track for everything eles
     void GetAllChildren(GameObject parent, List<GameObject> addingList){
         foreach (Transform child in parent.transform){
 
@@ -158,51 +199,29 @@ public class WhaleFlukingMotionDriver: MonoBehaviour
         }
    
     }
-
-
-
-    void updateTail(MotionDataPacket currentPacket)
-    {
-        
-        float equalUpdate = (currentPacket.fluking_signal/bonesList.Count); 
-        foreach (GameObject bone_ in bonesList)
-        {
-            Quaternion currentStart = boneStart[bone_.name];
-            bone_.transform.localRotation = Quaternion.Euler(equalUpdate, 0, 0) * currentStart;
-
+    MotionDataPacket getNextPacket() {
+        if (motionDataPacketList.Count == 0) return null;
+        MotionDataPacket nextPacket = null;
+        if (currentItemIndex < motionDataPacketList.Count){   
+            nextPacket = motionDataPacketList[currentItemIndex];
+            // Move to the next index for the next frame
+            currentItemIndex++;
+        } else {
+            Debug.Log("Reached end of File");
         }
+        return nextPacket;
     }
 
-  void FixedUpdate()
-{
 
-    //FIXED TIME STEP SET TO 0.1 WHICH MATCHES THE 10 HZ OF THE MOTION DATA, SO EACH FIXED UPDATE SHOULD CORRESPOND TO ONE ROW IN THE CSV FILE.
+    // TOGGLE BUTTON FOR USING CSV MOTION DATA - BASICALLY MAKE IT SO THAT THE RANDOM WALK WHCIH PROVIDES PHASE SPEED AND MOUTH STATUS 
+    // mouth !!!!!!
+    void oldTailUpdate(MotionDataPacket currentPacket) {
 
-    if (motionDataPacketList.Count == 0) return;
-
-    if (useSlerp)
-    {
-        bodyRoot.transform.rotation = Quaternion.Slerp(bodyRoot.transform.rotation, bodyTargetRotation, Time.fixedDeltaTime * rotationSmoothSpeed);
-        tailRoot.transform.localRotation = Quaternion.Slerp(tailRoot.transform.localRotation, tailTargetRotation, Time.fixedDeltaTime * rotationSmoothSpeed);
-    }
-    //bodyRoot.transform.rotation = Quaternion.Slerp(bodyRoot.transform.rotation, bodyTargetRotation, Time.fixedDeltaTime);// * rotationSmoothSpeed);
-
-    
-    //bodyRoot.transform.rotation = Quaternion.Slerp(bodyRoot.transform.rotation, bodyTargetRotation, (Time.fixedDeltaTime*0.1f) * rotationSmoothSpeed);
-
-    //tailRoot.transform.localRotation = Quaternion.Slerp(tailRoot.transform.localRotation, tailTargetRotation, Time.fixedDeltaTime);//* rotationSmoothSpeed);
-        
-    
-    // if (counter == 50)
-    // {
-    //     tailRoot.transform.localRotation = Quaternion.Slerp(tailRoot.transform.localRotation, tailTargetRotation, (Time.fixedDeltaTime*(counter/2)) * rotationSmoothSpeed);
-    //     counter = 0;
-    // }
-    
-    // get next csv packet
-    if (currentItemIndex < motionDataPacketList.Count)
-    {   
-        MotionDataPacket currentPacket = motionDataPacketList[currentItemIndex];
+        if (useSlerp)
+        {
+            bodyRoot.transform.rotation = Quaternion.Slerp(bodyRoot.transform.rotation, bodyTargetRotation, Time.fixedDeltaTime * rotationSmoothSpeed);
+            tailRoot.transform.localRotation = Quaternion.Slerp(tailRoot.transform.localRotation, tailTargetRotation, Time.fixedDeltaTime * rotationSmoothSpeed);
+        }
 
         /// data integrity
         if (float.IsNaN(currentPacket.body_signal) || float.IsNaN(currentPacket.fluking_signal))
@@ -210,7 +229,6 @@ public class WhaleFlukingMotionDriver: MonoBehaviour
             Debug.LogWarning($"Row {currentItemIndex} contains a NaN value");
             currentPacket.body_signal = 0f;
             currentPacket.fluking_signal = 0f;
-          
         }
 
         // Capture initial starting position on frame 1 
@@ -221,49 +239,118 @@ public class WhaleFlukingMotionDriver: MonoBehaviour
             bodyTargetRotation = bodyRoot.transform.rotation;
             tailTargetRotation = tailRoot.transform.localRotation;
         }
-
-        updateTail(currentPacket);
-        if (useSlerp)
-        {
+        
+        if (useSlerp){
             bodyTargetRotation = Quaternion.Euler(currentPacket.body_signal, 0, 0) * bodyStartRot;
             tailTargetRotation = Quaternion.Euler(currentPacket.fluking_signal*1.1f, 0, 0) * tailStartRot;
-        }
-        else
-        {
+        } else {
             bodyRoot.transform.rotation = Quaternion.Euler(currentPacket.body_signal, 0, 0) * bodyStartRot;
             tailRoot.transform.localRotation = Quaternion.Euler(currentPacket.fluking_signal, 0, 0) * tailStartRot;
         }
-        // Set rotation target
-        //bodyTargetRotation = Quaternion.Euler(currentPacket.body_signal, 0, 0) * bodyStartRot;
 
-        //SCALING THE FLUKE AMOUNG TO MAKE THE MOTION HAVE MORE AMPLITUDE 
-        //tailTargetRotation = Quaternion.Euler(currentPacket.fluking_signal*1.1f, 0, 0) * tailStartRot;
+        if (controls.Player.Reset.triggered){
 
-        // bodyRoot.transform.rotation = Quaternion.Euler(currentPacket.body_signal, 0, 0) * bodyStartRot;
-        // tailRoot.transform.localRotation = Quaternion.Euler(currentPacket.fluking_signal, 0, 0) * tailStartRot;
-        
-        
-        // Move to the next index for the next frame
-        currentItemIndex++;
-    }
-    else
-    {
-        Debug.Log("Reached end of File");
+            bodyRoot.transform.rotation = bodyStartRot;
+            tailRoot.transform.localRotation = tailStartRot;
+
+            currentItemIndex = 0;      
+        }
     }
 
-    if (controls.Player.Reset.triggered){
 
-        bodyRoot.transform.rotation = bodyStartRot;
-        tailRoot.transform.localRotation = tailStartRot;
+    // add thing to turn off next packet stuff from odl update so it doesnt tend towards 0 
+
+    //refacotr to make it so that csv data is not needed !!!!!!
+
+
+    void FixedUpdate(){
+
+    // Get Next Motion Data Packet
+    MotionDataPacket currentPacket = getNextPacket();
+
+  
+    // handles the larger motions like tail angle and body angle (needs csv data)
+    oldTailUpdate(currentPacket);
+
+
+    // updates Amp and Freq of Fluking motion
+    if (updateAmpFreq){ setAmplitudeAndFrequencyFromLookUp(currentPacket);} 
+
+
+    // handes the actual fluking motion along the tail, driven by jays math model
+    newTailUpdate();
+    }
     
-        currentItemIndex = 0;      
+    void setAmplitudeAndFrequencyFromLookUp(MotionDataPacket currentPacket){
+
+        float speed = (float)Math.Round(currentPacket.speed,1);
+
+        
+        double[] ampAndFreq = lookUp.lookUp("\"bottom\"", speed, false);
+
+        double found_amplitude = ampAndFreq[0];
+        double found_frequency = ampAndFreq[1];
+
+        changeLookUpInstance((float)found_amplitude, (float)found_frequency);
     }
+    
+    private float _timer = 0f;
+ void newTailUpdate()
+{
+
+    // GOTTA UPDATE TO INBETWEEN STEPS, MAYE FIXEDUP changes the target amp litude and this happens in update using deltatime ??? 
+    _timer += Time.fixedDeltaTime;
+
+    // Tan et al. (2011): q_i(t) = A_i * sin(2π*t/T_i + φ_i) + C_i
+    // equation for moving each tail bone based on the wave parameters and the position of the bone along the tail
+    float T = 1f / (float)frequency; 
+    float cumulativeDistance = 0f;
+
+    for (int i = 0; i < bonesList.Count; i++)
+    {   
+        // adjusts amplitude to be within range of motion for bone (could try clamping the final angle too??) LOOKS OKAY JUST NEED TO TUNE
+        float A_i   = (float)amplitude* boneMaxAngles[i];        
+        //   the shift of amount of the wave based on the distance (negative since going backwards) LOWER THIS!!!!!
+        float phi_i = -(cumulativeDistance * phaseShiftPerUnit);   
+        // static wave offset (not sure if this can be tuned without breaking anything so keeping it 0)
+        float C_i   = wave_offset;                                         
 
 
+        // use tan et al swimming gait formula
+        float currentAngle = A_i * Mathf.Sin((2f * Mathf.PI * _timer / T) + phi_i) + C_i;
+
+        // apply to bone (local roation makes it forward kinematic builds on each other)
+        bonesList[i].transform.localRotation =
+            Quaternion.Euler(currentAngle * Mathf.Rad2Deg, 0f, 0f)
+            * boneStart[bonesList[i].name];
+
+        cumulativeDistance += boneLength;
+    }
 }
 
 
+// used to swap between the look up instances
+public void changeLookUpInstance(float targetAmp, float targetFreq)
+{
+    amplitude  = Mathf.Lerp((float)amplitude,  targetAmp,  Time.fixedDeltaTime*0.1f);
+    frequency  = Mathf.Lerp((float)frequency,  targetFreq, Time.fixedDeltaTime * 0.1f);
+}
 
+
+string determinePhase() {
+    string output = null;
+    // descent
+    if (bodyRoot.transform.localRotation.x >-160.0f) {
+        output="\"descent\"";
+    //ascent
+    } else if (bodyRoot.transform.localRotation.x < -200.0f){
+        output="\"ascent\"";
+    // bottom (straight on)
+    } else {
+        output="\"bottom\"";
+    }
+    return output; 
+    }
 
 
 
