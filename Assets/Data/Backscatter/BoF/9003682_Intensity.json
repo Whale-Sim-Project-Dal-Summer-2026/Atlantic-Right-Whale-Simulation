@@ -1,0 +1,371 @@
+{
+    "generalMetadata": {
+        "metadataVersion": "0.1.3",
+        "title": null,
+        "shortName": "Backscatter",
+        "generalAbstract": null,
+        "chsRec": "True",
+        "placeKeywords": [
+            "Canada"
+        ],
+        "topicKeywords": [
+            "hydrography",
+            "oceans"
+        ],
+        "themeKeywords": [
+            "acoustic imagery",
+            "backscatter",
+            "multibeam backscatter"
+        ],
+        "owner": {
+            "organization": "Canadian Hydrographic Service",
+            "address": "200 Kent Street",
+            "city": "Ottawa",
+            "postalCode": "L2K 1J8",
+            "ownerEmail": "CHSINFO@dfo-mpo.gc.ca",
+            "role": "Owner"
+        },
+        "principalInvestigator": {
+            "organization": "Canadian Hydrographic Service",
+            "address": "200 Kent Street",
+            "city": "Ottawa",
+            "postalCode": "L2K 1J8",
+            "pocEmail": "CHSINFO@dfo-mpo.gc.ca",
+            "role": "principalInvestigator"
+        }
+    },
+    "acquisition": {
+        "attributes": {
+            "sor_id": "9003682",
+            "OBJNAM": "9003682",
+            "SURSTA": "20060616",
+            "SUREND": "20091031",
+            "TECSOU": "found by multi-beam",
+            "POSACC": "None",
+            "SOUACC": "None",
+            "bureau": "CHS Atlantic Region/SHC région Atlantique",
+            "pltfrm": "Matthew_ATL,Plover_ATL,Pipit_ATL,F.G.CREED_ATL",
+            "poshdw": "Applanix POSMV/Applanix POSMV",
+            "posmtd": "Real Time Kinematic positioning/RTK",
+            "sdghdw": "EM710 multibeam sounder/EM710 système multi-faisceaux,EM3002 multibeam sounder/EM3002 système multi-faisceaux,EM1002 multibeam sounder/EM1002 système multi-faisceaux",
+            "CATZOC": "zone of confidence A2",
+            "sounderFrequencyRange": null
+        },
+        "referenceSystemInfo": {
+            "$schema": "https://proj.org/schemas/v0.7/projjson.schema.json",
+            "type": "ProjectedCRS",
+            "name": "WGS 84 / UTM zone 20N",
+            "base_crs": {
+                "name": "WGS 84",
+                "datum_ensemble": {
+                    "name": "World Geodetic System 1984 ensemble",
+                    "members": [
+                        {
+                            "name": "World Geodetic System 1984 (Transit)",
+                            "id": {
+                                "authority": "EPSG",
+                                "code": 1166
+                            }
+                        },
+                        {
+                            "name": "World Geodetic System 1984 (G730)",
+                            "id": {
+                                "authority": "EPSG",
+                                "code": 1152
+                            }
+                        },
+                        {
+                            "name": "World Geodetic System 1984 (G873)",
+                            "id": {
+                                "authority": "EPSG",
+                                "code": 1153
+                            }
+                        },
+                        {
+                            "name": "World Geodetic System 1984 (G1150)",
+                            "id": {
+                                "authority": "EPSG",
+                                "code": 1154
+                            }
+                        },
+                        {
+                            "name": "World Geodetic System 1984 (G1674)",
+                            "id": {
+                                "authority": "EPSG",
+                                "code": 1155
+                            }
+                        },
+                        {
+                            "name": "World Geodetic System 1984 (G1762)",
+                            "id": {
+                                "authority": "EPSG",
+                                "code": 1156
+                            }
+                        },
+                        {
+                            "name": "World Geodetic System 1984 (G2139)",
+                            "id": {
+                                "authority": "EPSG",
+                                "code": 1309
+                            }
+                        }
+                    ],
+                    "ellipsoid": {
+                        "name": "WGS 84",
+                        "semi_major_axis": 6378137,
+                        "inverse_flattening": 298.257223563
+                    },
+                    "accuracy": "2.0",
+                    "id": {
+                        "authority": "EPSG",
+                        "code": 6326
+                    }
+                },
+                "coordinate_system": {
+                    "subtype": "ellipsoidal",
+                    "axis": [
+                        {
+                            "name": "Geodetic latitude",
+                            "abbreviation": "Lat",
+                            "direction": "north",
+                            "unit": "degree"
+                        },
+                        {
+                            "name": "Geodetic longitude",
+                            "abbreviation": "Lon",
+                            "direction": "east",
+                            "unit": "degree"
+                        }
+                    ]
+                },
+                "id": {
+                    "authority": "EPSG",
+                    "code": 4326
+                }
+            },
+            "conversion": {
+                "name": "UTM zone 20N",
+                "method": {
+                    "name": "Transverse Mercator",
+                    "id": {
+                        "authority": "EPSG",
+                        "code": 9807
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "Latitude of natural origin",
+                        "value": 0,
+                        "unit": "degree",
+                        "id": {
+                            "authority": "EPSG",
+                            "code": 8801
+                        }
+                    },
+                    {
+                        "name": "Longitude of natural origin",
+                        "value": -63,
+                        "unit": "degree",
+                        "id": {
+                            "authority": "EPSG",
+                            "code": 8802
+                        }
+                    },
+                    {
+                        "name": "Scale factor at natural origin",
+                        "value": 0.9996,
+                        "unit": "unity",
+                        "id": {
+                            "authority": "EPSG",
+                            "code": 8805
+                        }
+                    },
+                    {
+                        "name": "False easting",
+                        "value": 500000,
+                        "unit": "metre",
+                        "id": {
+                            "authority": "EPSG",
+                            "code": 8806
+                        }
+                    },
+                    {
+                        "name": "False northing",
+                        "value": 0,
+                        "unit": "metre",
+                        "id": {
+                            "authority": "EPSG",
+                            "code": 8807
+                        }
+                    }
+                ]
+            },
+            "coordinate_system": {
+                "subtype": "Cartesian",
+                "axis": [
+                    {
+                        "name": "Easting",
+                        "abbreviation": "E",
+                        "direction": "east",
+                        "unit": "metre"
+                    },
+                    {
+                        "name": "Northing",
+                        "abbreviation": "N",
+                        "direction": "north",
+                        "unit": "metre"
+                    }
+                ]
+            },
+            "scope": "Navigation and medium accuracy spatial referencing.",
+            "area": "Between 66°W and 60°W, northern hemisphere between equator and 84°N, onshore and offshore. Anguilla. Antigua and Barbuda. Bermuda. Brazil. British Virgin Islands. Canada - New Brunswick; Labrador; Nova Scotia; Nunavut; Prince Edward Island; Quebec. Dominica. Greenland. Grenada. Guadeloupe. Guyana. Martinique. Montserrat. Puerto Rico. St Kitts and Nevis. St Barthelemy. St Lucia. St Maarten, St Martin. St Vincent and the Grenadines. Trinidad and Tobago. Venezuela. US Virgin Islands.",
+            "bbox": {
+                "south_latitude": 0,
+                "west_longitude": -66,
+                "north_latitude": 84,
+                "east_longitude": -60
+            },
+            "id": {
+                "authority": "EPSG",
+                "code": 32620
+            }
+        }
+    },
+    "backscatterProcessing": {
+        "processModelName": null,
+        "processingAbstract": "The data presented is fully processed and ground truthed backscatter data. Intensity values are harmonized MBES measurements used to create regional map products. The Bay of Fundy (9003682) harmonized surface has 11 surfaces that were harmonized into the final output. Users interested in knowing more about harmonizing multi-source backscatter datasets and the method employed to create this dataset should download and read the following papers: Misiuk, B., Brown, C.J., Robert, K., & Lacharité, M. (2020). Harmonizing Multi-Source Sonar Backscatter Datasets for Seabed Mapping Using Bulk Shift Approaches. Remote Sensing. 12(4). https://doi.org/10.3390/rs12040601 and Haar, C., Misiuk, B., Gazzola, V., Wells, M., & Brown, C.J. (2023). Harmonizing multi-source backscatter data using bulk shift approaches to generate regional seabed maps: Bay of Fundy, Canada. Journal of Maps, 19(1). https://doi.org/10.1080/17445647.2023.2223629 ",
+        "chsRec": null,
+            "organization": "Seascape Ecology & Mapping Lab (SEAM) Dalhousie University | Department of Oceanography",
+            "address": "Room 4634, Life Sciences Centre, 1355 Oxford Street, PO Box 15000",
+            "city": "Halifax, NS",
+            "postalCode": "B3H 4R2",
+            "processorEmail": "",
+            "role": "Processor"
+        },
+        "softwareVendor": "QPS-FMGT",
+        "softwareVersion": null,
+        "bathymetryCleaned": "True",
+        "bathymetrySurfaceID": null,
+        "bathymetrySurfaceName": null,
+        "sounderFrequencyUsed": "70-300 kHz",
+        "processEngine": "Geocoder",
+        "timeseriesData": {
+            "timeSeries": "True",
+            "AVG": "Flat",
+            "AVGWindowSize": 300,
+            "AntiAlias": null,
+            "BeamPattern": "Both",
+            "Blending": "Weighted",
+            "Channel": "Both",
+            "Despeckle": "False",
+            "Editable": "False",
+            "Gain": "False",
+            "SmoothGyro": "False",
+            "TVG": "True",
+            "Weighting": "Swath"
+        },
+        "beamAverageData": {
+            "beamAverageData": null,
+            "AVGCurveSource": null,
+            "AVGNormalizationRange": {
+                "AVGMaxAngle": null,
+                "AVGMinAngle": null
+            },
+            "AreaAVG": null,
+            "BeamPatternFileOperation": null,
+            "ChunkSizeMultiplier": null,
+            "CorrectForAcquisitionMode": null,
+            "FilterAngleT1": {
+                "MaxAngle": null,
+                "MinAngle": null
+            },
+            "FilterAngleT2": {
+                "MaxAngle": null,
+                "MinAngle": null
+            },
+            "FilterT1": null,
+            "FilterT2": null,
+            "S7KCompensatedData": null,
+            "SearchRadius": {
+                "Multiplier": null,
+                "UseFootprint": null
+            }
+        },
+        "oceanographicSettings": {
+            "absorptionCoefficient": null,
+            "localSalinity": null,
+            "localTemperature": null,
+            "soundVelocity": null
+        },
+        "productDefaults": {
+            "filteringType": "dB mean",
+            "fillGaps": "True",
+            "artifacts": null,
+            "intensityRange": {
+                "intensityRangeMin": "-44.285",
+                "intensityRangeMax": "5.545"
+            },
+            "backscatterRange": {
+                "backscatterRangeMin": null,
+                "backscatterRangeMax": null
+            }
+        }, 
+    "backscatterProduct": {
+        "bckAuthor": {
+            "organization": "Seascape Ecology & Mapping Lab (SEAM) Dalhousie University | Department of Oceanography",
+            "address": "Room 4634, Life Sciences Centre, 1355 Oxford Street, PO Box 15000",
+            "city": "Halifax, NS",
+            "postalCode": "B3H 4R2",
+            "processorEmail": "CHSINFO@dfo-mpo.gc.ca",
+            "role": "Author",
+            "mosaicDate": null
+        },
+        "resolution": {
+            "width": "50.0",
+            "height": "50.0",
+            "unit": "metre"
+        },
+        "corner_coordinates": {
+            "lower_left": [
+                164725.0,
+                5083425.0
+            ],
+            "upper_right": [
+                409425.0,
+                4833125.0
+            ]
+        },
+        "dataTypeA": {
+            "dataType": "GeoTIFF",
+            "fileName": "9003682_Intensity.tiff",
+            "fileFormat": "tiff",
+            "fileCompression": "",
+            "fileSize": "15595.23 KB",
+            "intensity_layer_unit": "dB"
+        },
+        "dataTypeB": {
+            "dataType": "Intensity Ascii Grid",
+            "fileName": "9003682_Intensity.asc",
+            "fileFormat": "xyIntensity",
+            "fileSize": "161079.16 KB",
+            "intensity_layer_unit": "dB"
+        }
+    },
+    "settings": {
+        "language": "English"
+    },
+    "publisher": {
+        "publisher": {
+            "organization": "Canadian Hydrographic Service",
+            "unit": "Hydrographic Data Centre of Expertise (HDACoE)",
+            "address": "200 Kent Street",
+            "city": "Ottawa",
+            "postalCode": "L2K 1J8",
+            "ownerEmail": "CHSINFO@dfo-mpo.gc.ca",
+            "role": "Publisher"
+        },
+        "publishURL": "https://open.canada.ca/data/en/dataset/b9b1d7b2-7316-4220-93fb-ccfb60293746",
+        "publishDate": "20240711",
+        "status": "preliminary"
+    }
+}

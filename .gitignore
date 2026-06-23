@@ -80,6 +80,7 @@ crashlytics-build.properties
 
 *.lscache
 
+/Assets/Data/Processed/Backscatter/
 #ObiRope
 /Assets/Obi
 /Assets/Obi.meta

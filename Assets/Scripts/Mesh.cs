@@ -6,18 +6,13 @@ using System;
 using UnityMesh = UnityEngine.Mesh;
 using UnityEngine.InputSystem;
 
-namespace MeshGeneration
-{
+namespace MeshGeneration {
 
-    public class Mesh : MonoBehaviour
-    {
-        [SerializeField] int chunkSize = 10000;
+    public class Mesh : MonoBehaviour {
 
         [Header("General")]
         [Tooltip("Parent of all the mesh chunks")]
-
         [SerializeField] GameObject parent;
-        [SerializeField] ProcessingSettings processingSettings;
 
         [SerializeField] Material meshMaterial;
 
@@ -25,10 +20,17 @@ namespace MeshGeneration
         [Tooltip("Press this to reload all the meshes from the binary files found in Assets/Data/Processed/(Area)")]
         [SerializeField] bool reloadMesh;
 
+        FileUtilities fileUtil;
+        
+        [Header("Scriptable Objects")]
+        [SerializeField] ProcessingSettings processingSettings;
+        [SerializeField] List<DepthDataRecord> records;
+
         string byteFileDir;
 
-        void Start()
-        {
+        void Start() {
+            records = new List<DepthDataRecord>();
+            fileUtil = new FileUtilities();
             string areaPath = processingSettings.AreaToFilePath();
             byteFileDir = Path.Combine(Application.dataPath, "Data", "Processed", areaPath);
             reloadMesh = true;
@@ -45,125 +47,67 @@ namespace MeshGeneration
             clearOldChunks();
             startMeshPipeline();
             reloadMesh = false;
-
         }
 
-        void clearOldChunks()
-        {
-            foreach(Transform child in parent.GetComponentsInChildren<Transform>(true))
-            {
+        void clearOldChunks() {
+            foreach(Transform child in parent.GetComponentsInChildren<Transform>(true)) {
                 if(child == parent.transform) continue;
 
                 Destroy(child.gameObject);
             }
         }
 
+        void startMeshPipeline() {
 
-        void startMeshPipeline(){
-            List<DepthDataRecord> depthDataRecords = traversePath(byteFileDir);
-
-            generateAllMeshes(depthDataRecords);
+            traversePath(byteFileDir);
+            generateAllMeshes();
         }
 
-
-        DepthDataRecord readInByteFile(string filePath)
-        {
-            DepthDataRecord record = new DepthDataRecord();
-
-            if (string.IsNullOrEmpty(filePath))
-            {
-                return record;
-            }
-
-            if (!File.Exists(filePath))
-            {
-                return record;
-            }
-
-            using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read))
-            {
-                using (BinaryReader reader = new BinaryReader(fs))
-                {
-                    record.Width = reader.ReadInt32();
-                    record.Height = reader.ReadInt32();
-
-                    int chunkX = reader.ReadInt32();
-                    int chunkY = reader.ReadInt32();
-                    record.ChunkPosition = new Vector2Int(chunkX, chunkY);
-
-                    record.AverageDepth = reader.ReadSingle();
-
-                    int count = reader.ReadInt32();
-
-                    if (count == 0)
-                    {
-                        return record;
-                    }
-
-                    int byteCount = count * 4;
-
-                    byte[] rawBytes = reader.ReadBytes(byteCount);
-                    float[] depthsArray = new float[count];
-
-                    Buffer.BlockCopy(rawBytes, 0, depthsArray, 0, byteCount);
-
-                    record.Depths = new List<float>(depthsArray);
-                }
-            }
-
-            return record;
-        }
-
-        List<DepthDataRecord> traversePath(string path)
-        {
-
+        void traversePath(string path) {
             int numToRun = processingSettings.numToRun;
-            if (string.IsNullOrEmpty(path))
-            {
-                return null;
-            }
-            if (!Directory.Exists(path))
-            {
-                return null;
-            }
+            
+            if (string.IsNullOrEmpty(path)) return;
+            if (!Directory.Exists(path)) return;
 
             string[] files = Directory.GetFiles(path, "*.bytes", SearchOption.TopDirectoryOnly);
-            List<DepthDataRecord> depthDataRecords = new List<DepthDataRecord>(files.Length);
+            
+            records.Clear();
+
             int count = 0;
-            foreach (string file in files)
-            {
+            foreach (string file in files) {
                 if (count >= numToRun && numToRun != -1) continue;
-                DepthDataRecord depthDataRecord = readInByteFile(file);
-                depthDataRecords.Add(depthDataRecord);
+                
+                DepthDataRecord depthDataRecord = fileUtil.binToDepthRecord(file);
+                records.Add(depthDataRecord);
                 count++;
             }
-            return depthDataRecords;
         }
 
+        void generateAllMeshes() {
+            float chunkSize = processingSettings.chunkSize;
+            foreach (DepthDataRecord record in records) {
 
-        void generateAllMeshes(List<DepthDataRecord> records)
-        {
-            foreach (DepthDataRecord record in records)
-            {
-                Vector2Int chunkPos = record.ChunkPosition;
-                int west = chunkPos.x * chunkSize;
-                int north = chunkPos.y * chunkSize;
+                Vector2 chunkPos = record.ChunkPosition;
+
+                float west = Mathf.RoundToInt(chunkPos.x) * chunkSize;
+                float north = Mathf.RoundToInt(chunkPos.y) * chunkSize;
 
                 UnityMesh chunkMesh = generateMeshData(record);
                 GameObject chunkObject = new GameObject("TerrainChunk_W" + west + "_N" + north);
                 chunkObject.transform.SetParent(parent.transform);
+                
                 MeshFilter meshFilter = chunkObject.AddComponent<MeshFilter>();
                 MeshRenderer meshRenderer = chunkObject.AddComponent<MeshRenderer>();
                 meshRenderer.material = meshMaterial;
 
                 meshFilter.mesh = chunkMesh;
 
-
-                chunkObject.transform.position = new Vector3(north, 0, -west);
+                chunkObject.transform.position = new Vector3(north, 0, west);
             }
         }
 
         UnityMesh generateMeshData(DepthDataRecord record){
+            float chunkSize = processingSettings.chunkSize;
             List<Vector3> positions = new List<Vector3>();
 
             UnityMesh mesh = new UnityMesh{
@@ -172,10 +116,10 @@ namespace MeshGeneration
 
 
             
-            List<float> depths = record.Depths;
+            List<float> depths = record.tiffData.Data;
 
-            int height = record.Height;
-            int width = record.Width;
+            int height = record.tiffData.Height;
+            int width = record.tiffData.Width;
             float distanceBetweenPointsX = chunkSize / (width - 1);
             float distanceBetweenPointsZ = chunkSize / (height - 1);
 

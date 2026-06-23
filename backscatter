@@ -1,0 +1,597 @@
+[33mcommit 29ab4adcd949572b32ccd4d2168df3cbd924244f[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Mon Jun 22 10:36:02 2026 -0300
+
+    added more licenses
+
+[33mcommit df77e2df42dd980aff98f0ebf79c795d41ffa240[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Mon Jun 22 10:29:11 2026 -0300
+
+    added license for projnet
+
+[33mcommit 49c3bc11a9d3b734e85f9a08a4e62a146e1f8fdd[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Fri Jun 19 14:31:25 2026 -0300
+
+    cleared KNN tree after each chunk, fixed mesh issues, need texturing to align globally
+
+[33mcommit e97574aa18c3567c062a797f27f27351f149bdc3[m
+Merge: 3acf043 1fdd1a9
+Author: unknown <danydiab04@gmail.com>
+Date:   Fri Jun 19 13:30:45 2026 -0300
+
+    backscatter complete, merged into main, chunk and bathymetry positioning is weird
+
+[33mcommit 1fdd1a91a4057f4dc954c3895e701e2f9d26e5f8[m[33m ([m[1;31morigin/bs[m[33m, [m[1;32mbs[m[33m)[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Fri Jun 19 12:32:12 2026 -0300
+
+    index calculations done in floating point, only floor to int in the final step to keep precision, BS working, maybe needs upscaling
+
+[33mcommit 019d4d31ee7d52295c33d45e0157bb9bb063a539[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Thu Jun 18 17:57:34 2026 -0300
+
+    culling space based on needed chunks before projecting
+
+[33mcommit 949d883fa2772b73706737cdd7254f5812f2ec54[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Thu Jun 18 14:49:25 2026 -0300
+
+    debugging BS, fixed bounding box error, fixed wrong resolution projection, added bounds checks to reader to ensure out of bounds is impossible
+
+[33mcommit 0c5cd2c7c435268e7867969f4d4be3f7271555da[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Wed Jun 17 18:51:18 2026 -0300
+
+    BS pipeline working, why are all the values 1? need investigating
+
+[33mcommit de559c6172eb1a7f277924764888337abc28d6e8[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Wed Jun 17 12:02:09 2026 -0300
+
+    bs pipeline almost working, few other bugs need squashing
+
+[33mcommit e6801a0a57bfdc7eb582558887474ad9a8416862[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Tue Jun 16 18:18:33 2026 -0300
+
+    refactor, added logic to determine where in the BS array to index into for a singular chunk, needs debugging
+
+[33mcommit 03712a05101c3dffd837a0f1ba7746be332e4109[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Tue Jun 16 13:29:57 2026 -0300
+
+    refactor, making unified chunk data to be used throughout pipeline
+
+[33mcommit 3acf04364f9e2d45b067a8d528461a3ad328c971[m
+Merge: 03b392d bd4f08f
+Author: Colin Orian <34199556+Colin-Orian@users.noreply.github.com>
+Date:   Mon Jun 15 11:17:02 2026 -0300
+
+    Merge pull request #10 from Colin-Orian/AGX-Prep
+    
+    Updated gitignore again
+
+[33mcommit bd4f08f9345fa6152e2d20d38bc2651bf16367de[m
+Author: Colin Orian <colin.orian@ontariotechu.net>
+Date:   Mon Jun 15 11:15:48 2026 -0300
+
+    Updated gitignore again
+
+[33mcommit 03b392d828a67f06d2b7c746e3afc05553cebc2e[m
+Merge: 2009a19 f6b2cd6
+Author: Colin Orian <34199556+Colin-Orian@users.noreply.github.com>
+Date:   Mon Jun 15 11:07:12 2026 -0300
+
+    Merge pull request #9 from Colin-Orian/AGX-Prep
+    
+    Updated the gitignore a bit more
+
+[33mcommit f6b2cd6238fecde4c10683f59557c858cdec750b[m
+Author: Colin Orian <colin.orian@ontariotechu.net>
+Date:   Mon Jun 15 11:05:55 2026 -0300
+
+    Updated the gitignore a bit more
+
+[33mcommit 2009a19e675f4d72c783be8bb553e5ddefcfacf1[m
+Merge: dc13b22 f31fb21
+Author: Colin Orian <34199556+Colin-Orian@users.noreply.github.com>
+Date:   Mon Jun 15 10:59:54 2026 -0300
+
+    Merge pull request #8 from Colin-Orian/AGX-Prep
+    
+    Updated gitignore to prepare for AGX code
+
+[33mcommit f31fb21ca8774c2735cd9d60cee02bce8683c9ec[m
+Author: Colin Orian <colin.orian@ontariotechu.net>
+Date:   Mon Jun 15 10:58:18 2026 -0300
+
+    Updated gitignore to prepare for AGX code
+
+[33mcommit fa87db88a4db7cc5d3309d7f56c70877b25d23a6[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Thu Jun 11 17:22:52 2026 -0300
+
+    created shader graph, assigned, needs debugging
+
+[33mcommit a0cac19eb61d9636164c8a2a69bf3e8e5cea798e[m
+Merge: 11ebd78 d6c8968
+Author: unknown <danydiab04@gmail.com>
+Date:   Thu Jun 11 16:31:05 2026 -0300
+
+    merging main
+
+[33mcommit 11ebd78508623bb14ac0e19d36e16f5c284c9899[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Thu Jun 11 15:47:19 2026 -0300
+
+    reading bin into BS renderer
+
+[33mcommit 9c3aa497ae368c9d1855d4fcd0262dbbb8245ad0[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Wed Jun 10 18:28:31 2026 -0300
+
+    writing raster projector to binary, quashing bugs, 20 minute+ run time :(
+
+[33mcommit 472e48f9814cda7f7d1b0de60112ec327ed4ec8a[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Tue Jun 9 18:49:12 2026 -0300
+
+    raster projector working? Needs testing
+
+[33mcommit e7f67437da234c2d7b6a0e76b1c3a6746ec11f3d[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Tue Jun 9 13:33:36 2026 -0300
+
+    KNN generalized
+
+[33mcommit e67bbe60d7a041ddb6202fd2d6cabf847fcc2b18[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Tue Jun 9 12:56:57 2026 -0300
+
+    forward pass raster projector step complete, working on backward pass
+
+[33mcommit dc13b2260bc008d20519dd3470b8192d3ddcb353[m
+Merge: 5aceb85 23d734a
+Author: Colin Orian <34199556+Colin-Orian@users.noreply.github.com>
+Date:   Fri Jun 5 15:58:23 2026 -0300
+
+    Merge pull request #7 from Whale-Sim-Project-Dal-Summer-2026/Demo_Build
+    
+    V1.1
+
+[33mcommit 23d734a40e31ac9602d3d2f975a5e3054409960e[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Fri Jun 5 15:41:22 2026 -0300
+
+    V1.1 QOL, made things easier to use
+
+[33mcommit e73495a6c810a30c0aab8ddd66c9b294cba23f9a[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Fri Jun 5 11:59:01 2026 -0300
+
+    demo build complete, scene switching, main menu
+
+[33mcommit 4db94ad7d0483c1d23bb51f24aa28d09b41c3bb1[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Fri Jun 5 10:53:54 2026 -0300
+
+    added scene controls
+
+[33mcommit 8d3cbbb15b3a21338d85d31713df70a5029974f3[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Thu Jun 4 17:00:51 2026 -0300
+
+    added mesh and bathymetry controls
+
+[33mcommit 6cfffb92254bd2fc4f690701a4bf3767ad9f9c6b[m
+Author: Nicholas Bindels <nc282705@dal.ca>
+Date:   Thu Jun 4 16:47:58 2026 -0300
+
+    Updated UI Size
+
+[33mcommit 5aceb852c38d6a861b87a468b5620d0729b3a556[m
+Merge: 086f037 ad4d005
+Author: Colin Orian <34199556+Colin-Orian@users.noreply.github.com>
+Date:   Thu Jun 4 16:03:29 2026 -0300
+
+    Merge pull request #6 from Whale-Sim-Project-Dal-Summer-2026/v0_physics_demo
+    
+    V0 physics demo
+
+[33mcommit ad4d0056fa9a3ca3e509f8e9efd46a34e6733e3d[m
+Author: Nicholas Bindels <nc282705@dal.ca>
+Date:   Thu Jun 4 16:01:10 2026 -0300
+
+    Created Demo Scenes
+
+[33mcommit 086f0373e183bac339b9fbae27ff06d6fdf65271[m
+Merge: 20a01d0 d6c8968
+Author: Colin Orian <34199556+Colin-Orian@users.noreply.github.com>
+Date:   Thu Jun 4 14:59:19 2026 -0300
+
+    Merge pull request #5 from DanyDiab/main
+    
+    Placeholder Texture for Demo
+
+[33mcommit d6c89682011f87f0868dff9819d60b473caa9c45[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Thu Jun 4 14:32:08 2026 -0300
+
+    added texture import, added placeholder texture to mesh
+
+[33mcommit 77256fffe6d8a4eceb5feb3289118b3d0716fa74[m
+Merge: aa64ccc 20a01d0
+Author: unknown <danydiab04@gmail.com>
+Date:   Thu Jun 4 13:42:08 2026 -0300
+
+    Merge branch 'main' of github.com:DanyDiab/Atlantic-Right-Whale-Simulation
+
+[33mcommit f4da40c164efb4d835b14dfe4f2e4bd88e876980[m
+Author: Nicholas Bindels <nc282705@dal.ca>
+Date:   Wed Jun 3 21:38:27 2026 -0300
+
+    Finished Unity Physics Demo
+    
+    Added Rigidbody Movement and Tuned project settings for best collision results
+
+[33mcommit 1633da5aa7d2d13fe9c57bb8606711c6cf19646c[m
+Author: Nicholas Bindels <nc282705@dal.ca>
+Date:   Wed Jun 3 20:43:57 2026 -0300
+
+    Updated Colliders to Work with Obi
+
+[33mcommit 091dab1a801019b349b26a97c8edece5a0e9f061[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Wed Jun 3 12:09:10 2026 -0300
+
+    position chunks using UTM, offsets are not fully right
+
+[33mcommit d7f6c92bb249ce5b42599582a1a9ab15ef325109[m
+Author: Nicholas Bindels <nc282705@dal.ca>
+Date:   Wed Jun 3 11:57:27 2026 -0300
+
+    Added Unity Physics Demo
+
+[33mcommit 0ebe37fc5af3061ba85e26d1de42b6a92b1bf6cf[m
+Author: Nicholas Bindels <nc282705@dal.ca>
+Date:   Wed Jun 3 11:56:44 2026 -0300
+
+    Added Scroll Camera Zoom
+
+[33mcommit 3327aa5cf61ea28c0a91b11718e61c416a1086b1[m
+Author: Nicholas Bindels <nc282705@dal.ca>
+Date:   Wed Jun 3 11:56:16 2026 -0300
+
+    Updated Whale Collider Overlap
+
+[33mcommit 2fd78018b42b5adb2b0d69dc3bd8d715ae9a618b[m
+Author: Nicholas Bindels <nc282705@dal.ca>
+Date:   Wed Jun 3 11:55:46 2026 -0300
+
+    Updated Whale Collider Thickness
+
+[33mcommit e226d22b28aebf5f493077556975ba18fe0cff2c[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Tue Jun 2 18:09:23 2026 -0300
+
+    added conversion from  coordinates to UTM, need to fully integrate new coordinate system
+
+[33mcommit 8e0c97aa61a0cf3e8ee83f91e845a45a71077df8[m[33m ([m[1;32mprojection[m[33m)[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Tue Jun 2 14:25:21 2026 -0300
+
+    Created BS bounding box in meters, need to work on unification from lat/long to meters
+
+[33mcommit 0fd720ee08c53fb1d8057f600216ba0c573b5a1c[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Tue Jun 2 13:27:16 2026 -0300
+
+    min max normaliztion of backscatter data, working on unifiying chunked bathyetry and non chunked BS data
+
+[33mcommit c4ba717651d4f97008e1db7641ed71facca6ea39[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Mon Jun 1 17:31:09 2026 -0300
+
+    rading in geo tiff for BS
+
+[33mcommit a3e34c9d6d97eb4a37f1cce27044670c28b2ab40[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Mon Jun 1 17:16:48 2026 -0300
+
+    made tiff reading a general class/function
+
+[33mcommit 20a01d09de43cfe9ee13d8fc2c548df5aff828ce[m
+Merge: d58739a 138a260
+Author: Colin Orian <34199556+Colin-Orian@users.noreply.github.com>
+Date:   Mon Jun 1 15:05:16 2026 -0300
+
+    Merge pull request #4 from Whale-Sim-Project-Dal-Summer-2026/scene
+    
+    added main scene with vfx
+
+[33mcommit 138a260191c75b65b246b3d85365e21feb777068[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Mon Jun 1 15:01:29 2026 -0300
+
+    added main scene with vfx
+
+[33mcommit 762a74701f218630461a50a23484239779d564b3[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Mon Jun 1 12:43:09 2026 -0300
+
+    started bs reading
+
+[33mcommit aa64cccab462837585551ba9993fb2dcc5c14227[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Mon Jun 1 10:38:53 2026 -0300
+
+    organized noise. Made seperate function just for noise and one for noise and depth
+
+[33mcommit d58739afc267541caf81e704c8d67772106c1691[m
+Merge: 41766c3 38ad5b8
+Author: Colin Orian <34199556+Colin-Orian@users.noreply.github.com>
+Date:   Fri May 29 15:18:18 2026 -0300
+
+    Merge pull request #3 from DanyDiab/main
+    
+    Sea Floor Mapping
+
+[33mcommit 38ad5b895ea2cd2fd784d0a935dac11cb14c4206[m
+Merge: 738674f 41766c3
+Author: Colin Orian <34199556+Colin-Orian@users.noreply.github.com>
+Date:   Fri May 29 15:17:59 2026 -0300
+
+    Merge branch 'main' into main
+
+[33mcommit 41766c35ece80c0f6ed719ebe63770c5ddc141c1[m
+Merge: 5e3a5b6 2a19c99
+Author: Colin Orian <34199556+Colin-Orian@users.noreply.github.com>
+Date:   Fri May 29 14:02:27 2026 -0300
+
+    Merge pull request #2 from bindels03/v0
+    
+    V0 - Motion Replay & Whale Collision
+
+[33mcommit 2a19c9961ed4c7e199b4395ac8b2e883f7a66c4d[m
+Author: Nicholas Bindels <nc282705@dal.ca>
+Date:   Fri May 29 13:57:03 2026 -0300
+
+    Added Colliders to Whale Model
+
+[33mcommit 738674fd631b05513606386f707c304564b967bc[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Fri May 29 12:24:52 2026 -0300
+
+    added distance weighting to noise to enforce control point intersection
+
+[33mcommit 9f3396367ad07f87c58b20be011661ba5fad6800[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Fri May 29 11:53:06 2026 -0300
+
+    pushing processed data
+
+[33mcommit 443ca0e2db19d761d27cdeacd84300dad9270e44[m[33m ([m[1;31morigin/environment[m[33m, [m[1;32menvironment[m[33m)[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Thu May 28 19:03:01 2026 -0300
+
+    added FBM noise samplying at low resolution data to simulate high frequency detail.
+
+[33mcommit 41ed9c695c8d25756b1a4f0161e4d2e30c45fc02[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Thu May 28 14:02:15 2026 -0300
+
+    fixed chunks offsets
+
+[33mcommit 85f0f15293461b8e121882748a8971ec24801242[m
+Merge: 3741040 6656e36
+Author: unknown <danydiab04@gmail.com>
+Date:   Thu May 28 13:01:39 2026 -0300
+
+    Merge branch 'environment'
+
+[33mcommit 6656e366c435a6c299a3d2f712095252fa04664f[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Thu May 28 13:01:21 2026 -0300
+
+    Bathymetry Patcher fixed, valid points are strictly less than sealevel
+
+[33mcommit ef91abae0046a18c8f799a3c824983f5ed5a741f[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Wed May 27 19:11:11 2026 -0300
+
+    fixed mesh, fixed reader clipping values, needs debugging depth values
+
+[33mcommit 92b5932dde53b05279f5f764467b30bc8d750f2c[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Wed May 27 18:22:25 2026 -0300
+
+    fixed mesh
+
+[33mcommit be1412f1ec44d52613d63431e306c3a06c5b845d[m
+Author: DanyLaptop <DanyDiab04@gmail.com>
+Date:   Wed May 27 12:56:42 2026 -0300
+
+    more pipeline updates
+
+[33mcommit fdb68dd093d1c5902b2305eafeab278ed8cee7c8[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Wed May 27 11:42:18 2026 -0300
+
+    started pipeline for multiple bathymetric areas
+
+[33mcommit c35eef2e27f6a41b47fec2730321f70c6fd4cc72[m
+Author: Nicholas Bindels <nc282705@dal.ca>
+Date:   Tue May 26 18:27:08 2026 -0300
+
+    Added Orbit Camera for Whale
+    
+    can switch between orbit cam and free cam by pressing 'f'
+
+[33mcommit be7ff452c648807c01ce01e2d2227fae71bfad94[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Tue May 26 17:30:00 2026 -0300
+
+    downloaded BOF data and created SO to organize common data
+
+[33mcommit 29c93a47c4e3972841cec14c7fee0b5689621857[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Tue May 26 14:23:20 2026 -0300
+
+    started profiling IDW
+
+[33mcommit d2ed4db9001915806b591233362ab04aa1849097[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Tue May 26 13:52:46 2026 -0300
+
+    added Inverse Distance Weighting KNN approach to deal with missing points, needs optimization/profiling
+
+[33mcommit 3741040d2c9380cee25c7285120cfb5da39d9417[m
+Merge: 5e3a5b6 b4415fd
+Author: unknown <danydiab04@gmail.com>
+Date:   Tue May 26 11:58:38 2026 -0300
+
+    Merge branch 'environment'
+
+[33mcommit b4415fd75d021ea13230a7ea23e3824b3dcb69a0[m
+Author: unknown <danydiab04@gmail.com>
+Date:   Tue May 26 11:45:40 2026 -0300
+
+    splitting based on either windows or linux file delims
+
+[33mcommit 44fa583eeacfc7e2f6b6ee2175495cd721fb7aff[m
+Author: DanyLaptop <DanyDiab04@gmail.com>
+Date:   Mon May 25 16:10:04 2026 -0300
+
+    fixed chunk offsets and mesh sizing, chunks now line up
+
+[33mcommit d5e11052b429839a56c5efcb479843683b3310fb[m
+Author: DanyLaptop <DanyDiab04@gmail.com>
+Date:   Fri May 22 16:01:29 2026 -0300
+
+    nuget for unity packages attempt
+
+[33mcommit 5b970ce6499d750167a2e66168e5a95186561f17[m
+Author: DanyLaptop <DanyDiab04@gmail.com>
+Date:   Fri May 22 15:50:30 2026 -0300
+
+    fixing imports
+
+[33mcommit d78ab800e4f1faf5021879a49aefd2f662ac21f7[m
+Author: DanyLaptop <DanyDiab04@gmail.com>
+Date:   Fri May 22 14:52:11 2026 -0300
+
+    chunking working!
+
+[33mcommit 03236b065210583dcb035fa64cdaed79029e443e[m
+Author: DanyLaptop <DanyDiab04@gmail.com>
+Date:   Fri May 22 13:01:02 2026 -0300
+
+    added scaling
+
+[33mcommit 41ff2b1b94d2dea65b0a2dc97747cecaa34c910e[m
+Author: DanyLaptop <DanyDiab04@gmail.com>
+Date:   Thu May 21 14:24:51 2026 -0300
+
+    removed not needed import/package
+
+[33mcommit bf2e93b747e39aac8da8ddaf97baebb43a2cf26c[m
+Author: DanyLaptop <DanyDiab04@gmail.com>
+Date:   Thu May 21 13:29:43 2026 -0300
+
+    pushing data
+
+[33mcommit 472d7bc8c5f05dd646ff8e81e99d8d396939a5c7[m
+Author: DanyLaptop <DanyDiab04@gmail.com>
+Date:   Thu May 21 13:26:23 2026 -0300
+
+    concat multiple files into 1, OOM, trying on simulation computer
+
+[33mcommit 6a74743cf1fe12b45b925187c15ffbe8fd344191[m
+Author: DanyLaptop <DanyDiab04@gmail.com>
+Date:   Thu May 21 13:16:18 2026 -0300
+
+    mesh working! Going to add global Offsets now
+
+[33mcommit debceb62bd4944878434e8c56d794f00cbf00d22[m
+Author: DanyLaptop <DanyDiab04@gmail.com>
+Date:   Wed May 20 19:00:05 2026 -0300
+
+    updated reading to use DepthDataRecord struct to keep track of properties
+
+[33mcommit 4d36931651728437494e4ce44a9ae3a01f1763e3[m
+Author: Nicholas Bindels <nc282705@dal.ca>
+Date:   Wed May 20 18:02:53 2026 -0300
+
+    Fixed Missing Asset
+
+[33mcommit 31f728d04f8de7dcdd7a78b403755cb62efc6ade[m
+Author: Nicholas Bindels <nc282705@dal.ca>
+Date:   Wed May 20 18:02:01 2026 -0300
+
+    Add Mesh Colliders to Tail Tips
+
+[33mcommit 892e8661f1aedb5964ab10f09aa0bbdc59f4aee2[m
+Author: DanyLaptop <DanyDiab04@gmail.com>
+Date:   Wed May 20 14:56:42 2026 -0300
+
+    working on processing, added depthDataRecord
+
+[33mcommit cea8e1390315155e09fcbd58fc1053e2e2d4ca96[m
+Author: Nicholas Bindels <nc282705@dal.ca>
+Date:   Tue May 19 18:51:54 2026 -0300
+
+    Added Motion Data Replay & Rope Scene
+
+[33mcommit f01ddbd045c72ae8584b695485a0ce1a5e117cb9[m
+Author: Nicholas Bindels <nc282705@dal.ca>
+Date:   Tue May 19 18:45:01 2026 -0300
+
+    Updated gitignore
+
+[33mcommit 5e3a5b6511f250816cd3658ac274fce0203ce1d4[m
+Merge: 1c11575 8571010
+Author: Colin Orian <34199556+Colin-Orian@users.noreply.github.com>
+Date:   Tue May 19 09:28:59 2026 -0300
+
+    Merge pull request #1 from marssemenova/main
+    
+    Set Up Whale Model
+
+[33mcommit 7bd78511a4af648d7deea22dc9c9518528e0e610[m
+Author: DanyLaptop <DanyDiab04@gmail.com>
+Date:   Fri May 15 19:08:17 2026 -0300
+
+    reading in all tiffs, storing in .bytes
+
+[33mcommit 5d734a8278f3db0772d1f4314beee37588ca66bf[m
+Author: DanyLaptop <DanyDiab04@gmail.com>
+Date:   Fri May 15 14:54:33 2026 -0300
+
+    pushing scene data
+
+[33mcommit 384ea9bbc0f3696bff221252c4cf9ef9715b86b2[m
+Author: DanyLaptop <DanyDiab04@gmail.com>
+Date:   Fri May 15 14:52:42 2026 -0300
+
+    created Bathymetic reader to read in 1 tiff file
+
+[33mcommit 8571010cea62c77f22d2a1218962e2a09b7ad280[m
+Author: unknown <marssemenova@gmail.com>
+Date:   Thu May 14 16:27:46 2026 -0400
+
+    whale added
+
+[33mcommit 1c11575a93c06b4654950572053b35286e455a4a[m
+Author: Colin Orian <colin.orian@ontariotechu.net>
+Date:   Tue May 5 10:54:17 2026 -0300
+
+    Initial Commit
+
+[33mcommit e33c5e72211a7ebd0bfcdb87658486729d224646[m
+Author: Colin Orian <colin.orian@ontariotechu.net>
+Date:   Tue May 5 10:41:31 2026 -0300
+
+    Initial commit
