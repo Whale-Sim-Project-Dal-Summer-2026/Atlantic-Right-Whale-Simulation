@@ -1,7 +1,8 @@
 
 using DataSources; 
-using Unity;
-using System;
+using Unity.Mathematics;
+using UnityEngine;
+using AnimationDataStructs;
 
 
 //-- ROADMAP NOTES--
@@ -35,8 +36,68 @@ using System;
 
 //SAME THING WITH THE MULTIPLE DATA SOURCES!!!
 
-public class WhaleDriver
+public enum DataSourceType
+{
+    ClassicMotionDataCSV,
+    MotionDataCSV,
+    RandomWalk
+}
+
+
+public class WhaleDriver : MonoBehaviour
 {
     DataSource dataSource; 
+     CameraControls controls;
+    public TextAsset dataSourceFile;
+
+    public DataSourceType dataSourceType;
+    [SerializeField] Animator animator;
+    int timesetp = 0;
+
+    void Start(){
+        // set data source based on the enum value
+        dataSource = dataSourceType switch{
+            DataSourceType.ClassicMotionDataCSV => new ClassicMotionDataCSV(),
+            DataSourceType.MotionDataCSV => new MotionDataCSV(),
+            DataSourceType.RandomWalk => new RandomWalk(),
+            _ => throw new System.ArgumentOutOfRangeException()
+        };
+       WhaleState startState = new WhaleState(new WhaleBlueprint(0,0,0,0,1));
+       startState.MainBody[0].Position = transform.position;
+       startState.MainBody[0].Rotation = transform.rotation;
+       dataSource.LoadSource(dataSourceFile, startState, new WhaleBlueprint(0,0,0,0,1));
+
+
+    }
+    void Awake(){
+        controls = new CameraControls();
+    }
+
+    void OnEnable(){
+        controls.Enable();
+    }
+
+    void OnDisable(){
+        controls.Disable();
+    }
+
+    void updateWhaleState(int currentTimeStep) {
+        WhaleState newState = dataSource.getNextWhaleState(currentTimeStep);
+        transform.position = newState.MainBody[0].Position;
+        transform.rotation = newState.MainBody[0].Rotation;
+    }
+
+   
+  void FixedUpdate(){
+
+    updateWhaleState(timesetp);
+    timesetp ++;
     
+    if (controls.Player.Reset.triggered){
+       updateWhaleState(0);
+       timesetp = 0;    
+    }
+
+
+}
 }
