@@ -1,14 +1,20 @@
+using Unity.Mathematics;
+using UnityEngine;
 ///Contains all of the data structs for the animation of the whale
 /// trying to minimize memory but idk if its actually doing much
-
-
+namespace AnimationDataStructs
+{
 /// <summary>
 /// Stores the tail/fin animation as 4 halves which are applied as a rotation
 /// </summary>
 /// 
 /// this should save on memory since a transform is apparently kinda hefty
+/// 
+
+
+
 public struct LocalRotation_AnimationData {
-    public Half4 Rotation; // smaller than a quaternion
+    public half4 Rotation; // smaller than a quaternion
 }
 
 
@@ -57,7 +63,7 @@ public class WhaleState
     public Global_AnimationData[] MainBody;
 
     public WhaleState(WhaleBlueprint blueprint) {
-        Tail = new LocalRotation__AnimationData[blueprint.TailCount];
+        Tail = new LocalRotation_AnimationData[blueprint.TailCount];
         Mouth = new LocalRotation_AnimationData[blueprint.MouthCount];
         LeftFin = new LocalRotation_AnimationData[blueprint.LeftFinCount];
         RightFin = new LocalRotation_AnimationData[blueprint.RightFinCount];
@@ -65,4 +71,5 @@ public class WhaleState
     }
 
 
+}
 }

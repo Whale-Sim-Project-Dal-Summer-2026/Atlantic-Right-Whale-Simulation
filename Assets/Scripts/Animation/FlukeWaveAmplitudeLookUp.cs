@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Windows.Speech;
 using FlukeWaveAmplitudeLookUpClass;
 using System.Linq;
-using std;
+
 
 namespace FlukeWaveAmplitudeLookUpClass
 {

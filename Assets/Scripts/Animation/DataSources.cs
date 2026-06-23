@@ -1,11 +1,14 @@
 using System;
+using AnimationDataStructs;
+using Unity.Mathematics;
+using UnityEngine;
 
 namespace DataSources{
 public abstract class DataSource
 {
-    public abstract void LoadSource(TextAsset file);
-    public abstract void getNextWhaleState(Half currentTimeStep);
-    public abstract void getWhaleStateAt(Half timestep);
+    public abstract void LoadSource(TextAsset file, WhaleState startState, WhaleBlueprint blueprint);
+    public abstract WhaleState getNextWhaleState(int currentTimeStep);
+    public abstract WhaleState getWhaleStateAt(int timestep);
 }
 
 
@@ -22,17 +25,18 @@ public abstract class DataSource
 
 public class MotionDataCSV : DataSource
 {
-    public override void LoadSource(TextAsset file)
+    public override void LoadSource(TextAsset file, WhaleState startState, WhaleBlueprint blueprint)
     {
         throw new System.NotImplementedException();
     }
 
-    public override void getNextWhaleState(Half currentTimeStep)
+
+    public override WhaleState getNextWhaleState(int currentTimeStep)
     {
         throw new System.NotImplementedException();
     }
 
-    public override void getWhaleStateAt(Half timestep)
+    public override WhaleState getWhaleStateAt(int timestep)
     {
         throw new System.NotImplementedException();
     }
@@ -40,37 +44,21 @@ public class MotionDataCSV : DataSource
 
 public class RandomWalk : DataSource
 {
-    public override void LoadSource(TextAsset file)
+    public override void LoadSource(TextAsset file, WhaleState startState, WhaleBlueprint blueprint)
     {
         throw new System.NotImplementedException();
     }
 
-    public override void getNextWhaleState(Half currentTimeStep)
+
+    public override WhaleState getNextWhaleState(int currentTimeStep)
     {
         throw new System.NotImplementedException();
     }
 
-    public override void getWhaleStateAt(Half timestep)
+    public override WhaleState getWhaleStateAt(int timestep)
     {
         throw new System.NotImplementedException();
     }
 }
-//classic means no body movement just the up and down
-public class ClassicMotionDataCSV : DataSource
-{
-    public override void LoadSource(TextAsset file)
-    {
-        throw new System.NotImplementedException();
-    }
 
-    public override void getNextWhaleState(Half currentTimeStep)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void getWhaleStateAt(Half timestep)
-    {
-        throw new System.NotImplementedException();
-    }
-}
 }
