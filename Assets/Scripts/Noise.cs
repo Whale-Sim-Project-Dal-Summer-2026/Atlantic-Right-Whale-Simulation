@@ -12,7 +12,7 @@ public class Noise
     {
         this.settings = settings;
     }
-    public float addNoiseToDepth(float depth, float[] pos, int[] size, float distance)
+    public float addNoiseToDepth(float depth, Vector2 pos, int[] size, float distance)
     {
 
         byte mask = (byte)(distance < distanceMask ? 0 : 1);
@@ -24,12 +24,11 @@ public class Noise
         float lacunarity = 2.2f;
         float persistence = .55f;
 
-        float x = pos[0] / size[0];
-        float y = pos[1] / size[1];
+        float x = pos.x / size[0];
+        float y = pos.y / size[1];
 
         float accumulatedNoise = fBmNoise(x,y,frequency,amplitude,lacunarity,persistence,8);
         
-
         return depth + (accumulatedNoise * mask);
     }
 

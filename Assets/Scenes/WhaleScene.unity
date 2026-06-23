@@ -130,6 +130,8 @@ GameObject:
   - component: {fileID: 91705809}
   - component: {fileID: 91705810}
   - component: {fileID: 91705811}
+  - component: {fileID: 91705813}
+  - component: {fileID: 91705812}
   m_Layer: 0
   m_Name: SeaFloor
   m_TagString: Untagged
@@ -166,7 +168,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BathymetryReader
   processingSettings: {fileID: 11400000, guid: 33636be64600f5f4287e9b02c8521d90, type: 2}
-  reloadReader: 0
 --- !u!114 &91705811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,16 +175,44 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 91705807}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d6870917853a2303e83091d6606c493b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Mesh
-  chunkSize: 1000
   parent: {fileID: 1345709378}
-  processingSettings: {fileID: 11400000, guid: 33636be64600f5f4287e9b02c8521d90, type: 2}
-  meshMaterial: {fileID: 15302, guid: 0000000000000000f000000000000000, type: 0}
+  meshMaterial: {fileID: 2100000, guid: 8c58a6e5ef3e8054f82c9e58bb2ce835, type: 2}
   reloadMesh: 0
+  processingSettings: {fileID: 11400000, guid: 33636be64600f5f4287e9b02c8521d90, type: 2}
+--- !u!114 &91705812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 91705807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da4064e82b0c2cc44bcae77f533370e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BackscatterRenderer
+  meshParent: {fileID: 1345709378}
+  processingSettings: {fileID: 11400000, guid: 33636be64600f5f4287e9b02c8521d90, type: 2}
+  reloadTextures: 0
+  uvScale: 0.05
+--- !u!114 &91705813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 91705807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee0772a0c90d8504eb510843591e2e70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BackscatterReader
+  processingSettings: {fileID: 11400000, guid: 33636be64600f5f4287e9b02c8521d90, type: 2}
 --- !u!1 &401151133
 GameObject:
   m_ObjectHideFlags: 0

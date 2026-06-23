@@ -18,3 +18,4 @@ MonoBehaviour:
   numToRun: 5
   noiseAmplitude: 5
   noiseFrequency: 5
+  chunkSize: 1000
