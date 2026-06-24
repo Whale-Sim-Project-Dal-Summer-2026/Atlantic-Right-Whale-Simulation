@@ -10,11 +10,34 @@ namespace AnimationDataStructs
 /// 
 /// this should save on memory since a transform is apparently kinda hefty
 /// 
+/// switch back to float since it has difficuly being written to a binary fiel 
+/// 
+/// OTHER OPTION:
+/// Use giant arrays and then just store the index, this would be for literally every frame in the animation for each bone'
+/// basically use the amount of tail bones as an frame size 
+/// example: 
+///     {1,2,3,4,5,6,7,8,43,32,64,7,5,345,7,3,234,8,634,2...}  // list of all rotations to be applied to tail for all animation timesteps
+///   then there is frame number which denotes how many bones are in the tail 
+///    framewWindow = 4
+/// at timestep 1:  {[1,2,3,4],5,6,7,8,43,32,64,7,5,345,7,3,234,8,634,2...} // frame is first 4 roations in list'
+///  at timestep 2:  {1,2,3,4,[5,6,7,8],43,32,64,7,5,345,7,3,234,8,634,2...} // frame is second 4 roations in list'
+///  this contiunes 
+/// 
+/// this is better than storing whale state as a class object since it will be less memeroy used
+///  also faster to access since its in a giant array
+/// 
+/// cons:
+///     would be hard to manage this many windows for different sections of the whale,
+///     since each section has a different amount of bones, so a different frame size
+/// 
+/// I think this could be switched to later if needed, but for now just use the class object since its easier 
+/// 
+///     
 
 
 
 public struct LocalRotation_AnimationData {
-    public half4 Rotation; // smaller than a quaternion
+    public Quaternion Rotation; 
 }
 
 
@@ -50,7 +73,7 @@ public class WhaleBlueprint {
 /// <summary>
 ///  Defines a single frame/snapshot of the entires whales state
 /// </summary>
-public class WhaleState
+public struct WhaleState
 {
     // should just be a solid state of the whale, built from the whale blueprint 
 
