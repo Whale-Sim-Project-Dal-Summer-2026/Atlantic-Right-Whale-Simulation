@@ -1889,7 +1889,7 @@ MonoBehaviour:
   moveSpeed: 10
   fastSpeed: 25
   sensitivity: 1
-  orbitTarget: {fileID: 1412593735}
+  orbitTarget: {fileID: 1246253213}
   orbitDistance: 25
   orbitSensitivity: 2
   locked: 0
@@ -3610,8 +3610,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WhaleDriver
   dataSourceFile: {fileID: 4900000, guid: ad1392c26444b5e4ba48ac44905f5465, type: 3}
+  isPaused: 0
+  jumpToTimestep: -1
   dataSourceType: 0
   animator: {fileID: 1246253218}
+  timesetp: 0
 --- !u!114 &1246253215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3629,6 +3632,7 @@ MonoBehaviour:
   positionSmoothSpeed: 0.5
   rotationSmoothSpeed: 0.5
   SeaLevel: 75
+  currentItemIndex: 0
   animator: {fileID: 0}
 --- !u!114 &1246253216
 MonoBehaviour:
@@ -4212,6 +4216,7 @@ MonoBehaviour:
   positionSmoothSpeed: 0.5
   rotationSmoothSpeed: 0.5
   SeaLevel: 75
+  currentItemIndex: 0
   animator: {fileID: 1412593742}
 --- !u!1 &1426447672 stripped
 GameObject:
