@@ -3,6 +3,8 @@ using DataSources;
 using Unity.Mathematics;
 using UnityEngine;
 using AnimationDataStructs;
+using AnimationDataStorageManager;
+using static WhaleAnimationStreamer;
 
 
 //-- ROADMAP NOTES--
@@ -47,12 +49,16 @@ public enum DataSourceType
 public class WhaleDriver : MonoBehaviour
 {
     DataSource dataSource; 
-     CameraControls controls;
+    CameraControls controls;
     public TextAsset dataSourceFile;
+
+    public bool isPaused = false;
+    public int jumpToTimestep = -1; 
 
     public DataSourceType dataSourceType;
     [SerializeField] Animator animator;
-    int timesetp = 0;
+    public int timesetp = 0;
+    
 
     void Start(){
         // set data source based on the enum value
@@ -66,7 +72,8 @@ public class WhaleDriver : MonoBehaviour
        startState.MainBody[0].Position = transform.position;
        startState.MainBody[0].Rotation = transform.rotation;
        dataSource.LoadSource(dataSourceFile, startState, new WhaleBlueprint(0,0,0,0,1));
-
+    
+     
 
     }
     void Awake(){
@@ -81,21 +88,29 @@ public class WhaleDriver : MonoBehaviour
         controls.Disable();
     }
 
-    void updateWhaleState(int currentTimeStep) {
-        WhaleState newState = dataSource.getNextWhaleState(currentTimeStep);
+    void updateWhaleState() {
+        WhaleState newState = dataSource.getNextWhaleState();
         transform.position = newState.MainBody[0].Position;
         transform.rotation = newState.MainBody[0].Rotation;
     }
 
-   
+    void Update(){
+        if (isPaused) return;
+        if (jumpToTimestep >= 0){
+            dataSource.loadWhaleStateAt(jumpToTimestep);
+            timesetp = jumpToTimestep;
+            jumpToTimestep = -1; 
+        }
+    }
   void FixedUpdate(){
-
-    updateWhaleState(timesetp);
+    if (isPaused) return;
+    // if button is pushed then pass the number to load a certain timestep
+    updateWhaleState();
     timesetp ++;
     
     if (controls.Player.Reset.triggered){
-       updateWhaleState(0);
-       timesetp = 0;    
+       jumpToTimestep = 0;
+       animator.Play("R Whale Armature|Whale Swimming",0,0);  
     }
 
 
