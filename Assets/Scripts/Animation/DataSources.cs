@@ -6,9 +6,15 @@ using UnityEngine;
 namespace DataSources{
 public abstract class DataSource
 {
+    //public DataSaver dataSaver;
+
+    //public DataLoader dataLoader;
+
+    //int currentTimeStep = 0;
+
     public abstract void LoadSource(TextAsset file, WhaleState startState, WhaleBlueprint blueprint);
-    public abstract WhaleState getNextWhaleState(int currentTimeStep);
-    public abstract WhaleState getWhaleStateAt(int timestep);
+    public abstract WhaleState getNextWhaleState();
+    public abstract void loadWhaleStateAt(int timestep);
 }
 
 
@@ -31,12 +37,12 @@ public class MotionDataCSV : DataSource
     }
 
 
-    public override WhaleState getNextWhaleState(int currentTimeStep)
+    public override WhaleState getNextWhaleState()
     {
         throw new System.NotImplementedException();
     }
 
-    public override WhaleState getWhaleStateAt(int timestep)
+    public override void loadWhaleStateAt(int timestep)
     {
         throw new System.NotImplementedException();
     }
@@ -50,12 +56,13 @@ public class RandomWalk : DataSource
     }
 
 
-    public override WhaleState getNextWhaleState(int currentTimeStep)
+    public override WhaleState getNextWhaleState()
     {
         throw new System.NotImplementedException();
     }
 
-    public override WhaleState getWhaleStateAt(int timestep)
+    
+    public override void loadWhaleStateAt(int timestep)
     {
         throw new System.NotImplementedException();
     }
