@@ -1,27 +1,38 @@
-
 using MotionDataPacketClass;
 using AnimationDataStructs; 
 using DataSources;
 using UnityEngine;
-using Unity.Mathematics;
 using System.Collections.Generic;
+using AnimationDataStorageManager;
 
-
-//classic means no body movement just the up and down
+// classic means no body movement just the up and down
 // made from refacotring original code from v0 for testing 
 public class ClassicMotionDataCSV : DataSource
 {
     private int[] cols = { 0, 1, 8, 9, 10, 12, 14, 23 };
 
-    WhaleState[] states;
-    List<MotionDataPacket> motionDataPacketList = new List<MotionDataPacket>();
+    public List<MotionDataPacket> motionDataPacketList = new List<MotionDataPacket>();
+
+    DataStorageManager dataStorageManager;
+
+    int stateCount;
+    int chunkSize;
+    private WhaleAnimationStreamer streamer;
+    private bool isWaitingForLoad = false;
+    private WhaleState currentWhaleState;
 
     public override void LoadSource(TextAsset file, WhaleState startState, WhaleBlueprint blueprint)
     {
         LoadCSV(file);
-        states = new WhaleState[motionDataPacketList.Count + 1];
-        states[0] = startState;
-        calculateStates(startState, blueprint);
+       
+        dataStorageManager = new DataStorageManager(blueprint);
+        WhaleState[] temp = calculateStates(startState, blueprint);
+        currentWhaleState = startState;
+        dataStorageManager.SaveWhaleAnimationData(temp,Application.dataPath+"/testDATA");
+        streamer = new WhaleAnimationStreamer(dataStorageManager, Application.dataPath+"/testDATA",
+                                               batchSizeIn: 1500, refillThresholdIn: 500);
+        
+
     }
 
     void LoadCSV(TextAsset csvData)
@@ -50,12 +61,13 @@ public class ClassicMotionDataCSV : DataSource
         }
     }
 
-    void calculateStates(WhaleState startState, WhaleBlueprint blueprint)
+    WhaleState[] calculateStates(WhaleState startState, WhaleBlueprint blueprint)
     {
         WhaleState previousState = startState;
         Vector3 targetPosition   = startState.MainBody[0].Position;
         Quaternion targetRotation = startState.MainBody[0].Rotation;
-
+        WhaleState[] output = new WhaleState[motionDataPacketList.Count+1];
+        output[0]= startState;
         for (int i = 0; i < motionDataPacketList.Count; i++)
         {
             MotionDataPacket currentPacket = motionDataPacketList[i];
@@ -78,18 +90,41 @@ public class ClassicMotionDataCSV : DataSource
             newState.MainBody[0].Position = Vector3.Lerp(previousState.MainBody[0].Position, targetPosition, 0.004f * 0.5f);
             newState.MainBody[0].Rotation = Quaternion.Slerp(previousState.MainBody[0].Rotation, targetRotation, 0.004f * 0.5f);
 
-            states[i + 1] = newState;
+            output[i+1] = newState;
             previousState = newState;
         }
+        return output;
     }
 
-    public override WhaleState getNextWhaleState(int currentTimeStep)
-    {
-        return states[currentTimeStep];
+    public override WhaleState getNextWhaleState(){
+        // if waiting for background load of a state jump, just return the last state until the new state is ready
+        if (isWaitingForLoad) {
+    
+            if (!streamer.IsLoading && streamer.TryGetNextState(out var state)) {
+                //data has loaded, update the current state and stop waiting
+                currentWhaleState = state;
+                isWaitingForLoad = false; 
+                return state;
+           
+            } else {
+            
+                return currentWhaleState;
+            }
+        // normal play back not waiting for loading 
+        } else {
+            if (streamer.TryGetNextState(out var state)) {
+               return state;
+            } else {
+                Debug.LogWarning("Streamer error or no more states available");
+                return new WhaleState(new WhaleBlueprint(0, 0, 0, 0, 1));
+            }
+        }   
     }
 
-    public override WhaleState getWhaleStateAt(int timestep)
-    {
-        throw new System.NotImplementedException();
+    public override void loadWhaleStateAt(int timestep){
+        streamer.SeekTo(timestep);
+        isWaitingForLoad = true; 
+        
     }
+ 
 }
