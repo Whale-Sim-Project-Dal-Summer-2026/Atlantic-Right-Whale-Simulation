@@ -2,8 +2,8 @@ using Unity.Mathematics;
 using UnityEngine;
 ///Contains all of the data structs for the animation of the whale
 /// trying to minimize memory but idk if its actually doing much
-namespace AnimationDataStructs
-{
+namespace AnimationDataStructs{
+
 /// <summary>
 /// Stores the tail/fin animation as 4 halves which are applied as a rotation
 /// </summary>
@@ -20,7 +20,7 @@ namespace AnimationDataStructs
 ///   then there is frame number which denotes how many bones are in the tail 
 ///    framewWindow = 4
 /// at timestep 1:  {[1,2,3,4],5,6,7,8,43,32,64,7,5,345,7,3,234,8,634,2...} // frame is first 4 roations in list'
-///  at timestep 2:  {1,2,3,4,[5,6,7,8],43,32,64,7,5,345,7,3,234,8,634,2...} // frame is second 4 roations in list'
+/// at timestep 2:  {1,2,3,4,[5,6,7,8],43,32,64,7,5,345,7,3,234,8,634,2...} // frame is second 4 roations in list'
 ///  this contiunes 
 /// 
 /// this is better than storing whale state as a class object since it will be less memeroy used
@@ -31,8 +31,6 @@ namespace AnimationDataStructs
 ///     since each section has a different amount of bones, so a different frame size
 /// 
 /// I think this could be switched to later if needed, but for now just use the class object since its easier 
-/// 
-///     
 
 
 
@@ -47,8 +45,13 @@ public struct LocalRotation_AnimationData {
 /// 
 /// same here
 public struct Global_AnimationData {
+
+    // used for dead reckoning
     public Vector3 Position; 
     public Quaternion Rotation; 
+    
+    // used for applying force
+    public float Speed;
 }
 
 /// <summary>
