@@ -4,12 +4,34 @@ using System.Collections.Generic;
 using FlukeWaveAmplitudeLookUpClass;
 using System;
 
+// So 
+// whale class which contains the main functions
+// there should be an index step which handles the processing of the animation
+// maybe pre-process it?? so all of the states are saved into a file and then loaded or kept in ram 
+
+// needs to be able to jump to a timestep, lets lock in time steps as 1/10 of a second
+// so the random walk will need to generate a similair timestep thing 
+// 
+
+// new class whale controller
+// controller can operate in two modes cats tag replay, or random walk for entanglement
+
+// both will use same timestep so UI can remain the same 
+
+//so lets abstract the controller to relay on what we will call a motionSource
+// this source abstract will have get nextStep, and getStep for a timestep speficic one
+
+//whale controller will hold a list of bones with certain sections being denoted as certian parts (ie tail) - this will be done using a index range
+
+// this is also where drag and other things will be exposed - maybe a listener type situation? 
+
+
 public class WhaleFlukingMotionDriver: MonoBehaviour
 {   
     CameraControls controls;
     private List<MotionDataPacket> motionDataPacketList = new List<MotionDataPacket>();
 
-    private List<GameObject> bonesList = new List<GameObject>();
+    public List<GameObject> bonesList = new List<GameObject>();
 
 
     public GameObject tailRoot;
@@ -89,7 +111,7 @@ public float boneLength = 0.1f;
         bodyStartRot = bodyRoot.transform.rotation;
 
         bodyTargetRotation = bodyStartRot;
-         tailTargetRotation = tailStartRot;
+        tailTargetRotation = tailStartRot;
 
         controls = new CameraControls();
     }
@@ -270,7 +292,7 @@ public float boneLength = 0.1f;
 
   
     // handles the larger motions like tail angle and body angle (needs csv data)
-    oldTailUpdate(currentPacket);
+    //oldTailUpdate(currentPacket);
 
 
     // updates Amp and Freq of Fluking motion
