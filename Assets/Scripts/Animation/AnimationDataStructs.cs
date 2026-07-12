@@ -86,14 +86,21 @@ public struct WhaleState
     public LocalRotation_AnimationData[] Mouth;
     public LocalRotation_AnimationData[] LeftFin;
     public LocalRotation_AnimationData[] RightFin;
-    public Global_AnimationData[] MainBody;
+    public Global_AnimationData MainBody;
 
     public WhaleState(WhaleBlueprint blueprint) {
         Tail = new LocalRotation_AnimationData[blueprint.TailCount];
         Mouth = new LocalRotation_AnimationData[blueprint.MouthCount];
         LeftFin = new LocalRotation_AnimationData[blueprint.LeftFinCount];
         RightFin = new LocalRotation_AnimationData[blueprint.RightFinCount];
-        MainBody = new Global_AnimationData[blueprint.MainBodyCount];
+        MainBody = new Global_AnimationData();
+    }
+    public WhaleState((Global_AnimationData, LocalRotation_AnimationData[], LocalRotation_AnimationData[], LocalRotation_AnimationData[], LocalRotation_AnimationData[]) stateTuple) {
+        MainBody = stateTuple.Item1;
+        Tail = stateTuple.Item2;
+        LeftFin = stateTuple.Item3;
+        RightFin = stateTuple.Item4;
+        Mouth = stateTuple.Item5;
     }
 
 
