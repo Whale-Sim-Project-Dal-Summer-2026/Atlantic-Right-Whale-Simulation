@@ -24,18 +24,16 @@ public class WhaleMotionFromCSV : DataSource
     private WhaleAnimationStreamer streamer;
     private bool isWaitingForLoad = false;
     private WhaleState currentWhaleState;
-    private WhaleState startState; 
     private WhaleBlueprint blueprint;
     
     MouthSolver mouthSolver;
     FlukeSolver flukeSolver;
+    ClassicMainBodySolver mainBodySolver;
 
     //--Class Specific
     FlukeWaveAmplitudeLookUp lookUp;
 
   
-
-
 
     //THIS COUDL BE THE CONSTRUCTOR?????
     public override void LoadSource(AnimationSettings animationSettings, WhaleState startState, WhaleBlueprint blueprint)
@@ -54,10 +52,11 @@ public class WhaleMotionFromCSV : DataSource
 
         mouthSolver = new MouthSolver(startState.Mouth);
         flukeSolver = new FlukeSolver(blueprint.TailCount, fixedTimeStep, lookUp);
+        mainBodySolver = new ClassicMainBodySolver(fixedTimeStep, startState.MainBody);
+
         //build states
         WhaleState[] temp = calculateStates(startState, blueprint);
         currentWhaleState = startState;
-        this.startState = startState;
 
         //save states
         dataStorageManager.SaveWhaleAnimationData(temp,Application.dataPath+"/testDATA");
@@ -69,10 +68,10 @@ public class WhaleMotionFromCSV : DataSource
 
 
         //clear data no longer needed 
-        // motionDataPacketList = null;
-        // cSVLoader = null; 
-        // temp = null;
-        // GC.Collect();
+        motionDataPacketList = null;
+        cSVLoader = null; 
+        temp = null;
+        GC.Collect();
         
     }
 
@@ -110,8 +109,7 @@ public class WhaleMotionFromCSV : DataSource
     WhaleState[] calculateStates(WhaleState startState, WhaleBlueprint blueprint){
 
         WhaleState previousState = startState;
-        Vector3 targetPosition   = startState.MainBody.Position;
-        Quaternion targetRotation = startState.MainBody.Rotation;
+     
         WhaleState[] output = new WhaleState[motionDataPacketList.Count+1];
         output[0]= startState;
         for (int i = 0; i < motionDataPacketList.Count; i++)
@@ -128,14 +126,11 @@ public class WhaleMotionFromCSV : DataSource
                 currentPacket.roll = 0f;
             }
 
-            targetRotation  = Quaternion.Euler(currentPacket.pitch, currentPacket.head, currentPacket.roll);
-            targetPosition += targetRotation * Vector3.forward * currentPacket.speed * (fixedTimeStep * 10);
-            targetPosition.y = 75f - currentPacket.depth;
-
+          
             WhaleState newState = new WhaleState(blueprint);
-            newState.MainBody.Position = Vector3.Lerp(previousState.MainBody.Position, targetPosition,fixedTimeStep* 0.5f);
-            newState.MainBody.Rotation = Quaternion.Slerp(previousState.MainBody.Rotation, targetRotation, fixedTimeStep * 0.5f);
-
+            
+            //Calculate Main Body
+            newState.MainBody = mainBodySolver.solveMainBody(currentPacket, previousState.MainBody);
         
             //Calculate Fluke
             newState.Tail = flukeSolver.solveFuke(currentPacket, startState);
