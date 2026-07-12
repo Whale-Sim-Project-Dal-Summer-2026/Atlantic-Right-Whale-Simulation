@@ -5,6 +5,9 @@ using UnityEngine;
 using AnimationDataStructs;
 using AnimationDataStorageManager;
 using static WhaleAnimationStreamer;
+using System.Collections;
+using System.Collections.Generic;
+using NUnit.Framework;
 
 
 //-- ROADMAP NOTES--
@@ -42,6 +45,7 @@ public enum DataSourceType
 {
     ClassicMotionDataCSV,
     MotionDataCSV,
+    WhaleMotionFromCSV,
     RandomWalk
 }
 
@@ -58,24 +62,48 @@ public class WhaleDriver : MonoBehaviour
     public DataSourceType dataSourceType;
     [SerializeField] Animator animator;
     public int timesetp = 0;
-    
 
+    [Header("Animation Settings")]
+    public AnimationSettings animationSettings;
+  
+    WhaleModel whaleModel;
+
+    WhaleBones whaleBones;
+    
+    
     void Start(){
         // set data source based on the enum value
         dataSource = dataSourceType switch{
             DataSourceType.ClassicMotionDataCSV => new ClassicMotionDataCSV(),
             DataSourceType.MotionDataCSV => new MotionDataCSV(),
+            DataSourceType.WhaleMotionFromCSV => new WhaleMotionFromCSV(),
             DataSourceType.RandomWalk => new RandomWalk(),
             _ => throw new System.ArgumentOutOfRangeException()
         };
-       WhaleState startState = new WhaleState(new WhaleBlueprint(0,0,0,0,1));
-       startState.MainBody[0].Position = transform.position;
-       startState.MainBody[0].Rotation = transform.rotation;
-       dataSource.LoadSource(dataSourceFile, startState, new WhaleBlueprint(0,0,0,0,1));
-    
-     
 
+        // Retrieve the WhaleBones from the GameObject on the Whale 
+        WhaleBones whaleBones =  this.gameObject.GetComponent<WhaleBones>();
+
+        
+        //Set up the model which actually applies the state to the bones in the scene
+        whaleModel = new WhaleModel(whaleBones);
+        
+        // get the start state 
+        WhaleState startState = whaleModel.getCurrentState();
+
+        // get the blueprint which is just the counts of the bones in the whale
+        WhaleBlueprint blueprint = whaleModel.getBlueprint();
+
+        // set the start state position and rotation to the current transform of the whale
+        startState.MainBody.Position = transform.position;
+        startState.MainBody.Rotation = transform.rotation;
+
+        // load the data source
+        dataSource.LoadSource(animationSettings, startState, blueprint);
+    
     }
+
+
     void Awake(){
         controls = new CameraControls();
     }
@@ -90,8 +118,7 @@ public class WhaleDriver : MonoBehaviour
 
     void updateWhaleState() {
         WhaleState newState = dataSource.getNextWhaleState();
-        transform.position = newState.MainBody[0].Position;
-        transform.rotation = newState.MainBody[0].Rotation;
+        whaleModel.updateWhaleState(newState);
     }
 
     void Update(){
@@ -112,6 +139,7 @@ public class WhaleDriver : MonoBehaviour
        jumpToTimestep = 0;
        animator.Play("R Whale Armature|Whale Swimming",0,0);  
     }
+
 
 
 }
