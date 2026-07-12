@@ -266,6 +266,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c3dd9e0cc9aadac49b3ddec75245af86, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1246253214}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c3dd9e0cc9aadac49b3ddec75245af86, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1246253219}
     - targetCorrespondingSourceObject: {fileID: -2751606002294120706, guid: c3dd9e0cc9aadac49b3ddec75245af86, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1994175166}
@@ -467,6 +470,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c3dd9e0cc9aadac49b3ddec75245af86, type: 3}
       propertyPath: m_Name
       value: Right Whale SF Initial Model
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3dd9e0cc9aadac49b3ddec75245af86, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2006124716503967588, guid: c3dd9e0cc9aadac49b3ddec75245af86, type: 3}
       propertyPath: m_Name
@@ -1317,6 +1324,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8484351518889782251, guid: c3dd9e0cc9aadac49b3ddec75245af86, type: 3}
   m_PrefabInstance: {fileID: 19161131}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &264689635 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8480726194976966459, guid: c3dd9e0cc9aadac49b3ddec75245af86, type: 3}
+  m_PrefabInstance: {fileID: 3571448}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &279384984
 GameObject:
   m_ObjectHideFlags: 0
@@ -1543,6 +1555,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 280392412}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &290191997 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1031092818754542813, guid: c3dd9e0cc9aadac49b3ddec75245af86, type: 3}
+  m_PrefabInstance: {fileID: 3571448}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &305088243
 GameObject:
   m_ObjectHideFlags: 0
@@ -1893,6 +1910,11 @@ MonoBehaviour:
   orbitDistance: 25
   orbitSensitivity: 2
   locked: 0
+--- !u!1 &382297543 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8250904432996703928, guid: c3dd9e0cc9aadac49b3ddec75245af86, type: 3}
+  m_PrefabInstance: {fileID: 3571448}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -3198,6 +3220,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 917492684}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &949035251 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -1456163517337391007, guid: c3dd9e0cc9aadac49b3ddec75245af86, type: 3}
+  m_PrefabInstance: {fileID: 3571448}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1027469304
 GameObject:
   m_ObjectHideFlags: 0
@@ -3615,6 +3642,7 @@ MonoBehaviour:
   dataSourceType: 0
   animator: {fileID: 1246253218}
   timesetp: 0
+  animationSettings: {fileID: 11400000, guid: a079734cd265a3648b27716324684644, type: 2}
 --- !u!114 &1246253215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3685,6 +3713,27 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1246253219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1246253212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53d45e3a694cd6c47851c0bc72dcd19d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WhaleBones
+  mainBodyBone: {fileID: 1246253212}
+  tailStartBone: {fileID: 1319348188}
+  tailStopBone: {fileID: 1364710691}
+  mouthTopBone: {fileID: 1567981854}
+  mouthBottomBone: {fileID: 1842830745}
+  leftFinStartBone: {fileID: 290191997}
+  leftFinStopBone: {fileID: 264689635}
+  rightFinStartBone: {fileID: 949035251}
+  rightFinStopBone: {fileID: 382297543}
 --- !u!1 &1257740307
 GameObject:
   m_ObjectHideFlags: 0
@@ -4106,6 +4155,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1279296466}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1319348188 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3770634334774693350, guid: c3dd9e0cc9aadac49b3ddec75245af86, type: 3}
+  m_PrefabInstance: {fileID: 3571448}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1352550594 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4749537318920938167, guid: c3dd9e0cc9aadac49b3ddec75245af86, type: 3}
@@ -4138,6 +4192,11 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -2432090755550338912, guid: 48a90fdf2023eb547b058d434260aa11, type: 3}
+--- !u!1 &1364710691 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -1528558187340702623, guid: c3dd9e0cc9aadac49b3ddec75245af86, type: 3}
+  m_PrefabInstance: {fileID: 3571448}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1412593734 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c3dd9e0cc9aadac49b3ddec75245af86, type: 3}
@@ -4753,6 +4812,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1566468683}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1567981854 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1454862182509570600, guid: c3dd9e0cc9aadac49b3ddec75245af86, type: 3}
+  m_PrefabInstance: {fileID: 3571448}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1584328617
 GameObject:
   m_ObjectHideFlags: 0
@@ -5574,6 +5638,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1750399580}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1842830745 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5107318970772008384, guid: c3dd9e0cc9aadac49b3ddec75245af86, type: 3}
+  m_PrefabInstance: {fileID: 3571448}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1870889459
 GameObject:
   m_ObjectHideFlags: 0
