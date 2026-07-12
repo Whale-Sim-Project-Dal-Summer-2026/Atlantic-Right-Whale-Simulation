@@ -6,15 +6,14 @@ using UnityEngine;
 namespace DataSources{
 public abstract class DataSource
 {
-    //public DataSaver dataSaver;
-
     //public DataLoader dataLoader;
 
     //int currentTimeStep = 0;
 
-    public abstract void LoadSource(TextAsset file, WhaleState startState, WhaleBlueprint blueprint);
+    public abstract void LoadSource(AnimationSettings animationSettings, WhaleState startState, WhaleBlueprint blueprint);
     public abstract WhaleState getNextWhaleState();
     public abstract void loadWhaleStateAt(int timestep);
+    
 }
 
 
@@ -31,7 +30,10 @@ public abstract class DataSource
 
 public class MotionDataCSV : DataSource
 {
-    public override void LoadSource(TextAsset file, WhaleState startState, WhaleBlueprint blueprint)
+    // each one should have a constructor which builds itself using the blueprint provided
+    // maybe the blueprint can be passed in from a settings scriptable asset???
+    
+    public override void LoadSource(AnimationSettings animationSettings, WhaleState startState, WhaleBlueprint blueprint)
     {
         throw new System.NotImplementedException();
     }
@@ -50,7 +52,7 @@ public class MotionDataCSV : DataSource
 
 public class RandomWalk : DataSource
 {
-    public override void LoadSource(TextAsset file, WhaleState startState, WhaleBlueprint blueprint)
+    public override void LoadSource(AnimationSettings animationSettings, WhaleState startState, WhaleBlueprint blueprint)
     {
         throw new System.NotImplementedException();
     }

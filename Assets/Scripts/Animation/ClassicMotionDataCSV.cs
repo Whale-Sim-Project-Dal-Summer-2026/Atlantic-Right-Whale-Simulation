@@ -21,9 +21,9 @@ public class ClassicMotionDataCSV : DataSource
     private bool isWaitingForLoad = false;
     private WhaleState currentWhaleState;
 
-    public override void LoadSource(TextAsset file, WhaleState startState, WhaleBlueprint blueprint)
+    public override void LoadSource(AnimationSettings animationSettings, WhaleState startState, WhaleBlueprint blueprint)
     {
-        LoadCSV(file);
+        LoadCSV(animationSettings.MotionData_csv);
        
         dataStorageManager = new DataStorageManager(blueprint);
         WhaleState[] temp = calculateStates(startState, blueprint);
@@ -64,8 +64,8 @@ public class ClassicMotionDataCSV : DataSource
     WhaleState[] calculateStates(WhaleState startState, WhaleBlueprint blueprint)
     {
         WhaleState previousState = startState;
-        Vector3 targetPosition   = startState.MainBody[0].Position;
-        Quaternion targetRotation = startState.MainBody[0].Rotation;
+        Vector3 targetPosition   = startState.MainBody.Position;
+        Quaternion targetRotation = startState.MainBody.Rotation;
         WhaleState[] output = new WhaleState[motionDataPacketList.Count+1];
         output[0]= startState;
         for (int i = 0; i < motionDataPacketList.Count; i++)
@@ -87,8 +87,8 @@ public class ClassicMotionDataCSV : DataSource
             targetPosition.y = 75f - currentPacket.depth;
 
             WhaleState newState = new WhaleState(blueprint);
-            newState.MainBody[0].Position = Vector3.Lerp(previousState.MainBody[0].Position, targetPosition, 0.004f * 0.5f);
-            newState.MainBody[0].Rotation = Quaternion.Slerp(previousState.MainBody[0].Rotation, targetRotation, 0.004f * 0.5f);
+            newState.MainBody.Position = Vector3.Lerp(previousState.MainBody.Position, targetPosition, 0.004f * 0.5f);
+            newState.MainBody.Rotation = Quaternion.Slerp(previousState.MainBody.Rotation, targetRotation, 0.004f * 0.5f);
 
             output[i+1] = newState;
             previousState = newState;
