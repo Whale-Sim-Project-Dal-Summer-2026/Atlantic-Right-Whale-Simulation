@@ -64,8 +64,8 @@ public class ClassicMotionDataCSV : DataSource
     WhaleState[] calculateStates(WhaleState startState, WhaleBlueprint blueprint)
     {
         WhaleState previousState = startState;
-        Vector3 targetPosition   = startState.MainBody.Position;
-        Quaternion targetRotation = startState.MainBody.Rotation;
+        Vector3 targetPosition   = startState.Root.Position;
+        Quaternion targetRotation = startState.Root.Rotation;
         WhaleState[] output = new WhaleState[motionDataPacketList.Count+1];
         output[0]= startState;
         for (int i = 0; i < motionDataPacketList.Count; i++)
@@ -87,8 +87,8 @@ public class ClassicMotionDataCSV : DataSource
             targetPosition.y = 75f - currentPacket.depth;
 
             WhaleState newState = new WhaleState(blueprint);
-            newState.MainBody.Position = Vector3.Lerp(previousState.MainBody.Position, targetPosition, 0.004f * 0.5f);
-            newState.MainBody.Rotation = Quaternion.Slerp(previousState.MainBody.Rotation, targetRotation, 0.004f * 0.5f);
+            newState.Root.Position = Vector3.Lerp(previousState.Root.Position, targetPosition, 0.004f * 0.5f);
+            newState.Root.Rotation = Quaternion.Slerp(previousState.Root.Rotation, targetRotation, 0.004f * 0.5f);
 
             output[i+1] = newState;
             previousState = newState;
@@ -116,7 +116,7 @@ public class ClassicMotionDataCSV : DataSource
                return state;
             } else {
                 Debug.LogWarning("Streamer error or no more states available");
-                return new WhaleState(new WhaleBlueprint(0, 0, 0, 0, 1));
+                return new WhaleState(new WhaleBlueprint(0, 0, 0, 0, 1,0,0));
             }
         }   
     }

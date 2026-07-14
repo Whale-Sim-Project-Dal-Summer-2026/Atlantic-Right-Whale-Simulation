@@ -7,47 +7,65 @@ using System.Linq;
 public class WhaleModel {
 
     //--Bone Counts--
-    int mainBodyBoneCount;
+    int rootBoneCount;
     int tailBoneCount;
     int leftFinBoneCount;
     int rightFinBoneCount;
     int mouthBoneCount;
+    int headBoneCount;
+    int tailStartIndex;
    
     //--Bone Lists--
-    GameObject mainBodyBone;
-    List<GameObject> tailBones;
+    GameObject rootBone;
+    GameObject headBone;
+    GameObject tailStartBone;
+    List<GameObject> bodyLengthBones;
     List<GameObject> leftFinBones;
     List<GameObject> rightFinBones;
     List<GameObject> mouthBones; 
 
+    int bodyEndIndex;
+    int startTailIndex;
+    int tailEndIndex;
+    int leftFlukeEndIndex;
+    int leftFlukeStartIndex;
+
     public WhaleModel(WhaleBones whaleBones){
-        tailBones = new List<GameObject>();
+        bodyLengthBones = new List<GameObject>();
         leftFinBones = new List<GameObject>();
         rightFinBones = new List<GameObject>();
         mouthBones = new List<GameObject>();
 
         InitializeBones(whaleBones);
 
-        mainBodyBoneCount = 1;
-        tailBoneCount = tailBones.Count;
+        rootBoneCount = 1;
+        tailBoneCount = bodyLengthBones.Count;
         leftFinBoneCount = leftFinBones.Count;
         rightFinBoneCount = rightFinBones.Count;
         mouthBoneCount = mouthBones.Count;
-        mainBodyBone = whaleBones.mainBodyBone;
+        rootBone = whaleBones.rootBone;
+        headBoneCount = 1;
     }
     void InitializeBones(WhaleBones blueprintSettings){
 
-        GetAllChildren(blueprintSettings.tailStartBone, tailBones, blueprintSettings.tailStopBone);
+        GetAllChildren(blueprintSettings.tailStartBone, bodyLengthBones, blueprintSettings.tailStopBone);
         GetAllChildren(blueprintSettings.leftFinStartBone, leftFinBones, blueprintSettings.leftFinStopBone);
         GetAllChildren(blueprintSettings.rightFinStartBone, rightFinBones, blueprintSettings.rightFinStopBone);
         mouthBones.Add(blueprintSettings.mouthTopBone);
         mouthBones.Add(blueprintSettings.mouthBottomBone);
+        headBone = blueprintSettings.headBone;
+        tailStartBone = blueprintSettings.tailStartBone;
 
     }
     void GetAllChildren(GameObject parent, List<GameObject> addingList, GameObject stopObject){
         foreach (Transform child in parent.transform){
             // skips colldiers 
             if (child.name == "Colliders"|| child.name == "Collider"){ continue;}
+
+            if (child == tailStartBone) {
+                tailStartIndex = addingList.Count;
+            }
+
             addingList.Add(child.gameObject);
 
             if (child.gameObject == stopObject)
@@ -61,7 +79,7 @@ public class WhaleModel {
     }
 
     public WhaleBlueprint getBlueprint(){
-        return new WhaleBlueprint(tailBoneCount, mouthBoneCount, leftFinBoneCount, rightFinBoneCount,mainBodyBoneCount);
+        return new WhaleBlueprint(tailBoneCount, mouthBoneCount, leftFinBoneCount, rightFinBoneCount,rootBoneCount,headBoneCount, tailStartIndex);
     }
 
     public WhaleState getCurrentState(){
@@ -69,15 +87,15 @@ public class WhaleModel {
     }
 
     // cast the current gameobject transforms to a whale state object
-    (Global_AnimationData, LocalRotation_AnimationData[], LocalRotation_AnimationData[], LocalRotation_AnimationData[], LocalRotation_AnimationData[]) castGameObjectsToWhaleState(){
-        Global_AnimationData mainBodyState = new Global_AnimationData();
-        mainBodyState.Position = mainBodyBone.transform.position;
-        mainBodyState.Rotation = mainBodyBone.transform.rotation;
+    (Global_AnimationData, LocalRotation_AnimationData[], LocalRotation_AnimationData[], LocalRotation_AnimationData[], LocalRotation_AnimationData[], LocalRotation_AnimationData) castGameObjectsToWhaleState(){
+        Global_AnimationData rootState = new Global_AnimationData();
+        rootState.Position = rootBone.transform.position;
+        rootState.Rotation = rootBone.transform.rotation;
 
-        LocalRotation_AnimationData[] tailStates = new LocalRotation_AnimationData[tailBones.Count];
-        for (int i = 0; i < tailBones.Count; i++)
+        LocalRotation_AnimationData[] bodyLengthStates = new LocalRotation_AnimationData[bodyLengthBones.Count];
+        for (int i = 0; i < bodyLengthBones.Count; i++)
         {
-            tailStates[i].Rotation = tailBones[i].transform.localRotation;
+            bodyLengthStates[i].Rotation = bodyLengthBones[i].transform.localRotation;
         }
 
         LocalRotation_AnimationData[] leftFinStates = new LocalRotation_AnimationData[leftFinBones.Count];
@@ -97,17 +115,30 @@ public class WhaleModel {
         {
             mouthStates[i].Rotation = mouthBones[i].transform.localRotation;
         }
+        LocalRotation_AnimationData headState = new LocalRotation_AnimationData();
+        headState.Rotation = headBone.transform.localRotation;
+        
 
-        return (mainBodyState, tailStates, leftFinStates, rightFinStates, mouthStates);
+        return (rootState, bodyLengthStates, leftFinStates, rightFinStates, mouthStates, headState);
     }
 
     public void updateWhaleState(WhaleState newState){
-        mainBodyBone.transform.position = newState.MainBody.Position;
-        mainBodyBone.transform.rotation = newState.MainBody.Rotation;
+        rootBone.transform.position = newState.Root.Position;
+        rootBone.transform.rotation = newState.Root.Rotation;
 
-        for (int i = 0; i < newState.Tail.Count(); i++)
-        {
-            tailBones[i].transform.localRotation = newState.Tail[i].Rotation;
+        swapZandY(newState.Head.Rotation, out Quaternion headRot);
+        headBone.transform.localRotation = headRot;
+
+
+        for (int i = 0; i < newState.BodyLength.Count(); i++)
+        {   
+            if (i < bodyLengthBones.Count-8){
+                swapZandY(newState.BodyLength[i].Rotation, out Quaternion newRot);
+                bodyLengthBones[i].transform.localRotation = newRot;
+            } else {
+                bodyLengthBones[i].transform.localRotation = newState.BodyLength[i].Rotation;
+            }
+
         }
 
         for (int i = 0; i < newState.LeftFin.Count(); i++)
@@ -124,6 +155,17 @@ public class WhaleModel {
         {
             mouthBones[i].transform.localRotation = newState.Mouth[i].Rotation;
         }
+    }
+
+    void swapZandY(Quaternion input, out Quaternion output){
+        Vector3 euler = input.eulerAngles;
+        float currentY = euler.y;
+        float currentZ = euler.z;
+
+        euler.y = currentZ;
+        euler.z = currentY;
+
+        output = Quaternion.Euler(euler.x, euler.y, euler.z);
     }
 
 }

@@ -2,7 +2,11 @@ using UnityEngine;
 public class WhaleBones : MonoBehaviour
 {
     [Header("Main Body Config")]
-    public GameObject mainBodyBone;
+    public GameObject rootBone;
+
+    public GameObject headBone;
+
+    public GameObject bodyStartBone;
 
     [Header("Tail Config")]
     public GameObject tailStartBone;

@@ -1,20 +1,13 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
 using AnimationDataStructs;
 using DataSources;
 using AnimationDataStorageManager;
-using static WhaleAnimationStreamer;
 using MotionDataPacketClass;
 using FlukeWaveAmplitudeLookUpClass;
-using static CSVLoader;
-using System.Reflection;
 
-
-public class WhaleMotionFromCSV : DataSource
-{
-    private int[] cols = { 0, 1, 8, 9, 10, 12, 14, 23 };
+public class WhaleMotionFromCSV : DataSource{
 
     public List<MotionDataPacket> motionDataPacketList = new List<MotionDataPacket>();
     private float fixedTimeStep = 0.004f;
@@ -29,11 +22,12 @@ public class WhaleMotionFromCSV : DataSource
     MouthSolver mouthSolver;
     FlukeSolver flukeSolver;
     ClassicMainBodySolver mainBodySolver;
+    BodyRollSolver bodyRollSolver;
 
     //--Class Specific
     FlukeWaveAmplitudeLookUp lookUp;
 
-  
+    int tailStartIndex = 0;
 
     //THIS COUDL BE THE CONSTRUCTOR?????
     public override void LoadSource(AnimationSettings animationSettings, WhaleState startState, WhaleBlueprint blueprint)
@@ -51,9 +45,10 @@ public class WhaleMotionFromCSV : DataSource
         dataStorageManager = new DataStorageManager(blueprint);
 
         mouthSolver = new MouthSolver(startState.Mouth);
-        flukeSolver = new FlukeSolver(blueprint.TailCount, fixedTimeStep, lookUp);
-        mainBodySolver = new ClassicMainBodySolver(fixedTimeStep, startState.MainBody);
-
+        flukeSolver = new FlukeSolver(blueprint.BodyLengthCount, fixedTimeStep, lookUp, tailStartIndex);
+        mainBodySolver = new ClassicMainBodySolver(fixedTimeStep, startState.Root);
+        bodyRollSolver = new BodyRollSolver(fixedTimeStep);
+        
         //build states
         WhaleState[] temp = calculateStates(startState, blueprint);
         currentWhaleState = startState;
@@ -130,15 +125,21 @@ public class WhaleMotionFromCSV : DataSource
             WhaleState newState = new WhaleState(blueprint);
             
             //Calculate Main Body
-            newState.MainBody = mainBodySolver.solveMainBody(currentPacket, previousState.MainBody);
-        
-            //Calculate Fluke
-            newState.Tail = flukeSolver.solveFuke(currentPacket, startState);
-            //Solve Mouth State
+            newState.Root = mainBodySolver.solveMainBody(currentPacket, previousState.Root);
+
+            newState = bodyRollSolver.solveBodyRoll(previousState, newState.Root, blueprint, mainBodySolver.getLastTravelDistance());
+
             newState.Mouth = mouthSolver.solveMouth(currentPacket.MouthOpen == 1 ? true : false , previousState.Mouth);
 
-            output[i+1] = newState;
+            // set previous state to prevent compounding fluke calc
             previousState = newState;
+
+            //Calculate Fluke based on body roll state
+            newState.BodyLength= flukeSolver.solveFuke(currentPacket, newState);
+
+      
+            output[i+1] = newState;
+            
         }
         return output;
     }
@@ -172,10 +173,9 @@ public class WhaleMotionFromCSV : DataSource
         }   
     }
 
-    public override void loadWhaleStateAt(int timestep)
-    {
+    public override void loadWhaleStateAt(int timestep){
         streamer.SeekTo(timestep);
         isWaitingForLoad = true; 
-        
+       
     }
 }

@@ -7,11 +7,14 @@ namespace AnimationDataStorageManager {
     public class DataStorageManager{
 
     // Fixed counts for each section to offset the data correctly when writing
-    int tail_Count;
+    int bodyLength_Count;
     int mouth_Count;
     int leftFin_Count;
     int rightFin_count; 
-    int mainBody_Count;
+    int root_Count;
+    int head_Count;
+    int tailStartIndex;
+  
 
     //byte sizes for getting offsets
     const int NUM_BYTES_LOCALROTATION = 4 * sizeof(float);
@@ -21,11 +24,12 @@ namespace AnimationDataStorageManager {
 
     public DataStorageManager(WhaleBlueprint blueprint) {
         // init from the blueprint
-        tail_Count = blueprint.TailCount;
+        bodyLength_Count = blueprint.BodyLengthCount;
         mouth_Count = blueprint.MouthCount;
         leftFin_Count = blueprint.LeftFinCount;
         rightFin_count = blueprint.RightFinCount;
-        mainBody_Count = blueprint.MainBodyCount;
+        root_Count = blueprint.RootCount;
+        head_Count = blueprint.HeadCount;
     }
 
     public void SaveWhaleAnimationData(WhaleState[] whaleStates, string filePath) {
@@ -41,11 +45,13 @@ namespace AnimationDataStorageManager {
                 for (int i =0; i < whaleStates.Length; i++) {
                     WhaleState state = whaleStates[i];
                 
-                    if (state.Tail.Length > 0) WriteLocalRotation(writer, state.Tail);
-                    if (state.Mouth.Length > 0) WriteLocalRotation(writer, state.Mouth);
-                    if (state.LeftFin.Length > 0) WriteLocalRotation(writer, state.LeftFin);
-                    if (state.RightFin.Length > 0) WriteLocalRotation(writer, state.RightFin);
-                    WriteBodyBlock(writer, state.MainBody);
+                    if (state.BodyLength.Length > 0) WriteLocalRotationList(writer, state.BodyLength);
+                    if (state.Mouth.Length > 0) WriteLocalRotationList(writer, state.Mouth);
+                    if (state.LeftFin.Length > 0) WriteLocalRotationList(writer, state.LeftFin);
+                    if (state.RightFin.Length > 0) WriteLocalRotationList(writer, state.RightFin);
+                    if (head_Count > 0) WriteLocalRotation(writer, state.Head);
+                    WriteBodyBlock(writer, state.Root);
+                    
 
                 }
             }
@@ -62,14 +68,16 @@ namespace AnimationDataStorageManager {
 
                     for (int i = 0; i < totalFrames; i++) {
                     
-                        WhaleState state = new WhaleState(new WhaleBlueprint(tail_Count, mouth_Count, leftFin_Count, rightFin_count, mainBody_Count));
+                        WhaleState state = new WhaleState(new WhaleBlueprint(bodyLength_Count, mouth_Count, leftFin_Count, rightFin_count, root_Count, head_Count, tailStartIndex));
 
                         // Populate the data from the stream.
-                        if (state.Tail.Length > 0) ReadLocalRotation(reader, state.Tail);
-                        if (state.Mouth.Length > 0) ReadLocalRotation(reader, state.Mouth);
-                        if (state.LeftFin.Length > 0) ReadLocalRotation(reader, state.LeftFin);
-                        if (state.RightFin.Length > 0) ReadLocalRotation(reader, state.RightFin);
-                        ReadBodyBlock(reader, state.MainBody);
+                        if (state.BodyLength.Length > 0) ReadLocalRotationList(reader, state.BodyLength);
+                        if (state.Mouth.Length > 0) ReadLocalRotationList(reader, state.Mouth);
+                        if (state.LeftFin.Length > 0) ReadLocalRotationList(reader, state.LeftFin);
+                        if (state.RightFin.Length > 0) ReadLocalRotationList(reader, state.RightFin);
+                        if (head_Count > 0 ) state.Head = ReadLocalRotation(reader, state.Head);
+                        ReadBodyBlock(reader, state.Root);
+                        
 
                         states[i] = state;
                     }
@@ -89,21 +97,24 @@ namespace AnimationDataStorageManager {
                     $"Frame {frameIndex} is out of range \nFile has {totalFrames} frames.");
 
                 // Gets number of bytes for each local rotation sections
-                int bytesForLocalRotation = (tail_Count + mouth_Count + leftFin_Count + rightFin_count) * NUM_BYTES_LOCALROTATION;
+                int bytesForLocalRotation = (bodyLength_Count + mouth_Count + leftFin_Count + rightFin_count+ head_Count) * NUM_BYTES_LOCALROTATION;
                 // gets number of bytes for the main body section
-                int bytesForGlobalAnimation = mainBody_Count * NUM_BYTES_GLOBALANIMATION;
+                int bytesForGlobalAnimation = root_Count  * NUM_BYTES_GLOBALANIMATION;
                 // combine to get total bytes per frame
                 int bytesPerFrame = bytesForLocalRotation + bytesForGlobalAnimation;
                 // skip the frame count header then jump ahead frameIndex frames
                 long offset = sizeof(int) + (long)frameIndex * bytesPerFrame;
                 stream.Seek(offset, SeekOrigin.Begin);
 
-                WhaleState state = new WhaleState(new WhaleBlueprint(tail_Count, mouth_Count, leftFin_Count, rightFin_count, mainBody_Count));
-                if (state.Tail.Length > 0) ReadLocalRotation(reader, state.Tail);
-                if (state.Mouth.Length > 0) ReadLocalRotation(reader, state.Mouth);
-                if (state.LeftFin.Length > 0) ReadLocalRotation(reader, state.LeftFin);
-                if (state.RightFin.Length > 0) ReadLocalRotation(reader, state.RightFin);
-                ReadBodyBlock(reader, state.MainBody);
+                WhaleState state = new WhaleState(new WhaleBlueprint(bodyLength_Count, mouth_Count, leftFin_Count, rightFin_count, root_Count, head_Count, tailStartIndex));
+
+                if (state.BodyLength.Length > 0) ReadLocalRotationList(reader, state.BodyLength);
+                if (state.Mouth.Length > 0) ReadLocalRotationList(reader, state.Mouth);
+                if (state.LeftFin.Length > 0) ReadLocalRotationList(reader, state.LeftFin);
+                if (state.RightFin.Length > 0) ReadLocalRotationList(reader, state.RightFin);
+                if (head_Count>0) state.Head = ReadLocalRotation(reader, state.Head);
+                ReadBodyBlock(reader, state.Root);
+                
 
                 return state;
             }
@@ -121,9 +132,9 @@ namespace AnimationDataStorageManager {
                 count = Math.Min(count, totalFrames - startFrame);
 
                 // Gets number of bytes for each local rotation sections
-                int bytesForLocalRotation = (tail_Count + mouth_Count + leftFin_Count + rightFin_count) * NUM_BYTES_LOCALROTATION;
+                int bytesForLocalRotation = (bodyLength_Count + mouth_Count + leftFin_Count + rightFin_count + head_Count) * NUM_BYTES_LOCALROTATION;
                 // gets number of bytes for the main body section
-                int bytesForGlobalAnimation = mainBody_Count * NUM_BYTES_GLOBALANIMATION;
+                int bytesForGlobalAnimation = root_Count * NUM_BYTES_GLOBALANIMATION;
                 // combine to get total bytes per frame
                 int bytesPerFrame = bytesForLocalRotation + bytesForGlobalAnimation;
 
@@ -133,13 +144,16 @@ namespace AnimationDataStorageManager {
 
                 WhaleState[] states = new WhaleState[count];
                 for (int i = 0; i < count; i++) {
-                    WhaleState state = new WhaleState(new WhaleBlueprint(tail_Count, mouth_Count, leftFin_Count, rightFin_count, mainBody_Count));
+                   WhaleState state = new WhaleState(new WhaleBlueprint(bodyLength_Count, mouth_Count, leftFin_Count, rightFin_count, root_Count, head_Count, tailStartIndex));
 
-                    if (state.Tail.Length > 0) ReadLocalRotation(reader, state.Tail);
-                    if (state.Mouth.Length > 0) ReadLocalRotation(reader, state.Mouth);
-                    if (state.LeftFin.Length > 0) ReadLocalRotation(reader, state.LeftFin);
-                    if (state.RightFin.Length > 0) ReadLocalRotation(reader, state.RightFin);
-                    state.MainBody = ReadBodyBlock(reader, state.MainBody);
+
+                    if (state.BodyLength.Length > 0) ReadLocalRotationList(reader, state.BodyLength);
+                    if (state.Mouth.Length > 0) ReadLocalRotationList(reader, state.Mouth);
+                    if (state.LeftFin.Length > 0) ReadLocalRotationList(reader, state.LeftFin);
+                    if (state.RightFin.Length > 0) ReadLocalRotationList(reader, state.RightFin);
+                    if (head_Count >0) state.Head = ReadLocalRotation(reader, state.Head);
+                    state.Root = ReadBodyBlock(reader, state.Root);
+
 
                     states[i] = state;
                 }
@@ -149,7 +163,7 @@ namespace AnimationDataStorageManager {
         }
     }
     
-    private void ReadLocalRotation(BinaryReader reader, LocalRotation_AnimationData[] data) {
+    private void ReadLocalRotationList(BinaryReader reader, LocalRotation_AnimationData[] data) {
             for (int i = 0; i < data.Length; i++) {
                 data[i].Rotation.x = (float)reader.ReadSingle();
                 data[i].Rotation.y =(float)reader.ReadSingle();
@@ -157,6 +171,14 @@ namespace AnimationDataStorageManager {
                 data[i].Rotation.w = (float)reader.ReadSingle();
             }
         }
+    private LocalRotation_AnimationData ReadLocalRotation(BinaryReader reader, LocalRotation_AnimationData data) {
+            data.Rotation.x = (float)reader.ReadSingle();
+            data.Rotation.y =(float)reader.ReadSingle();
+            data.Rotation.z = (float)reader.ReadSingle();
+            data.Rotation.w = (float)reader.ReadSingle();
+            return data;
+        }
+    
 
     private Global_AnimationData ReadBodyBlock(BinaryReader reader, Global_AnimationData data) {
             data.Position.x = (float)reader.ReadSingle();
@@ -176,7 +198,7 @@ namespace AnimationDataStorageManager {
         using (BinaryReader reader = new BinaryReader(stream))
             return reader.ReadInt32();
     }
-    private void WriteLocalRotation(BinaryWriter writer, LocalRotation_AnimationData[] data) {
+    private void WriteLocalRotationList(BinaryWriter writer, LocalRotation_AnimationData[] data) {
         foreach (var item in data) {
             // 
             writer.Write(item.Rotation.x); 
@@ -184,6 +206,14 @@ namespace AnimationDataStorageManager {
             writer.Write(item.Rotation.z);
             writer.Write(item.Rotation.w);
         }
+    }
+    
+    private void WriteLocalRotation(BinaryWriter writer, LocalRotation_AnimationData data) {
+            writer.Write(data.Rotation.x); 
+            writer.Write(data.Rotation.y);
+            writer.Write(data.Rotation.z);
+            writer.Write(data.Rotation.w);
+    
     }
 
     private void WriteBodyBlock(BinaryWriter writer, Global_AnimationData data) {

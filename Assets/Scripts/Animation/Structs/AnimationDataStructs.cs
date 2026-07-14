@@ -58,18 +58,39 @@ public struct Global_AnimationData {
 /// Defines the "Shape" of the whale, ie how many bones in each section
 /// </summary>
 public class WhaleBlueprint {
-    public int TailCount;
+    public int BodyLengthCount;
     public int MouthCount;
     public int LeftFinCount;
     public int RightFinCount;
-    public int MainBodyCount;
+    public int RootCount;
+    public int HeadCount;
 
-    public WhaleBlueprint(int tail, int mouth, int lFin, int rFin, int body) {
-        TailCount = tail;
+    /// <summary>
+    /// First Bone in the tail, last body bone is TailStartIndex - 1
+    /// </summary>
+    public int TailStartIndex;
+
+    /// <summary>
+    /// Count of Bones in Tail SubSection
+    /// </summary>
+    public int TailCount;
+    /// <summary>
+    /// Count of Bones in the Body SubSection
+    /// </summary>
+    public int BodyCount;
+    
+
+
+    public WhaleBlueprint(int bodyLength, int mouth, int lFin, int rFin, int root, int head, int tailStartIndex) {
+        BodyLengthCount = bodyLength;
         MouthCount = mouth;
         LeftFinCount = lFin;
         RightFinCount = rFin;
-        MainBodyCount = body;
+        RootCount = root;
+        HeadCount = head;
+        TailStartIndex = tailStartIndex;
+        TailCount = bodyLength - TailStartIndex;
+        BodyCount = TailStartIndex;
     }
 }
 
@@ -82,25 +103,28 @@ public struct WhaleState
 
     // seems to be decently memory effcient???
 
-    public LocalRotation_AnimationData[] Tail;
+    public LocalRotation_AnimationData[] BodyLength;
     public LocalRotation_AnimationData[] Mouth;
     public LocalRotation_AnimationData[] LeftFin;
     public LocalRotation_AnimationData[] RightFin;
-    public Global_AnimationData MainBody;
+    public Global_AnimationData Root;
+    public LocalRotation_AnimationData Head;
 
     public WhaleState(WhaleBlueprint blueprint) {
-        Tail = new LocalRotation_AnimationData[blueprint.TailCount];
+        BodyLength = new LocalRotation_AnimationData[blueprint.BodyLengthCount];
         Mouth = new LocalRotation_AnimationData[blueprint.MouthCount];
         LeftFin = new LocalRotation_AnimationData[blueprint.LeftFinCount];
         RightFin = new LocalRotation_AnimationData[blueprint.RightFinCount];
-        MainBody = new Global_AnimationData();
+        Root = new Global_AnimationData();
+        Head = new LocalRotation_AnimationData();
     }
-    public WhaleState((Global_AnimationData, LocalRotation_AnimationData[], LocalRotation_AnimationData[], LocalRotation_AnimationData[], LocalRotation_AnimationData[]) stateTuple) {
-        MainBody = stateTuple.Item1;
-        Tail = stateTuple.Item2;
+    public WhaleState((Global_AnimationData, LocalRotation_AnimationData[], LocalRotation_AnimationData[], LocalRotation_AnimationData[], LocalRotation_AnimationData[], LocalRotation_AnimationData) stateTuple) {
+        Root = stateTuple.Item1;
+        BodyLength = stateTuple.Item2;
         LeftFin = stateTuple.Item3;
         RightFin = stateTuple.Item4;
         Mouth = stateTuple.Item5;
+        Head = stateTuple.Item6;
     }
 
 

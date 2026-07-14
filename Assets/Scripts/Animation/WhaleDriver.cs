@@ -95,8 +95,8 @@ public class WhaleDriver : MonoBehaviour
         WhaleBlueprint blueprint = whaleModel.getBlueprint();
 
         // set the start state position and rotation to the current transform of the whale
-        startState.MainBody.Position = transform.position;
-        startState.MainBody.Rotation = transform.rotation;
+        startState.Root.Position = transform.position;
+        startState.Root.Rotation = transform.rotation;
 
         // load the data source
         dataSource.LoadSource(animationSettings, startState, blueprint);
@@ -137,7 +137,7 @@ public class WhaleDriver : MonoBehaviour
     
     if (controls.Player.Reset.triggered){
        jumpToTimestep = 0;
-       animator.Play("R Whale Armature|Whale Swimming",0,0);  
+       //animator.Play("R Whale Armature|Whale Swimming",0,0);  
     }
 
 
