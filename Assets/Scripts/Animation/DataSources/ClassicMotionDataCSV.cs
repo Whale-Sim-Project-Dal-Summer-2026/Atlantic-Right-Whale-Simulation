@@ -28,8 +28,8 @@ public class ClassicMotionDataCSV : DataSource
         dataStorageManager = new DataStorageManager(blueprint);
         WhaleState[] temp = calculateStates(startState, blueprint);
         currentWhaleState = startState;
-        dataStorageManager.SaveWhaleAnimationData(temp,Application.dataPath+"/testDATA");
-        streamer = new WhaleAnimationStreamer(dataStorageManager, Application.dataPath+"/testDATA",
+        dataStorageManager.SaveWhaleAnimationData(temp,Application.dataPath+"/testDATA3");
+        streamer = new WhaleAnimationStreamer(dataStorageManager, Application.dataPath+"/testDATA3",
                                                batchSizeIn: 1500, refillThresholdIn: 500);
         
 
