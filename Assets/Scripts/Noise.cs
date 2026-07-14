@@ -17,7 +17,9 @@ public class Noise
 
         byte mask = (byte)(distance < distanceMask ? 0 : 1);
 
-
+        if(mask == 0){
+            return depth;
+        }
         float frequency = settings.noiseFrequency;
         float amplitude = settings.noiseAmplitude;
 
@@ -29,7 +31,7 @@ public class Noise
 
         float accumulatedNoise = fBmNoise(x,y,frequency,amplitude,lacunarity,persistence,8);
         
-        return depth + (accumulatedNoise * mask);
+        return depth + accumulatedNoise;
     }
 
 // pos[1] / size[1]

@@ -66,15 +66,6 @@ public class BackscatterReader : MonoBehaviour {
             return croppedChunks;
         }
         int validCount = 0;
-        int idx = 0;
-        Dictionary<int,float> help = new Dictionary<int, float>();
-        foreach(float val in masterBackscatter.Data){
-            if (!Mathf.Approximately(val, 1.0f)){
-                validCount++;
-                help[idx] = val;
-            }
-                idx++;
-        }
         
         Debug.Log(validCount + " valid points out of " + masterBackscatter.Data.Count);
 
