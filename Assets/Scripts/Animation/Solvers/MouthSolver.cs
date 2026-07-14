@@ -5,13 +5,13 @@ using MotionDataPacketClass;
 using NUnit.Framework;
 public class MouthSolver {
    
-    Quaternion topMaxRot= new Quaternion(-0.18183507f,0.0130922776f,0.0438416749f,0.982263923f);
-    Quaternion bottomMaxRot = new Quaternion(0.344820946f,-0.0132084452f,-0.0802880526f,0.935135305f);
+    Quaternion topMaxRot= new Quaternion(-0.18183507f,0,0,0.982263923f);
+    Quaternion bottomMaxRot = new Quaternion(0.344820946f,0,0,0.935135305f);
   
     Quaternion topStart;
     Quaternion bottomStart;
-    float positionSmoothSpeed = 5f;
-    float rotationSmoothSpeed = 5f;
+    float positionSmoothSpeed = 1f;
+    float rotationSmoothSpeed = .125f;
 
     bool isMouthOpen = false;
    
