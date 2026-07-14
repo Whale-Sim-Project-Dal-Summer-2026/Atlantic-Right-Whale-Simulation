@@ -1,7 +1,7 @@
 using AnimationDataStructs;
 using UnityEngine;
 using MotionDataPacketClass;
-public class ClassicMainBodySolver {
+public class ClassicMainBodySolver : MainBodySolverAbstract {
     private float fixedTimeStep;
     private float speedFactor;
 
@@ -14,7 +14,7 @@ public class ClassicMainBodySolver {
      
     }
 
-    public Global_AnimationData solveMainBody(MotionDataPacket currentPacket, Global_AnimationData previousState){
+    public override Global_AnimationData solveMainBody(MotionDataPacket currentPacket, Global_AnimationData previousState){
         Global_AnimationData newState = new Global_AnimationData();
 
         // Calculate tagrets
