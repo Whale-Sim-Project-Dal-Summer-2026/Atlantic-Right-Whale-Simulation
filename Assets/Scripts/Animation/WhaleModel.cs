@@ -123,11 +123,12 @@ public class WhaleModel {
     }
 
     public void updateWhaleState(WhaleState newState){
+        //determinePhase(newState);
         rootBone.transform.position = newState.Root.Position;
         rootBone.transform.rotation = newState.Root.Rotation;
 
-        swapZandY(newState.Head.Rotation, out Quaternion headRot);
-        headBone.transform.localRotation = headRot;
+        //swapYandX(newState.Head.Rotation, out Quaternion headRot);
+        headBone.transform.localRotation = newState.Head.Rotation;
 
 
         for (int i = 0; i < newState.BodyLength.Count(); i++)
@@ -156,7 +157,27 @@ public class WhaleModel {
             mouthBones[i].transform.localRotation = newState.Mouth[i].Rotation;
         }
     }
+    
+       string determinePhase(WhaleState startState){ 
+        string output = null;
 
+        float angleFromCenter = Mathf.DeltaAngle(startState.Root.Rotation.eulerAngles.x, 0f);
+        // descent
+        if (angleFromCenter >5.0f) {
+             Debug.Log("ascent");
+            output="\"ascent\"";
+            
+        //ascent
+        } else if (angleFromCenter < -4.0f){
+           Debug.Log("descent");
+            output="\"descent\"";
+        // bottom (straight on)
+        } else {
+            Debug.Log("bottom");
+            output="\"bottom\"";
+        }
+        return output; 
+    }
     void swapZandY(Quaternion input, out Quaternion output){
         Vector3 euler = input.eulerAngles;
         float currentY = euler.y;
@@ -164,6 +185,16 @@ public class WhaleModel {
 
         euler.y = currentZ;
         euler.z = currentY;
+
+        output = Quaternion.Euler(euler.x, euler.y, euler.z);
+    }
+      void swapYandX(Quaternion input, out Quaternion output){
+        Vector3 euler = input.eulerAngles;
+        float currentX = euler.x;
+        float currentY = euler.y;
+
+        euler.y = currentX;
+        euler.x = currentY;
 
         output = Quaternion.Euler(euler.x, euler.y, euler.z);
     }
