@@ -126,7 +126,14 @@ public struct WhaleState
         Mouth = stateTuple.Item5;
         Head = stateTuple.Item6;
     }
-
+    public WhaleState(WhaleState other) {
+        BodyLength = new LocalRotation_AnimationData[other.BodyLength.Length];
+        Mouth = new LocalRotation_AnimationData[other.Mouth.Length];
+        LeftFin = new LocalRotation_AnimationData[other.LeftFin.Length];
+        RightFin = new LocalRotation_AnimationData[other.RightFin.Length];
+        Root = new Global_AnimationData();
+        Head = new LocalRotation_AnimationData();
+    }
 
 }
 }
