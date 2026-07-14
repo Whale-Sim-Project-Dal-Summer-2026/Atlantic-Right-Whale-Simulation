@@ -21,7 +21,7 @@ public class WhaleMotionFromCSV : DataSource{
     
     MouthSolver mouthSolver;
     FlukeSolver flukeSolver;
-    ClassicMainBodySolver mainBodySolver;
+    MainBodySolverAbstract mainBodySolver;
     BodyRollSolver bodyRollSolver;
 
     //--Class Specific
@@ -46,7 +46,7 @@ public class WhaleMotionFromCSV : DataSource{
 
         mouthSolver = new MouthSolver(startState.Mouth);
         flukeSolver = new FlukeSolver(blueprint.BodyLengthCount, fixedTimeStep, lookUp, tailStartIndex);
-        mainBodySolver = new ClassicMainBodySolver(fixedTimeStep, startState.Root);
+        mainBodySolver = new ImprovedMainBodySolver(fixedTimeStep, startState);
         bodyRollSolver = new BodyRollSolver(fixedTimeStep);
         
         //build states
@@ -127,8 +127,15 @@ public class WhaleMotionFromCSV : DataSource{
             //Calculate Main Body
             newState.Root = mainBodySolver.solveMainBody(currentPacket, previousState.Root);
 
-            newState = bodyRollSolver.solveBodyRoll(previousState, newState.Root, blueprint, mainBodySolver.getLastTravelDistance());
-
+            if (mainBodySolver is ImprovedMainBodySolver improvedSolver)
+            {
+                newState.Head = improvedSolver.getHeadState();
+                newState.BodyLength = improvedSolver.getBodyState();
+            }
+            else
+            {
+                newState.BodyLength = previousState.BodyLength;
+            }
             newState.Mouth = mouthSolver.solveMouth(currentPacket.MouthOpen == 1 ? true : false , previousState.Mouth);
 
             // set previous state to prevent compounding fluke calc
