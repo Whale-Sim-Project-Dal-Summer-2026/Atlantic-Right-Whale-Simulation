@@ -11,12 +11,12 @@ public class FilteredClassicMainBodySolver : MainBodySolverAbstract {
     private float depthFilter = 0.01f;    
     private float rotationFilter= .01f; 
 
-    public FilteredClassicMainBodySolver(float fixedTimeStepIn, Global_AnimationData startState){
+    public FilteredClassicMainBodySolver(float fixedTimeStepIn, WhaleState startState){
         fixedTimeStep = fixedTimeStepIn;
-        this.targetPosition = startState.Position;
-        this.targetRotation = startState.Rotation;
-        this.filteredDepth = startState.Position.y;
-        this.filteredRotation = startState.Rotation;
+        this.targetPosition = startState.Root.Position;
+        this.targetRotation = startState.Root.Rotation;
+        this.filteredDepth = startState.Root.Position.y;
+        this.filteredRotation = startState.Root.Rotation;
     }
 
     public override Global_AnimationData solveMainBody(MotionDataPacket currentPacket, Global_AnimationData previousState){

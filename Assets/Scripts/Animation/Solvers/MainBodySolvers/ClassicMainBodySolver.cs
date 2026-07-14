@@ -3,14 +3,13 @@ using UnityEngine;
 using MotionDataPacketClass;
 public class ClassicMainBodySolver : MainBodySolverAbstract {
     private float fixedTimeStep;
-    private float speedFactor;
 
     Vector3 targetPosition;
     Quaternion targetRotation;
-    public ClassicMainBodySolver(float fixedTimeStepIn, Global_AnimationData startState){
+    public ClassicMainBodySolver(float fixedTimeStepIn, WhaleState startState){
         fixedTimeStep = fixedTimeStepIn;
-        this.targetPosition = startState.Position;
-        this.targetRotation = startState.Rotation;
+        this.targetPosition = startState.Root.Position;
+        this.targetRotation = startState.Root.Rotation;
      
     }
 
