@@ -49,7 +49,7 @@ MonoBehaviour:
   m_collisionsEnabled: 1
   m_isSensor: 1
   m_enableMassProperties: 1
-  m_material: {fileID: 0}
+  m_material: {fileID: 11400000, guid: 815c4a64fcb0cde4ca4e83101cadbf9f, type: 2}
   m_halfExtents: {x: 500, y: 200, z: 500}
 --- !u!1 &6621734579642427469
 GameObject:

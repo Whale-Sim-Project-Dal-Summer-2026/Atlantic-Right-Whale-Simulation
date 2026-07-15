@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db0430bc0cec6644da0ddc115740a2c6, type: 3}
   m_Name: AnimationSettings
   m_EditorClassIdentifier: Assembly-CSharp::AnimationSettings
-  MotionData_csv: {fileID: 4900000, guid: ad1392c26444b5e4ba48ac44905f5465, type: 3}
+  MotionData_csv: {fileID: 4900000, guid: fc188e5628ae24947ba6bbf6d2d72ec3, type: 3}
   MotionData_ContainsHeaders: 1
-  FlukeAmpLookUp_csv: {fileID: 4900000, guid: 1564597a17c33514ca77a6cf6d1bd7ef, type: 3}
+  FlukeAmpLookUp_csv: {fileID: 4900000, guid: f5a8a0e2193d7d6479d8cd14d0cb0f48, type: 3}
   FlukeAmp_ContainsHeaders: 1

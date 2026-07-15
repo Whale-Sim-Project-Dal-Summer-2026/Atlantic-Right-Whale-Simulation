@@ -1,0 +1,102 @@
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+
+
+public class ManualWhaleController : MonoBehaviour{
+    
+    WhaleMoveInfo whaleMoveInfo;
+
+    [Header("Manually Set Values")]
+    [SerializeField] float yaw;
+    [SerializeField] float pitch;
+    [SerializeField] float speed;
+
+    [Header("Constants")]
+
+    [SerializeField] float maxAcceleration = .5f;
+    [SerializeField] float maxSpeed = 5f;
+    [SerializeField] float turningSpeed = .5f;
+
+
+    InputAction  moveInput;
+    InputAction  accelerateInput;
+    InputAction  deccelerateInput;
+
+
+    Vector2 lookDir;
+    float accelerateForce;
+    float deccelerateForce;
+
+
+    void Start(){
+        whaleMoveInfo = new WhaleMoveInfo();
+        moveInput = InputSystem.actions.FindAction("Move");
+        accelerateInput = InputSystem.actions.FindAction("Accelerate");
+        deccelerateInput = InputSystem.actions.FindAction("Deccelerate");
+
+    }
+
+    void updateMoveInfo(){
+        whaleMoveInfo.yaw = yaw;
+        whaleMoveInfo.pitch = pitch;
+        whaleMoveInfo.speed = speed;
+    }
+
+
+    void readInputs(){
+        lookDir = moveInput.ReadValue<Vector2>();
+        accelerateForce = accelerateInput.ReadValue<float>();
+        deccelerateForce = deccelerateInput.ReadValue<float>();
+    }
+
+    void updateSpeed(){
+        float currAcceleartion = Mathf.Lerp(0,maxAcceleration,accelerateForce);
+        float currDecelleration = Mathf.Lerp(0,-maxAcceleration, deccelerateForce);
+
+        float deltaAcceleration = currAcceleartion + currDecelleration;
+
+        speed += deltaAcceleration * Time.deltaTime;
+
+        speed = Mathf.Clamp(speed, 0,maxSpeed);
+    }
+
+    void updateYawPitch(){
+        // pitch X
+        // Yaw Z
+
+// remap the inputs from [-1,1] -> [0,1]
+        float x = Mathf.Lerp(0.0f, 1.0f, Mathf.InverseLerp(-1.0f,1.0f,lookDir.x));
+        float y = Mathf.Lerp(0.0f, 1.0f, Mathf.InverseLerp(-1.0f,1.0f,lookDir.y));
+
+        float yawDelta = Mathf.Lerp(-turningSpeed, turningSpeed, x);
+        float pitchDelta = Mathf.Lerp(-turningSpeed, turningSpeed, y);
+
+        yaw += yawDelta;
+        pitch += pitchDelta;
+
+        pitch = Mathf.Clamp(pitch, -90, 90);
+
+    }
+
+    void Update()
+    {
+        updateMoveInfo();
+        
+        readInputs();
+
+        updateSpeed();
+
+        updateYawPitch();
+        // float accelerationDelta = 
+
+    }
+}
+
+public struct WhaleMoveInfo{
+    public float yaw;
+    public float pitch;
+
+    public float speed;
+}
+

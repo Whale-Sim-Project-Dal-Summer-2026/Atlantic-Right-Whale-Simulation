@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.83199996, y: 0.49600002, z: 0.6}
+  m_LocalScale: {x: 1.666, y: 1, z: 1.226}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7352560638455544095}
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_isSensor: 0
   m_enableMassProperties: 1
   m_material: {fileID: 11400000, guid: 70023d4ec488a4b4a8d6c32cb750971b, type: 2}
-  m_halfExtents: {x: 4.16, y: 2.48, z: 3}
+  m_halfExtents: {x: 0.833, y: 0.5, z: 0.613}
 --- !u!1001 &2166796882464329294
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -181,15 +181,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: e7438ef32ce2b5c498fec067f019fecb, type: 3}
       propertyPath: m_LocalScale.x
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e7438ef32ce2b5c498fec067f019fecb, type: 3}
       propertyPath: m_LocalScale.y
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e7438ef32ce2b5c498fec067f019fecb, type: 3}
       propertyPath: m_LocalScale.z
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e7438ef32ce2b5c498fec067f019fecb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -272,11 +272,11 @@ MonoBehaviour:
     <RigidBody>k__BackingField: {fileID: 257279670184309854}
     m_mass:
       m_defaultToggle: 1
-      m_defaultValue: 495206.38
+      m_defaultValue: 4085.0317
       m_userValue: 60
     m_inertiaDiagonal:
       m_defaultToggle: 1
-      m_defaultValue: {x: 2500858.2, y: 4342233.5, z: 3871853.5}
+      m_defaultValue: {x: 852.0954, y: 1456.5289, z: 1285.2722}
       m_userValue: {x: 1, y: 1, z: 1}
     m_inertiaOffDiagonal:
       m_defaultToggle: 1
@@ -284,7 +284,7 @@ MonoBehaviour:
       m_userValue: {x: 1, y: 1, z: 1}
     m_centerOfMassOffset:
       m_defaultToggle: 1
-      m_defaultValue: {x: -4, y: 2.5, z: -3}
+      m_defaultValue: {x: -0.39999962, y: 0.25, z: -0.30000305}
       m_userValue: {x: 0, y: 0, z: 0}
     m_massCoefficients: {x: 0, y: 0, z: 0}
     m_inertiaCoefficients: {x: 0, y: 0, z: 0}

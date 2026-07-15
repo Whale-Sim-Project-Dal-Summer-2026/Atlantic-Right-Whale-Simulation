@@ -2441,8 +2441,8 @@ MonoBehaviour:
   m_fixedUpdateRealTimeFactor: 1
   m_updateRealTimeCorrectionFactor: 0.9
   m_gravity: {x: 0, y: -9.82, z: 0}
-  m_timeStep: 0.004999993
-  m_solverSettings: {fileID: 11400000, guid: 721a350ca544f2c478b40d577f7ca7a9, type: 2}
+  m_timeStep: 0.1
+  m_solverSettings: {fileID: 11400000, guid: 5f5f88de1c4933345b6b3745888e4925, type: 2}
   m_preIntegratePositions: 0
   m_displayStatistics: 0
   m_statisticsMovingAverage: 50
@@ -8085,7 +8085,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2949686268973457154, guid: 3bf820b5dafa87142b89077383b0492c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6500
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 2949686268973457154, guid: 3bf820b5dafa87142b89077383b0492c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -11519,7 +11519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1928959f5179ef142b4fe489d3c7990e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MovementRB
-  speed: 200000000
+  speed: 100000000
   angularSpeed: 1
   target: {fileID: 680989763}
 --- !u!114 &1474742773
@@ -11571,20 +11571,20 @@ MonoBehaviour:
   <MassProperties>k__BackingField:
     <RigidBody>k__BackingField: {fileID: 1474742775}
     m_mass:
-      m_defaultToggle: 1
+      m_defaultToggle: 0
       m_defaultValue: 16250.177
-      m_userValue: 1
+      m_userValue: 200000
     m_inertiaDiagonal:
       m_defaultToggle: 1
-      m_defaultValue: {x: 190219.33, y: 194869.45, z: 22806.703}
+      m_defaultValue: {x: 2341075.8, y: 2398307.8, z: 280694.84}
       m_userValue: {x: 1, y: 1, z: 1}
     m_inertiaOffDiagonal:
       m_defaultToggle: 1
-      m_defaultValue: {x: 127.03366, y: 406.69537, z: 5944.5913}
+      m_defaultValue: {x: 1172.6057, y: 3753.9878, z: 54871.465}
       m_userValue: {x: 1, y: 1, z: 1}
     m_centerOfMassOffset:
       m_defaultToggle: 0
-      m_defaultValue: {x: 0.05135204, y: 0.32634905, z: 3.060425}
+      m_defaultValue: {x: 0.05135204, y: 0.32634905, z: 3.06033}
       m_userValue: {x: 0, y: -0.5, z: 2}
     m_massCoefficients: {x: 0, y: 0, z: 0}
     m_inertiaCoefficients: {x: 0, y: 0, z: 0}
