@@ -11,6 +11,7 @@ public class WhaleMotionFromCSV : DataSource{
 
     public List<MotionDataPacket> motionDataPacketList = new List<MotionDataPacket>();
     private float fixedTimeStep = 0.004f;
+    int totalTimesteps = 0;
     private float timer = 0.0f;
     DataStorageManager dataStorageManager;
     CSVLoader cSVLoader; 
@@ -26,6 +27,7 @@ public class WhaleMotionFromCSV : DataSource{
 
     //--Class Specific
     FlukeWaveAmplitudeLookUp lookUp;
+
 
     int tailStartIndex = 0;
 
@@ -51,6 +53,7 @@ public class WhaleMotionFromCSV : DataSource{
         
         //build states
         WhaleState[] temp = calculateStates(startState, blueprint);
+        totalTimesteps = temp.Length;
         currentWhaleState = startState;
 
         //save states
@@ -184,5 +187,9 @@ public class WhaleMotionFromCSV : DataSource{
         streamer.SeekTo(timestep);
         isWaitingForLoad = true; 
        
+    }
+    public override void GetTotalTimesteps(out int totalTimesteps)
+    {
+        totalTimesteps = this.totalTimesteps;
     }
 }

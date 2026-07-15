@@ -1,5 +1,6 @@
 using System;
 using AnimationDataStructs;
+using Mono.Cecil.Cil;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ public abstract class DataSource
     public abstract void LoadSource(AnimationSettings animationSettings, WhaleState startState, WhaleBlueprint blueprint);
     public abstract WhaleState getNextWhaleState();
     public abstract void loadWhaleStateAt(int timestep);
+    public abstract void GetTotalTimesteps(out int totalTimesteps);
     
 }
 
@@ -48,6 +50,10 @@ public class MotionDataCSV : DataSource
     {
         throw new System.NotImplementedException();
     }
+    public override void GetTotalTimesteps(out int totalTimesteps)
+    {
+        throw new System.NotImplementedException();
+    }
 }
 
 public class RandomWalk : DataSource
@@ -65,6 +71,10 @@ public class RandomWalk : DataSource
 
     
     public override void loadWhaleStateAt(int timestep)
+    {
+        throw new System.NotImplementedException();
+    }
+     public override void GetTotalTimesteps(out int totalTimesteps)
     {
         throw new System.NotImplementedException();
     }
