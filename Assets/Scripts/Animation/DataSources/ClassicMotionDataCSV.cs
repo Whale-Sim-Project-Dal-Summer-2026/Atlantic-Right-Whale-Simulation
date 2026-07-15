@@ -20,6 +20,7 @@ public class ClassicMotionDataCSV : DataSource
     private WhaleAnimationStreamer streamer;
     private bool isWaitingForLoad = false;
     private WhaleState currentWhaleState;
+    private int totalTimesteps;
 
     public override void LoadSource(AnimationSettings animationSettings, WhaleState startState, WhaleBlueprint blueprint)
     {
@@ -28,6 +29,7 @@ public class ClassicMotionDataCSV : DataSource
         dataStorageManager = new DataStorageManager(blueprint);
         WhaleState[] temp = calculateStates(startState, blueprint);
         currentWhaleState = startState;
+        totalTimesteps = temp.Length;
         dataStorageManager.SaveWhaleAnimationData(temp,Application.dataPath+"/testDATA3");
         streamer = new WhaleAnimationStreamer(dataStorageManager, Application.dataPath+"/testDATA3",
                                                batchSizeIn: 1500, refillThresholdIn: 500);
@@ -125,6 +127,10 @@ public class ClassicMotionDataCSV : DataSource
         streamer.SeekTo(timestep);
         isWaitingForLoad = true; 
         
+    }
+    public override void GetTotalTimesteps(out int totalTimesteps)
+    {
+        totalTimesteps = this.totalTimesteps;
     }
  
 }

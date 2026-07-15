@@ -11,6 +11,7 @@ public class WhaleMotionFromCSV : DataSource{
 
     public List<MotionDataPacket> motionDataPacketList = new List<MotionDataPacket>();
     private float fixedTimeStep = 0.004f;
+    int totalTimesteps = 0;
     private float timer = 0.0f;
     DataStorageManager dataStorageManager;
     CSVLoader cSVLoader; 
@@ -21,11 +22,13 @@ public class WhaleMotionFromCSV : DataSource{
     
     MouthSolver mouthSolver;
     FlukeSolver flukeSolver;
+    FinSolver finSolver;
     MainBodySolverAbstract mainBodySolver;
     BodyRollSolver bodyRollSolver;
 
     //--Class Specific
     FlukeWaveAmplitudeLookUp lookUp;
+
 
     int tailStartIndex = 0;
 
@@ -48,9 +51,11 @@ public class WhaleMotionFromCSV : DataSource{
         flukeSolver = new FlukeSolver(blueprint.BodyLengthCount, fixedTimeStep, lookUp, tailStartIndex);
         mainBodySolver = new ImprovedMainBodySolver(fixedTimeStep, startState);
         bodyRollSolver = new BodyRollSolver(fixedTimeStep);
+        finSolver = new FinSolver(startState.LeftFin.Length, fixedTimeStep);
         
         //build states
         WhaleState[] temp = calculateStates(startState, blueprint);
+        totalTimesteps = temp.Length;
         currentWhaleState = startState;
 
         //save states
@@ -137,13 +142,14 @@ public class WhaleMotionFromCSV : DataSource{
                 newState.BodyLength = previousState.BodyLength;
             }
             newState.Mouth = mouthSolver.solveMouth(currentPacket.MouthOpen == 1 ? true : false , previousState.Mouth);
-
+            newState.LeftFin = finSolver.solveFin(currentPacket, true, previousState.LeftFin);
+            newState.RightFin = finSolver.solveFin(currentPacket,  false, previousState.RightFin);
             // set previous state to prevent compounding fluke calc
             previousState = newState;
 
             //Calculate Fluke based on body roll state
             newState.BodyLength= flukeSolver.solveFuke(currentPacket, newState);
-
+           
       
             output[i+1] = newState;
             
@@ -184,5 +190,9 @@ public class WhaleMotionFromCSV : DataSource{
         streamer.SeekTo(timestep);
         isWaitingForLoad = true; 
        
+    }
+    public override void GetTotalTimesteps(out int totalTimesteps)
+    {
+        totalTimesteps = this.totalTimesteps;
     }
 }

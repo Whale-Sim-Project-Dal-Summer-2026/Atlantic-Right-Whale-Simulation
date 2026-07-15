@@ -1,0 +1,113 @@
+using AnimationDataStructs;
+using MotionDataPacketClass;
+using UnityEngine;
+using DataSources;
+using System.Collections.Generic;
+using FlukeWaveAmplitudeLookUpClass;
+
+//real time user input data
+public class WhaleMotionFromUserInputRT : DataSource
+{
+    //not real value since we are getting real time user input
+    int totalTimesteps = -1; 
+
+    int timestep = 0;
+    float fixedTimeStep = 0.004f;
+
+    //might be cool to eventually be able to save user input to a file and then play it back as a motion data csv source
+    UserInputManager userInputManager; // neds to be created
+
+    WhaleState currentWhaleState;
+    WhaleState startState; // initial state of the whale, will be used to reset the whale to its initial position and rotation
+
+    CSVLoader cSVLoader;
+    FlukeSolver flukeSolver;
+    FlukeWaveAmplitudeLookUp lookUp;
+    int tailStartIndex = 0;
+    MouthSolver mouthSolver;
+    FinSolver finSolver;
+    WhaleBlueprint blueprint;
+
+    MainBodySolverAbstract mainBodySolver;
+
+    public override void LoadSource(AnimationSettings animationSettings, WhaleState startState, WhaleBlueprint blueprint)
+    {
+        // needs to be able to return:
+            // pitch, roll, yaw, speed, mouth open/close
+        userInputManager= Object.FindAnyObjectByType<UserInputManager>(); 
+        cSVLoader = new CSVLoader();
+        loadFlukeWaveAmplitudeLookUpCSV(animationSettings);
+
+        this.startState = startState;
+        this.currentWhaleState = startState;
+        this.blueprint = blueprint;
+
+        mouthSolver = new MouthSolver(startState.Mouth);
+        flukeSolver = new FlukeSolver(blueprint.BodyLengthCount, fixedTimeStep, lookUp, tailStartIndex);
+        mainBodySolver = new AGXUserMainBodySolver(fixedTimeStep, startState);
+        finSolver = new FinSolver(startState.LeftFin.Length, fixedTimeStep);
+
+    }
+
+    void loadFlukeWaveAmplitudeLookUpCSV(AnimationSettings animationSettings){
+        var loaded_CsvData = cSVLoader.loadCSV(animationSettings.FlukeAmpLookUp_csv,animationSettings.FlukeAmp_ContainsHeaders);
+        string[][] csvData = loaded_CsvData.data;
+        Dictionary<string,int> columnIndices= loaded_CsvData.columnIndices;
+
+        lookUp = new FlukeWaveAmplitudeLookUp(csvData,columnIndices);
+
+    }
+
+    public override WhaleState getNextWhaleState()
+    {
+
+
+
+        WhaleState newState = new WhaleState(blueprint);
+
+                // Get user input for movement
+        MotionDataPacket motionDataPacket = createMotionDataPacketFromUserInput(userInputManager);
+
+        // Solve for the new state based on user input
+        newState.Root = mainBodySolver.solveMainBody(motionDataPacket, currentWhaleState.Root);
+        if (mainBodySolver is AGXUserMainBodySolver agxSolver)
+        {
+            newState.BodyLength = agxSolver.getBodyState();
+            newState.Head = agxSolver.getHeadState();
+        }
+        else
+        {
+            Debug.LogError("mainBodySolver is not of type AGXUserMainBodySolver");
+        }
+        newState.Mouth = mouthSolver.solveMouth(motionDataPacket.MouthOpen == 1 ? true : false , currentWhaleState.Mouth);
+        this.currentWhaleState = newState;
+
+        newState.BodyLength= flukeSolver.solveFuke(motionDataPacket, newState);
+        newState.LeftFin = finSolver.solveFin(motionDataPacket, true, currentWhaleState.LeftFin);
+        newState.RightFin = finSolver.solveFin(motionDataPacket,  false, currentWhaleState.RightFin);
+
+       
+        return newState;
+    }
+
+    MotionDataPacket createMotionDataPacketFromUserInput(UserInputManager userInputManager)
+    {
+        MotionDataPacket motionDataPacket = new MotionDataPacket();
+        motionDataPacket.head = userInputManager.getYaw(); //yaw
+        motionDataPacket.pitch = userInputManager.getPitch();
+        motionDataPacket.roll = userInputManager.getRoll();
+        motionDataPacket.speed = userInputManager.getSpeed();
+        motionDataPacket.MouthOpen = userInputManager.getMouthOpen() ? 1 : 0;
+
+        return motionDataPacket;
+    }
+    public override void loadWhaleStateAt(int timestep)
+    {
+        throw new System.NotImplementedException();
+    }
+    
+    public override void GetTotalTimesteps(out int totalTimesteps)
+    {
+        totalTimesteps = this.totalTimesteps;
+    }
+}
