@@ -4,7 +4,10 @@ using System.Collections;
 using System.Collections.Generic;
 using AnimationDataStructs;
 using System.Linq;
-public class WhaleModel {
+/// <summary>
+/// Handles Forward movement based on dead reckoning using speed and direction
+/// </summary>
+public class WhaleModelUnity : WhaleModelAbstract {
 
     //--Bone Counts--
     int rootBoneCount;
@@ -30,7 +33,7 @@ public class WhaleModel {
     int leftFlukeEndIndex;
     int leftFlukeStartIndex;
 
-    public WhaleModel(WhaleBones whaleBones){
+    public WhaleModelUnity(WhaleBones whaleBones){
         bodyLengthBones = new List<GameObject>();
         leftFinBones = new List<GameObject>();
         rightFinBones = new List<GameObject>();
@@ -78,11 +81,11 @@ public class WhaleModel {
    
     }
 
-    public WhaleBlueprint getBlueprint(){
+    public override WhaleBlueprint getBlueprint(){
         return new WhaleBlueprint(tailBoneCount, mouthBoneCount, leftFinBoneCount, rightFinBoneCount,rootBoneCount,headBoneCount, tailStartIndex);
     }
 
-    public WhaleState getCurrentState(){
+    public override WhaleState getCurrentState(){
         return new WhaleState(castGameObjectsToWhaleState());
     }
 
@@ -122,13 +125,13 @@ public class WhaleModel {
         return (rootState, bodyLengthStates, leftFinStates, rightFinStates, mouthStates, headState);
     }
 
-    public void updateWhaleState(WhaleState newState){
+    public override void updateWhaleState(WhaleState newState){
         //determinePhase(newState);
         rootBone.transform.position = newState.Root.Position;
         rootBone.transform.rotation = newState.Root.Rotation;
 
-        //swapYandX(newState.Head.Rotation, out Quaternion headRot);
-        headBone.transform.localRotation = newState.Head.Rotation;
+        swapYandX(newState.Head.Rotation, out Quaternion headRot);
+        headBone.transform.localRotation = headRot;
 
 
         for (int i = 0; i < newState.BodyLength.Count(); i++)

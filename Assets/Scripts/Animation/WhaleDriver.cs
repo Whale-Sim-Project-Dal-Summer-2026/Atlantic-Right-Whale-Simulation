@@ -44,30 +44,43 @@ using NUnit.Framework;
 public enum DataSourceType
 {
     ClassicMotionDataCSV,
-    MotionDataCSV,
     WhaleMotionFromCSV,
+    WhaleMotionFromUserInputRT,
+    MotionDataCSV,
     RandomWalk
+}
+public enum WhaleModelType
+{
+    Unity,
+    AGX
 }
 
 
 public class WhaleDriver : MonoBehaviour
 {
-    DataSource dataSource; 
+   
     CameraControls controls;
     public TextAsset dataSourceFile;
 
     public bool isPaused = false;
-    public int jumpToTimestep = -1; 
+    public int jumpToTimestep = -1;
 
+    [Header("Data Source Settings")]
     public DataSourceType dataSourceType;
+    DataSource dataSource; 
+
+    [Header("Whale Model Settings")]
+    public WhaleModelType whaleModelType;
     [SerializeField] Animator animator;
     public int timesetp = 0;
+    public int totalTimesteps = 0;
 
     [Header("Animation Settings")]
     public AnimationSettings animationSettings;
   
-    WhaleModel whaleModel;
+   
 
+    WhaleModelAbstract whaleModel;
     WhaleBones whaleBones;
     
     
@@ -78,15 +91,20 @@ public class WhaleDriver : MonoBehaviour
             DataSourceType.MotionDataCSV => new MotionDataCSV(),
             DataSourceType.WhaleMotionFromCSV => new WhaleMotionFromCSV(),
             DataSourceType.RandomWalk => new RandomWalk(),
+            DataSourceType.WhaleMotionFromUserInputRT => new WhaleMotionFromUserInputRT(),
             _ => throw new System.ArgumentOutOfRangeException()
         };
 
         // Retrieve the WhaleBones from the GameObject on the Whale 
         WhaleBones whaleBones =  this.gameObject.GetComponent<WhaleBones>();
 
-        
+        dataSource.GetTotalTimesteps(out totalTimesteps);
         //Set up the model which actually applies the state to the bones in the scene
-        whaleModel = new WhaleModel(whaleBones);
+        whaleModel = whaleModelType switch{
+            WhaleModelType.Unity => new WhaleModelUnity(whaleBones),
+            WhaleModelType.AGX => new WhaleModelAGX(whaleBones),
+            _ => throw new System.ArgumentOutOfRangeException()
+        };
         
         // get the start state 
         WhaleState startState = whaleModel.getCurrentState();
