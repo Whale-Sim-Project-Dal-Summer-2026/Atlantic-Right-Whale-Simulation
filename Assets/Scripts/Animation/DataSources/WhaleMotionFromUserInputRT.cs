@@ -25,6 +25,7 @@ public class WhaleMotionFromUserInputRT : DataSource
     FlukeWaveAmplitudeLookUp lookUp;
     int tailStartIndex = 0;
     MouthSolver mouthSolver;
+    FinSolver finSolver;
     WhaleBlueprint blueprint;
 
     MainBodySolverAbstract mainBodySolver;
@@ -44,7 +45,7 @@ public class WhaleMotionFromUserInputRT : DataSource
         mouthSolver = new MouthSolver(startState.Mouth);
         flukeSolver = new FlukeSolver(blueprint.BodyLengthCount, fixedTimeStep, lookUp, tailStartIndex);
         mainBodySolver = new AGXUserMainBodySolver(fixedTimeStep, startState);
-
+        finSolver = new FinSolver(startState.LeftFin.Length, fixedTimeStep);
 
     }
 
@@ -82,6 +83,8 @@ public class WhaleMotionFromUserInputRT : DataSource
         this.currentWhaleState = newState;
 
         newState.BodyLength= flukeSolver.solveFuke(motionDataPacket, newState);
+        newState.LeftFin = finSolver.solveFin(motionDataPacket, true, currentWhaleState.LeftFin);
+        newState.RightFin = finSolver.solveFin(motionDataPacket,  false, currentWhaleState.RightFin);
 
        
         return newState;
