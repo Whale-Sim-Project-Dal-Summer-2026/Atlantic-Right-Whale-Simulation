@@ -138,8 +138,8 @@ public class WhaleModelAGX : WhaleModelAbstract {
         rootBone.transform.position = newState.Root.Position;
         rootBone.transform.rotation = newState.Root.Rotation;
 
-        swapYandX(newState.Head.Rotation, out Quaternion headRot);
-        headBone.transform.localRotation = headRot;
+         //swapYandX(newState.Head.Rotation, out Quaternion headRot);
+        headBone.transform.localRotation = newState.Head.Rotation;
 
 
         for (int i = 0; i < newState.BodyLength.Count(); i++)
