@@ -2899,8 +2899,10 @@ MonoBehaviour:
   isPaused: 0
   jumpToTimestep: -1
   dataSourceType: 2
+  whaleModelType: 0
   animator: {fileID: 0}
   timesetp: 0
+  totalTimesteps: 0
   animationSettings: {fileID: 11400000, guid: a079734cd265a3648b27716324684644, type: 2}
 --- !u!1 &6590794832029823142
 GameObject:

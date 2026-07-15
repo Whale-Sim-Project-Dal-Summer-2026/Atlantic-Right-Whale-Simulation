@@ -15,7 +15,7 @@ public class WhaleMotionFromUserInputRT : DataSource
     float fixedTimeStep = 0.004f;
 
     //might be cool to eventually be able to save user input to a file and then play it back as a motion data csv source
-    UserInputManager userInputManager; // neds to be created
+    [SerializeField] UserInputManager userInputManager; // neds to be created
 
     WhaleState currentWhaleState;
     WhaleState startState; // initial state of the whale, will be used to reset the whale to its initial position and rotation
@@ -34,8 +34,10 @@ public class WhaleMotionFromUserInputRT : DataSource
     {
         // needs to be able to return:
             // pitch, roll, yaw, speed, mouth open/close
-        userInputManager= Object.FindAnyObjectByType<UserInputManager>(); 
+
         cSVLoader = new CSVLoader();
+
+        userInputManager = GameObject.FindAnyObjectByType<UserInputManager>();
         loadFlukeWaveAmplitudeLookUpCSV(animationSettings);
 
         this.startState = startState;
@@ -93,11 +95,11 @@ public class WhaleMotionFromUserInputRT : DataSource
     MotionDataPacket createMotionDataPacketFromUserInput(UserInputManager userInputManager)
     {
         MotionDataPacket motionDataPacket = new MotionDataPacket();
-        motionDataPacket.head = userInputManager.getYaw(); //yaw
-        motionDataPacket.pitch = userInputManager.getPitch();
-        motionDataPacket.roll = userInputManager.getRoll();
-        motionDataPacket.speed = userInputManager.getSpeed();
-        motionDataPacket.MouthOpen = userInputManager.getMouthOpen() ? 1 : 0;
+        motionDataPacket.head = userInputManager.yaw; //yaw
+        motionDataPacket.pitch = userInputManager.pitch;
+        motionDataPacket.roll = userInputManager.roll;
+        motionDataPacket.speed = userInputManager.speed;
+        motionDataPacket.MouthOpen = userInputManager.mouthOpen ? 1 : 0;
 
         return motionDataPacket;
     }

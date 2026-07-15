@@ -5,7 +5,8 @@ using UnityEngine.InputSystem;
 
 public class ManualWhaleController : MonoBehaviour{
     
-    WhaleMoveInfo whaleMoveInfo;
+
+    [SerializeField] UserInputManager whaleInput;
 
     [Header("Manually Set Values")]
     [SerializeField] float yaw;
@@ -30,7 +31,6 @@ public class ManualWhaleController : MonoBehaviour{
 
 
     void Start(){
-        whaleMoveInfo = new WhaleMoveInfo();
         moveInput = InputSystem.actions.FindAction("Move");
         accelerateInput = InputSystem.actions.FindAction("Accelerate");
         deccelerateInput = InputSystem.actions.FindAction("Deccelerate");
@@ -38,9 +38,9 @@ public class ManualWhaleController : MonoBehaviour{
     }
 
     void updateMoveInfo(){
-        whaleMoveInfo.yaw = yaw;
-        whaleMoveInfo.pitch = pitch;
-        whaleMoveInfo.speed = speed;
+        whaleInput.yaw = yaw;
+        whaleInput.pitch = pitch;
+        whaleInput.speed = speed;
     }
 
 
@@ -91,12 +91,5 @@ public class ManualWhaleController : MonoBehaviour{
         // float accelerationDelta = 
 
     }
-}
-
-public struct WhaleMoveInfo{
-    public float yaw;
-    public float pitch;
-
-    public float speed;
 }
 
