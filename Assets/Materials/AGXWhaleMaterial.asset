@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AGXWhaleMaterial
   m_EditorClassIdentifier: AGXUnity::AGXUnity.ShapeMaterial
   m_serializationVersion: 1
-  m_density: 700
+  m_density: 1700
   m_youngsWireStretch: 1e+10
   m_youngsWireBend: 1e+9
   m_dampingStretch: 0.06
