@@ -51,19 +51,14 @@ public class AGXUserMainBodySolver : MainBodySolverAbstract {
 // heading : Z
 // pitch X
 
-        newState.Rotation = Quaternion.Slerp(previousState.Rotation, targetRotation, fixedTimeStep * 0.5f);
+        newState.Rotation = Quaternion.Slerp(previousState.Rotation, targetRotation, fixedTimeStep * 0.8f);
 
 
         Vector3 forward = newState.Rotation * Vector3.forward;
 
+        newState.Position = previousState.Position + newState.Speed * forward * fixedTimeStep * 2f;
 
-        // Vector3 forward = Vector3.zero;
-        // forward.x = Mathf.Cos(heading) * Mathf.Cos(currentPacket.pitch);
-        // forward.x = Mathf.Sin(currentPacket.head) * Mathf.Cos(currentPacket.pitch);
-        // forward.z = Mathf.Sin(currentPacket.pitch);
-        newState.Position = Vector3.Lerp(previousState.Position, previousState.Position + newState.Speed * (newState.Rotation * forward) * fixedTimeStep * 5f, 0.5f);
-
-        Debug.DrawLine(newState.Position, newState.Position + (forward * 10f), Color.red);
+        Debug.DrawLine(newState.Position, newState.Position + (forward * 50f), Color.red);
 
 
 
