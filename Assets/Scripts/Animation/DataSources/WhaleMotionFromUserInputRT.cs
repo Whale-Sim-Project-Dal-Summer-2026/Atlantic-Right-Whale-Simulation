@@ -67,7 +67,7 @@ public class WhaleMotionFromUserInputRT : DataSource
 
         WhaleState newState = new WhaleState(blueprint);
 
-                // Get user input for movement
+        // Get user input for movement
         MotionDataPacket motionDataPacket = createMotionDataPacketFromUserInput(userInputManager);
 
         // Solve for the new state based on user input

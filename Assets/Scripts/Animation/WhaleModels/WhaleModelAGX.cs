@@ -4,6 +4,8 @@ using System.Collections;
 using System.Collections.Generic;
 using AnimationDataStructs;
 using System.Linq;
+using AGXUnity.IO.OpenPLX;
+using AGXUnity.Utils;
 
 /// <summary>
 /// Makes use of AGX rigid body to move the whale using forces calculated based on its speed and root forward dircitonb 
@@ -28,7 +30,9 @@ public class WhaleModelAGX : WhaleModelAbstract {
     List<GameObject> bodyLengthBones;
     List<GameObject> leftFinBones;
     List<GameObject> rightFinBones;
-    List<GameObject> mouthBones; 
+    List<GameObject> mouthBones;
+
+    AGXUnity.RigidBody rootRB;
 
     int bodyEndIndex;
     int startTailIndex;
@@ -51,6 +55,8 @@ public class WhaleModelAGX : WhaleModelAbstract {
         mouthBoneCount = mouthBones.Count;
         rootBone = whaleBones.rootBone;
         headBoneCount = 1;
+
+        rootRB = rootBone.GetComponent<AGXUnity.RigidBody>();
     }
     void InitializeBones(WhaleBones blueprintSettings){
 
@@ -95,8 +101,8 @@ public class WhaleModelAGX : WhaleModelAbstract {
     // cast the current gameobject transforms to a whale state object
     (Global_AnimationData, LocalRotation_AnimationData[], LocalRotation_AnimationData[], LocalRotation_AnimationData[], LocalRotation_AnimationData[], LocalRotation_AnimationData) castGameObjectsToWhaleState(){
         Global_AnimationData rootState = new Global_AnimationData();
-        rootState.Position = rootBone.transform.position;
-        rootState.Rotation = rootBone.transform.rotation;
+        rootState.Position = rootRB.Native.getPosition().ToVector3();
+        rootState.Rotation = rootRB.Native.getRotation().ToHandedQuaternion();
 
         LocalRotation_AnimationData[] bodyLengthStates = new LocalRotation_AnimationData[bodyLengthBones.Count];
         for (int i = 0; i < bodyLengthBones.Count; i++)
@@ -133,10 +139,10 @@ public class WhaleModelAGX : WhaleModelAbstract {
 
         //UPDATE T USE AGX RIGID BODY FORCES INSTEAD OF SETTING TRANSFORM DIRECTLY
 
-        // 
-
-        rootBone.transform.position = newState.Root.Position;
-        rootBone.transform.rotation = newState.Root.Rotation;
+        
+        rootRB.Native.setPosition(newState.Root.Position.ToHandedVec3());
+        // rootBone.transform.position = newState.Root.Position;
+        rootRB.Native.setRotation(newState.Root.Rotation.ToHandedQuat());
 
          //swapYandX(newState.Head.Rotation, out Quaternion headRot);
         headBone.transform.localRotation = newState.Head.Rotation;

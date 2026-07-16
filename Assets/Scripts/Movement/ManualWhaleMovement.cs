@@ -29,11 +29,14 @@ public class ManualWhaleController : MonoBehaviour{
     float accelerateForce;
     float deccelerateForce;
 
+    bool controllerConnected;
+
 
     void Start(){
         moveInput = InputSystem.actions.FindAction("Move");
         accelerateInput = InputSystem.actions.FindAction("Accelerate");
         deccelerateInput = InputSystem.actions.FindAction("Deccelerate");
+        controllerConnected = Gamepad.current != null;
 
     }
 
@@ -45,9 +48,11 @@ public class ManualWhaleController : MonoBehaviour{
 
 
     void readInputs(){
-        lookDir = moveInput.ReadValue<Vector2>();
-        accelerateForce = accelerateInput.ReadValue<float>();
-        deccelerateForce = deccelerateInput.ReadValue<float>();
+        if(!controllerConnected) return;
+
+        lookDir = moveInput?.ReadValue<Vector2>() ?? Vector2.zero;
+        accelerateForce = accelerateInput?.ReadValue<float>() ?? 0f;
+        deccelerateForce = deccelerateInput?.ReadValue<float>() ?? 0f;
     }
 
     void updateSpeed(){
@@ -58,7 +63,7 @@ public class ManualWhaleController : MonoBehaviour{
 
         speed += deltaAcceleration * Time.deltaTime;
 
-        speed = Mathf.Clamp(speed, 0,maxSpeed);
+        speed = Mathf.Clamp(speed, 0, maxSpeed);
     }
 
     void updateYawPitch(){
@@ -70,13 +75,12 @@ public class ManualWhaleController : MonoBehaviour{
         float y = Mathf.Lerp(0.0f, 1.0f, Mathf.InverseLerp(-1.0f,1.0f,lookDir.y));
 
         float yawDelta = Mathf.Lerp(-turningSpeed, turningSpeed, x);
-        float pitchDelta = Mathf.Lerp(-turningSpeed, turningSpeed, y);
+        float pitchDelta = Mathf.Lerp(turningSpeed, -turningSpeed, y);
 
         yaw += yawDelta;
         pitch += pitchDelta;
 
         pitch = Mathf.Clamp(pitch, -90, 90);
-
     }
 
     void Update()

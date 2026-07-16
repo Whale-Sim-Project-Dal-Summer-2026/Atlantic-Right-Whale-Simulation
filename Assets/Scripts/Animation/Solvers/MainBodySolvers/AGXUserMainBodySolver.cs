@@ -27,6 +27,7 @@ public class AGXUserMainBodySolver : MainBodySolverAbstract {
     public AGXUserMainBodySolver(float fixedTimeStepIn, WhaleState startState){
         fixedTimeStep = fixedTimeStepIn;
         this.targetRotation = startState.Root.Rotation;
+        this.targetPosition = startState.Root.Position;
         currentState = startState;
     }
 
@@ -46,7 +47,25 @@ public class AGXUserMainBodySolver : MainBodySolverAbstract {
 
         // Lerp and Slerp toward filtered targets
         newState.Speed = currentPacket.speed;
+
+// heading : Z
+// pitch X
+
         newState.Rotation = Quaternion.Slerp(previousState.Rotation, targetRotation, fixedTimeStep * 0.5f);
+
+
+        Vector3 forward = newState.Rotation * Vector3.forward;
+
+
+        // Vector3 forward = Vector3.zero;
+        // forward.x = Mathf.Cos(heading) * Mathf.Cos(currentPacket.pitch);
+        // forward.x = Mathf.Sin(currentPacket.head) * Mathf.Cos(currentPacket.pitch);
+        // forward.z = Mathf.Sin(currentPacket.pitch);
+        newState.Position = Vector3.Lerp(previousState.Position, previousState.Position + newState.Speed * (newState.Rotation * forward) * fixedTimeStep * 5f, 0.5f);
+
+        Debug.DrawLine(newState.Position, newState.Position + (forward * 10f), Color.red);
+
+
 
       
         return newState;
@@ -79,7 +98,7 @@ public class AGXUserMainBodySolver : MainBodySolverAbstract {
     
         newState.Root = new Global_AnimationData
         {
-            Position = new Vector3(0,0,0), 
+            Position = solvedRoot.Position, 
             Rotation = rootRotationNow
         };
     
