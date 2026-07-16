@@ -40,6 +40,8 @@ public class WhaleModelAGX : WhaleModelAbstract {
     int leftFlukeEndIndex;
     int leftFlukeStartIndex;
 
+    agx.Vec3 prevVelocity;
+
     public WhaleModelAGX(WhaleBones whaleBones){
         bodyLengthBones = new List<GameObject>();
         leftFinBones = new List<GameObject>();
@@ -56,7 +58,8 @@ public class WhaleModelAGX : WhaleModelAbstract {
         rootBone = whaleBones.rootBone;
         headBoneCount = 1;
 
-        rootRB = rootBone.GetComponent<AGXUnity.RigidBody>();
+        rootRB = rootBone.GetComponentInChildren<AGXUnity.RigidBody>();
+        prevVelocity = new agx.Vec3(0);
     }
     void InitializeBones(WhaleBones blueprintSettings){
 
@@ -140,13 +143,26 @@ public class WhaleModelAGX : WhaleModelAbstract {
         //UPDATE T USE AGX RIGID BODY FORCES INSTEAD OF SETTING TRANSFORM DIRECTLY
 
         
-        rootRB.Native.setPosition(newState.Root.Position.ToHandedVec3());
+        // rootRB.Native.setPosition(newState.Root.Position.ToHandedVec3());
+
+        agx.Vec3 currPos = rootRB.Native.getPosition();
+        agx.Vec3 targetPos = newState.Root.Position.ToHandedVec3();
+
+        agx.Vec3 velocity = targetPos - currPos;
+
+        float mass = (float) rootRB.Native.getMassProperties().getMass();
+
+        agx.Vec3 force = mass * ((velocity - prevVelocity) / Time.fixedDeltaTime);
+
+        prevVelocity = velocity;
+
+        rootRB.Native.addForce(force);
+
         // rootBone.transform.position = newState.Root.Position;
         rootRB.Native.setRotation(newState.Root.Rotation.ToHandedQuat());
 
          //swapYandX(newState.Head.Rotation, out Quaternion headRot);
         headBone.transform.localRotation = newState.Head.Rotation;
-
 
         for (int i = 0; i < newState.BodyLength.Count(); i++)
         {   

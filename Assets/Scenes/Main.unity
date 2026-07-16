@@ -3583,6 +3583,7 @@ GameObject:
   - component: {fileID: 240298605}
   - component: {fileID: 240298606}
   - component: {fileID: 240298607}
+  - component: {fileID: 240298608}
   m_Layer: 0
   m_Name: Whale
   m_TagString: Untagged
@@ -3599,7 +3600,7 @@ Transform:
   m_GameObject: {fileID: 240298604}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 500, y: 166.3, z: 500}
+  m_LocalPosition: {x: 500, y: 30, z: 500}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3621,7 +3622,7 @@ MonoBehaviour:
   whaleInput: {fileID: 545508174}
   yaw: 0
   pitch: 0
-  speed: 0
+  speed: 0.5
   maxAcceleration: 1
   maxSpeed: 5
   turningSpeed: 1
@@ -3642,28 +3643,43 @@ MonoBehaviour:
     <RigidBody>k__BackingField: {fileID: 240298607}
     m_mass:
       m_defaultToggle: 1
-      m_defaultValue: 9578.915
-      m_userValue: 1
+      m_defaultValue: 1
+      m_userValue: 40000
     m_inertiaDiagonal:
       m_defaultToggle: 1
-      m_defaultValue: {x: 123292.91, y: 127207.61, z: 13653.194}
+      m_defaultValue: {x: 1, y: 1, z: 1}
       m_userValue: {x: 1, y: 1, z: 1}
     m_inertiaOffDiagonal:
       m_defaultToggle: 1
-      m_defaultValue: {x: 42.91859, y: -163.64957, z: 2088.1177}
+      m_defaultValue: {x: 0, y: 0, z: 0}
       m_userValue: {x: 1, y: 1, z: 1}
     m_centerOfMassOffset:
       m_defaultToggle: 1
-      m_defaultValue: {x: -0.012894095, y: 0.4733509, z: 3.5061185}
+      m_defaultValue: {x: -0, y: 0, z: 0}
       m_userValue: {x: 0, y: 0, z: 0}
     m_massCoefficients: {x: 0, y: 0, z: 0}
     m_inertiaCoefficients: {x: 0, y: 0, z: 0}
-  m_motionControl: 2
+  m_motionControl: 3
   m_handleAsParticle: 0
   m_linearVelocity: {x: 0, y: 0, z: 0}
   m_angularVelocity: {x: 0, y: 0, z: 0}
   m_linearVelocityDamping: {x: 0, y: 0, z: 0}
   m_angularVelocityDamping: {x: 0, y: 0, z: 0}
+--- !u!114 &240298608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 240298604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc38363f1e98c7e42bb386d273d203f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ColliderSwapper
+  m_serializationVersion: 1
+  parent: {fileID: 0}
+  shapeMaterial: {fileID: 0}
 --- !u!1 &245197486
 GameObject:
   m_ObjectHideFlags: 0
@@ -5355,6 +5371,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6570673030590896701, guid: 44e416a8c5f886d4998a4b62bad4bd76, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1209056186}
+    - targetCorrespondingSourceObject: {fileID: 6570673030590896701, guid: 44e416a8c5f886d4998a4b62bad4bd76, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1209056193}
     - targetCorrespondingSourceObject: {fileID: 3206551864178360855, guid: 44e416a8c5f886d4998a4b62bad4bd76, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3363080}
@@ -12817,6 +12836,45 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 792291079309079365, guid: 44e416a8c5f886d4998a4b62bad4bd76, type: 3}
   m_PrefabInstance: {fileID: 402972230}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1209056193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209056185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e01f271d05be96f44852cb49dfac5711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AGXUnity::AGXUnity.RigidBody
+  m_serializationVersion: 1
+  <MassProperties>k__BackingField:
+    <RigidBody>k__BackingField: {fileID: 1209056193}
+    m_mass:
+      m_defaultToggle: 1
+      m_defaultValue: 9578.915
+      m_userValue: 1
+    m_inertiaDiagonal:
+      m_defaultToggle: 1
+      m_defaultValue: {x: 123292.914, y: 127207.61, z: 13653.208}
+      m_userValue: {x: 1, y: 1, z: 1}
+    m_inertiaOffDiagonal:
+      m_defaultToggle: 1
+      m_defaultValue: {x: 42.916214, y: -163.64957, z: 2088.1335}
+      m_userValue: {x: 1, y: 1, z: 1}
+    m_centerOfMassOffset:
+      m_defaultToggle: 1
+      m_defaultValue: {x: -0.012894095, y: 0.47334865, z: 3.5061185}
+      m_userValue: {x: 0, y: 0, z: 0}
+    m_massCoefficients: {x: 0, y: 0, z: 0}
+    m_inertiaCoefficients: {x: 0, y: 0, z: 0}
+  m_motionControl: 3
+  m_handleAsParticle: 0
+  m_linearVelocity: {x: 0, y: 0, z: 0}
+  m_angularVelocity: {x: 0, y: 0, z: 0}
+  m_linearVelocityDamping: {x: 0, y: 0, z: 0}
+  m_angularVelocityDamping: {x: 0, y: 0, z: 0}
 --- !u!1 &1213433730 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6319836726185452002, guid: 44e416a8c5f886d4998a4b62bad4bd76, type: 3}
@@ -20370,7 +20428,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2093660639
 Transform:
   m_ObjectHideFlags: 0
