@@ -7,4 +7,6 @@ public class UserInputManager : MonoBehaviour
     public float yaw;
     public float speed;
     public bool mouthOpen;
+
+    public AGXUnity.RigidBody rb;
 }

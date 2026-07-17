@@ -38,6 +38,7 @@ public class WhaleMotionFromUserInputRT : DataSource
         cSVLoader = new CSVLoader();
 
         userInputManager = GameObject.FindAnyObjectByType<UserInputManager>();
+
         loadFlukeWaveAmplitudeLookUpCSV(animationSettings);
 
         this.startState = startState;
@@ -46,7 +47,7 @@ public class WhaleMotionFromUserInputRT : DataSource
 
         mouthSolver = new MouthSolver(startState.Mouth);
         flukeSolver = new FlukeSolver(blueprint.BodyLengthCount, fixedTimeStep, lookUp, tailStartIndex);
-        mainBodySolver = new AGXUserMainBodySolver(fixedTimeStep, startState);
+        mainBodySolver = new AGXUserMainBodySolver(fixedTimeStep, startState, userInputManager.rb);
         finSolver = new FinSolver(startState.LeftFin.Length, fixedTimeStep);
 
     }
@@ -72,6 +73,7 @@ public class WhaleMotionFromUserInputRT : DataSource
 
         // Solve for the new state based on user input
         newState.Root = mainBodySolver.solveMainBody(motionDataPacket, currentWhaleState.Root);
+
         if (mainBodySolver is AGXUserMainBodySolver agxSolver)
         {
             newState.BodyLength = agxSolver.getBodyState();

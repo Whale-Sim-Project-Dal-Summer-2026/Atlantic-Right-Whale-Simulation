@@ -217,6 +217,24 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Accelerate"",
+                    ""type"": ""Button"",
+                    ""id"": ""67f8f78e-e4fc-41e5-8938-b675e240936f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Deccelerate"",
+                    ""type"": ""Button"",
+                    ""id"": ""5c773616-42ae-46e1-8a99-5fd521bede49"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -734,6 +752,28 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Scene3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f447fa80-3316-412e-86d1-7036c31ebad6"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Accelerate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b5e5591e-31de-452e-9994-502d605b7df2"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Deccelerate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1335,6 +1375,8 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
         m_Player_Scene1 = m_Player.FindAction("Scene1", throwIfNotFound: true);
         m_Player_Scene2 = m_Player.FindAction("Scene2", throwIfNotFound: true);
         m_Player_Scene3 = m_Player.FindAction("Scene3", throwIfNotFound: true);
+        m_Player_Accelerate = m_Player.FindAction("Accelerate", throwIfNotFound: true);
+        m_Player_Deccelerate = m_Player.FindAction("Deccelerate", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1442,6 +1484,8 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Scene1;
     private readonly InputAction m_Player_Scene2;
     private readonly InputAction m_Player_Scene3;
+    private readonly InputAction m_Player_Accelerate;
+    private readonly InputAction m_Player_Deccelerate;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1510,6 +1554,14 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Scene3 => m_Wrapper.m_Player_Scene3;
         /// <summary>
+        /// Provides access to the underlying input action "Player/Accelerate".
+        /// </summary>
+        public InputAction @Accelerate => m_Wrapper.m_Player_Accelerate;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Deccelerate".
+        /// </summary>
+        public InputAction @Deccelerate => m_Wrapper.m_Player_Deccelerate;
+        /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -1577,6 +1629,12 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
             @Scene3.started += instance.OnScene3;
             @Scene3.performed += instance.OnScene3;
             @Scene3.canceled += instance.OnScene3;
+            @Accelerate.started += instance.OnAccelerate;
+            @Accelerate.performed += instance.OnAccelerate;
+            @Accelerate.canceled += instance.OnAccelerate;
+            @Deccelerate.started += instance.OnDeccelerate;
+            @Deccelerate.performed += instance.OnDeccelerate;
+            @Deccelerate.canceled += instance.OnDeccelerate;
         }
 
         /// <summary>
@@ -1630,6 +1688,12 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
             @Scene3.started -= instance.OnScene3;
             @Scene3.performed -= instance.OnScene3;
             @Scene3.canceled -= instance.OnScene3;
+            @Accelerate.started -= instance.OnAccelerate;
+            @Accelerate.performed -= instance.OnAccelerate;
+            @Accelerate.canceled -= instance.OnAccelerate;
+            @Deccelerate.started -= instance.OnDeccelerate;
+            @Deccelerate.performed -= instance.OnDeccelerate;
+            @Deccelerate.canceled -= instance.OnDeccelerate;
         }
 
         /// <summary>
@@ -2028,6 +2092,20 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnScene3(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Accelerate" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnAccelerate(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Deccelerate" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDeccelerate(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

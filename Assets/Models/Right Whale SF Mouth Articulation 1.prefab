@@ -2904,6 +2904,7 @@ MonoBehaviour:
   timesetp: 0
   totalTimesteps: 0
   animationSettings: {fileID: 11400000, guid: a079734cd265a3648b27716324684644, type: 2}
+  processingSettings: {fileID: 0}
 --- !u!1 &6590794832029823142
 GameObject:
   m_ObjectHideFlags: 0

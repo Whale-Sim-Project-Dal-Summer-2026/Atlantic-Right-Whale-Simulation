@@ -77,6 +77,9 @@ public class WhaleDriver : MonoBehaviour
 
     [Header("Animation Settings")]
     public AnimationSettings animationSettings;
+
+// we care about seaLevel only here
+    public ProcessingSettings processingSettings;
   
    
 

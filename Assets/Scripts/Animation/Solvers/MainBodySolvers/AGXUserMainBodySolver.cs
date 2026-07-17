@@ -1,6 +1,7 @@
 using AnimationDataStructs;
 using UnityEngine;
 using MotionDataPacketClass;
+using AGXUnity.Utils;
 
 public class AGXUserMainBodySolver : MainBodySolverAbstract {
     private float fixedTimeStep;
@@ -23,12 +24,17 @@ public class AGXUserMainBodySolver : MainBodySolverAbstract {
 
     private float responseAtTail = 0.3f;
 
+    AGXUnity.RigidBody rb;
 
-    public AGXUserMainBodySolver(float fixedTimeStepIn, WhaleState startState){
+
+
+    public AGXUserMainBodySolver(float fixedTimeStepIn, WhaleState startState, AGXUnity.RigidBody rb){
         fixedTimeStep = fixedTimeStepIn;
         this.targetRotation = startState.Root.Rotation;
         this.targetPosition = startState.Root.Position;
+        this.rb = rb;
         currentState = startState;
+
     }
 
     // combines filtered classic main body solver with body roll solver for better motion 
@@ -41,28 +47,25 @@ public class AGXUserMainBodySolver : MainBodySolverAbstract {
 
     // saves the internal position and travel distance for the body roll solver to use
     private Global_AnimationData classicMainBodySolve ( MotionDataPacket currentPacket, Global_AnimationData previousState){
+
         Global_AnimationData newState = new Global_AnimationData();
+
+        Vector3 currentRbPosition = rb.Native.getPosition().ToHandedVector3();
+
 
         targetRotation = Quaternion.Euler(currentPacket.pitch, currentPacket.head, currentPacket.roll);
 
         // Lerp and Slerp toward filtered targets
         newState.Speed = currentPacket.speed;
 
-// heading : Z
-// pitch X
-
         newState.Rotation = Quaternion.Slerp(previousState.Rotation, targetRotation, fixedTimeStep * 0.8f);
-
 
         Vector3 forward = newState.Rotation * Vector3.forward;
 
-        newState.Position = previousState.Position + newState.Speed * forward * fixedTimeStep * 2f;
+        newState.Position = currentRbPosition + (newState.Speed * forward * fixedTimeStep);
 
-        Debug.DrawLine(newState.Position, newState.Position + (forward * 50f), Color.red);
+        Debug.DrawLine(newState.Position, newState.Position + (forward * newState.Speed), Color.red);
 
-
-
-      
         return newState;
     }
 

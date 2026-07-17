@@ -40,7 +40,7 @@ public class WhaleModelAGX : WhaleModelAbstract {
     int leftFlukeEndIndex;
     int leftFlukeStartIndex;
 
-    agx.Vec3 prevVelocity;
+    float seaLevel;
 
     public WhaleModelAGX(WhaleBones whaleBones){
         bodyLengthBones = new List<GameObject>();
@@ -58,8 +58,9 @@ public class WhaleModelAGX : WhaleModelAbstract {
         rootBone = whaleBones.rootBone;
         headBoneCount = 1;
 
-        rootRB = rootBone.GetComponentInChildren<AGXUnity.RigidBody>();
-        prevVelocity = new agx.Vec3(0);
+        rootRB = rootBone.GetComponentInChildren<AGXUnity.RigidBody>().GetInitialized<AGXUnity.RigidBody>();
+        seaLevel = 0.0f;
+
     }
     void InitializeBones(WhaleBones blueprintSettings){
 
@@ -137,28 +138,39 @@ public class WhaleModelAGX : WhaleModelAbstract {
         return (rootState, bodyLengthStates, leftFinStates, rightFinStates, mouthStates, headState);
     }
 
-    public override void updateWhaleState(WhaleState newState){
-        //determinePhase(newState);
-
-        //UPDATE T USE AGX RIGID BODY FORCES INSTEAD OF SETTING TRANSFORM DIRECTLY
-
-        
-        // rootRB.Native.setPosition(newState.Root.Position.ToHandedVec3());
+    void updateMovement(WhaleState newState){
 
         agx.Vec3 currPos = rootRB.Native.getPosition();
+
+        if (currPos.y >= seaLevel) {
+           return;
+        }
+        
         agx.Vec3 targetPos = newState.Root.Position.ToHandedVec3();
+        agx.Vec3 currentVelocity = rootRB.Native.getVelocity();
+        
+        agx.Vec3 displacement = targetPos - currPos;
+        float mass = (float)rootRB.Native.getMassProperties().getMass();
 
-        agx.Vec3 velocity = targetPos - currPos;
+        float positionalStiffness = 500f; 
+        
+        float velocityDamping = 10f; 
 
-        float mass = (float) rootRB.Native.getMassProperties().getMass();
+        float inWater = currPos.y < seaLevel ? 1.0f : 0.0f;
 
-        agx.Vec3 force = mass * ((velocity - prevVelocity) / Time.fixedDeltaTime);
+        agx.Vec3 desiredVelocity = displacement * positionalStiffness * inWater;
 
-        prevVelocity = velocity;
+        agx.Vec3 velocityError = desiredVelocity - currentVelocity;
 
-        rootRB.Native.addForce(force);
+        agx.Vec3 force = velocityError * mass * velocityDamping;
 
-        // rootBone.transform.position = newState.Root.Position;
+        rootRB.Native.addForce(force);  
+    }
+
+    public override void updateWhaleState(WhaleState newState) {
+
+        updateMovement(newState);
+
         rootRB.Native.setRotation(newState.Root.Rotation.ToHandedQuat());
 
          //swapYandX(newState.Head.Rotation, out Quaternion headRot);

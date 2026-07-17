@@ -20,6 +20,8 @@ public class ManualWhaleController : MonoBehaviour{
     [SerializeField] float turningSpeed = .5f;
 
 
+    [Header("References")]
+    [SerializeField] AGXUnity.RigidBody rb;
     InputAction  moveInput;
     InputAction  accelerateInput;
     InputAction  deccelerateInput;
@@ -32,11 +34,17 @@ public class ManualWhaleController : MonoBehaviour{
     bool controllerConnected;
 
 
-    void Start(){
+    void Awake(){
         moveInput = InputSystem.actions.FindAction("Move");
         accelerateInput = InputSystem.actions.FindAction("Accelerate");
         deccelerateInput = InputSystem.actions.FindAction("Deccelerate");
         controllerConnected = Gamepad.current != null;
+
+        whaleInput.rb = rb.GetInitialized<AGXUnity.RigidBody>();
+
+        if (!controllerConnected){
+            Debug.LogWarning("No Controller Detected!");
+        }
 
     }
 
