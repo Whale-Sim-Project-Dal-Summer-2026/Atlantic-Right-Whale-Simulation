@@ -12,6 +12,7 @@ public class ManualWhaleController : MonoBehaviour{
     [SerializeField] float yaw;
     [SerializeField] float pitch;
     [SerializeField] float speed;
+    [SerializeField] float openMouth;
 
     [Header("Constants")]
 
@@ -22,9 +23,11 @@ public class ManualWhaleController : MonoBehaviour{
 
     [Header("References")]
     [SerializeField] AGXUnity.RigidBody rb;
-    InputAction  moveInput;
-    InputAction  accelerateInput;
-    InputAction  deccelerateInput;
+    InputAction moveInput;
+    InputAction accelerateInput;
+    InputAction deccelerateInput;
+    InputAction openMouthInput;
+
 
 
     Vector2 lookDir;
@@ -38,6 +41,7 @@ public class ManualWhaleController : MonoBehaviour{
         moveInput = InputSystem.actions.FindAction("Move");
         accelerateInput = InputSystem.actions.FindAction("Accelerate");
         deccelerateInput = InputSystem.actions.FindAction("Deccelerate");
+        openMouthInput = InputSystem.actions.FindAction("OpenMouth");
         controllerConnected = Gamepad.current != null;
 
         whaleInput.rb = rb.GetInitialized<AGXUnity.RigidBody>();
@@ -52,6 +56,7 @@ public class ManualWhaleController : MonoBehaviour{
         whaleInput.yaw = yaw;
         whaleInput.pitch = pitch;
         whaleInput.speed = speed;
+        whaleInput.mouthOpen = openMouth == 1;
     }
 
 
@@ -61,6 +66,8 @@ public class ManualWhaleController : MonoBehaviour{
         lookDir = moveInput?.ReadValue<Vector2>() ?? Vector2.zero;
         accelerateForce = accelerateInput?.ReadValue<float>() ?? 0f;
         deccelerateForce = deccelerateInput?.ReadValue<float>() ?? 0f;
+
+        openMouth = openMouthInput?.ReadValue<float>() ?? 0.0f;
     }
 
     void updateSpeed(){
@@ -100,6 +107,8 @@ public class ManualWhaleController : MonoBehaviour{
         updateSpeed();
 
         updateYawPitch();
+
+
         // float accelerationDelta = 
 
     }

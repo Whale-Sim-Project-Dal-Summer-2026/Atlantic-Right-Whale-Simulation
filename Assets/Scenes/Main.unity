@@ -3621,7 +3621,8 @@ MonoBehaviour:
   whaleInput: {fileID: 545508174}
   yaw: 0
   pitch: 0
-  speed: 0.5
+  speed: 1
+  openMouth: 0
   maxAcceleration: 1
   maxSpeed: 5
   turningSpeed: 1

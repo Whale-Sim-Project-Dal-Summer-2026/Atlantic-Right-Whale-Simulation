@@ -235,6 +235,15 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenMouth"",
+                    ""type"": ""Button"",
+                    ""id"": ""d3b76fe7-fddd-49fd-8af3-26989b4e755f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -774,6 +783,17 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
                     ""action"": ""Deccelerate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""75edae5b-3f3b-41e4-9583-6385c4672d2a"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""OpenMouth"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1377,6 +1397,7 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
         m_Player_Scene3 = m_Player.FindAction("Scene3", throwIfNotFound: true);
         m_Player_Accelerate = m_Player.FindAction("Accelerate", throwIfNotFound: true);
         m_Player_Deccelerate = m_Player.FindAction("Deccelerate", throwIfNotFound: true);
+        m_Player_OpenMouth = m_Player.FindAction("OpenMouth", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1486,6 +1507,7 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Scene3;
     private readonly InputAction m_Player_Accelerate;
     private readonly InputAction m_Player_Deccelerate;
+    private readonly InputAction m_Player_OpenMouth;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1562,6 +1584,10 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Deccelerate => m_Wrapper.m_Player_Deccelerate;
         /// <summary>
+        /// Provides access to the underlying input action "Player/OpenMouth".
+        /// </summary>
+        public InputAction @OpenMouth => m_Wrapper.m_Player_OpenMouth;
+        /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -1635,6 +1661,9 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
             @Deccelerate.started += instance.OnDeccelerate;
             @Deccelerate.performed += instance.OnDeccelerate;
             @Deccelerate.canceled += instance.OnDeccelerate;
+            @OpenMouth.started += instance.OnOpenMouth;
+            @OpenMouth.performed += instance.OnOpenMouth;
+            @OpenMouth.canceled += instance.OnOpenMouth;
         }
 
         /// <summary>
@@ -1694,6 +1723,9 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
             @Deccelerate.started -= instance.OnDeccelerate;
             @Deccelerate.performed -= instance.OnDeccelerate;
             @Deccelerate.canceled -= instance.OnDeccelerate;
+            @OpenMouth.started -= instance.OnOpenMouth;
+            @OpenMouth.performed -= instance.OnOpenMouth;
+            @OpenMouth.canceled -= instance.OnOpenMouth;
         }
 
         /// <summary>
@@ -2106,6 +2138,13 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnDeccelerate(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "OpenMouth" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnOpenMouth(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
