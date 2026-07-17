@@ -17,7 +17,7 @@ RenderSettings:
   m_Fog: 1
   m_FogColor: {r: 0.23137255, g: 0.3647059, b: 0.6313726, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.004
+  m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -7084,6 +7084,7 @@ GameObject:
   - component: {fileID: 1205938768}
   - component: {fileID: 1205938767}
   - component: {fileID: 1205938766}
+  - component: {fileID: 1205938772}
   - component: {fileID: 1205938771}
   m_Layer: 0
   m_Name: Main Camera
@@ -7172,7 +7173,7 @@ Camera:
   m_GameObject: {fileID: 1205938765}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.22957455, g: 0.36374152, b: 0.6320754, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -7247,6 +7248,22 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: b2cc19c76e25d914c82399cb17d61bc8, type: 2}
+--- !u!114 &1205938772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1205938765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebda68bd148cc3c41b8474db69aa6ed1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Effectmanager
+  camera: {fileID: 1205938769}
+  volume: {fileID: 1205938771}
+  effectsEnabled: 1
+  settings: {fileID: 0}
 --- !u!114 &1233222089
 MonoBehaviour:
   m_ObjectHideFlags: 0

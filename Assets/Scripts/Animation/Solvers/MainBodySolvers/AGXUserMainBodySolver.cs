@@ -58,7 +58,7 @@ public class AGXUserMainBodySolver : MainBodySolverAbstract {
         // Lerp and Slerp toward filtered targets
         newState.Speed = currentPacket.speed;
 
-        newState.Rotation = Quaternion.Slerp(previousState.Rotation, targetRotation, fixedTimeStep * 0.8f);
+        newState.Rotation = Quaternion.Slerp(previousState.Rotation, targetRotation, fixedTimeStep * 0.7f);
 
         Vector3 forward = newState.Rotation * Vector3.forward;
 
