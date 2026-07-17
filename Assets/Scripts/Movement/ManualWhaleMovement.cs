@@ -1,5 +1,7 @@
+using AGXUnity.Utils;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.TextCore;
 
 
 
@@ -48,6 +50,7 @@ public class ManualWhaleController : MonoBehaviour{
     float currSpeedUp;
 
     float speedAcceleration;
+    agx.Vec3 whaleStartPos;
 
 
 
@@ -62,12 +65,25 @@ public class ManualWhaleController : MonoBehaviour{
 
         whaleInput.rb = rb.GetInitialized<AGXUnity.RigidBody>();
 
+
+        whaleStartPos = rb.Native.getPosition();
+
+
         if (!controllerConnected){
             Debug.LogWarning("No Controller Detected!");
         }
 
         speedAcceleration = 1f;
+
+
+        ResetManager.OnReset += resetWhalePosition;
     }
+
+
+    void resetWhalePosition(){
+        rb.Native.setPosition(whaleStartPos);
+    }
+
 
     void updateMoveInfo(){
         whaleInput.yaw = yaw;

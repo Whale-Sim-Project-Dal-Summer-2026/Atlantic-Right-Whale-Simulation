@@ -749,6 +749,17 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""d2dec295-2f64-48a5-88c0-ac6916d7626c"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Reset"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""02af54f6-8558-40cb-89a5-349d4267386e"",
                     ""path"": ""<Keyboard>/#(R)"",
                     ""interactions"": """",
@@ -838,7 +849,7 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""5197dcc0-82e8-405c-8d4b-6ba877f4e4d2"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

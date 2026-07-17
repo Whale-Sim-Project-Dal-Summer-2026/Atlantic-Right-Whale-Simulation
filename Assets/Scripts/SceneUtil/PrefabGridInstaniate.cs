@@ -22,6 +22,14 @@ public class RopePositioning : MonoBehaviour
     void Start() {
         ropes = new List<GameObject>();
         spawnRopes = true;
+        // when reset is triggered
+        ResetManager.OnReset += ClearAndCreate;
+    }
+
+    void ClearAndCreate()
+    {
+        ClearRopes();
+        CreateRopes();
     }
 
     // Destroys all currently tracked ropes and clears the list
@@ -58,8 +66,7 @@ public class RopePositioning : MonoBehaviour
             return;
         }
 
-        ClearRopes();
-        CreateRopes();
+        ClearAndCreate();
 
         spawnRopes = false;
     }
