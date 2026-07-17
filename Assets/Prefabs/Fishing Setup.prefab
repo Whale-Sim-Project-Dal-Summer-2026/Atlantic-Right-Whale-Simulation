@@ -81,8 +81,8 @@ MonoBehaviour:
   lobsterTrap: {fileID: 1356546218376360735, guid: 2aa2e8ea51b44a74b856a6e5381ff052, type: 3}
   buoy: {fileID: 4345060032287545016}
   wireMat: {fileID: -876546973899608171, guid: 0ce2014a67ddf2143bf8022ca7f3767c, type: 3}
-  spacingDelta: 100
-  depth: 100
+  spacingDelta: 40
+  depth: 50
 --- !u!1001 &8077675295806794736
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -114,6 +114,10 @@ PrefabInstance:
     - target: {fileID: 1499691146711412478, guid: a3887040c24be094fa18b93f8a40f63c, type: 3}
       propertyPath: m_lift
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2269388607803073655, guid: a3887040c24be094fa18b93f8a40f63c, type: 3}
+      propertyPath: m_material
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5124739424622241778, guid: a3887040c24be094fa18b93f8a40f63c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -162,6 +166,10 @@ PrefabInstance:
     - target: {fileID: 6240891861930625908, guid: a3887040c24be094fa18b93f8a40f63c, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8893478194687518890, guid: a3887040c24be094fa18b93f8a40f63c, type: 3}
+      propertyPath: m_material
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
