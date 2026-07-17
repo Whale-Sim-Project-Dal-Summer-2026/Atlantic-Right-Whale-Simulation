@@ -21,12 +21,19 @@ public class ManualWhaleController : MonoBehaviour{
     [SerializeField] float turningSpeed = .5f;
 
 
+
+
+
+
+
     [Header("References")]
     [SerializeField] AGXUnity.RigidBody rb;
     InputAction moveInput;
     InputAction accelerateInput;
     InputAction deccelerateInput;
     InputAction openMouthInput;
+
+    InputAction speedUpAction;
 
 
 
@@ -36,12 +43,21 @@ public class ManualWhaleController : MonoBehaviour{
 
     bool controllerConnected;
 
+    bool speedUpPressed;
+
+    float currSpeedUp;
+
+    float speedAcceleration;
+
+
 
     void Awake(){
         moveInput = InputSystem.actions.FindAction("Move");
         accelerateInput = InputSystem.actions.FindAction("Accelerate");
         deccelerateInput = InputSystem.actions.FindAction("Deccelerate");
         openMouthInput = InputSystem.actions.FindAction("OpenMouth");
+        speedUpAction = InputSystem.actions.FindAction("SimulationSpeedUp");
+
         controllerConnected = Gamepad.current != null;
 
         whaleInput.rb = rb.GetInitialized<AGXUnity.RigidBody>();
@@ -50,11 +66,13 @@ public class ManualWhaleController : MonoBehaviour{
             Debug.LogWarning("No Controller Detected!");
         }
 
+        speedAcceleration = 1f;
     }
 
     void updateMoveInfo(){
         whaleInput.yaw = yaw;
         whaleInput.pitch = pitch;
+        // clamp the values to the constraints for the animation
         whaleInput.speed = speed;
         whaleInput.mouthOpen = openMouth == 1;
     }
@@ -68,7 +86,18 @@ public class ManualWhaleController : MonoBehaviour{
         deccelerateForce = deccelerateInput?.ReadValue<float>() ?? 0f;
 
         openMouth = openMouthInput?.ReadValue<float>() ?? 0.0f;
+
+        speedUpPressed = (speedUpAction?.ReadValue<float>() ?? 0.0f) == 1.0f; 
     }
+
+    float calculateSpeedUp(){
+        if (!speedUpPressed){
+            return 0.0f;
+        }
+        
+        return currSpeedUp + (speedAcceleration * Time.deltaTime);
+    }
+
 
     void updateSpeed(){
         float currAcceleartion = Mathf.Lerp(0,maxAcceleration,accelerateForce);
@@ -79,6 +108,10 @@ public class ManualWhaleController : MonoBehaviour{
         speed += deltaAcceleration * Time.deltaTime;
 
         speed = Mathf.Clamp(speed, 0, maxSpeed);
+
+        currSpeedUp = calculateSpeedUp();
+        
+        speed += currSpeedUp;
     }
 
     void updateYawPitch(){

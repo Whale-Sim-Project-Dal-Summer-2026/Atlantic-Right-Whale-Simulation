@@ -253,6 +253,15 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SimulationSpeedUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""875b3226-b802-451a-9fb6-e6c64a3ce714"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -814,6 +823,17 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5197dcc0-82e8-405c-8d4b-6ba877f4e4d2"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SimulationSpeedUp"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1419,6 +1439,7 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
         m_Player_Deccelerate = m_Player.FindAction("Deccelerate", throwIfNotFound: true);
         m_Player_OpenMouth = m_Player.FindAction("OpenMouth", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+        m_Player_SimulationSpeedUp = m_Player.FindAction("SimulationSpeedUp", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1530,6 +1551,7 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Deccelerate;
     private readonly InputAction m_Player_OpenMouth;
     private readonly InputAction m_Player_Pause;
+    private readonly InputAction m_Player_SimulationSpeedUp;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1614,6 +1636,10 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
         /// <summary>
+        /// Provides access to the underlying input action "Player/SimulationSpeedUp".
+        /// </summary>
+        public InputAction @SimulationSpeedUp => m_Wrapper.m_Player_SimulationSpeedUp;
+        /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -1693,6 +1719,9 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @SimulationSpeedUp.started += instance.OnSimulationSpeedUp;
+            @SimulationSpeedUp.performed += instance.OnSimulationSpeedUp;
+            @SimulationSpeedUp.canceled += instance.OnSimulationSpeedUp;
         }
 
         /// <summary>
@@ -1758,6 +1787,9 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @SimulationSpeedUp.started -= instance.OnSimulationSpeedUp;
+            @SimulationSpeedUp.performed -= instance.OnSimulationSpeedUp;
+            @SimulationSpeedUp.canceled -= instance.OnSimulationSpeedUp;
         }
 
         /// <summary>
@@ -2184,6 +2216,13 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnPause(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SimulationSpeedUp" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSimulationSpeedUp(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

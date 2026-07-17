@@ -20,7 +20,10 @@ public class FlukeWaveAmplitudeLookUp{
     
     //  gives back the freq and amplitude for the current phase
 
-    private Dictionary<string,FlukeWaveAmplitudeInstance> lookUpTable; 
+    private Dictionary<string,FlukeWaveAmplitudeInstance> lookUpTable;
+
+    float minSpeed = .5f;
+    float maxSpeed = 5f;
 
 
     // builds the lookup table from csv data
@@ -67,13 +70,16 @@ public class FlukeWaveAmplitudeLookUp{
     public double[] lookUp(string phase, float speed, bool mouthOpen) {
         double[] output= new double[2];
 
-        string hashedName = hashName(phase,speed,mouthOpen);
+        float clampedSpeed = Mathf.Clamp(speed,minSpeed,maxSpeed);
 
-        if (speed == 0f) {
-                output[0]=0d;
-                output[1]=0d;
-                return output;
-            }
+        string hashedName = hashName(phase,clampedSpeed,mouthOpen);
+
+
+        // if (speed == 0f) {
+        //     output[0]=0d;
+        //     output[1]=0d;
+        //     return output;
+        // }
 
         FlukeWaveAmplitudeInstance foundInstance = lookUpTable[hashedName];
 
