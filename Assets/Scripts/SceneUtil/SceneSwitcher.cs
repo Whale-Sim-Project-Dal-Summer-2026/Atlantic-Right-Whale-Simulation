@@ -1,59 +1,78 @@
 using System.Collections.Generic;
-using Obi;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class SceneSwitcher : MonoBehaviour
 {
-
+    public static SceneSwitcher Instance { get; private set; }
 
     [SerializeField] List<string> scenes;
 
+    InputAction openMenuAction;
+
+    bool openMenu;
     string currScene;
 
+    void Awake()
+    {
+        if (Instance != null) {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
 
     void Start()
     {
+        openMenuAction = InputSystem.actions.FindAction("OpenMenu");
         currScene = SceneManager.GetActiveScene().name;
+    }
+
+    void checkForMenuPress() {
+        openMenu = (openMenuAction?.ReadValue<float>() ?? 0.0f) == 1.0f;
     }
 
     void Update()
     {
-        if (Keyboard.current.escapeKey.isPressed)
-        {
+        if (Keyboard.current.escapeKey.isPressed) {
             Application.Quit();
         }
+        checkForMenuPress();
 
-        if (Keyboard.current.digit1Key.isPressed)
-        {
-
-            changeScene(scenes[0]);
+        if (openMenu) {
+            changeToScenarios();
         }
-        if (Keyboard.current.digit2Key.isPressed)
-        {
-
-            changeScene(scenes[1]);
-        }
-        if (Keyboard.current.digit3Key.isPressed)
-        {
-
-            changeScene(scenes[2]);
-        }  
-           
     }
-
 
     void changeScene(string scene)
     {
-        if(currScene == scene) return;
+        if (currScene == scene) return;
 
-        Debug.LogFormat("curr: {0}\nScene {1}",currScene, scene);
+        Debug.LogFormat("curr: {0}\nScene {1}", currScene, scene);
 
         currScene = scene;
         SceneManager.LoadScene(scene);
+    }
 
+    public void changeToNoGear() {
+        changeScene(scenes[0]);
+    }
+    public void changeToNoEntangle() {
+        changeScene(scenes[1]);
+    }
+
+    public void changeToEntangle() {
+        changeScene(scenes[2]);
+    }
+
+    public void changeToFreeSwim() {
+        changeScene(scenes[3]);
+    }
+
+    public void changeToScenarios() {
+        changeScene(scenes[4]);
     }
 }
