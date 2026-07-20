@@ -28,6 +28,7 @@ public class PublicUIManager : MonoBehaviour {
     private IdleMode idleUI;
     private Button toggleUIAltBtn;
     private GameObject scrubberUI;
+    private SceneSwitcher sceneSwitcher;
     
     // vars
     private bool isIdle = false;
@@ -62,6 +63,11 @@ public class PublicUIManager : MonoBehaviour {
         idleUI = GameObject.Find("IdleUI").GetComponent<IdleMode>();
         toggleUIAltBtn = GameObject.Find("ToggleBtns").transform.Find("ToggleUIAltBtn").GetComponent<Button>();
         scrubberUI = GameObject.Find("ScrubberUI");
+        sceneSwitcher = GameObject.Find("Scene Switcher").GetComponent<SceneSwitcher>();
+    }
+
+    void Start() {
+        scenariosBtn.onClick.AddListener(sceneSwitcher.changeToScenarios);
     }
 
     void Update() {

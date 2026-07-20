@@ -232,7 +232,9 @@ public class SimulationUIManager : MonoBehaviour {
 
     public void SetPathVisibility(bool on) {
         whaleTrailMesh.enabled = on;
-        togglePathBtnImage.sprite = togglePathBtnImage.sprite == togglePathSpriteOff ? togglePathSpriteOn : togglePathSpriteOff;
+        if (togglePathBtn) {
+            togglePathBtnImage.sprite = togglePathBtnImage.sprite == togglePathSpriteOff ? togglePathSpriteOn : togglePathSpriteOff;
+        }
     }
     
     /**
