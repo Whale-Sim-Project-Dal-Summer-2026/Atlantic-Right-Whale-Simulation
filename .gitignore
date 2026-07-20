@@ -95,7 +95,7 @@ Assets/Scripts/Data.meta
 
 #Whale Movement
 
-/Assets/Data/WhaleMovement/
+**/WhaleMovement*
 Assets/TextMesh Pro.meta
 Assets/TextMesh Pro/Examples & Extras.meta
 /Assets/TextMesh Pro
@@ -109,3 +109,4 @@ Assets/agx.lfx
 Assets/agx.lfx.meta
 
 *.zip
+**/.idea/
