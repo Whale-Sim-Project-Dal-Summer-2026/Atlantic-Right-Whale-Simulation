@@ -41,6 +41,9 @@ public class ResetManager : MonoBehaviour{
             currTimeHeld = 0.0f;
         }
     }
+   public void TriggerReset(){
+        OnReset?.Invoke();
+    }
 
 
 

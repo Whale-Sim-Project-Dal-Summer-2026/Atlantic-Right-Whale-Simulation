@@ -128,9 +128,9 @@ public class ClassicMotionDataCSV : DataSource
         isWaitingForLoad = true; 
         
     }
-    public override void GetTotalTimesteps(out int totalTimesteps)
+    public override int GetTotalTimesteps()
     {
-        totalTimesteps = this.totalTimesteps;
+        return this.totalTimesteps;
     }
  
 }

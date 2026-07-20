@@ -14,7 +14,7 @@ public abstract class DataSource
     public abstract void LoadSource(AnimationSettings animationSettings, WhaleState startState, WhaleBlueprint blueprint);
     public abstract WhaleState getNextWhaleState();
     public abstract void loadWhaleStateAt(int timestep);
-    public abstract void GetTotalTimesteps(out int totalTimesteps);
+    public abstract int GetTotalTimesteps();
     
 }
 
@@ -50,7 +50,7 @@ public class MotionDataCSV : DataSource
     {
         throw new System.NotImplementedException();
     }
-    public override void GetTotalTimesteps(out int totalTimesteps)
+    public override int GetTotalTimesteps()
     {
         throw new System.NotImplementedException();
     }
@@ -74,7 +74,7 @@ public class RandomWalk : DataSource
     {
         throw new System.NotImplementedException();
     }
-     public override void GetTotalTimesteps(out int totalTimesteps)
+     public override int GetTotalTimesteps()
     {
         throw new System.NotImplementedException();
     }

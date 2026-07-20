@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 
 
+
 //-- ROADMAP NOTES--
 
 
@@ -46,6 +47,7 @@ public enum DataSourceType
     ClassicMotionDataCSV,
     WhaleMotionFromCSV,
     WhaleMotionFromUserInputRT,
+    WhaleMotionFromCSV_AGX,
     MotionDataCSV,
     RandomWalk
 }
@@ -78,9 +80,14 @@ public class WhaleDriver : MonoBehaviour
     [Header("Animation Settings")]
     public AnimationSettings animationSettings;
 
+    public int CSV_ResetTimeStep;
+    public int PauseTime; 
+    private int StartingPauseTime = 0;
+
 // we care about seaLevel only here
     public ProcessingSettings processingSettings;
-  
+    
+    public ResetManager ResetManager;
    
 
     WhaleModelAbstract whaleModel;
@@ -88,12 +95,17 @@ public class WhaleDriver : MonoBehaviour
     
     
     void Start(){
+
+
+        StartingPauseTime = PauseTime;
+
         // set data source based on the enum value
         dataSource = dataSourceType switch{
             DataSourceType.ClassicMotionDataCSV => new ClassicMotionDataCSV(),
             DataSourceType.MotionDataCSV => new MotionDataCSV(),
             DataSourceType.WhaleMotionFromCSV => new WhaleMotionFromCSV(),
             DataSourceType.RandomWalk => new RandomWalk(),
+            DataSourceType.WhaleMotionFromCSV_AGX => new WhaleMotionFromCSV_AGX(),
             DataSourceType.WhaleMotionFromUserInputRT => new WhaleMotionFromUserInputRT(),
             _ => throw new System.ArgumentOutOfRangeException()
         };
@@ -101,7 +113,8 @@ public class WhaleDriver : MonoBehaviour
         // Retrieve the WhaleBones from the GameObject on the Whale 
         WhaleBones whaleBones =  this.gameObject.GetComponent<WhaleBones>();
 
-        dataSource.GetTotalTimesteps(out totalTimesteps);
+   
+
         //Set up the model which actually applies the state to the bones in the scene
         whaleModel = whaleModelType switch{
             WhaleModelType.Unity => new WhaleModelUnity(whaleBones),
@@ -121,7 +134,14 @@ public class WhaleDriver : MonoBehaviour
 
         // load the data source
         dataSource.LoadSource(animationSettings, startState, blueprint);
-    
+             int totalTimeStes = dataSource.GetTotalTimesteps();
+        this.totalTimesteps = totalTimeStes;
+
+        ResetManager.OnReset += () => {
+            jumpToTimestep = 0;
+            PauseTime = StartingPauseTime;
+            isPaused = true;
+        };
     }
 
 
@@ -146,18 +166,35 @@ public class WhaleDriver : MonoBehaviour
         if (isPaused) return;
         if (jumpToTimestep >= 0){
             dataSource.loadWhaleStateAt(jumpToTimestep);
+            updateWhaleState();
+        
             timesetp = jumpToTimestep;
             jumpToTimestep = -1; 
         }
     }
   void FixedUpdate(){
+    PauseTime -= 1;
+    if (PauseTime <= 0){
+        PauseTime = 0;
+        isPaused = false;
+    }
+
     if (isPaused) return;
     // if button is pushed then pass the number to load a certain timestep
     updateWhaleState();
+
+ 
     timesetp ++;
+   
+    // looping parameter
+    if (timesetp >= CSV_ResetTimeStep){
+        timesetp = 0;
+        ResetManager.TriggerReset();
+    }
     
     if (controls.Player.Reset.triggered){
        jumpToTimestep = 0;
+       ResetManager.TriggerReset();
        //animator.Play("R Whale Armature|Whale Swimming",0,0);  
     }
 

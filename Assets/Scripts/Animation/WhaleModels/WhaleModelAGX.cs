@@ -173,7 +173,7 @@ public class WhaleModelAGX : WhaleModelAbstract {
 
         rootRB.Native.setRotation(newState.Root.Rotation.ToHandedQuat());
 
-         //swapYandX(newState.Head.Rotation, out Quaternion headRot);
+        //swapYandX(newState.Head.Rotation, out Quaternion headRot);
         headBone.transform.localRotation = newState.Head.Rotation;
 
         for (int i = 0; i < newState.BodyLength.Count(); i++)

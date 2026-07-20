@@ -6,18 +6,23 @@ using DataSources;
 using AnimationDataStorageManager;
 using MotionDataPacketClass;
 using FlukeWaveAmplitudeLookUpClass;
+using Unity.VisualScripting;
+using AGXUnity;
 
-public class WhaleMotionFromCSV : DataSource{
+public class WhaleMotionFromCSV_AGX : DataSource{
 
     public List<MotionDataPacket> motionDataPacketList = new List<MotionDataPacket>();
     private float fixedTimeStep = 0.004f;
-    int totalTimesteps = 0;
+    public int totalTimesteps = 0;
     private float timer = 0.0f;
     DataStorageManager dataStorageManager;
     CSVLoader cSVLoader; 
     private WhaleAnimationStreamer streamer;
     private bool isWaitingForLoad = false;
+
     private WhaleState currentWhaleState;
+    private WhaleState whaleStartState;
+    private WhaleState previousWhaleState;
     private WhaleBlueprint blueprint;
     
     MouthSolver mouthSolver;
@@ -25,12 +30,15 @@ public class WhaleMotionFromCSV : DataSource{
     FinSolver finSolver;
     MainBodySolverAbstract mainBodySolver;
   
+     [SerializeField] UserInputManager userInputManager; // neds to be created
 
     //--Class Specific
     FlukeWaveAmplitudeLookUp lookUp;
 
 
     int tailStartIndex = 0;
+
+    int currentTimestep = 0;
 
     //THIS COUDL BE THE CONSTRUCTOR?????
     public override void LoadSource(AnimationSettings animationSettings, WhaleState startState, WhaleBlueprint blueprint)
@@ -42,6 +50,8 @@ public class WhaleMotionFromCSV : DataSource{
         loadFlukeWaveAmplitudeLookUpCSV(animationSettings);
 
 
+        userInputManager = GameObject.FindAnyObjectByType<UserInputManager>();
+
         this.blueprint = blueprint;
 
         // set up storage
@@ -49,27 +59,31 @@ public class WhaleMotionFromCSV : DataSource{
 
         mouthSolver = new MouthSolver(startState.Mouth);
         flukeSolver = new FlukeSolver(blueprint.BodyLengthCount, fixedTimeStep, lookUp, tailStartIndex);
-        mainBodySolver = new ImprovedMainBodySolver(fixedTimeStep, startState);
+        mainBodySolver = new AGXCSVMainBodySolver(fixedTimeStep, startState, userInputManager.rb);
         finSolver = new FinSolver(startState.LeftFin.Length, fixedTimeStep);
         
         //build states
-        WhaleState[] temp = calculateStates(startState, blueprint);
-        totalTimesteps = temp.Length;
+        //WhaleState[] temp = calculateStates(startState, blueprint);
+        
+        int currentTotalTimesteps = motionDataPacketList.Count;
+        this.totalTimesteps = currentTotalTimesteps;
+        
         currentWhaleState = startState;
+        whaleStartState = startState;
+        this.previousWhaleState = startState;
 
         //save states
-        dataStorageManager.SaveWhaleAnimationData(temp,Application.dataPath+"/testDATA");
+        //dataStorageManager.SaveWhaleAnimationData(temp,Application.dataPath+"/testDATA");
 
         //start streamer
-        streamer = new WhaleAnimationStreamer(dataStorageManager, Application.dataPath+"/testDATA",
-                                               batchSizeIn: 1500, refillThresholdIn: 500);
+        //streamer = new WhaleAnimationStreamer(dataStorageManager, Application.dataPath+"/testDATA",
+                                               //batchSizeIn: 1500, refillThresholdIn: 500);
         
 
 
         //clear data no longer needed 
-        motionDataPacketList = null;
         cSVLoader = null; 
-        temp = null;
+      
         GC.Collect();
         
     }
@@ -131,7 +145,7 @@ public class WhaleMotionFromCSV : DataSource{
             //Calculate Main Body
             newState.Root = mainBodySolver.solveMainBody(currentPacket, previousState.Root);
 
-            if (mainBodySolver is ImprovedMainBodySolver improvedSolver)
+            if (mainBodySolver is AGXCSVMainBodySolver improvedSolver)
             {
                 newState.Head = improvedSolver.getHeadState();
                 newState.BodyLength = improvedSolver.getBodyState();
@@ -156,40 +170,82 @@ public class WhaleMotionFromCSV : DataSource{
         }
         return output;
     }
+       WhaleState calculateState(){
+
+        
+            MotionDataPacket currentPacket = motionDataPacketList[currentTimestep];
+            currentTimestep++;
+
+            // Data integrity
+            if (float.IsNaN(currentPacket.speed) || float.IsNaN(currentPacket.pitch) ||
+                float.IsNaN(currentPacket.head)  || float.IsNaN(currentPacket.roll))
+            {
+                currentPacket.speed = 0f;
+                currentPacket.pitch = 0f;
+                currentPacket.head = 0f;
+                currentPacket.roll = 0f;
+            }
+
+          
+            WhaleState newState = new WhaleState(this.blueprint);
+            
+            //Calculate Main Body
+            newState.Root = mainBodySolver.solveMainBody(currentPacket, this.previousWhaleState.Root);
+
+            if (mainBodySolver is AGXCSVMainBodySolver improvedSolver)
+            {
+                newState.Head = improvedSolver.getHeadState();
+                newState.BodyLength = improvedSolver.getBodyState();
+            }
+            else
+            {
+                newState.BodyLength = this.previousWhaleState.BodyLength;
+            }
+            newState.Mouth = mouthSolver.solveMouth(currentPacket.MouthOpen == 1 ? true : false , previousWhaleState.Mouth);
+            newState.LeftFin = finSolver.solveFin(currentPacket, true, previousWhaleState.LeftFin);
+            newState.RightFin = finSolver.solveFin(currentPacket,  false, this.previousWhaleState.RightFin);
+            
+            // set previous state to prevent compounding fluke calc
+            previousWhaleState = newState;
+
+            //Calculate Fluke based on body roll state
+            newState.BodyLength= flukeSolver.solveFuke(currentPacket, newState);
+           
+      
+          
+            
+        
+        return newState;
+    }
   
    
     
 
     public override WhaleState getNextWhaleState()
     {
-         // if waiting for background load of a state jump, just return the last state until the new state is ready
-        if (isWaitingForLoad) {
-    
-            if (!streamer.IsLoading && streamer.TryGetNextState(out var state)) {
-                //data has loaded, update the current state and stop waiting
-                currentWhaleState = state;
-                isWaitingForLoad = false; 
-                return state;
-           
-            } else {
-            
-                return currentWhaleState;
-            }
-        // normal play back not waiting for loading 
-        } else {
-            if (streamer.TryGetNextState(out var state)) {
-               return state;
-            } else {
-                Debug.LogWarning("Streamer error or no more states available");
-                return new WhaleState(blueprint);
-            }
-        }   
+        WhaleState next = calculateState();
+        return next;
     }
 
     public override void loadWhaleStateAt(int timestep){
-        streamer.SeekTo(timestep);
-        isWaitingForLoad = true; 
-       
+
+        if (timestep != 0) throw new NotImplementedException("Loading a state at a specific timestep is not implemented for WhaleMotionFromCSV_AGX.");
+
+        currentTimestep = timestep;
+        previousWhaleState = whaleStartState;
+        userInputManager.rb.LinearVelocity = Vector3.zero;
+        userInputManager.rb.AngularVelocity = Vector3.zero;
+
+        userInputManager.rb.Native.setPosition(new agx.Vec3(-500, -25, 500));
+        userInputManager.rb.Native.setRotation(new agx.Quat(0, 0, 0,1));
+        userInputManager.rb.GameObject().transform.position = new Vector3(-500, -25, 500);
+        userInputManager.rb.GameObject().transform.rotation = Quaternion.identity;
+
+        
+      
+        
+        
+    
     }
     public override int GetTotalTimesteps()
     {

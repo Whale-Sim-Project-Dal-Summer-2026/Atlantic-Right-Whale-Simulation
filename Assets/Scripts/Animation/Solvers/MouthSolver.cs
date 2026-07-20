@@ -7,11 +7,11 @@ public class MouthSolver {
    
     Quaternion topMaxRot= new Quaternion(-0.18183507f,0,0,0.982263923f);
     Quaternion bottomMaxRot = new Quaternion(0.344820946f,0,0,0.935135305f);
-  
+    
     Quaternion topStart;
     Quaternion bottomStart;
     float positionSmoothSpeed = 1f;
-    float rotationSmoothSpeed = .125f;
+    float rotationSmoothSpeed = .5f;
 
     bool isMouthOpen = false;
    
@@ -31,11 +31,11 @@ public class MouthSolver {
         isMouthOpen = isMouthOpenIn;
 
         if (isMouthOpen){
-            solvedMouthData[0].Rotation = Quaternion.Slerp(currentMouthState[0].Rotation, topMaxRot, rotationSmoothSpeed * Time.deltaTime);
-            solvedMouthData[1].Rotation = Quaternion.Slerp(currentMouthState[1].Rotation, bottomMaxRot, rotationSmoothSpeed * Time.deltaTime);
+            solvedMouthData[0].Rotation = Quaternion.Slerp(currentMouthState[0].Rotation, topMaxRot, rotationSmoothSpeed * Time.fixedDeltaTime);
+            solvedMouthData[1].Rotation = Quaternion.Slerp(currentMouthState[1].Rotation, bottomMaxRot, rotationSmoothSpeed * Time.fixedDeltaTime);
         } else {
-            solvedMouthData[0].Rotation = Quaternion.Slerp(currentMouthState[0].Rotation, topStart, rotationSmoothSpeed * Time.deltaTime);
-            solvedMouthData[1].Rotation = Quaternion.Slerp(currentMouthState[1].Rotation, bottomStart, rotationSmoothSpeed * Time.deltaTime);
+            solvedMouthData[0].Rotation = Quaternion.Slerp(currentMouthState[0].Rotation, topStart, rotationSmoothSpeed * Time.fixedDeltaTime);
+            solvedMouthData[1].Rotation = Quaternion.Slerp(currentMouthState[1].Rotation, bottomStart, rotationSmoothSpeed * Time.fixedDeltaTime);
         }
 
         return solvedMouthData;
