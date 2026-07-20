@@ -15,7 +15,7 @@ MonoBehaviour:
   DataArea: 1
   SeaLevel: 0
   MaxDepth: -10000
-  numToRun: 1
+  numToRun: 5
   noiseAmplitude: 5
   noiseFrequency: 5
   chunkSize: 1000

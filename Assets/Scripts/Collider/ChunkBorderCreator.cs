@@ -38,21 +38,28 @@ public class ChunkBorderCreator : ScriptComponent {
         chunkPositions = new List<Vector2>();
         finalWalls = new List<wallInfo>();
 
+        createBorder();
+
         return base.Initialize();
 
 
 
     }
 
+
+    void createBorder(){
+        grabCurrMeshs();
+        createAllMeshWalls();
+        createFinalWallList();
+        createAGXWallBorders();
+    }
+
     void Update(){
         if (createWalls)
         {
             createWalls = false;
+            createBorder();
 
-            grabCurrMeshs();
-            createAllMeshWalls();
-            createFinalWallList();
-            createAGXWallBorders();
 
         }
     }
@@ -70,15 +77,10 @@ public class ChunkBorderCreator : ScriptComponent {
         foreach(MeshFilter mf in currMeshs){
             Bounds chunkBounds = mf.mesh.bounds;
 
-            Vector2 min = chunkBounds.min;
-            Vector2 max = chunkBounds.max;
-
-            Vector2 x = new Vector2(min.x, max.x);
-            Vector2 z = new Vector2(min.y, max.y);
-
-            chunkBorderInfo info = createChunkWalls(x,z);
-
             (int west, int north) = parseChunkName(mf);
+
+            chunkBorderInfo info = createChunkWalls(west, north);
+
 
             Vector2 chunkPos = new Vector2(west, north);
 
@@ -108,7 +110,12 @@ public class ChunkBorderCreator : ScriptComponent {
     }
 
 
-    chunkBorderInfo createChunkWalls(Vector2 x, Vector2 z){
+    chunkBorderInfo createChunkWalls(int west, int north){
+
+        Vector2 z = new Vector2(west, west + chunkSize);
+        Vector2 x = new Vector2(north, north + chunkSize);
+
+
         wallInfo top = new wallInfo();
 
         top.leftPoint = new Vector2(x.x,z.y);

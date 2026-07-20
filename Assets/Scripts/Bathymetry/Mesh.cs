@@ -39,16 +39,23 @@ namespace MeshGeneration {
 
         string byteFileDir;
 
-        protected override bool Initialize() {
-            // agxWire.WireController wireController = new agxWire.WireController();
-            // setEnableDynamicWireContactsGlobally(true);
 
+        // OnAwake += in 
+
+        override protected void OnAwake()
+        {
+            
             records = new List<DepthDataRecord>();
             fileUtil = new FileUtilities();
             string areaPath = processingSettings.AreaToFilePath();
             byteFileDir = Path.Combine(Application.dataPath, "Data", "Processed", areaPath);
             // reloadMesh = true;
             startMeshPipeline();
+        }
+        protected override bool Initialize() {
+            // agxWire.WireController wireController = new agxWire.WireController();
+            // setEnableDynamicWireContactsGlobally(true);
+
             
             return base.Initialize();
         }
