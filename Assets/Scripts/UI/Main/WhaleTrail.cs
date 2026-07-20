@@ -18,7 +18,7 @@ public class WhaleTrail : MonoBehaviour {
     
     void Awake() {
         spline = GameObject.Find("WhaleTrail").GetComponent<SplineContainer>()[0];
-        whale = GameObject.Find("Right Whale SF Collider Model");
+        whale = GameObject.Find("Right Whale SF Mouth Articulation 1");
     }
 
     void Start() {

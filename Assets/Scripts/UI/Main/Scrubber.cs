@@ -46,30 +46,48 @@ public class Scrubber : MonoBehaviour {
     void Awake() {
         // get refs
         animator = GetComponent<Animator>();
-        pinBtn = GameObject.Find("PinBtn").GetComponent<Button>();
-        pinBtnColor = pinBtn.GetComponent<Button>().colors.normalColor;
-        ColorBlock newColors = pinBtn.GetComponent<Button>().colors;
-        newColors.normalColor = pinned ? Color.white : pinBtnColor;
-        pinBtn.GetComponent<Button>().colors = newColors;
+        GameObject check = GameObject.Find("PinBtn");
+        if (check) {
+            pinBtn = check.GetComponent<Button>();
+            pinBtnColor = pinBtn.GetComponent<Button>().colors.normalColor;
+            ColorBlock newColors = pinBtn.GetComponent<Button>().colors;
+            newColors.normalColor = pinned ? Color.white : pinBtnColor;
+            pinBtn.GetComponent<Button>().colors = newColors;
+        }
         timeline = GameObject.Find("Timeline").GetComponent<Slider>();
         // labels
         timeText = GameObject.Find("Time").GetComponent<TextMeshProUGUI>();
-        speedText = GameObject.Find("Speed").GetComponent<TextMeshProUGUI>();
+        check = GameObject.Find("Speed");
+        if (check) {
+            speedText = check.GetComponent<TextMeshProUGUI>();
+        }
         // cam btns
         cam1Btn = GameObject.Find("Cam1Btn").GetComponent<Button>();
         cam2Btn = GameObject.Find("Cam2Btn").GetComponent<Button>();
         cam3Btn = GameObject.Find("Cam3Btn").GetComponent<Button>();
         // playback btns
         restartBtn = GameObject.Find("RestartBtn").GetComponent<Button>();
-        bwdBtn = GameObject.Find("BwdBtn").GetComponent<Button>();
+        check = GameObject.Find("BwdBtn");
+        if (check) {
+            bwdBtn = check.GetComponent<Button>();
+        }
         pausePlayBtn = GameObject.Find("PausePlayBtn").GetComponent<Button>(); 
         pausePlayBtnImage = pausePlayBtn.GetComponent<Image>();
         pauseSprite = Resources.Load<Sprite>("UI/Scrubber/pause");
         playSprite = Resources.Load<Sprite>("UI/Scrubber/play");
-        fwdBtn = GameObject.Find("FwdBtn").GetComponent<Button>();
+        check = GameObject.Find("FwdBtn");
+        if (check) {
+            fwdBtn = check.GetComponent<Button>();
+        }
         // speed btns 
-        slowerBtn = GameObject.Find("SlowerBtn").GetComponent<Button>();
-        fasterBtn = GameObject.Find("FasterBtn").GetComponent<Button>();
+        check = GameObject.Find("SlowerBtn");
+        if (check) {
+            slowerBtn = check.GetComponent<Button>();
+        }
+        check = GameObject.Find("FasterBtn");
+        if (check) {
+            fasterBtn = check.GetComponent<Button>();
+        }
     }
 
     void Start() {

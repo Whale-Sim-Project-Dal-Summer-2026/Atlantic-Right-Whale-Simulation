@@ -49,7 +49,10 @@ public class SimulationUIManager : MonoBehaviour {
 
     void Awake() {
         // get refs
-        fpsText = GameObject.Find("FPS").GetComponent<TextMeshProUGUI>();
+        GameObject check = GameObject.Find("FPS");
+        if (check) {
+            fpsText = check.GetComponent<TextMeshProUGUI>();
+        }
         forcesListUI = GameObject.Find("ForcesListUI");
         headingBallUI = GameObject.Find("HeadingBallUI");
         depthUI = GameObject.Find("DepthUI");
@@ -59,26 +62,42 @@ public class SimulationUIManager : MonoBehaviour {
         toggleUIBtn = GameObject.Find("ToggleUIBtn").GetComponent<Button>();
         toggleUIAltBtn = GameObject.Find("ToggleBtns").transform.Find("ToggleUIAltBtn").GetComponent<Button>();
         GameObject toggleDragBtnObj = GameObject.Find("ToggleDragBtn");
-        toggleDragBtn = toggleDragBtnObj.GetComponent<Button>();
-        toggleDragSpriteOff = toggleDragBtnObj.GetComponent<Image>().sprite;
-        toggleDragSpriteOn = Resources.Load<Sprite>("UI/Toggles/yesdrag");
-        toggleDragBtnImage = toggleDragBtnObj.GetComponent<Image>();
+        if (toggleDragBtnObj) {
+            toggleDragBtn = toggleDragBtnObj.GetComponent<Button>();
+            toggleDragSpriteOff = toggleDragBtnObj.GetComponent<Image>().sprite;
+            toggleDragSpriteOn = Resources.Load<Sprite>("UI/Toggles/yesdrag");
+            toggleDragBtnImage = toggleDragBtnObj.GetComponent<Image>();
+        }
         GameObject toggleStressBtnObj = GameObject.Find("ToggleStressBtn");
-        toggleStressBtn = toggleStressBtnObj.GetComponent<Button>();
-        toggleStressSpriteOff = toggleStressBtnObj.GetComponent<Image>().sprite;
-        toggleStressSpriteOn = Resources.Load<Sprite>("UI/Toggles/yesstress");
-        toggleStressBtnImage = toggleStressBtnObj.GetComponent<Image>();
+        if (toggleStressBtnObj) {
+            toggleStressBtn = toggleStressBtnObj.GetComponent<Button>();
+            toggleStressSpriteOff = toggleStressBtnObj.GetComponent<Image>().sprite;
+            toggleStressSpriteOn = Resources.Load<Sprite>("UI/Toggles/yesstress");
+            toggleStressBtnImage = toggleStressBtnObj.GetComponent<Image>();
+        }
         GameObject togglePathBtnObj = GameObject.Find("TogglePathBtn");
-        togglePathBtn = togglePathBtnObj.GetComponent<Button>();
-        togglePathSpriteOff = togglePathBtnObj.GetComponent<Image>().sprite;
-        togglePathSpriteOn = Resources.Load<Sprite>("UI/Toggles/yespath");
-        togglePathBtnImage = togglePathBtnObj.GetComponent<Image>();
-        settingsBtn = GameObject.Find("SettingsBtn").GetComponent<Button>(); 
+        if (togglePathBtnObj) {
+            togglePathBtn = togglePathBtnObj.GetComponent<Button>();
+            togglePathSpriteOff = togglePathBtnObj.GetComponent<Image>().sprite;
+            togglePathSpriteOn = Resources.Load<Sprite>("UI/Toggles/yespath");
+            togglePathBtnImage = togglePathBtnObj.GetComponent<Image>();
+        }
+
+        check = GameObject.Find("SettingsBtn");
+        if (check) {
+            settingsBtn = check.GetComponent<Button>();
+        }
         // graphs
         depthGraph = GameObject.Find("DepthGraph").GetComponent<GraphRenderer>();
         depthRollingGraph = GameObject.Find("DepthRollingGraph").GetComponent<GraphRenderer>();
-        flukingGraph = GameObject.Find("FlukingGraph").GetComponent<GraphRenderer>();
-        flukingRollingGraph = GameObject.Find("FlukingRollingGraph").GetComponent<GraphRenderer>();
+        check = GameObject.Find("FlukingGraph");
+        if (check) {
+            flukingGraph = check.GetComponent<GraphRenderer>();
+        }
+        check = GameObject.Find("FlukingRollingGraph");
+        if (check) {
+            flukingRollingGraph = check.GetComponent<GraphRenderer>();
+        }
         // extern
         pubUIManager = GetComponent<PublicUIManager>();
         scrubber = GameObject.Find("ScrubberUI").GetComponent<Scrubber>();

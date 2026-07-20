@@ -40,14 +40,23 @@ public class PublicUIManager : MonoBehaviour {
         helpUI = GameObject.Find("HelpUI").GetComponent<HelpPopup>();
         scenariosBtn = GameObject.Find("ScenariosBtn").GetComponent<Button>();
         GameObject controlHintsUI = GameObject.Find("ControlHintsUI");
-        controlHintsFreeCam = controlHintsUI.transform.Find("ControlHintsFreeCam").gameObject;
-        controlHintsFreeRoam = controlHintsUI.transform.Find("ControlHintsFreeRoam").gameObject;
-        controlHintsFollowCam = GameObject.Find("ControlHintsFollowCam");
+        Transform check = controlHintsUI.transform.Find("ControlHintsFreeCam");
+        if (check) {
+            controlHintsFreeCam = check.gameObject;
+        }
+        check = controlHintsUI.transform.Find("ControlHintsFreeRoam");
+        if (check) {
+            controlHintsFreeRoam = check.gameObject;
+        }
+        check = controlHintsUI.transform.Find("ControlHintsFollowCam");
+        if (check) {
+            controlHintsFollowCam = check.gameObject;
+        }
         viewerUI = GameObject.Find("ViewerUI").GetComponent<ViewerPopup>();
         GameObject funFactsObj = GameObject.Find("CyclingFunFactsTxt");
         funFactsTxt = funFactsObj.GetComponent<TextMeshProUGUI>();
         funFactsBtn = funFactsObj.GetComponent<Button>();
-        whaleCollider = GameObject.Find("Right Whale SF Collider Model").GetComponent<Collider>();
+        whaleCollider = GameObject.Find("Right Whale SF Mouth Articulation 1").GetComponent<Collider>();
         // extern
         simUIManager = GetComponent<SimulationUIManager>();
         idleUI = GameObject.Find("IdleUI").GetComponent<IdleMode>();
@@ -122,6 +131,6 @@ public class PublicUIManager : MonoBehaviour {
         helpBtn.interactable = on;
         scenariosBtn.interactable = on;
         funFactsBtn.interactable = on;
-        
+        // TODO: disable whale collider
     }
 }
