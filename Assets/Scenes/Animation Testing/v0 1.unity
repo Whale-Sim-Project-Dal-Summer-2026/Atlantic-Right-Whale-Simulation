@@ -1915,6 +1915,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8250904432996703928, guid: c3dd9e0cc9aadac49b3ddec75245af86, type: 3}
   m_PrefabInstance: {fileID: 3571448}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &409159697 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -6317719128473299115, guid: c3dd9e0cc9aadac49b3ddec75245af86, type: 3}
+  m_PrefabInstance: {fileID: 3571448}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -3639,9 +3644,11 @@ MonoBehaviour:
   dataSourceFile: {fileID: 4900000, guid: ad1392c26444b5e4ba48ac44905f5465, type: 3}
   isPaused: 0
   jumpToTimestep: -1
-  dataSourceType: 0
+  dataSourceType: 1
+  whaleModelType: 0
   animator: {fileID: 1246253218}
   timesetp: 0
+  totalTimesteps: 0
   animationSettings: {fileID: 11400000, guid: a079734cd265a3648b27716324684644, type: 2}
 --- !u!114 &1246253215
 MonoBehaviour:
@@ -3725,7 +3732,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53d45e3a694cd6c47851c0bc72dcd19d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WhaleBones
-  mainBodyBone: {fileID: 1246253212}
+  rootBone: {fileID: 1257740307}
+  headBone: {fileID: 1390048984}
+  bodyStartBone: {fileID: 409159697}
   tailStartBone: {fileID: 1319348188}
   tailStopBone: {fileID: 1364710691}
   mouthTopBone: {fileID: 1567981854}
@@ -4195,6 +4204,11 @@ MeshCollider:
 --- !u!1 &1364710691 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -1528558187340702623, guid: c3dd9e0cc9aadac49b3ddec75245af86, type: 3}
+  m_PrefabInstance: {fileID: 3571448}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1390048984 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -3431673420588243558, guid: c3dd9e0cc9aadac49b3ddec75245af86, type: 3}
   m_PrefabInstance: {fileID: 3571448}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1412593734 stripped
