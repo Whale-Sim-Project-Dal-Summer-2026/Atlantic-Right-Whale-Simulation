@@ -5,6 +5,7 @@
  * @author Mars Semenova
 */
 
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,6 +18,10 @@ public class LineGraph : Graph {
     private TextMeshProUGUI maxText; 
     private TextMeshProUGUI minText; 
     
+    // vars
+    private float max;
+    private float min;
+    
     void Awake() {
         // get refs
         graphUI = Resources.Load<Sprite>("UI/Graphs/macrographbg");    
@@ -28,7 +33,8 @@ public class LineGraph : Graph {
         CreateGraphUI();
         
         // create max line + txt
-        float max = -100f;
+        // TODO: position line above or below sea lvl based on max
+        max = dataset.Max();
         GameObject maxUIObj = new GameObject("MaxUI");
         maxUIObj.transform.SetParent(gameObject.transform);
         maxUIObj.transform.localPosition = Vector3.zero; 
@@ -60,7 +66,7 @@ public class LineGraph : Graph {
         maxLineImage.useSpriteMesh = true;
         
         // create min line + txt (TODO: make a func so less repetition)
-        float min = -200f;
+        min = dataset.Min();
         GameObject minUIObj = new GameObject("MinUI");
         minUIObj.transform.SetParent(gameObject.transform);
         minUIObj.transform.localPosition = Vector3.zero; 
@@ -90,5 +96,11 @@ public class LineGraph : Graph {
         Image minLineImage = minLineObj.AddComponent<Image>();
         minLineImage.sprite = dashedLine;
         minLineImage.useSpriteMesh = true;
+        
+        GraphData();
+    }
+
+    private void GraphData() {
+        // TODO
     }
 }

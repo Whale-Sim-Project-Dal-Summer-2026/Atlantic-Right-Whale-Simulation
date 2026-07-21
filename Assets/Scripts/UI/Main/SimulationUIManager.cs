@@ -57,7 +57,10 @@ public class SimulationUIManager : MonoBehaviour {
         headingBallUI = GameObject.Find("HeadingBallUI");
         depthUI = GameObject.Find("DepthUI");
         flukingUI = GameObject.Find("FlukingUI");
-        whaleTrailMesh = GameObject.Find("WhaleTrail").GetComponent<MeshRenderer>();
+        check = GameObject.Find("WhaleTrail");
+        if (check) {
+            whaleTrailMesh = check.GetComponent<MeshRenderer>();
+        }
         // toggles
         toggleUIBtn = GameObject.Find("ToggleUIBtn").GetComponent<Button>();
         toggleUIAltBtn = GameObject.Find("ToggleBtns").transform.Find("ToggleUIAltBtn").GetComponent<Button>();
@@ -88,8 +91,14 @@ public class SimulationUIManager : MonoBehaviour {
             settingsBtn = check.GetComponent<Button>();
         }
         // graphs
-        depthGraph = GameObject.Find("DepthGraph").GetComponent<GraphRenderer>();
-        depthRollingGraph = GameObject.Find("DepthRollingGraph").GetComponent<GraphRenderer>();
+        check = GameObject.Find("DepthGraph");
+        if (check) {
+            depthGraph =  check.GetComponent<GraphRenderer>();
+        }
+        check = GameObject.Find("DepthRollingGraph");
+        if (check) {
+            depthRollingGraph = check.GetComponent<GraphRenderer>();
+        }
         check = GameObject.Find("FlukingGraph");
         if (check) {
             flukingGraph = check.GetComponent<GraphRenderer>();
@@ -100,7 +109,10 @@ public class SimulationUIManager : MonoBehaviour {
         }
         // extern
         pubUIManager = GetComponent<PublicUIManager>();
-        scrubber = GameObject.Find("ScrubberUI").GetComponent<Scrubber>();
+        check = GameObject.Find("ScrubberUI");
+        if (check) {
+            scrubber =  check.GetComponent<Scrubber>();
+        }
     }
     
     void Start() {
@@ -128,17 +140,26 @@ public class SimulationUIManager : MonoBehaviour {
      */
     private void SetGraphData() {
         TextAsset data = Resources.Load<TextAsset>("WhaleMovement/RW230714P48processed"); // TODO
+        int[] cols = { 0, 1, 8, 9, 10, 12, 14, 23 };
+        string[] lines = data.text.Split(new char[] { '\n', '\r' }, System.StringSplitOptions.RemoveEmptyEntries);
+        float[] depth = new float[lines.Length-1];
+        for (int x = 1; x < lines.Length; x++) {
+            string[] values = lines[x].Split(',');
+            if (values.Length >= 1) {
+                depth[x-1] = float.Parse(values[cols[1]]);
+            }
+        }
         if (depthGraph) {
-            depthGraph.SetData(data);
+            depthGraph.SetData(depth);
         }
         if (depthRollingGraph) {
-            depthRollingGraph.SetData(data);
+            depthRollingGraph.SetData(depth);
         }
         if (flukingGraph) {
-            flukingGraph.SetData(data);
+            flukingGraph.SetData(depth);
         }
         if (flukingRollingGraph) {
-            flukingRollingGraph.SetData(data);
+            flukingRollingGraph.SetData(depth);
         }
     }
 
@@ -231,7 +252,9 @@ public class SimulationUIManager : MonoBehaviour {
     }
 
     public void SetPathVisibility(bool on) {
-        whaleTrailMesh.enabled = on;
+        if (whaleTrailMesh) {
+            whaleTrailMesh.enabled = on;
+        }
         if (togglePathBtn) {
             togglePathBtnImage.sprite = togglePathBtnImage.sprite == togglePathSpriteOff ? togglePathSpriteOn : togglePathSpriteOff;
         }

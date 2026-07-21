@@ -7983,7 +7983,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2568376304239035832, guid: 3bf820b5dafa87142b89077383b0492c, type: 3}
       propertyPath: m_Name
-      value: Right Whale SF Collider Model
+      value: Right Whale SF Mouth Articulation 1
       objectReference: {fileID: 0}
     - target: {fileID: 2568376304239035832, guid: 3bf820b5dafa87142b89077383b0492c, type: 3}
       propertyPath: m_Layer
@@ -9242,8 +9242,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ViewerItem
   collider: {fileID: 1983064507}
-  image: {fileID: 8400000, guid: 6bd7ad2bc46095045bbf1bb57804b999, type: 2}
-  text: whale
+  image: {fileID: 2800000, guid: aa0676e890382b34dbf6dc19294c2340, type: 3}
+  text: North Atlantic Right Whale
 --- !u!114 &1993439809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9766,9 +9766,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 746168256}
     m_Modifications:
+    - target: {fileID: 1514544625985974617, guid: 5ba7dfe5a262f8d49b3e70eff31641b4, type: 3}
+      propertyPath: resolution
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6161014699423550441, guid: 5ba7dfe5a262f8d49b3e70eff31641b4, type: 3}
       propertyPath: m_Name
       value: FlukingUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 6161014699423550441, guid: 5ba7dfe5a262f8d49b3e70eff31641b4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8768415430432182051, guid: 5ba7dfe5a262f8d49b3e70eff31641b4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9998,6 +10006,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ForcesListUI
       objectReference: {fileID: 0}
+    - target: {fileID: 1025311581802160821, guid: c787e1945c2113240a8b25e3fe8d8451, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8578049092843274005, guid: c787e1945c2113240a8b25e3fe8d8451, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -10187,6 +10199,10 @@ PrefabInstance:
     - target: {fileID: 803365010833339495, guid: b5b30d05d992c6446a452a5cefdb0c8e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469473270371090491, guid: b5b30d05d992c6446a452a5cefdb0c8e, type: 3}
+      propertyPath: resolution
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7161055433478297676, guid: b5b30d05d992c6446a452a5cefdb0c8e, type: 3}
       propertyPath: m_Name

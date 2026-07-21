@@ -19,7 +19,10 @@ public class HelpPopup : MonoBehaviour {
     void Awake() {
         // get refs
         simUIManager = GameObject.Find("UI").GetComponent<SimulationUIManager>();
-        scrubber = GameObject.Find("ScrubberUI").GetComponent<Scrubber>();
+        GameObject check = GameObject.Find("ScrubberUI");
+        if (check) {
+            scrubber =  check.GetComponent<Scrubber>();
+        }
     }
 
     void Start() {
@@ -31,14 +34,18 @@ public class HelpPopup : MonoBehaviour {
     }
     
     public void SetHelpPopupVisibility(bool isOpen) {
-        if (isOpen) {
+        if (scrubber && isOpen) {
             pauseOn = scrubber.IsPaused();
         }
         open = isOpen;
         helpPopup.SetActive(isOpen);
         simUIManager.SetUIInteractivity(!isOpen);
-        if (scrubber && !pauseOn) {
-            scrubber.TogglePause();
+        if (scrubber && isOpen && !pauseOn) {
+            scrubber.SetPause(true);
+        }
+        if (scrubber && !isOpen && !pauseOn) {
+            scrubber.SetPause(false);
+            pauseOn = true; // so that if called without opening again it wont set it to pause
         }
     }
 

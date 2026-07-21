@@ -22,6 +22,9 @@ public class PublicUIManager : MonoBehaviour {
     private ViewerPopup viewerUI;
     private Button funFactsBtn;
     private TextMeshProUGUI funFactsTxt;
+    private Button unstickBtn;
+    private Button closeViewerBtn;
+    private Button closeViewerBtnController;
     private Collider whaleCollider;
     // extern
     private SimulationUIManager simUIManager;
@@ -41,22 +44,29 @@ public class PublicUIManager : MonoBehaviour {
         helpUI = GameObject.Find("HelpUI").GetComponent<HelpPopup>();
         scenariosBtn = GameObject.Find("ScenariosBtn").GetComponent<Button>();
         GameObject controlHintsUI = GameObject.Find("ControlHintsUI");
-        Transform check = controlHintsUI.transform.Find("ControlHintsFreeCam");
-        if (check) {
-            controlHintsFreeCam = check.gameObject;
+        Transform checkT = controlHintsUI.transform.Find("ControlHintsFreeCam");
+        if (checkT) {
+            controlHintsFreeCam = checkT.gameObject;
         }
-        check = controlHintsUI.transform.Find("ControlHintsFreeRoam");
-        if (check) {
-            controlHintsFreeRoam = check.gameObject;
+        checkT = controlHintsUI.transform.Find("ControlHintsFreeRoam");
+        if (checkT) {
+            controlHintsFreeRoam = checkT.gameObject;
         }
-        check = controlHintsUI.transform.Find("ControlHintsFollowCam");
-        if (check) {
-            controlHintsFollowCam = check.gameObject;
+        checkT = controlHintsUI.transform.Find("ControlHintsFollowCam");
+        if (checkT) {
+            controlHintsFollowCam = checkT.gameObject;
         }
         viewerUI = GameObject.Find("ViewerUI").GetComponent<ViewerPopup>();
         GameObject funFactsObj = GameObject.Find("CyclingFunFactsTxt");
         funFactsTxt = funFactsObj.GetComponent<TextMeshProUGUI>();
         funFactsBtn = funFactsObj.GetComponent<Button>();
+        GameObject check = GameObject.Find("UnstickBtn");
+        if (check) {
+            unstickBtn = check.GetComponent<Button>();
+        }
+        GameObject viewerBG = GameObject.Find("ViewerUI").transform.Find("ViewerBG").gameObject;
+        closeViewerBtn = viewerBG.transform.Find("CloseViewerBtn").GetComponent<Button>();
+        closeViewerBtnController = viewerBG.transform.Find("CloseViewerBtnController").GetComponent<Button>();
         whaleCollider = GameObject.Find("Right Whale SF Mouth Articulation 1").GetComponent<Collider>();
         // extern
         simUIManager = GetComponent<SimulationUIManager>();
@@ -131,12 +141,18 @@ public class PublicUIManager : MonoBehaviour {
         if (viewerUI) {
             viewerUI.SetViewerPopupVisibility(false);
         }
+        whaleCollider.enabled = on;
     }
     
     public void SetUIInteractivity(bool on) {
         helpBtn.interactable = on;
         scenariosBtn.interactable = on;
         funFactsBtn.interactable = on;
-        // TODO: disable whale collider
+        if (unstickBtn) {
+            unstickBtn.interactable = on;
+        }
+        closeViewerBtn.interactable = on;
+        closeViewerBtnController.interactable = on;
+        whaleCollider.enabled = on;
     }
 }

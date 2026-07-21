@@ -17,8 +17,11 @@ public class WhaleTrail : MonoBehaviour {
     private int interval = 10;
     
     void Awake() {
-        spline = GameObject.Find("WhaleTrail").GetComponent<SplineContainer>()[0];
         whale = GameObject.Find("Right Whale SF Mouth Articulation 1");
+        GameObject whaleTrail = GameObject.Find("WhaleTrail");
+        whaleTrail.transform.position = whale.transform.position;
+        spline = whaleTrail.GetComponent<SplineContainer>()[0];
+        
     }
 
     void Start() {

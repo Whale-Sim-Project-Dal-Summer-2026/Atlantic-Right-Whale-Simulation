@@ -15,13 +15,15 @@ public abstract class Graph : MonoBehaviour {
     protected Sprite graphUI;
     protected TMP_FontAsset font;
     
-    protected TextAsset dataset;
+    // vars
+    protected float[] dataset;
+    protected int resolution;
     
     /**
      * Set data to be used in the graph.
      * @param data - Data passed as a TextAsset.
      */
-    public void SetData(TextAsset data) {
+    public void SetData(float[] data) {
         dataset = data;
     }
     
@@ -44,5 +46,9 @@ public abstract class Graph : MonoBehaviour {
         Image graphUIImage = gameObject.AddComponent<Image>();
         graphUIImage.sprite = graphUI;
         graphUIImage.useSpriteMesh = true;
+    }
+    
+    public void SetResolution(int res) {
+        resolution = res;
     }
 }

@@ -45,6 +45,7 @@ public class Scrubber : MonoBehaviour {
     
     void Awake() {
         // get refs
+        
         animator = GetComponent<Animator>();
         GameObject check = GameObject.Find("PinBtn");
         if (check) {
@@ -73,8 +74,8 @@ public class Scrubber : MonoBehaviour {
         }
         pausePlayBtn = GameObject.Find("PausePlayBtn").GetComponent<Button>(); 
         pausePlayBtnImage = pausePlayBtn.GetComponent<Image>();
-        pauseSprite = Resources.Load<Sprite>("UI/Scrubber/pause");
-        playSprite = Resources.Load<Sprite>("UI/Scrubber/play");
+        pauseSprite = Resources.Load<Sprite>("UI/Scrubber/play");
+        playSprite = Resources.Load<Sprite>("UI/Scrubber/pause");
         check = GameObject.Find("FwdBtn");
         if (check) {
             fwdBtn = check.GetComponent<Button>();
@@ -101,7 +102,7 @@ public class Scrubber : MonoBehaviour {
             });
         }
         if (pausePlayBtn) {
-            pausePlayBtn.onClick.AddListener(TogglePause);
+            pausePlayBtn.onClick.AddListener(() => SetPause(!paused));
         }
         if (slowerBtn) {
             slowerBtn.onClick.AddListener(() => SetSpeed(speedsInd - 1));
@@ -124,9 +125,13 @@ public class Scrubber : MonoBehaviour {
             }
         }
         
+        // set scrubber percentage
+        float percent = 5; // TODO
+        timeline.value = percent;
+        
         // shortcuts (TODO)
         if (Keyboard.current.spaceKey.wasPressedThisFrame || Keyboard.current.mediaPlayPause.wasPressedThisFrame) {
-            TogglePause();
+            SetPause(!paused);
         }
         if (Keyboard.current.rightArrowKey.wasPressedThisFrame) {
             // TODO: time+=1
@@ -167,8 +172,8 @@ public class Scrubber : MonoBehaviour {
     /**
      * Toggle pause.
      */
-    public void TogglePause() {
-        paused = !paused;
+    public void SetPause(bool on) {
+        paused = on;
         if (pausePlayBtnImage) {
             pausePlayBtnImage.sprite = paused ? pauseSprite : playSprite;
         }

@@ -85,7 +85,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c222c2737b9c8f4f9e5dd4babeb72f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GraphRenderer
-  dataset: {fileID: 4900000, guid: 3918953992e35c145b1fd914e5006382, type: 3}
+  dataset:
+  - 4900000
+  - Infinity
+  - 3
+  resolution: 0
   graphType: 1
   font: {fileID: 11400000, guid: aaf33f85dd552bc42899fd73b157dba0, type: 2}
 --- !u!1 &7161055433478297676
@@ -206,6 +210,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c222c2737b9c8f4f9e5dd4babeb72f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GraphRenderer
-  dataset: {fileID: 4900000, guid: 3918953992e35c145b1fd914e5006382, type: 3}
+  dataset:
+  - 4900000
+  - Infinity
+  - 3
+  resolution: 0
   graphType: 2
   font: {fileID: 11400000, guid: aaf33f85dd552bc42899fd73b157dba0, type: 2}

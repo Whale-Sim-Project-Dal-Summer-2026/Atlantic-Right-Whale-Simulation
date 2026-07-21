@@ -8,6 +8,7 @@ public class IdleMode : MonoBehaviour {
     // vars
     public float idleTime;
     private float lastInput;
+    private bool forceIdle = false;
     
     void Awake() {
         lastInput = Time.time;
@@ -17,10 +18,14 @@ public class IdleMode : MonoBehaviour {
         if (Keyboard.current.anyKey.wasPressedThisFrame) {
             lastInput = Time.time;
         }
-        IdleUI.SetActive(IsIdle());
+
+        if (Keyboard.current.f10Key.wasPressedThisFrame) {
+            forceIdle = !forceIdle;
+        }
+        IdleUI.SetActive(IsIdle() || forceIdle);
     }
         
     public bool IsIdle(){
-        return Time.time - lastInput > idleTime;
+        return (Time.time - lastInput > idleTime) || forceIdle;
     }
 }

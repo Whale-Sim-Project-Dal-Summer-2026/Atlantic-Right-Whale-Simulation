@@ -85,7 +85,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c222c2737b9c8f4f9e5dd4babeb72f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GraphRenderer
-  dataset: {fileID: 0}
+  dataset:
+  - 0
+  resolution: 0
   graphType: 1
   font: {fileID: 11400000, guid: aaf33f85dd552bc42899fd73b157dba0, type: 2}
 --- !u!1 &3076049967685538585
@@ -173,7 +175,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c222c2737b9c8f4f9e5dd4babeb72f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GraphRenderer
-  dataset: {fileID: 0}
+  dataset:
+  - 0
+  resolution: 0
   graphType: 2
   font: {fileID: 11400000, guid: aaf33f85dd552bc42899fd73b157dba0, type: 2}
 --- !u!1 &6161014699423550441
