@@ -150,7 +150,7 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
                     ""name"": ""Previous"",
                     ""type"": ""Button"",
                     ""id"": ""2776c80d-3c14-4091-8c56-d04ced07a2b0"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -276,6 +276,42 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
                     ""name"": ""OpenHelp"",
                     ""type"": ""Button"",
                     ""id"": ""65de205c-309b-4f91-b99d-d94185cf65a5"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""HideUI"",
+                    ""type"": ""Button"",
+                    ""id"": ""71b5b0ca-be3e-45a3-95dd-b281814755ee"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Cam1"",
+                    ""type"": ""Button"",
+                    ""id"": ""34461a92-e89e-4c7e-817e-2889e6dffbc3"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Cam2"",
+                    ""type"": ""Button"",
+                    ""id"": ""fc153adb-edfd-4d5c-8ebd-cf3b69eb83bc"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Cam3"",
+                    ""type"": ""Button"",
+                    ""id"": ""c8b9e668-78d7-4a2a-a3ea-455bd78a286a"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -713,12 +749,34 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
+                    ""name"": ""up"",
+                    ""id"": ""5ede9c54-a324-4d0e-a308-0e01fdbcb882"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Up/Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": ""down"",
                     ""id"": ""b279e637-275f-4136-acee-2fffc5c40838"",
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
+                    ""action"": ""Up/Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""eb66a632-3f44-45c2-8701-f7c991786283"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
                     ""action"": ""Up/Down"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -863,6 +921,50 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""OpenHelp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""afefafd9-d5f4-4e10-a275-b6d1608e0dc7"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HideUI"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2f62d8fb-7047-4fb3-8bd1-47ce4185ea0c"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cam1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5ad5726b-2229-4953-a70b-1d95ca2a16ec"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cam2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fa34c6ec-b031-4892-9b06-648233817794"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cam3"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1471,6 +1573,10 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
         m_Player_SimulationSpeedUp = m_Player.FindAction("SimulationSpeedUp", throwIfNotFound: true);
         m_Player_OpenMenu = m_Player.FindAction("OpenMenu", throwIfNotFound: true);
         m_Player_OpenHelp = m_Player.FindAction("OpenHelp", throwIfNotFound: true);
+        m_Player_HideUI = m_Player.FindAction("HideUI", throwIfNotFound: true);
+        m_Player_Cam1 = m_Player.FindAction("Cam1", throwIfNotFound: true);
+        m_Player_Cam2 = m_Player.FindAction("Cam2", throwIfNotFound: true);
+        m_Player_Cam3 = m_Player.FindAction("Cam3", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1585,6 +1691,10 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_SimulationSpeedUp;
     private readonly InputAction m_Player_OpenMenu;
     private readonly InputAction m_Player_OpenHelp;
+    private readonly InputAction m_Player_HideUI;
+    private readonly InputAction m_Player_Cam1;
+    private readonly InputAction m_Player_Cam2;
+    private readonly InputAction m_Player_Cam3;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1681,6 +1791,22 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @OpenHelp => m_Wrapper.m_Player_OpenHelp;
         /// <summary>
+        /// Provides access to the underlying input action "Player/HideUI".
+        /// </summary>
+        public InputAction @HideUI => m_Wrapper.m_Player_HideUI;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Cam1".
+        /// </summary>
+        public InputAction @Cam1 => m_Wrapper.m_Player_Cam1;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Cam2".
+        /// </summary>
+        public InputAction @Cam2 => m_Wrapper.m_Player_Cam2;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Cam3".
+        /// </summary>
+        public InputAction @Cam3 => m_Wrapper.m_Player_Cam3;
+        /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -1769,6 +1895,18 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
             @OpenHelp.started += instance.OnOpenHelp;
             @OpenHelp.performed += instance.OnOpenHelp;
             @OpenHelp.canceled += instance.OnOpenHelp;
+            @HideUI.started += instance.OnHideUI;
+            @HideUI.performed += instance.OnHideUI;
+            @HideUI.canceled += instance.OnHideUI;
+            @Cam1.started += instance.OnCam1;
+            @Cam1.performed += instance.OnCam1;
+            @Cam1.canceled += instance.OnCam1;
+            @Cam2.started += instance.OnCam2;
+            @Cam2.performed += instance.OnCam2;
+            @Cam2.canceled += instance.OnCam2;
+            @Cam3.started += instance.OnCam3;
+            @Cam3.performed += instance.OnCam3;
+            @Cam3.canceled += instance.OnCam3;
         }
 
         /// <summary>
@@ -1843,6 +1981,18 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
             @OpenHelp.started -= instance.OnOpenHelp;
             @OpenHelp.performed -= instance.OnOpenHelp;
             @OpenHelp.canceled -= instance.OnOpenHelp;
+            @HideUI.started -= instance.OnHideUI;
+            @HideUI.performed -= instance.OnHideUI;
+            @HideUI.canceled -= instance.OnHideUI;
+            @Cam1.started -= instance.OnCam1;
+            @Cam1.performed -= instance.OnCam1;
+            @Cam1.canceled -= instance.OnCam1;
+            @Cam2.started -= instance.OnCam2;
+            @Cam2.performed -= instance.OnCam2;
+            @Cam2.canceled -= instance.OnCam2;
+            @Cam3.started -= instance.OnCam3;
+            @Cam3.performed -= instance.OnCam3;
+            @Cam3.canceled -= instance.OnCam3;
         }
 
         /// <summary>
@@ -2290,6 +2440,34 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnOpenHelp(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "HideUI" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnHideUI(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Cam1" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCam1(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Cam2" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCam2(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Cam3" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCam3(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

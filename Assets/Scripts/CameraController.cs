@@ -93,7 +93,7 @@ public class CameraController : MonoBehaviour{
                 break;
             }
             case CameraState.LOCKED: {
-/*cam on top of whale*/                
+                /*cam on top of whale*/                
                 break;
             }
         }
