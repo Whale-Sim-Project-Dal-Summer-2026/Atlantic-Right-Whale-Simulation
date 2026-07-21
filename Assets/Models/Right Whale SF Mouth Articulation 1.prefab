@@ -958,6 +958,37 @@ Transform:
   - {fileID: 7477750351435479997}
   m_Father: {fileID: 1989562454726632422}
   m_LocalEulerAnglesHint: {x: -43.051, y: -6.983, z: 91.236}
+--- !u!1 &2967564038829010693
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8665378215815314830}
+  m_Layer: 7
+  m_Name: WhaleLockTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8665378215815314830
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2967564038829010693}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3, z: -2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 792291079309079365}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3030828196255619532
 GameObject:
   m_ObjectHideFlags: 0
@@ -2858,6 +2889,7 @@ Transform:
   m_Children:
   - {fileID: 1101175189609113687}
   - {fileID: 7705695662026759595}
+  - {fileID: 8665378215815314830}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5919568700779277781
@@ -2901,10 +2933,17 @@ MonoBehaviour:
   dataSourceType: 2
   whaleModelType: 0
   animator: {fileID: 0}
-  timesetp: 0
+  currentTimestep: 0
   totalTimesteps: 0
   animationSettings: {fileID: 11400000, guid: a079734cd265a3648b27716324684644, type: 2}
+  CSV_ResetTimeStep: 0
+  PauseTime: 0
   processingSettings: {fileID: 0}
+  ResetManager: {fileID: 0}
+  whaleYaw: 0
+  whalePitch: 0
+  whaleRoll: 0
+  whaleSpeed: 0
 --- !u!1 &6590794832029823142
 GameObject:
   m_ObjectHideFlags: 0
