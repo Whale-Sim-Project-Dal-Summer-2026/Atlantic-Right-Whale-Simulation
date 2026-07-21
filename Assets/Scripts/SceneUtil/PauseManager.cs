@@ -21,6 +21,7 @@ public class PauseManager : MonoBehaviour{
 
     double lastPressTime;
 
+    Scrubber Scrubber;
 
     void Start(){
         pauseAction = InputSystem.actions.FindAction("Pause");
@@ -28,6 +29,23 @@ public class PauseManager : MonoBehaviour{
 
         pressBuffer = 500.0f;
         lastPressTime = Time.realtimeSinceStartupAsDouble * 1000;
+
+        Scrubber.OnPause += () => {
+            switch (state){
+            case (PauseState.PLAYING):{
+                Time.timeScale = 0.0f;
+                state = PauseState.PAUSED;       
+                break;
+            }
+
+            case (PauseState.PAUSED):{
+                Time.timeScale = 1.0f;
+                state = PauseState.PLAYING;       
+                break;
+            }
+        }
+
+        };
     }
 
 

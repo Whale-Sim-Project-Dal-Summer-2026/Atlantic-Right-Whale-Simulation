@@ -43,8 +43,17 @@ public class Scrubber : MonoBehaviour {
     private float[] speeds = {0.25f, 0.5f, 0.75f, 1.0f, 1.5f, 2.0f, 3.0f, 4.0f, 5.0f};
     private int speedsInd = 3;
 
+
+    // used for the scrubber percentages and time
     public WhaleDriver whaleDriver;
     public float currentTimeStepDelta; 
+
+    //used for the play/pause
+    public PauseManager pauseManager;
+
+    public delegate void PauseEvent();
+
+    public static event PauseEvent OnPause;
     
     void Awake() {
         // get refs
@@ -183,7 +192,9 @@ public class Scrubber : MonoBehaviour {
         paused = on;
         if (pausePlayBtnImage) {
             pausePlayBtnImage.sprite = paused ? pauseSprite : playSprite;
+
         }
+        OnPause?.Invoke();
     }
     
     /**
