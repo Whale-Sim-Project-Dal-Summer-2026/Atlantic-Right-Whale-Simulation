@@ -16,15 +16,17 @@ public abstract class Graph : MonoBehaviour {
     protected TMP_FontAsset font;
     
     // vars
-    protected float[] dataset;
+    protected float[] dataX;
+    protected float[] dataY;
     protected int resolution;
     
     /**
      * Set data to be used in the graph.
      * @param data - Data passed as a TextAsset.
      */
-    public void SetData(float[] data) {
-        dataset = data;
+    public void SetData(float[] dX, float[] dY) {
+        dataX = dX;
+        dataY = dY;
     }
     
     /**

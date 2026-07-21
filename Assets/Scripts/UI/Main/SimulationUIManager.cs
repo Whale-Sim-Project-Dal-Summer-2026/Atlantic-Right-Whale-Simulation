@@ -49,13 +49,15 @@ public class SimulationUIManager : MonoBehaviour {
 
     void Awake() {
         // get refs
+        depthGraph =  GameObject.Find("DepthGraph").GetComponent<GraphRenderer>(); // TODO: rem
+        return;
         GameObject check = GameObject.Find("FPS");
         if (check) {
             fpsText = check.GetComponent<TextMeshProUGUI>();
         }
         forcesListUI = GameObject.Find("ForcesListUI");
         headingBallUI = GameObject.Find("HeadingBallUI");
-        depthUI = GameObject.Find("DepthUI");
+        //depthUI = GameObject.Find("DepthUI"); (TODO)
         flukingUI = GameObject.Find("FlukingUI");
         check = GameObject.Find("WhaleTrail");
         if (check) {
@@ -142,24 +144,36 @@ public class SimulationUIManager : MonoBehaviour {
         TextAsset data = Resources.Load<TextAsset>("WhaleMovement/RW230714P48processed"); // TODO
         int[] cols = { 0, 1, 8, 9, 10, 12, 14, 23 };
         string[] lines = data.text.Split(new char[] { '\n', '\r' }, System.StringSplitOptions.RemoveEmptyEntries);
-        float[] depth = new float[lines.Length-1];
+        int count = 0;
+        for (int x = 1; x < lines.Length; x++) { // TODO: y 1?
+            string[] values = lines[x].Split(',');
+            if (values.Length >= 1) {
+                count++;
+            }
+        }
+        float[] depth = new float[count];
+        float[] time = new float[count];
+        count = 0;
         for (int x = 1; x < lines.Length; x++) {
             string[] values = lines[x].Split(',');
             if (values.Length >= 1) {
-                depth[x-1] = float.Parse(values[cols[1]]);
+                depth[count] = float.Parse(values[cols[1]]);
+                time[count] = float.Parse(values[cols[0]]);
+                count++;
             }
         }
+
         if (depthGraph) {
-            depthGraph.SetData(depth);
+            depthGraph.SetData(time, depth);
         }
         if (depthRollingGraph) {
-            depthRollingGraph.SetData(depth);
+            depthRollingGraph.SetData(time, depth);
         }
         if (flukingGraph) {
-            flukingGraph.SetData(depth);
+            flukingGraph.SetData(time, depth);
         }
         if (flukingRollingGraph) {
-            flukingRollingGraph.SetData(depth);
+            flukingRollingGraph.SetData(time, depth);
         }
     }
 

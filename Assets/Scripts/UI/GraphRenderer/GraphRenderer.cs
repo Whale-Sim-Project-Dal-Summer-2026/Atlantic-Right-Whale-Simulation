@@ -14,7 +14,8 @@ public class GraphRenderer : MonoBehaviour {
     private Graph script;
     
     // data
-    public float[] dataset;
+    public float[] dataX;
+    public float[] dataY;
     public int resolution;
     
     // graph options enum
@@ -30,7 +31,7 @@ public class GraphRenderer : MonoBehaviour {
 
     void Start() {
         // check validity
-        if (graphType == GraphType.None || dataset == null || resolution < 0) {
+        if (graphType == GraphType.None || dataX == null || dataY == null || resolution < 0) {
             gameObject.SetActive(false);
         } else {
             CreateGraph();
@@ -41,10 +42,11 @@ public class GraphRenderer : MonoBehaviour {
      * Set data to be used in the graph.
      * @param data - Data passed as a TextAsset.
      */
-    public void SetData(float[] data) {
-        dataset = data;
+    public void SetData(float[] dX, float[] dY) {
+        dataX = dX;
+        dataY = dY;
 
-        if (dataset == null) {
+        if (dataX == null || dataY == null) {
             gameObject.SetActive(false);
             return;
         }
@@ -53,7 +55,7 @@ public class GraphRenderer : MonoBehaviour {
             if (genedGraph == null) { // if graph doesn't exist create
                 CreateGraph();
             } else { // otherwise update data
-                script.SetData(data);
+                script.SetData(dataX, dataY);
             }
         }
     }
@@ -64,7 +66,7 @@ public class GraphRenderer : MonoBehaviour {
      */
     public void SetGraphType(GraphType type) {
         graphType = type;
-        if (dataset != null) {
+        if (dataX != null && dataY != null) {
             CreateGraph();
         }
     }
@@ -97,7 +99,7 @@ public class GraphRenderer : MonoBehaviour {
         }
         
         genedGraph.transform.SetParent(gameObject.transform);
-        script.SetData(dataset);
+        script.SetData(dataX, dataY);
         script.SetFont(font);
         script.SetResolution(resolution);
         gameObject.SetActive(true);
