@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Animation.DataSources;
 using AnimationDataStructs;
-using DataSources;
+using Animation.DataSources;
 using AnimationDataStorageManager;
 using MotionDataPacketClass;
 using FlukeWaveAmplitudeLookUpClass;

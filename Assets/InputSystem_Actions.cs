@@ -271,6 +271,15 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenHelp"",
+                    ""type"": ""Button"",
+                    ""id"": ""65de205c-309b-4f91-b99d-d94185cf65a5"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -749,28 +758,6 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""d2dec295-2f64-48a5-88c0-ac6916d7626c"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""Reset"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""02af54f6-8558-40cb-89a5-349d4267386e"",
-                    ""path"": ""<Keyboard>/#(R)"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Reset"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""dab2d53d-d5e5-4e7e-8528-e9e9ceaa2c06"",
                     ""path"": ""<Keyboard>/1"",
                     ""interactions"": """",
@@ -838,10 +825,10 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""91448a7d-96e7-41eb-ba95-a67aff957f71"",
-                    ""path"": ""<Gamepad>/start"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Gamepad"",
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -860,11 +847,22 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""beafcc7b-a770-436a-a26d-bc655efdad69"",
-                    ""path"": ""<Gamepad>/select"",
+                    ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
                     ""action"": ""OpenMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8809714a-c17c-4d98-b848-8e3c70fde57d"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenHelp"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1472,6 +1470,7 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_SimulationSpeedUp = m_Player.FindAction("SimulationSpeedUp", throwIfNotFound: true);
         m_Player_OpenMenu = m_Player.FindAction("OpenMenu", throwIfNotFound: true);
+        m_Player_OpenHelp = m_Player.FindAction("OpenHelp", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1585,6 +1584,7 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_SimulationSpeedUp;
     private readonly InputAction m_Player_OpenMenu;
+    private readonly InputAction m_Player_OpenHelp;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1677,6 +1677,10 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @OpenMenu => m_Wrapper.m_Player_OpenMenu;
         /// <summary>
+        /// Provides access to the underlying input action "Player/OpenHelp".
+        /// </summary>
+        public InputAction @OpenHelp => m_Wrapper.m_Player_OpenHelp;
+        /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -1762,6 +1766,9 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
             @OpenMenu.started += instance.OnOpenMenu;
             @OpenMenu.performed += instance.OnOpenMenu;
             @OpenMenu.canceled += instance.OnOpenMenu;
+            @OpenHelp.started += instance.OnOpenHelp;
+            @OpenHelp.performed += instance.OnOpenHelp;
+            @OpenHelp.canceled += instance.OnOpenHelp;
         }
 
         /// <summary>
@@ -1833,6 +1840,9 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
             @OpenMenu.started -= instance.OnOpenMenu;
             @OpenMenu.performed -= instance.OnOpenMenu;
             @OpenMenu.canceled -= instance.OnOpenMenu;
+            @OpenHelp.started -= instance.OnOpenHelp;
+            @OpenHelp.performed -= instance.OnOpenHelp;
+            @OpenHelp.canceled -= instance.OnOpenHelp;
         }
 
         /// <summary>
@@ -2273,6 +2283,13 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnOpenMenu(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "OpenHelp" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnOpenHelp(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

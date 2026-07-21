@@ -1,8 +1,9 @@
 using AnimationDataStructs;
 using MotionDataPacketClass;
 using UnityEngine;
-using DataSources;
+using Animation.DataSources;
 using System.Collections.Generic;
+using Animation.DataSources;
 using FlukeWaveAmplitudeLookUpClass;
 
 //real time user input data

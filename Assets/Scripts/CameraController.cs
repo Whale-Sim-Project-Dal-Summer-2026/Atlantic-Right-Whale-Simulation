@@ -20,8 +20,26 @@ public class CameraController : MonoBehaviour{
     float yaw;
     float pitch;
     [SerializeField] bool locked;
+    
+    CameraState state;
+    
+    InputAction Cam1;
+    InputAction Cam2;
+    InputAction Cam3;
+
+    enum CameraState {
+        ORBIT,
+        FREE,
+        LOCKED
+    }
 
     void Awake(){
+        Cam1 = InputSystem.actions.FindAction("Cam1");
+        Cam2 = InputSystem.actions.FindAction("Cam2");
+        Cam3 = InputSystem.actions.FindAction("Cam3");
+    
+        
+        
         locked = false;
         controls = new CameraControls();
 
@@ -52,7 +70,33 @@ public class CameraController : MonoBehaviour{
             ApplyOrbit();
     }
 
-    void Update(){
+    void changeCams() {
+        bool toCam1 = (Cam1?.ReadValue<float>() ?? 0f) == 1.0f;
+        bool toCam2 = (Cam2?.ReadValue<float>() ?? 0f) == 1.0f;
+        bool toCam3 = (Cam3?.ReadValue<float>() ?? 0f) == 1.0f;
+
+        if (toCam1) state = CameraState.ORBIT;
+        if (toCam2) state = CameraState.LOCKED;
+        if (toCam3) state = CameraState.FREE;
+    }
+
+    void Update() {
+        changeCams();
+        
+        switch (state) {
+            case CameraState.ORBIT: {
+                UpdateOrbit();
+                break;
+            }
+            case CameraState.FREE: {
+                UpdateFreeCam();
+                break;
+            }
+            case CameraState.LOCKED: {
+/*cam on top of whale*/                
+                break;
+            }
+        }
 
         // Main update loop
 

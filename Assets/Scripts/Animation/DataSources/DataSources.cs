@@ -4,7 +4,7 @@ using Mono.Cecil.Cil;
 using Unity.Mathematics;
 using UnityEngine;
 
-namespace DataSources{
+namespace Animation.DataSources{
 public abstract class DataSource
 {
     //public DataLoader dataLoader;

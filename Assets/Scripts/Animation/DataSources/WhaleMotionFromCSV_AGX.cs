@@ -2,12 +2,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using AnimationDataStructs;
-using DataSources;
+using Animation.DataSources;
 using AnimationDataStorageManager;
 using MotionDataPacketClass;
 using FlukeWaveAmplitudeLookUpClass;
 using Unity.VisualScripting;
 using AGXUnity;
+using Animation.DataSources;
 
 public class WhaleMotionFromCSV_AGX : DataSource{
 

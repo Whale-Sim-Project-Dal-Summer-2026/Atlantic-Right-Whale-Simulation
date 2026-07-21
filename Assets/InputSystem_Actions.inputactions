@@ -185,6 +185,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "OpenHelp",
+                    "type": "Button",
+                    "id": "65de205c-309b-4f91-b99d-d94185cf65a5",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -663,28 +672,6 @@
                 },
                 {
                     "name": "",
-                    "id": "d2dec295-2f64-48a5-88c0-ac6916d7626c",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Gamepad",
-                    "action": "Reset",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "02af54f6-8558-40cb-89a5-349d4267386e",
-                    "path": "<Keyboard>/#(R)",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "Reset",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "dab2d53d-d5e5-4e7e-8528-e9e9ceaa2c06",
                     "path": "<Keyboard>/1",
                     "interactions": "",
@@ -752,10 +739,10 @@
                 {
                     "name": "",
                     "id": "91448a7d-96e7-41eb-ba95-a67aff957f71",
-                    "path": "<Gamepad>/start",
+                    "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Gamepad",
                     "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -774,11 +761,22 @@
                 {
                     "name": "",
                     "id": "beafcc7b-a770-436a-a26d-bc655efdad69",
-                    "path": "<Gamepad>/select",
+                    "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "OpenMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8809714a-c17c-4d98-b848-8e3c70fde57d",
+                    "path": "<Gamepad>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenHelp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

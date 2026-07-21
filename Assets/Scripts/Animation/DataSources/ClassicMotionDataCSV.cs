@@ -1,8 +1,9 @@
 using MotionDataPacketClass;
 using AnimationDataStructs; 
-using DataSources;
+using Animation.DataSources;
 using UnityEngine;
 using System.Collections.Generic;
+using Animation.DataSources;
 using AnimationDataStorageManager;
 
 // classic means no body movement just the up and down
