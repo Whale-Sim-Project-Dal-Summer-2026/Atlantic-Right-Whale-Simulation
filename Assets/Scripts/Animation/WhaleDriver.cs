@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using agx;
 using Unity.Collections;
+using System;
 
 
 
@@ -191,10 +192,22 @@ public class WhaleDriver : MonoBehaviour
     void updateUIParameters(WhaleState newState) {
         whaleSpeed = newState.Root.Speed;
         
-        whalePitch = newState.Root.Rotation.eulerAngles.x;
-        whaleYaw = newState.Root.Rotation.eulerAngles.y;
-        whaleRoll = newState.Root.Rotation.eulerAngles.z;
+       
 
+        float pitch = newState.Root.Rotation.eulerAngles.x;
+        if (pitch > 180f) pitch -= 360f;
+        //Debug.Log("Pitch: "+ pitch);
+        //float pitch360Percent  = Mathf.InverseLerp(0,360, pitch);
+        //float newPitch = Mathf.Lerp(-90,90,pitch360Percent);
+
+        //if (newPitch < 0) newPitch= -(newPitch + 90);
+        //else newPitch= -(newPitch-90);
+
+        whalePitch = -pitch;
+
+        whaleYaw = newState.Root.Rotation.eulerAngles.y;
+
+        whaleRoll = newState.Root.Rotation.eulerAngles.z;
     }
   void FixedUpdate(){
     PauseTime -= 1;
