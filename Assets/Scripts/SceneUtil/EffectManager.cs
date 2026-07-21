@@ -8,7 +8,6 @@ public class Effectmanager : MonoBehaviour{
     [SerializeField] Volume volume;
 
     Vignette vignetteComponent;
-    FilmGrain filmGrainComponent;
 
     [SerializeField] bool effectsEnabled;
     [SerializeField] ProcessingSettings settings;
@@ -18,7 +17,6 @@ public class Effectmanager : MonoBehaviour{
 
     void Start(){
         volume.profile.TryGet<Vignette>(out vignetteComponent);
-        volume.profile.TryGet<FilmGrain>(out filmGrainComponent);
 
         seaLevel = settings.SeaLevel;
     }
@@ -32,7 +30,6 @@ public class Effectmanager : MonoBehaviour{
         float intensity = effectsEnabled ? 1.0f : 0.0f;
 
         vignetteComponent.intensity.value = intensity;
-        filmGrainComponent.intensity.value = intensity;
 
         
     }

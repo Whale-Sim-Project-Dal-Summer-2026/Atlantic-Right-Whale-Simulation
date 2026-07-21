@@ -5773,7 +5773,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 966298593}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c3acf9865b355d4a99c60390cbf3292, type: 3}
   m_Name: 
@@ -7432,7 +7432,7 @@ MonoBehaviour:
   orbitDistance: 25
   orbitSensitivity: 2
   rotationLocked: 0
-  POVTarget: {fileID: 1578198073}
+  POVTarget: {fileID: 6824787337333441231}
   WhaleInput: {fileID: 545508174}
 --- !u!114 &1205938767
 MonoBehaviour:
@@ -9551,11 +9551,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fbc58a26579735048b3f44e0d01725fb, type: 3}
---- !u!1 &1578198073 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4821498246770036369, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
-  m_PrefabInstance: {fileID: 6824787337333441228}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1599948921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13650,6 +13645,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e01f271d05be96f44852cb49dfac5711, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.RigidBody
+--- !u!1 &6824787337333441231 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4821498246770036369, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
+  m_PrefabInstance: {fileID: 6824787337333441228}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8311757934354782330 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6454711327911404320, guid: d048ea5d3e60e574fbc50183f4ebffab, type: 3}

@@ -9,6 +9,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class Scrubber : MonoBehaviour {
@@ -53,9 +54,14 @@ public class Scrubber : MonoBehaviour {
 
     public ResetManager resetManager;
 
-    public delegate void PauseEvent();
-
     public static event PauseEvent OnPause;
+
+    public delegate void PauseEvent();
+    
+    
+    public static event CamSwitchEvent OnCamSwitch;
+
+    public delegate void CamSwitchEvent(int index);
     
     void Awake() {
         // get refs
@@ -105,8 +111,7 @@ public class Scrubber : MonoBehaviour {
         }
     }
 
-    void Start() {
-        // set up btns
+    void addButtonListeners() {
         if (pinBtn) {
             pinBtn.onClick.AddListener(() => {
                 pinned = !pinned;
@@ -115,6 +120,28 @@ public class Scrubber : MonoBehaviour {
                 pinBtn.GetComponent<Button>().colors = newColors;
             });
         }
+
+        if (cam1Btn) {
+            cam1Btn.onClick.AddListener(() => {
+                OnCamSwitch?.Invoke(1);
+            });
+        }
+        if (cam2Btn) {
+            cam2Btn.onClick.AddListener(() => {
+                OnCamSwitch?.Invoke(2);
+            });
+        }
+        if (cam3Btn) {
+            cam3Btn.onClick.AddListener(() => {
+                OnCamSwitch?.Invoke(3);
+            });
+        }
+    }
+
+    void Start() {
+        // set up btns
+        addButtonListeners();
+        
         if (pausePlayBtn) {
             pausePlayBtn.onClick.AddListener(() => SetPause(!paused));
         }

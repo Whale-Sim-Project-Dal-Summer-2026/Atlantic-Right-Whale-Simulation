@@ -5762,7 +5762,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 966298593}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c3acf9865b355d4a99c60390cbf3292, type: 3}
   m_Name: 
@@ -7438,7 +7438,7 @@ MonoBehaviour:
   orbitDistance: 25
   orbitSensitivity: 2
   rotationLocked: 0
-  POVTarget: {fileID: 1373859656}
+  POVTarget: {fileID: 6824787337333441232}
   WhaleInput: {fileID: 545508174}
 --- !u!114 &1205938767
 MonoBehaviour:
@@ -8647,11 +8647,6 @@ MonoBehaviour:
   spawnDimension: {x: 1, y: 1}
   ropeSpacing: 10
   spawnRopes: 0
---- !u!1 &1373859656 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4821498246770036369, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
-  m_PrefabInstance: {fileID: 6824787337333441228}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1395186487
 GameObject:
   m_ObjectHideFlags: 0
@@ -10875,7 +10870,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1782275352
 Transform:
   m_ObjectHideFlags: 0
@@ -13824,6 +13819,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 11.02, y: 5.39, z: 18.5}
   m_Center: {x: 0, y: 0.35, z: 0}
+--- !u!1 &6824787337333441232 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4821498246770036369, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
+  m_PrefabInstance: {fileID: 6824787337333441228}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6824787337333441233 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6231168970818655502, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
