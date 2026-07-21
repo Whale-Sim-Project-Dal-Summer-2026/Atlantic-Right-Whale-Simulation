@@ -164,7 +164,7 @@ public class WhaleModelAGX : WhaleModelAbstract {
 
         agx.Vec3 force = velocityError * mass * velocityDamping;
 
-        rootRB.Native.addForce(force);  
+        rootRB.Native.addForce(force);
     }
 
     public override void updateWhaleState(WhaleState newState) {

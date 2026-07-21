@@ -1,5 +1,9 @@
+using openplx.Physics3D.Interactions;
+using Unity.Mathematics.Geometry;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
+
 public class CameraController : MonoBehaviour{
     [Header("Free Cam")]
     public float moveSpeed = 10f;
@@ -15,32 +19,39 @@ public class CameraController : MonoBehaviour{
     Vector2 moveInput;
     Vector2 lookInput;
     Vector2 upDownInput;
+
     bool sprinting;
-    bool isFreeCam = false;
     float yaw;
     float pitch;
-    [SerializeField] bool locked;
+    [SerializeField] bool rotationLocked;
+    [SerializeField] GameObject POVTarget;
+    [SerializeField] private UserInputManager WhaleInput; 
     
     CameraState state;
     
     InputAction Cam1;
     InputAction Cam2;
     InputAction Cam3;
+    InputAction CamLock;
+
+    float inputBuffer = 200;
+    double lastTimePressed;
 
     enum CameraState {
         ORBIT,
         FREE,
-        LOCKED
+        POV,
     }
 
-    void Awake(){
+    void Awake() {
+        lastTimePressed = Time.realtimeSinceStartupAsDouble * 1000;
+
+        
         Cam1 = InputSystem.actions.FindAction("Cam1");
         Cam2 = InputSystem.actions.FindAction("Cam2");
         Cam3 = InputSystem.actions.FindAction("Cam3");
+        CamLock = InputSystem.actions.FindAction("CamLock");
     
-        
-        
-        locked = false;
         controls = new CameraControls();
 
         controls.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
@@ -65,23 +76,33 @@ public class CameraController : MonoBehaviour{
         yaw   = transform.eulerAngles.y;
         pitch = transform.eulerAngles.x;
 
-        //start in orbit mode 
-        if (orbitTarget != null)
-            ApplyOrbit();
     }
 
+    void lockUnLockCamera() {
+        bool lockPressed = (CamLock?.ReadValue<float>() ?? 0f) > .5f;
+        if (!lockPressed) return;
+
+        double currTime = Time.realtimeSinceStartupAsDouble * 1000;
+        
+        if (currTime - lastTimePressed < inputBuffer) return;
+
+        lastTimePressed = currTime;
+        rotationLocked = !rotationLocked;
+    }
     void changeCams() {
         bool toCam1 = (Cam1?.ReadValue<float>() ?? 0f) == 1.0f;
         bool toCam2 = (Cam2?.ReadValue<float>() ?? 0f) == 1.0f;
         bool toCam3 = (Cam3?.ReadValue<float>() ?? 0f) == 1.0f;
 
         if (toCam1) state = CameraState.ORBIT;
-        if (toCam2) state = CameraState.LOCKED;
-        if (toCam3) state = CameraState.FREE;
+        if (toCam2) state = CameraState.FREE;
+        if (toCam3) state = CameraState.POV;
+
     }
 
     void Update() {
         changeCams();
+        lockUnLockCamera();
         
         switch (state) {
             case CameraState.ORBIT: {
@@ -92,37 +113,17 @@ public class CameraController : MonoBehaviour{
                 UpdateFreeCam();
                 break;
             }
-            case CameraState.LOCKED: {
-                /*cam on top of whale*/                
+            case CameraState.POV: {
+                UpdatePOVCam();
                 break;
             }
         }
-
-        // Main update loop
-
-        // Toggle between free cam and orbit mode with F key
-        if (Keyboard.current.lKey.wasPressedThisFrame)
-        {
-            locked = !locked;
-        }
-        if (Keyboard.current.fKey.wasPressedThisFrame)
-            ToggleMode();
-        if (isFreeCam)
-            UpdateFreeCam();
-        else
-            UpdateOrbit();
-
     }
 
-    void ToggleMode(){   
-        // Toggle the camera mode
-        isFreeCam = !isFreeCam;
 
-        // When switching to orbit mode change to orbit camera right away
-        if (!isFreeCam && orbitTarget != null)
-        {
-            ApplyOrbit();
-        }
+    void UpdatePOVCam() {
+        transform.position = POVTarget.transform.position;
+        transform.rotation = Quaternion.LookRotation(POVTarget.transform.parent.rotation * Vector3.forward);
     }
 
     void UpdateFreeCam(){
@@ -141,14 +142,14 @@ public class CameraController : MonoBehaviour{
         transform.position += move * speed * Time.deltaTime;
     }
     void UpdateOrbit(){
-
-
         // If no target, do nothing
         if (orbitTarget == null) return;
 
         // rotate with look input around the target
-        yaw += lookInput.x * orbitSensitivity;
-        pitch -= lookInput.y * orbitSensitivity;
+
+        float rotate = rotationLocked ? 0.0f : 1.0f;
+        yaw += lookInput.x * orbitSensitivity * rotate;
+        pitch -= lookInput.y * orbitSensitivity * rotate;
         pitch = Mathf.Clamp(pitch, -80, 80);
         
         // calculate zoom based on up/down input (basically how close to the target))
@@ -159,18 +160,14 @@ public class CameraController : MonoBehaviour{
         orbitDistance -= zoom;
         // take the max of orbit to prevent from going through the target
         orbitDistance  = Mathf.Max(5f, orbitDistance);
-        if(locked) return;
-       
-        ApplyOrbit();
-    }
 
-    void ApplyOrbit(){
-
-        // calcuate rotation based on the pitch and yaw
         Quaternion rot = Quaternion.Euler(pitch, yaw, 0f);
-        // set position based on the targets position 
-        transform.position = orbitTarget.position - rot * Vector3.forward * orbitDistance;
 
+        transform.position = orbitTarget.position - rot * Vector3.forward * orbitDistance;
+        
+        if(rotationLocked) return;
+        
         transform.rotation = rot;
     }
+
 }

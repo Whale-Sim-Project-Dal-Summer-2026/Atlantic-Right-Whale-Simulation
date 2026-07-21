@@ -230,6 +230,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "CamLock",
+                    "type": "Button",
+                    "id": "ba88cce8-1b51-49d3-930c-b6526b872585",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -879,6 +888,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Cam3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a1bb0bf6-12e6-423e-90b0-7bd6da2e5f0f",
+                    "path": "<Gamepad>/rightStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "CamLock",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
