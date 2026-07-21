@@ -49,15 +49,13 @@ public class SimulationUIManager : MonoBehaviour {
 
     void Awake() {
         // get refs
-        depthGraph =  GameObject.Find("DepthGraph").GetComponent<GraphRenderer>(); // TODO: rem
-        return;
         GameObject check = GameObject.Find("FPS");
         if (check) {
             fpsText = check.GetComponent<TextMeshProUGUI>();
         }
         forcesListUI = GameObject.Find("ForcesListUI");
         headingBallUI = GameObject.Find("HeadingBallUI");
-        //depthUI = GameObject.Find("DepthUI"); (TODO)
+        depthUI = GameObject.Find("DepthUI"); 
         flukingUI = GameObject.Find("FlukingUI");
         check = GameObject.Find("WhaleTrail");
         if (check) {
