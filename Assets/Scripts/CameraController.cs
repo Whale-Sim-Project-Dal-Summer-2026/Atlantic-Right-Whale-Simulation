@@ -43,6 +43,7 @@ public class CameraController : MonoBehaviour{
     }
 
     void Awake() {
+        Scrubber.OnCamSwitch += changeCamViaScrub;
         lastTimePressed = Time.realtimeSinceStartupAsDouble * 1000;
 
         
@@ -64,6 +65,12 @@ public class CameraController : MonoBehaviour{
 
         controls.Player.Sprint.performed += ctx => sprinting = true;
         controls.Player.Sprint.canceled += ctx => sprinting = false;
+    }
+
+    void changeCamViaScrub(int index) {
+        if (index == 1) state = CameraState.ORBIT;
+        if (index == 2) state = CameraState.FREE;
+        if (index == 3) state = CameraState.POV;
     }
 
     void OnEnable() => controls.Enable();
