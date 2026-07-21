@@ -7420,6 +7420,8 @@ MonoBehaviour:
   orbitDistance: 25
   orbitSensitivity: 2
   locked: 0
+  POVTarget: {fileID: 1373859656}
+  WhaleInput: {fileID: 545508174}
 --- !u!114 &1205938767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8623,6 +8625,37 @@ MonoBehaviour:
   spawnDimension: {x: 1, y: 1}
   ropeSpacing: 10
   spawnRopes: 0
+--- !u!1 &1373859656
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1373859657}
+  m_Layer: 7
+  m_Name: WhaleLockTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1373859657
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1373859656}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3, z: -2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 146644512}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1395186487
 GameObject:
   m_ObjectHideFlags: 0
@@ -13746,6 +13779,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7005710207572005585, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
       insertIndex: 0
       addedObject: {fileID: 941942775}
+    - targetCorrespondingSourceObject: {fileID: 7005710207572005585, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1373859657}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3524128933481675689, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
       insertIndex: -1
