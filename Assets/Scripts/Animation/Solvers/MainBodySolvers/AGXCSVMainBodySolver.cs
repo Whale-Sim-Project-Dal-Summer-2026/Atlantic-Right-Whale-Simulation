@@ -156,7 +156,7 @@ public class AGXCSVMainBodySolver : MainBodySolverAbstract {
             parentWorldPrev = segWorldPrev;
             parentWorldNow = segWorldNow;
         }
-
+        newState.Root.Speed = solvedRoot.Speed;
         return newState;
     }
 }

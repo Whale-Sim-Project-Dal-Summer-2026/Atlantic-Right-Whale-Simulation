@@ -145,6 +145,7 @@ public class AGXUserMainBodySolver : MainBodySolverAbstract {
             parentWorldNow = segWorldNow;
         }
 
+        newState.Root.Speed = solvedRoot.Speed;
         return newState;
     }
 }

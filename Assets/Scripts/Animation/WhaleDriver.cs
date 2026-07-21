@@ -8,6 +8,8 @@ using static WhaleAnimationStreamer;
 using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
+using agx;
+using Unity.Collections;
 
 
 
@@ -74,7 +76,7 @@ public class WhaleDriver : MonoBehaviour
     [Header("Whale Model Settings")]
     public WhaleModelType whaleModelType;
     [SerializeField] Animator animator;
-    
+
     public int currentTimestep = 0;
     public int totalTimesteps = 0;
 
@@ -94,6 +96,15 @@ public class WhaleDriver : MonoBehaviour
     WhaleModelAbstract whaleModel;
     WhaleBones whaleBones;
     
+
+    //UI EXTRAS
+
+
+    public float whaleYaw;
+    public float whalePitch;
+    public float whaleRoll;
+
+    public float whaleSpeed; 
     
     void Start(){
 
@@ -160,6 +171,7 @@ public class WhaleDriver : MonoBehaviour
 
     void updateWhaleState() {
         WhaleState newState = dataSource.getNextWhaleState();
+        updateUIParameters(newState);
         whaleModel.updateWhaleState(newState);
     }
 
@@ -172,6 +184,15 @@ public class WhaleDriver : MonoBehaviour
             currentTimestep = jumpToTimestep;
             jumpToTimestep = -1; 
         }
+    }
+
+    void updateUIParameters(WhaleState newState) {
+        whaleSpeed = newState.Root.Speed;
+        
+        whalePitch = newState.Root.Rotation.eulerAngles.x;
+        whaleYaw = newState.Root.Rotation.eulerAngles.y;
+        whaleRoll = newState.Root.Rotation.eulerAngles.z;
+
     }
   void FixedUpdate(){
     PauseTime -= 1;

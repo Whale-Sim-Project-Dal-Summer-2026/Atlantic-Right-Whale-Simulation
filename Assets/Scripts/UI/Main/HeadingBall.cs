@@ -17,6 +17,10 @@ public class HeadingBall : MonoBehaviour {
     private GameObject rollTexture;
     private GameObject pitchTexture;
     private RectTransform pitchTextureRectTransform;
+
+    public WhaleDriver whaleDriver; 
+
+    private int counter = 0;
     
     void Awake() {
         // get refs
@@ -32,22 +36,25 @@ public class HeadingBall : MonoBehaviour {
     void Update() {
         // update ball
         // TODO
-        
+        counter ++;
+
+        if (counter >= 50){
         // set speed
-        speedText.text = 100 + " km/h"; // TODO
-        
+        speedText.text = whaleDriver.whaleSpeed.ToString("F0") + " m/s"; // TODO
+        counter =0; 
+        }
         // set heading
-        int heading = 100 % 360; // TODO
+        int heading = Mathf.CeilToInt(whaleDriver.whaleYaw) % 360; // TODO
         headingText.text = heading + "\u00b0"; 
         headingText.transform.rotation = Quaternion.Euler(headingText.transform.eulerAngles.x, headingText.transform.eulerAngles.y, -1*heading); 
         
         // set roll
-        int roll = 45; // TODO
+        int roll = Mathf.CeilToInt(whaleDriver.whaleRoll); // TODO
         rollText.text = roll + "\u00b0";
         rollTexture.transform.rotation = Quaternion.Euler(headingText.transform.eulerAngles.x, headingText.transform.eulerAngles.y, roll);
 
         // set yaw
-        int pitch = 90; // TODO
+        int pitch = Mathf.CeilToInt(whaleDriver.whalePitch); // TODO
         Vector3 pitchCenter = pitchTexture.transform.position;
         float maxOffsetLen = pitchTextureRectTransform.rect.height / 2;
         pitchText.text = pitch + "\u00b0";
