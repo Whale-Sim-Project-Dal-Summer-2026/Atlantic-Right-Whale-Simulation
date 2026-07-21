@@ -3,7 +3,6 @@ using MotionDataPacketClass;
 using UnityEngine;
 using Animation.DataSources;
 using System.Collections.Generic;
-using Animation.DataSources;
 using FlukeWaveAmplitudeLookUpClass;
 
 //real time user input data
@@ -108,7 +107,12 @@ public class WhaleMotionFromUserInputRT : DataSource
     }
     public override void loadWhaleStateAt(int timestep)
     {
-        throw new System.NotImplementedException();
+       if (timestep != 0)
+        {
+            Debug.LogWarning("WhaleMotionFromUserInputRT does not support loading states at specific timesteps. Resetting to initial state.");
+        }
+        this.currentWhaleState = startState;
+        userInputManager.rb.Native.setPosition(new agx.Vec3(0, 75f - startState.Root.Position.y, 0));
     }
 
     public override int GetTotalTimesteps()

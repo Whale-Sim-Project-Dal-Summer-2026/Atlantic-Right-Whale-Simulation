@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using Animation.DataSources;
 using AnimationDataStructs;
 using Animation.DataSources;
 using AnimationDataStorageManager;
@@ -188,6 +187,7 @@ public class WhaleMotionFromCSV : DataSource{
     }
 
     public override void loadWhaleStateAt(int timestep){
+       
         streamer.SeekTo(timestep);
         isWaitingForLoad = true; 
        
