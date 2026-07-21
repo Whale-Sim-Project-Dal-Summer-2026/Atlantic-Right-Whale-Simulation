@@ -48,6 +48,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42a210e2d67a62342806c0e42e8d92c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scrubber
+  whaleDriver: {fileID: 0}
+  currentTimeStepDelta: 0
+  pauseManager: {fileID: 0}
+  resetManager: {fileID: 0}
 --- !u!1 &186856415661389428
 GameObject:
   m_ObjectHideFlags: 0

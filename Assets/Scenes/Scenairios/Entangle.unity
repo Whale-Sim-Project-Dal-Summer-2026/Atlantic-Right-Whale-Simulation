@@ -5035,6 +5035,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a85111d3fe4e01801528f62f92de63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PublicUIManager
+  resetManager: {fileID: 0}
 --- !u!114 &806279213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6067,7 +6068,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 966298593}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c3acf9865b355d4a99c60390cbf3292, type: 3}
   m_Name: 
@@ -6827,7 +6828,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1085607646
 Transform:
   m_ObjectHideFlags: 0
@@ -7824,8 +7825,8 @@ MonoBehaviour:
   orbitDistance: 25
   orbitSensitivity: 2
   rotationLocked: 0
-  POVTarget: {fileID: 0}
-  WhaleInput: {fileID: 0}
+  POVTarget: {fileID: 6824787337333441233}
+  WhaleInput: {fileID: 545508174}
 --- !u!114 &1205938767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13920,6 +13921,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8b0934ce29bd794b9e9ed1cade8be86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WhaleDriver
+--- !u!1 &6824787337333441233 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4821498246770036369, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
+  m_PrefabInstance: {fileID: 6824787337333441228}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

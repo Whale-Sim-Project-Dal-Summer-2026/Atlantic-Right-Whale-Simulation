@@ -25,7 +25,6 @@ public class CameraController : MonoBehaviour{
     float pitch;
     [SerializeField] bool rotationLocked;
     [SerializeField] GameObject POVTarget;
-    [SerializeField] private UserInputManager WhaleInput; 
     
     CameraState state;
     
