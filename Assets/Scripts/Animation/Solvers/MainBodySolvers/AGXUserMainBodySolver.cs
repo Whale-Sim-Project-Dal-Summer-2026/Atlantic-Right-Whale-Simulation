@@ -16,7 +16,7 @@ public class AGXUserMainBodySolver : MainBodySolverAbstract {
     
     private float rootTurnSpeed = 150f;
 
-    private float headTurnSpeed = 1f;
+    private float headTurnSpeed = 3f;
 
     private float followRotationSpeed = 8f;
 

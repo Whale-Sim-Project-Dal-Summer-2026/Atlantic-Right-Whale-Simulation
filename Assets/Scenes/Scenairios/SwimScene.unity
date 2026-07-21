@@ -3019,6 +3019,22 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4601650997053863039, guid: af894e0831850ea45bbf60cb1083922c, type: 3}
+      propertyPath: whaleDriver
+      value: 
+      objectReference: {fileID: 6824787337333441233}
+    - target: {fileID: 4601650997053863039, guid: af894e0831850ea45bbf60cb1083922c, type: 3}
+      propertyPath: pauseManager
+      value: 
+      objectReference: {fileID: 392961703}
+    - target: {fileID: 4601650997053863039, guid: af894e0831850ea45bbf60cb1083922c, type: 3}
+      propertyPath: resetManager
+      value: 
+      objectReference: {fileID: 2035111053}
+    - target: {fileID: 4601650997053863039, guid: af894e0831850ea45bbf60cb1083922c, type: 3}
+      propertyPath: currentTimeStepDelta
+      value: 0.004
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6958,6 +6974,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a85111d3fe4e01801528f62f92de63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PublicUIManager
+  resetManager: {fileID: 0}
 --- !u!114 &1148659899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6970,6 +6987,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cbfd58f7105f994d8241123cd379108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainUIManager
+  animationSettings: {fileID: 11400000, guid: a079734cd265a3648b27716324684644, type: 2}
 --- !u!4 &1148659900
 Transform:
   m_ObjectHideFlags: 0
@@ -7419,7 +7437,7 @@ MonoBehaviour:
   orbitTarget: {fileID: 146644512}
   orbitDistance: 25
   orbitSensitivity: 2
-  locked: 0
+  rotationLocked: 0
   POVTarget: {fileID: 1373859656}
   WhaleInput: {fileID: 545508174}
 --- !u!114 &1205938767
@@ -8277,6 +8295,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8975167117216619673, guid: c907aeca67a6f9242b04b5904859ddad, type: 3}
+      propertyPath: whaleDriver
+      value: 
+      objectReference: {fileID: 6824787337333441233}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8625,37 +8647,11 @@ MonoBehaviour:
   spawnDimension: {x: 1, y: 1}
   ropeSpacing: 10
   spawnRopes: 0
---- !u!1 &1373859656
+--- !u!1 &1373859656 stripped
 GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 4821498246770036369, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
+  m_PrefabInstance: {fileID: 6824787337333441228}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1373859657}
-  m_Layer: 7
-  m_Name: WhaleLockTarget
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1373859657
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1373859656}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: -2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 146644512}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1395186487
 GameObject:
   m_ObjectHideFlags: 0
@@ -13779,9 +13775,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7005710207572005585, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
       insertIndex: 0
       addedObject: {fileID: 941942775}
-    - targetCorrespondingSourceObject: {fileID: 7005710207572005585, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1373859657}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3524128933481675689, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
       insertIndex: -1
@@ -13831,6 +13824,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 11.02, y: 5.39, z: 18.5}
   m_Center: {x: 0, y: 0.35, z: 0}
+--- !u!114 &6824787337333441233 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6231168970818655502, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
+  m_PrefabInstance: {fileID: 6824787337333441228}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6824787337333441229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8b0934ce29bd794b9e9ed1cade8be86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WhaleDriver
 --- !u!1001 &7793314521052104933
 PrefabInstance:
   m_ObjectHideFlags: 0

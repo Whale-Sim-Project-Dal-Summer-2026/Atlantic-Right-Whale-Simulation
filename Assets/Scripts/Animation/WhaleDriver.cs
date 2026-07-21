@@ -152,7 +152,6 @@ public class WhaleDriver : MonoBehaviour
         ResetManager.OnReset += () => {
             jumpToTimestep = 0;
             PauseTime = StartingPauseTime;
-            isPaused = true;
         };
     }
 
@@ -176,6 +175,9 @@ public class WhaleDriver : MonoBehaviour
     }
 
     void Update(){
+        if (PauseTime>0) {
+            isPaused = true; 
+        }
         if (isPaused) return;
         if (jumpToTimestep >= 0){
             dataSource.loadWhaleStateAt(jumpToTimestep);

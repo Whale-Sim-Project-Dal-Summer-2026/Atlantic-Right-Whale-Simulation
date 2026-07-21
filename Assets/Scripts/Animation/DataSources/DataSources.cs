@@ -1,6 +1,5 @@
 using System;
 using AnimationDataStructs;
-using Mono.Cecil.Cil;
 using Unity.Mathematics;
 using UnityEngine;
 

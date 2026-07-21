@@ -3303,7 +3303,7 @@ MonoBehaviour:
   yaw: 0
   speed: 0
   mouthOpen: 0
-  rb: {fileID: 0}
+  rb: {fileID: 6824787337333441230}
 --- !u!4 &545508175
 Transform:
   m_ObjectHideFlags: 0
@@ -5773,7 +5773,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 966298593}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c3acf9865b355d4a99c60390cbf3292, type: 3}
   m_Name: 
@@ -7431,7 +7431,9 @@ MonoBehaviour:
   orbitTarget: {fileID: 146644512}
   orbitDistance: 25
   orbitSensitivity: 2
-  locked: 0
+  rotationLocked: 0
+  POVTarget: {fileID: 1578198073}
+  WhaleInput: {fileID: 545508174}
 --- !u!114 &1205938767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7583,7 +7585,7 @@ MonoBehaviour:
   camera: {fileID: 1205938769}
   volume: {fileID: 1205938771}
   effectsEnabled: 1
-  settings: {fileID: 0}
+  settings: {fileID: 11400000, guid: 33636be64600f5f4287e9b02c8521d90, type: 2}
 --- !u!1001 &1224442624
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7636,6 +7638,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8975167117216619673, guid: c907aeca67a6f9242b04b5904859ddad, type: 3}
+      propertyPath: whaleDriver
+      value: 
+      objectReference: {fileID: 6824787337333441229}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8544,7 +8550,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1370660985}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 95bc93e46ff14cc4d82900ea9c7ad6bb, type: 3}
   m_Name: 
@@ -8866,6 +8872,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a85111d3fe4e01801528f62f92de63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PublicUIManager
+  resetManager: {fileID: 1737455057}
 --- !u!114 &1458736382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8878,6 +8885,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cbfd58f7105f994d8241123cd379108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainUIManager
+  animationSettings: {fileID: 11400000, guid: a079734cd265a3648b27716324684644, type: 2}
 --- !u!4 &1458736383
 Transform:
   m_ObjectHideFlags: 0
@@ -9543,6 +9551,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fbc58a26579735048b3f44e0d01725fb, type: 3}
+--- !u!1 &1578198073 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4821498246770036369, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
+  m_PrefabInstance: {fileID: 6824787337333441228}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1599948921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13214,9 +13227,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6231168970818655502, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
+      propertyPath: ResetManager
+      value: 
+      objectReference: {fileID: 1737455057}
+    - target: {fileID: 6231168970818655502, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
       propertyPath: dataSourceFile
       value: 
       objectReference: {fileID: 4900000, guid: 3918953992e35c145b1fd914e5006382, type: 3}
+    - target: {fileID: 6231168970818655502, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
+      propertyPath: CSV_ResetTimeStep
+      value: 100000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6231168970818655502, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
+      propertyPath: processingSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: 33636be64600f5f4287e9b02c8521d90, type: 2}
     - target: {fileID: 6246823292776187739, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -13267,7 +13292,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6524659130996562198, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 30
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6524659130996562198, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13603,6 +13628,28 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 187546739}
   m_SourcePrefab: {fileID: 100100000, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
+--- !u!114 &6824787337333441229 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6231168970818655502, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
+  m_PrefabInstance: {fileID: 6824787337333441228}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187546734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8b0934ce29bd794b9e9ed1cade8be86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WhaleDriver
+--- !u!114 &6824787337333441230 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8170248270554834483, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
+  m_PrefabInstance: {fileID: 6824787337333441228}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187546734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e01f271d05be96f44852cb49dfac5711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AGXUnity::AGXUnity.RigidBody
 --- !u!4 &8311757934354782330 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6454711327911404320, guid: d048ea5d3e60e574fbc50183f4ebffab, type: 3}

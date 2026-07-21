@@ -37,6 +37,8 @@ public class PublicUIManager : MonoBehaviour {
     private bool isIdle = false;
     private bool isHelpOpen = false;
     private bool isPathOn = false;
+
+    public ResetManager resetManager;
     
     void Awake() {
         // get refs
@@ -63,6 +65,7 @@ public class PublicUIManager : MonoBehaviour {
         GameObject check = GameObject.Find("UnstickBtn");
         if (check) {
             unstickBtn = check.GetComponent<Button>();
+            unstickBtn.onClick.AddListener(() => {resetManager.TriggerReset();});
         }
         GameObject viewerBG = GameObject.Find("ViewerUI").transform.Find("ViewerBG").gameObject;
         closeViewerBtn = viewerBG.transform.Find("CloseViewerBtn").GetComponent<Button>();
