@@ -51,6 +51,8 @@ public class Scrubber : MonoBehaviour {
     //used for the play/pause
     public PauseManager pauseManager;
 
+    public ResetManager resetManager;
+
     public delegate void PauseEvent();
 
     public static event PauseEvent OnPause;
@@ -121,6 +123,9 @@ public class Scrubber : MonoBehaviour {
         }
         if (fasterBtn) {
             fasterBtn.onClick.AddListener(() => SetSpeed(speedsInd + 1));
+        }
+        if (restartBtn) {
+            restartBtn.onClick.AddListener(() => resetManager.TriggerReset());
         }
     }
 
