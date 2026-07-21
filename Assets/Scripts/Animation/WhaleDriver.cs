@@ -74,7 +74,8 @@ public class WhaleDriver : MonoBehaviour
     [Header("Whale Model Settings")]
     public WhaleModelType whaleModelType;
     [SerializeField] Animator animator;
-    public int timesetp = 0;
+    
+    public int currentTimestep = 0;
     public int totalTimesteps = 0;
 
     [Header("Animation Settings")]
@@ -168,7 +169,7 @@ public class WhaleDriver : MonoBehaviour
             dataSource.loadWhaleStateAt(jumpToTimestep);
             updateWhaleState();
         
-            timesetp = jumpToTimestep;
+            currentTimestep = jumpToTimestep;
             jumpToTimestep = -1; 
         }
     }
@@ -184,11 +185,11 @@ public class WhaleDriver : MonoBehaviour
     updateWhaleState();
 
  
-    timesetp ++;
+    currentTimestep ++;
    
     // looping parameter
-    if (timesetp >= CSV_ResetTimeStep){
-        timesetp = 0;
+    if (currentTimestep >= CSV_ResetTimeStep){
+        currentTimestep = 0;
         ResetManager.TriggerReset();
     }
     
@@ -200,5 +201,8 @@ public class WhaleDriver : MonoBehaviour
 
 
 
+
 }
+
+
 }

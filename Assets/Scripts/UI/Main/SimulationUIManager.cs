@@ -9,6 +9,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using System; 
 
 public class SimulationUIManager : MonoBehaviour {
     // objs
@@ -43,6 +44,8 @@ public class SimulationUIManager : MonoBehaviour {
     // extern
     private PublicUIManager pubUIManager;
     private Scrubber scrubber;
+
+    public AnimationSettings animationSettings; 
     
     //vars
     CursorLockMode currCursorState = CursorLockMode.Locked;
@@ -139,7 +142,7 @@ public class SimulationUIManager : MonoBehaviour {
      * Set simulation data to be used for graphs.
      */
     private void SetGraphData() {
-        TextAsset data = Resources.Load<TextAsset>("WhaleMovement/RW230714P48processed"); // TODO
+        TextAsset data = animationSettings.MotionData_csv;
         int[] cols = { 0, 1, 8, 9, 10, 12, 14, 23 };
         string[] lines = data.text.Split(new char[] { '\n', '\r' }, System.StringSplitOptions.RemoveEmptyEntries);
         int count = 0;

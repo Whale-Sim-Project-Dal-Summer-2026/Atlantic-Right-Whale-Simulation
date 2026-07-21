@@ -42,6 +42,9 @@ public class Scrubber : MonoBehaviour {
     private bool pinned  = true;
     private float[] speeds = {0.25f, 0.5f, 0.75f, 1.0f, 1.5f, 2.0f, 3.0f, 4.0f, 5.0f};
     private int speedsInd = 3;
+
+    public WhaleDriver whaleDriver;
+    public float currentTimeStepDelta; 
     
     void Awake() {
         // get refs
@@ -125,8 +128,12 @@ public class Scrubber : MonoBehaviour {
             }
         }
         
+        updateTime();
         // set scrubber percentage
-        float percent = 5; // TODO
+        float percent = ((float)whaleDriver.currentTimestep / whaleDriver.CSV_ResetTimeStep) * 100; 
+        //Debug.Log("Current Prercent: " + percent);
+
+        // this will get the current timne 
         timeline.value = percent;
         
         // shortcuts (TODO)
@@ -247,5 +254,21 @@ public class Scrubber : MonoBehaviour {
         if (fasterBtn) {
             fasterBtn.interactable = on;
         }
+    }
+    void updateTime() {
+        
+        float currentTimeStep = whaleDriver.currentTimestep; 
+        float secondsConvert = currentTimeStep * currentTimeStepDelta;
+
+        float mins = secondsConvert / 60;
+        
+        float secs = secondsConvert % 60; 
+        int minsInt = Mathf.CeilToInt(mins);
+        minsInt--;
+        int secsInt = Mathf.CeilToInt(secs); 
+        secsInt--;
+
+        timeText.SetText(minsInt + ":" + secsInt);
+
     }
 }
