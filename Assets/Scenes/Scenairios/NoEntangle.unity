@@ -3496,7 +3496,7 @@ MonoBehaviour:
   yaw: 0
   speed: 0
   mouthOpen: 0
-  rb: {fileID: 0}
+  rb: {fileID: 6824787337333441234}
 --- !u!4 &545508175
 Transform:
   m_ObjectHideFlags: 0
@@ -13828,6 +13828,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4821498246770036369, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
   m_PrefabInstance: {fileID: 6824787337333441228}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6824787337333441234 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8170248270554834483, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
+  m_PrefabInstance: {fileID: 6824787337333441228}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6824787337333441229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e01f271d05be96f44852cb49dfac5711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AGXUnity::AGXUnity.RigidBody
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

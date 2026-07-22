@@ -6958,7 +6958,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a85111d3fe4e01801528f62f92de63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PublicUIManager
-  resetManager: {fileID: 0}
+  resetManager: {fileID: 2035111053}
 --- !u!114 &1148659899
 MonoBehaviour:
   m_ObjectHideFlags: 0

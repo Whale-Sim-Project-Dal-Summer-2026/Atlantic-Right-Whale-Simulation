@@ -1,12 +1,23 @@
-fun fact 1
-fun fact 2
-fun fact 3
-fun fact 4
-fun fact 5
-fun fact 6
-fun fact 7
-fun fact 8
-fun fact 9
-fun fact 10
-fun fact 11
-fun fact 12
+Did you know? Whales are cool!
+Did you know? As of 2025, only about 370 North Atlantic Right Whales are left :(
+Did you know? North Atlantic Right Whales have tiny crustaceans, related to the skeleton shrimp, living on their heads.
+Did you know? North Atlantic Right Whales feed by taking large amounts of water into their mouths and pushing it through their baleen filters.
+Did you know? Every North Atlantic Right Whale has a unique pattern of rough skin patches which researchers use to identify and track individual whales.
+Did you know? North Atlantic Right Whales have to eat about 1,000 to 2,500 kilograms of food a day.
+Did you know? When a North Atlantic Right Whale calf is first born, it’s around 4.2 metres long, and by the time it reaches adulthood, it can grow to 15.8 metres long.
+Did you know? At full size, North Atlantic Right Whales can weigh up to 63,500 kilograms!
+Did you know? North Atlantic Right Whales move fairly slowly, usually swimming at around 9.6 kilometres per hour. This unfortunately also makes them vulnerable to collisions with ships :(
+Did you know? The North Atlantic Right Whale got its name from whalers who over-hunted them to near extinction because they were especially easy and bountiful to hunt.
+Did you know? Fisheries on the south shore of Nova Scotia and in the Bay of Fundy commonly use larger vessels and fish wire lobster traps to fish in deeper waters
+Did you know? Shallow water lobster fishing commonly takes place on the eastern shore of Nova Scotia, in Cape Breton, in the Northumberland Strait, and off the coasts of New Brunswick and P.E.I. Wooden traps are common in these areas.
+Did you know? Traps are commonly deployed in a “trawl” configuration, which allows multiple traps to be set on the ocean floor and hauled back into the fishing boat at once.
+Did you know? Surface buoy marks the location of the traps for harvesters to find them again and alerts
+neighbouring vessels not to set overtop of the gear.
+Did you know? Once the fish harvesters retrieve their traps, they triage the caught lobster: undersized males and female lobster are thrown back in the water to protect the health of the stock.
+Did you know? Caught lobster are banded with rubber bands around both claws and they are stored in crates before being offloaded and sold to processors at the wharf.
+Did you know? Fish harvesters use large steel crab pots to catch snow crab. The crab pots on bottom are
+connected to the surface buoy with a vertical rope called a “buoyline”. Traditionally, snow crab harvesters use thick, strong floating rope with a sinking top portion as a buoyline.
+Did you know? All females and all undersized male crabs are thrown back as a conservation
+measure to ensure the future of the stock.
+Did you know? A female snow crab produces from 16,000 to 160,000 eggs in the spring which are brooded by the mothers for up to 2 years, depending upon ambient temperatures and food availability.
+Did you know? Crabs are stored in ice to keep them fresh until they reach their final destination.

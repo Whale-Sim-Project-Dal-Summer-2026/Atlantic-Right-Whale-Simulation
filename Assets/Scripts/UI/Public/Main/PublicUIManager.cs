@@ -179,7 +179,7 @@ public class PublicUIManager : MonoBehaviour {
             }
         }
         if (viewerUI) {
-            if (!on && helpUI.IsOpen()) {
+            if (!on && viewerUI.IsOpen()) {
                 viewerUI.SetViewerPopupVisibility(false);
             }
         }
