@@ -19,6 +19,7 @@ public class PublicUIManager : MonoBehaviour {
     private GameObject controlHintsFreeCam;
     private GameObject controlHintsFreeRoam;
     private GameObject controlHintsFollowCam;
+    private GameObject controlHintsPOVCam;
     private ViewerPopup viewerUI;
     private Button funFactsBtn;
     private TextMeshProUGUI funFactsTxt;
@@ -40,6 +41,9 @@ public class PublicUIManager : MonoBehaviour {
 
     public ResetManager resetManager;
     
+    private WhaleTrail whaleTrail;
+    private int currCam = 1;
+    
     void Awake() {
         // get refs
         helpBtn = GameObject.Find("HelpBtn").GetComponent<Button>();
@@ -58,6 +62,10 @@ public class PublicUIManager : MonoBehaviour {
         if (checkT) {
             controlHintsFollowCam = checkT.gameObject;
         }
+        checkT = controlHintsUI.transform.Find("ControlHintsPOVCam");
+        if (checkT) {
+            controlHintsPOVCam = checkT.gameObject;
+        }
         viewerUI = GameObject.Find("ViewerUI").GetComponent<ViewerPopup>();
         GameObject funFactsObj = GameObject.Find("CyclingFunFactsTxt");
         funFactsTxt = funFactsObj.GetComponent<TextMeshProUGUI>();
@@ -65,7 +73,16 @@ public class PublicUIManager : MonoBehaviour {
         GameObject check = GameObject.Find("UnstickBtn");
         if (check) {
             unstickBtn = check.GetComponent<Button>();
-            unstickBtn.onClick.AddListener(() => {resetManager.TriggerReset();});
+            check = GameObject.Find("WhaleTrail");
+            if (check) {
+                whaleTrail = check.GetComponent<WhaleTrail>();
+            }
+            unstickBtn.onClick.AddListener(() => {
+                resetManager.TriggerReset();
+                if (whaleTrail) {
+                    whaleTrail.ResetPath();
+                }
+            });
         }
         GameObject viewerBG = GameObject.Find("ViewerUI").transform.Find("ViewerBG").gameObject;
         closeViewerBtn = viewerBG.transform.Find("CloseViewerBtn").GetComponent<Button>();
@@ -96,6 +113,11 @@ public class PublicUIManager : MonoBehaviour {
                 isIdle = false;
                 SetIdleMode(false);
             }
+        }
+
+        bool camSwitched = false; // TODO
+        if (camSwitched) {
+            currCam = 2; // or whatever (TODO)
         }
     }
 
@@ -129,20 +151,27 @@ public class PublicUIManager : MonoBehaviour {
         helpBtn.gameObject.SetActive(showUI);
         scenariosBtn.gameObject.SetActive(showUI);
         funFactsTxt.gameObject.SetActive(showUI);
-        if (controlHintsFreeCam) { // TODO: only activate if curr scene matches
+        if (controlHintsFreeCam && currCam == 2) { // TODO: only activate if curr scene matches
             controlHintsFreeCam.SetActive(showUI);
         }
         if (controlHintsFreeRoam) { // TODO: only activate if curr scene matches
             controlHintsFreeRoam.SetActive(showUI);
         }
-        if (controlHintsFollowCam) { // TODO: only activate if curr scene matches
+        if (controlHintsFollowCam && currCam == 1) { // TODO: only activate if curr scene matches
             controlHintsFollowCam.SetActive(showUI);
         }
+        if (controlHintsPOVCam && currCam == 3) { // TODO: only activate if curr scene matches
+            controlHintsPOVCam.SetActive(showUI);
+        }
         if (helpUI) {
-            helpUI.SetHelpPopupVisibility(false);
+            if (!on && helpUI.IsOpen()) {
+                helpUI.SetHelpPopupVisibility(false);
+            }
         }
         if (viewerUI) {
-            viewerUI.SetViewerPopupVisibility(false);
+            if (!on && helpUI.IsOpen()) {
+                viewerUI.SetViewerPopupVisibility(false);
+            }
         }
         whaleCollider.enabled = on;
     }

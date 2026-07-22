@@ -13,7 +13,7 @@ public class HelpPopup : MonoBehaviour {
     private Scrubber scrubber;
 
     // vars
-    private bool pauseOn;
+    private bool pauseOn = false;
     private bool open = false;
     
     void Awake() {
@@ -33,19 +33,21 @@ public class HelpPopup : MonoBehaviour {
         }
     }
     
-    public void SetHelpPopupVisibility(bool isOpen) {
-        if (scrubber && isOpen) {
+    public void SetHelpPopupVisibility(bool on) {
+        if (scrubber && on) {
             pauseOn = scrubber.IsPaused();
         }
-        open = isOpen;
-        helpPopup.SetActive(isOpen);
-        simUIManager.SetUIInteractivity(!isOpen);
-        if (scrubber && isOpen && !pauseOn) {
+        open = on;
+        helpPopup.SetActive(on);
+        simUIManager.SetUIInteractivity(!on);
+        if (scrubber && on && !pauseOn) {
             scrubber.SetPause(true);
         }
-        if (scrubber && !isOpen && !pauseOn) {
+        if (scrubber && !on && !pauseOn) {
             scrubber.SetPause(false);
-            pauseOn = true; // so that if called without opening again it wont set it to pause
+        }
+        if (scrubber && !on) {
+            pauseOn = false;
         }
     }
 

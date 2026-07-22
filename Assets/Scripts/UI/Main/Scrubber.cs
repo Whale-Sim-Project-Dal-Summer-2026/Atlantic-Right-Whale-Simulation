@@ -57,11 +57,11 @@ public class Scrubber : MonoBehaviour {
     public static event PauseEvent OnPause;
 
     public delegate void PauseEvent();
-    
-    
     public static event CamSwitchEvent OnCamSwitch;
 
     public delegate void CamSwitchEvent(int index);
+
+    private WhaleTrail whaleTrail;
     
     void Awake() {
         // get refs
@@ -109,6 +109,11 @@ public class Scrubber : MonoBehaviour {
         if (check) {
             fasterBtn = check.GetComponent<Button>();
         }
+        
+        check = GameObject.Find("WhaleTrail");
+        if (check) {
+            whaleTrail = check.GetComponent<WhaleTrail>();
+        }
     }
 
     void addButtonListeners() {
@@ -152,7 +157,12 @@ public class Scrubber : MonoBehaviour {
             fasterBtn.onClick.AddListener(() => SetSpeed(speedsInd + 1));
         }
         if (restartBtn) {
-            restartBtn.onClick.AddListener(() => resetManager.TriggerReset());
+            restartBtn.onClick.AddListener(() => {
+                if (whaleTrail) {
+                    whaleTrail.ResetPath();
+                }
+                resetManager.TriggerReset();
+            });
         }
     }
 
@@ -311,7 +321,14 @@ public class Scrubber : MonoBehaviour {
         int secsInt = Mathf.CeilToInt(secs); 
         secsInt--;
 
-        timeText.SetText(minsInt + ":" + secsInt);
+        if (minsInt < 0) {
+            minsInt = 0;
+        }
+
+        if (secsInt < 0) {
+            secsInt = 0;
+        }
+        timeText.text = $"{minsInt:00}:{secsInt:00}";
 
     }
 }

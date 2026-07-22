@@ -19,7 +19,6 @@ public class SimulationUIManager : MonoBehaviour {
     private GameObject depthUI;
     private GameObject flukingUI;
     private MeshRenderer whaleTrailMesh;
-    
     // toggles
     private Button toggleUIBtn;
     private Button toggleUIAltBtn;
@@ -44,7 +43,6 @@ public class SimulationUIManager : MonoBehaviour {
     // extern
     private PublicUIManager pubUIManager;
     private Scrubber scrubber;
-
     public AnimationSettings animationSettings; 
     
     //vars
@@ -88,7 +86,6 @@ public class SimulationUIManager : MonoBehaviour {
             togglePathSpriteOn = Resources.Load<Sprite>("UI/Toggles/yespath");
             togglePathBtnImage = togglePathBtnObj.GetComponent<Image>();
         }
-
         check = GameObject.Find("SettingsBtn");
         if (check) {
             settingsBtn = check.GetComponent<Button>();
@@ -127,7 +124,7 @@ public class SimulationUIManager : MonoBehaviour {
     
     void Update() {
         // toggle cursor (TODO: disable cam rotate)
-        Cursor.lockState = Keyboard.current.altKey.isPressed ? CursorLockMode.None : currCursorState;
+        //Cursor.lockState = Keyboard.current.altKey.isPressed ? CursorLockMode.None : currCursorState; (TODO)
         
         // shortcuts (TODO)
         if (Keyboard.current.escapeKey.wasPressedThisFrame) {

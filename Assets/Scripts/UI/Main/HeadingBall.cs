@@ -5,6 +5,7 @@
  * @author Mars Semenova 
  */
 
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -53,13 +54,13 @@ public class HeadingBall : MonoBehaviour {
         rollText.text = roll + "\u00b0";
         rollTexture.transform.rotation = Quaternion.Euler(headingText.transform.eulerAngles.x, headingText.transform.eulerAngles.y, roll);
 
-        // set yaw
-        int pitch = Mathf.CeilToInt(whaleDriver.whalePitch); // TODO
+        // set pitch
+        float pitch = Mathf.CeilToInt(whaleDriver.whalePitch); // TODO
         Vector3 pitchCenter = pitchTexture.transform.position;
-        float maxOffsetLen = pitchTextureRectTransform.rect.height / 2;
+        float maxOffsetLen = pitchTextureRectTransform.rect.height*pitchTextureRectTransform.lossyScale.y / 2;
         pitchText.text = pitch + "\u00b0";
-        float offsetLen = (maxOffsetLen-20) * (pitch / 90);
-        Vector3 offset = new Vector3(-50, pitch < 0 ? -offsetLen-maxOffsetLen : offsetLen-maxOffsetLen, 0);
+        float offsetLen = (maxOffsetLen-20) * (Math.Abs(pitch) / 90);
+        Vector3 offset = new Vector3(-60, -maxOffsetLen + (pitch < 0 ? -offsetLen : offsetLen), 0);
         pitchText.transform.position = pitchCenter + offset;
         
     }

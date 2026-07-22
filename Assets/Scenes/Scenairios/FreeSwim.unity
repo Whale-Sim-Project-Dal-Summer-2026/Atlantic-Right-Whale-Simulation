@@ -7433,7 +7433,6 @@ MonoBehaviour:
   orbitSensitivity: 2
   rotationLocked: 0
   POVTarget: {fileID: 6824787337333441231}
-  WhaleInput: {fileID: 545508174}
 --- !u!114 &1205938767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8826,6 +8825,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5822358916588130945, guid: 185ff3170786f054b95342358584421e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7523839474557519275, guid: 185ff3170786f054b95342358584421e, type: 3}
       propertyPath: m_Name
       value: ControlHintsUI
@@ -8834,6 +8837,7 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 5736586593011829273, guid: 185ff3170786f054b95342358584421e, type: 3}
     - {fileID: 3981035095427646186, guid: 185ff3170786f054b95342358584421e, type: 3}
+    - {fileID: 599229086095319654, guid: 185ff3170786f054b95342358584421e, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 185ff3170786f054b95342358584421e, type: 3}

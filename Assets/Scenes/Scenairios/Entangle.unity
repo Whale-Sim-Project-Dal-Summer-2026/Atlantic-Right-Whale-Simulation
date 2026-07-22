@@ -231,25 +231,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3981035095427646186, guid: 185ff3170786f054b95342358584421e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5736586593011829273, guid: 185ff3170786f054b95342358584421e, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5804678302446353892, guid: 185ff3170786f054b95342358584421e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.1
-      objectReference: {fileID: 0}
     - target: {fileID: 7523839474557519275, guid: 185ff3170786f054b95342358584421e, type: 3}
       propertyPath: m_Name
       value: ControlHintsUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 8503392052208482019, guid: 185ff3170786f054b95342358584421e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 17.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -6361,6 +6345,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WhaleTrail
       objectReference: {fileID: 0}
+    - target: {fileID: 3959274088241637910, guid: 5bb3004edeef18f45b1f0b99c92e93d7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6828,7 +6816,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1085607646
 Transform:
   m_ObjectHideFlags: 0
@@ -7826,7 +7814,6 @@ MonoBehaviour:
   orbitSensitivity: 2
   rotationLocked: 0
   POVTarget: {fileID: 6824787337333441233}
-  WhaleInput: {fileID: 545508174}
 --- !u!114 &1205938767
 MonoBehaviour:
   m_ObjectHideFlags: 0

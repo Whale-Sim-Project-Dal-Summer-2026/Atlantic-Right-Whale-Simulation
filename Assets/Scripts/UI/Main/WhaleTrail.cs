@@ -38,9 +38,9 @@ public class WhaleTrail : MonoBehaviour {
     void Update() {
         Vector3 currWhalePos = whale.transform.position;
         Vector3 whaleOffset = currWhalePos - whalePos;
-        BezierKnot currKnot = spline[liveKnot], currStaticKnot = spline[liveKnot-1];
-        Vector3 newPos = (Vector3) currKnot.Position + whaleOffset;
-        currKnot.Position =  newPos;
+        BezierKnot currKnot = spline[liveKnot], currStaticKnot = spline[liveKnot - 1];
+        Vector3 newPos = (Vector3)currKnot.Position + whaleOffset;
+        currKnot.Position = newPos;
         whalePos = currWhalePos;
         spline.SetKnot(liveKnot, currKnot);
         Vector3 currStaticSplinePos = currStaticKnot.Position;
@@ -51,6 +51,17 @@ public class WhaleTrail : MonoBehaviour {
             liveKnot++;
         }
 
-        spline.EnforceTangentModeNoNotify(new SplineRange(0, liveKnot));
+        //spline.EnforceTangentModeNoNotify(new SplineRange(0, liveKnot));
     }
+
+    public void ResetPath() {
+        whalePos = whale.transform.position;
+        spline.Clear();
+        spline.SetTangentMode(TangentMode.AutoSmooth);
+        BezierKnot newKnotObj = new BezierKnot(new float3(0,0,0));
+        newKnotObj.Rotation = whale.transform.rotation; // TODO: make sure this is actually working
+        spline.Add(newKnotObj, TangentMode.AutoSmooth);
+        spline.Add(newKnotObj, TangentMode.AutoSmooth);
+        liveKnot = 1;
+    } 
 }
