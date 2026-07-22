@@ -42,9 +42,13 @@ public class PublicUIManager : MonoBehaviour {
     public ResetManager resetManager;
     
     private WhaleTrail whaleTrail;
-    private int currCam = 1;
+    private int currCam;
+        
+    
     
     void Awake() {
+        CameraController.OnCamSwitch += GetCurrCam;
+        
         // get refs
         helpBtn = GameObject.Find("HelpBtn").GetComponent<Button>();
         helpUI = GameObject.Find("HelpUI").GetComponent<HelpPopup>();
@@ -96,6 +100,10 @@ public class PublicUIManager : MonoBehaviour {
         sceneSwitcher = GameObject.Find("Scene Switcher").GetComponent<SceneSwitcher>();
     }
 
+    void GetCurrCam(int camIndex) {
+        
+    }
+
     void Start() {
         scenariosBtn.onClick.AddListener(sceneSwitcher.changeToScenarios);
     }
@@ -116,10 +124,12 @@ public class PublicUIManager : MonoBehaviour {
         }
 
         bool camSwitched = false; // TODO
-        if (camSwitched) {
-            currCam = 2; // or whatever (TODO)
-        }
+
     }
+    
+    
+    
+    
 
     private void SetIdleMode(bool on) {
         isIdle = on;

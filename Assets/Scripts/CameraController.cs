@@ -35,6 +35,10 @@ public class CameraController : MonoBehaviour{
 
     float inputBuffer = 200;
     double lastTimePressed;
+    
+    public delegate void CamSwitchEvent(int index);
+
+    public static event CamSwitchEvent OnCamSwitch;
 
     enum CameraState {
         ORBIT,
@@ -43,7 +47,7 @@ public class CameraController : MonoBehaviour{
     }
 
     void Awake() {
-        Scrubber.OnCamSwitch += changeCamViaScrub;
+        Scrubber.OnCamSwitch += changeToCam;
         lastTimePressed = Time.realtimeSinceStartupAsDouble * 1000;
 
         
@@ -66,12 +70,7 @@ public class CameraController : MonoBehaviour{
         controls.Player.Sprint.performed += ctx => sprinting = true;
         controls.Player.Sprint.canceled += ctx => sprinting = false;
     }
-
-    void changeCamViaScrub(int index) {
-        if (index == 1) state = CameraState.ORBIT;
-        if (index == 2) state = CameraState.FREE;
-        if (index == 3) state = CameraState.POV;
-    }
+    
 
     void OnEnable() => controls.Enable();
     void OnDisable() => controls.Disable();
@@ -95,14 +94,31 @@ public class CameraController : MonoBehaviour{
         lastTimePressed = currTime;
         rotationLocked = !rotationLocked;
     }
+
+
+    void changeToCam(int index) {
+        switch (index) {
+            case 1:
+                state = CameraState.ORBIT;
+                break;
+            case 2:
+                state = CameraState.FREE;
+                break;
+            case 3:
+                state = CameraState.POV;
+                break;
+        }
+        
+        OnCamSwitch?.Invoke(index);
+    }
     void changeCams() {
         bool toCam1 = (Cam1?.ReadValue<float>() ?? 0f) == 1.0f;
         bool toCam2 = (Cam2?.ReadValue<float>() ?? 0f) == 1.0f;
         bool toCam3 = (Cam3?.ReadValue<float>() ?? 0f) == 1.0f;
 
-        if (toCam1) state = CameraState.ORBIT;
-        if (toCam2) state = CameraState.FREE;
-        if (toCam3) state = CameraState.POV;
+        if (toCam1) changeToCam(1);
+        if (toCam2) changeToCam(2);
+        if (toCam3) changeToCam(3);
 
     }
 
