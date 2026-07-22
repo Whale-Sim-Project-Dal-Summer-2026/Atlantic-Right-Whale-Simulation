@@ -112,7 +112,7 @@ public class WhaleMotionFromUserInputRT : DataSource
             Debug.LogWarning("WhaleMotionFromUserInputRT does not support loading states at specific timesteps. Resetting to initial state.");
         }
         this.currentWhaleState = startState;
-        userInputManager.rb.Native.setPosition(new agx.Vec3(0, 75f - startState.Root.Position.y, 0));
+        userInputManager.rb.Native.setPosition(new agx.Vec3(-500, 0, 500));
     }
 
     public override int GetTotalTimesteps()
