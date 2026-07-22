@@ -25,6 +25,7 @@ public class PauseManager : MonoBehaviour{
 
     void Start(){
         pauseAction = InputSystem.actions.FindAction("Pause");
+        Time.timeScale = 1.0f;
         state = PauseState.PLAYING;
 
         pressBuffer = 500.0f;

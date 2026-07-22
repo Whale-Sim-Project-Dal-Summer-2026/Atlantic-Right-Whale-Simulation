@@ -15,8 +15,9 @@ public class IdleMode : MonoBehaviour {
     }
         
     private void Update() {
-        if (Keyboard.current.anyKey.wasPressedThisFrame || Gamepad.current.wasUpdatedThisFrame) {
-            Debug.Log("INPUT");
+        bool keyboardPress = (Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame);
+        bool controllerPress = Gamepad.current != null && Gamepad.current.wasUpdatedThisFrame;
+        if (keyboardPress || controllerPress) {
             lastInput = Time.time;
         }
 
