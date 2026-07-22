@@ -11,6 +11,7 @@ using NUnit.Framework;
 using agx;
 using Unity.Collections;
 using System;
+using agxDriveTrain;
 
 
 
@@ -195,6 +196,7 @@ public class WhaleDriver : MonoBehaviour
        
 
         float pitch = newState.Root.Rotation.eulerAngles.x;
+
         if (pitch > 180f) pitch -= 360f;
         //Debug.Log("Pitch: "+ pitch);
         //float pitch360Percent  = Mathf.InverseLerp(0,360, pitch);
@@ -206,8 +208,13 @@ public class WhaleDriver : MonoBehaviour
         whalePitch = -pitch;
 
         whaleYaw = newState.Root.Rotation.eulerAngles.y;
+        
+        float roll = newState.Root.Rotation.eulerAngles.z;
 
-        whaleRoll = newState.Root.Rotation.eulerAngles.z;
+        if (roll > 180f) roll -= 360f;
+
+
+        whaleRoll = -roll; 
     }
   void FixedUpdate(){
     PauseTime -= 1;
