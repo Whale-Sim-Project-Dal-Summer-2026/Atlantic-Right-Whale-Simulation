@@ -1,15 +1,11 @@
-using System;
 using AnimationDataStructs;
-using Unity.Mathematics;
-using UnityEngine;
 
 namespace Animation.DataSources{
-public abstract class DataSource
-{
-    //public DataLoader dataLoader;
 
-    //int currentTimeStep = 0;
-
+/// <summary>
+/// Abstract Class from which all datasources are based on
+/// </summary>
+public abstract class DataSource{
     public abstract void LoadSource(AnimationSettings animationSettings, WhaleState startState, WhaleBlueprint blueprint);
     public abstract WhaleState getNextWhaleState();
     public abstract void loadWhaleStateAt(int timestep);
@@ -17,44 +13,7 @@ public abstract class DataSource
     
 }
 
-
-// so somehow need to have a datasource feed the driver, maybe both could be passed in the whale structure??
-// maybe they are passed in the current whale state, and return the next whale state? as well as delta time both fixed and regular
-
-// BOTH WILL RETURN WHALE STATES which hold lists of different bones in the whale
-// okay so they will have their own logic for doing this? maybe two motion data csv ones? one for the classic method of just moving using the forward vec 
-// and another with full body motion??
-// 
-
-//FIRST DRAFT OF DATASOURCES JUST FOR MY OWN MEMEORY
-//NOTHING IS IMPLEMENTED YET
-
-public class MotionDataCSV : DataSource
-{
-    // each one should have a constructor which builds itself using the blueprint provided
-    // maybe the blueprint can be passed in from a settings scriptable asset???
-    
-    public override void LoadSource(AnimationSettings animationSettings, WhaleState startState, WhaleBlueprint blueprint)
-    {
-        throw new System.NotImplementedException();
-    }
-
-
-    public override WhaleState getNextWhaleState()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void loadWhaleStateAt(int timestep)
-    {
-        throw new System.NotImplementedException();
-    }
-    public override int GetTotalTimesteps()
-    {
-        throw new System.NotImplementedException();
-    }
-}
-
+/// current work in prog
 public class RandomWalk : DataSource
 {
     public override void LoadSource(AnimationSettings animationSettings, WhaleState startState, WhaleBlueprint blueprint)

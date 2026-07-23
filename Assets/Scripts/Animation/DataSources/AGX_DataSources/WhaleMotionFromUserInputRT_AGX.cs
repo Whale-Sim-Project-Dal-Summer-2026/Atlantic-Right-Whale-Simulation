@@ -5,28 +5,33 @@ using Animation.DataSources;
 using System.Collections.Generic;
 using FlukeWaveAmplitudeLookUpClass;
 
-//real time user input data
+/// <summary>
+/// Real Time User input turned into whale movement, No Saving or Streaming, WhaleState Processed in Real Time
+/// </summary>
 public class WhaleMotionFromUserInputRT : DataSource
 {
     //not real value since we are getting real time user input
     int totalTimesteps = -1; 
-
-    int timestep = 0;
+    // same thing here
+    int timestep = -1;
     float fixedTimeStep = 0.004f;
 
     //might be cool to eventually be able to save user input to a file and then play it back as a motion data csv source
-    [SerializeField] UserInputManager userInputManager; // neds to be created
+
+    // passes user input in 
+    [SerializeField] UserInputManager userInputManager; 
 
     WhaleState currentWhaleState;
     WhaleState startState; // initial state of the whale, will be used to reset the whale to its initial position and rotation
-
+    WhaleBlueprint blueprint;
     CSVLoader cSVLoader;
     FlukeSolver flukeSolver;
     FlukeWaveAmplitudeLookUp lookUp;
+
+    // Solvers
     int tailStartIndex = 0;
     MouthSolver mouthSolver;
     FinSolver finSolver;
-    WhaleBlueprint blueprint;
 
     MainBodySolverAbstract mainBodySolver;
 

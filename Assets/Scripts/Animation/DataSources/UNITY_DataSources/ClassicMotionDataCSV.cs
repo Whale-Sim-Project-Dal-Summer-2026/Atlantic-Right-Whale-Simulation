@@ -3,11 +3,14 @@ using AnimationDataStructs;
 using Animation.DataSources;
 using UnityEngine;
 using System.Collections.Generic;
-using Animation.DataSources;
 using AnimationDataStorageManager;
 
 // classic means no body movement just the up and down
 // made from refacotring original code from v0 for testing 
+
+/// <summary>
+/// No Streamer, No Saving, One Giant list of WhaleStates 
+/// </summary>
 public class ClassicMotionDataCSV : DataSource
 {
     private int[] cols = { 0, 1, 8, 9, 10, 12, 14, 23 };

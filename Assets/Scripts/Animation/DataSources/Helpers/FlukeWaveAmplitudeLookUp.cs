@@ -1,24 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Windows.Speech;
-using FlukeWaveAmplitudeLookUpClass;
-using System.Linq;
 
+namespace FlukeWaveAmplitudeLookUpClass{
 
-namespace FlukeWaveAmplitudeLookUpClass
-{
 /// <summary>
-/// Stores the lookup table of fluke amplitude
+/// Stores the lookup table of fluke amplitude - derived from Jay's Model
 /// </summary>
 
 public class FlukeWaveAmplitudeLookUp{
-
-
-    // this should contain the list of the all amplitudes for lookup 
-
-    //smaller dict of all things 
-    
-    //  gives back the freq and amplitude for the current phase
 
     private Dictionary<string,FlukeWaveAmplitudeInstance> lookUpTable;
 
@@ -65,21 +54,12 @@ public class FlukeWaveAmplitudeLookUp{
     }
 
 
-
-
     public double[] lookUp(string phase, float speed, bool mouthOpen) {
         double[] output= new double[2];
 
         float clampedSpeed = Mathf.Clamp(speed,minSpeed,maxSpeed);
 
         string hashedName = hashName(phase,clampedSpeed,mouthOpen);
-
-
-        // if (speed == 0f) {
-        //     output[0]=0d;
-        //     output[1]=0d;
-        //     return output;
-        // }
 
         FlukeWaveAmplitudeInstance foundInstance = lookUpTable[hashedName];
 
@@ -91,7 +71,5 @@ public class FlukeWaveAmplitudeLookUp{
     }
     public int Count() {
         return lookUpTable.Count;
-
-
     }
 }}

@@ -1,6 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+/// <summary>
+/// Loads a CSV, Helper Class for all Datasources
+/// </summary>
 public class CSVLoader{ 
 public (string[][] data ,Dictionary<string,int> columnIndices) loadCSV(TextAsset csvFile,bool hasHeaders){
         
