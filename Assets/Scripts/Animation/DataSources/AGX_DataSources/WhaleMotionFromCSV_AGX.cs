@@ -11,6 +11,31 @@ using AnimationDataStorageManager;
 using MotionDataPacketClass;
 using FlukeWaveAmplitudeLookUpClass;
 
+// current issue, due to the nature of agx reseting does not clear the previous forces/ targets so each time reset is pressed it deviates
+
+// solution, each reset completely destroy the whale and rigid body, create a new instance of it. 
+// Then use the below method which saves whale states to re-run the exact scenario again. 
+// this should make each run exactly the same as from each position the same exact force is applied
+
+// this will remove the compounding error present
+
+// since this requires the rigid body, it's not possible to completely precomput this before runtime
+// BUT, I think I could save each state as its running using the datastorage manager, and keep track of which sections have been run alreay.
+
+// Lets say the animation/m,ovement ran until timestep 100 and then was restarted
+// there would be 100 whale states calculated
+// as each state is calcualted it is written to the file.
+// then a reset happens and instead of recalculating, the states are read back from the file, 
+// once it would reach timestep 101, it begins reclactuing them live and saving to a file
+
+// this means that for each csv, only one full run through is needed to be able to save all states
+
+
+//save the forces into the position vector for 
+
+
+
+
 public class WhaleMotionFromCSV_AGX : DataSource{
 
     

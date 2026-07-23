@@ -6,9 +6,15 @@ using System.Collections.Generic;
 using FlukeWaveAmplitudeLookUpClass;
 
 /// <summary>
-/// Real Time User input turned into whale movement, No Saving or Streaming, WhaleState Processed in Real Time
+/// Real Time User input turned into whale movement, No Saving or Streaming, WhaleState Processed in Real Time.
+/// Uses Unity Physics
 /// </summary>
-public class WhaleMotionFromUserInputRT : DataSource
+/// 
+/// 
+/// 
+/// this may not be useful to have but i just kinda want things to be even since who knows what future development may happen
+public class WhaleMotionFromUserInputRT_UNITY
+ : DataSource
 {
     //not real value since we are getting real time user input
     int totalTimesteps = -1; 
