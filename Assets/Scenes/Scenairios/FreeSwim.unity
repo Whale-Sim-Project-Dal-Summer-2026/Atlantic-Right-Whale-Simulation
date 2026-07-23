@@ -2784,7 +2784,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &392961703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2797,6 +2797,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1f29d0c01872a749b17c2c8bbc5d493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseManager
+  allowUserInput: 0
 --- !u!4 &392961704
 Transform:
   m_ObjectHideFlags: 0
@@ -3968,6 +3969,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HelpUI
       objectReference: {fileID: 0}
+    - target: {fileID: 4505869503805513057, guid: 11d2352ce9cfdfb4ca1f05f1d5b57f25, type: 3}
+      propertyPath: simUIManager
+      value: 
+      objectReference: {fileID: 1458736382}
     - target: {fileID: 6516652904964345063, guid: 11d2352ce9cfdfb4ca1f05f1d5b57f25, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4006,6 +4011,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6516652904964345063, guid: 11d2352ce9cfdfb4ca1f05f1d5b57f25, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7170085108513337919, guid: 11d2352ce9cfdfb4ca1f05f1d5b57f25, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -9994,7 +10003,7 @@ PrefabInstance:
     - target: {fileID: 7578469641411572701, guid: 185ff3170786f054b95342358584421e, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 98616092271ebb64b8837ae47ad8cfdc, type: 3}
+      objectReference: {fileID: 21300000, guid: 1331b232aacca2549a3c8c87d58080c6, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 5736586593011829273, guid: 185ff3170786f054b95342358584421e, type: 3}

@@ -2600,6 +2600,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1f29d0c01872a749b17c2c8bbc5d493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseManager
+  allowUserInput: 1
 --- !u!4 &392961704
 Transform:
   m_ObjectHideFlags: 0

@@ -23,6 +23,8 @@ public class PauseManager : MonoBehaviour{
 
     Scrubber Scrubber;
 
+    [SerializeField] bool allowUserInput;
+
     void Start(){
         pauseAction = InputSystem.actions.FindAction("Pause");
         Time.timeScale = 1.0f;
@@ -31,8 +33,17 @@ public class PauseManager : MonoBehaviour{
         pressBuffer = 500.0f;
         lastPressTime = Time.realtimeSinceStartupAsDouble * 1000;
 
-        Scrubber.OnPause += () => {
-            switch (state){
+
+        HelpPopup.OnSwapStates += swapStates;
+        Scrubber.OnPause += swapStates;
+    }
+
+
+    void swapStates(){
+        // swap states
+
+        Debug.Log("Swap Pause");
+        switch (state){
             case (PauseState.PLAYING):{
                 Time.timeScale = 0.0f;
                 state = PauseState.PAUSED;       
@@ -45,12 +56,12 @@ public class PauseManager : MonoBehaviour{
                 break;
             }
         }
-
-        };
     }
 
 
     bool readInAction(){
+        if(!allowUserInput) return false;
+        
         return (pauseAction?.ReadValue<float>() ?? 0.0f) == 1.0f;
     }
 
@@ -66,20 +77,8 @@ public class PauseManager : MonoBehaviour{
 
         lastPressTime = currTime;
 
-// swap states
-        switch (state){
-            case (PauseState.PLAYING):{
-                Time.timeScale = 0.0f;
-                state = PauseState.PAUSED;       
-                break;
-            }
+        swapStates();
 
-            case (PauseState.PAUSED):{
-                Time.timeScale = 1.0f;
-                state = PauseState.PLAYING;       
-                break;
-            }
-        }
 
     }
 }

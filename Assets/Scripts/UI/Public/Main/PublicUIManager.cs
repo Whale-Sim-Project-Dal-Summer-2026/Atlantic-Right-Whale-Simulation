@@ -13,7 +13,6 @@ using UnityEngine.UI;
 
 public class PublicUIManager : MonoBehaviour {
     // objs
-    private Button helpBtn;
     private HelpPopup helpUI;
     private Button scenariosBtn;
     private GameObject controlHintsFreeCam;
@@ -43,12 +42,16 @@ public class PublicUIManager : MonoBehaviour {
     
     private WhaleTrail whaleTrail;
     private int currCam = 1;
+
+    public delegate void MenuToggleEvent(bool toggle);
+
+    public static event MenuToggleEvent OnMenuToggle;
     
     void Awake() {
         CameraController.OnCamSwitch += GetCurrCam;
+        HelpPopup.OnSwapStates += swapCursorLock;
         
         // get refs
-        helpBtn = GameObject.Find("HelpBtn").GetComponent<Button>();
         helpUI = GameObject.Find("HelpUI").GetComponent<HelpPopup>();
         scenariosBtn = GameObject.Find("ScenariosBtn").GetComponent<Button>();
         GameObject controlHintsUI = GameObject.Find("ControlHintsUI");
@@ -98,7 +101,13 @@ public class PublicUIManager : MonoBehaviour {
         sceneSwitcher = GameObject.Find("Scene Switcher").GetComponent<SceneSwitcher>();
     }
 
-// camera event subscriber
+    void OnDisable()
+    {
+        CameraController.OnCamSwitch -= GetCurrCam;
+        HelpPopup.OnSwapStates -= swapCursorLock;
+    }
+
+    // camera event subscriber
     void GetCurrCam(int camIndex) {
         currCam = camIndex; 
         if (currCam == 1) {
@@ -140,10 +149,12 @@ public class PublicUIManager : MonoBehaviour {
         scenariosBtn.onClick.AddListener(sceneSwitcher.changeToScenarios);
     }
 
+    void swapCursorLock(){
+        simUIManager.SetCursorLock(Cursor.visible);
+    }
+
     void Update() {
-        if (helpUI) {
-            simUIManager.SetCursorLock(!helpUI.IsOpen()) ;
-        }
+
         if (idleUI) {
             if (!isIdle && idleUI.IsIdle()) {
                 SetIdleMode(true);
@@ -156,13 +167,16 @@ public class PublicUIManager : MonoBehaviour {
         }
     }
     
+    // TODO make IDLE MODE an event that different components listen for to toggle, rather than keeping references
+
     private void SetIdleMode(bool on) {
         isIdle = on;
         simUIManager.SetUIVisibility(!on);
         simUIManager.SetPathVisibility(!on);
         if (on) {
             if (helpUI) { 
-                helpUI.SetHelpPopupVisibility(false);
+                // removed this line because publicUI manager no longer knows about the help popup. (It handles its own visibility)
+                // helpUI.SetHelpPopupVisibility(false);
             }
             if (viewerUI) {
                 viewerUI.SetViewerPopupVisibility(false);
@@ -183,7 +197,13 @@ public class PublicUIManager : MonoBehaviour {
         bool showUI = on;
 
         // hide UI
-        helpBtn.gameObject.SetActive(showUI);
+
+        
+        // TODO make ToggleUI an event that different components listen for to toggle, rather than keeping references
+        // components should Subscribe to this event to know when to toggle! Talk to Dany if Help if needed with setup :)
+        OnMenuToggle?.Invoke(showUI);
+
+
         scenariosBtn.gameObject.SetActive(showUI);
         funFactsTxt.gameObject.SetActive(showUI);
         if (controlHintsFreeCam && currCam == 2) { // TODO: only activate if curr scene matches
@@ -198,11 +218,6 @@ public class PublicUIManager : MonoBehaviour {
         if (controlHintsPOVCam && currCam == 3) { // TODO: only activate if curr scene matches
             controlHintsPOVCam.SetActive(showUI);
         }
-        if (helpUI) {
-            if (!on && helpUI.IsOpen()) {
-                helpUI.SetHelpPopupVisibility(false);
-            }
-        }
         if (viewerUI) {
             if (!on && viewerUI.IsOpen()) {
                 viewerUI.SetViewerPopupVisibility(false);
@@ -212,7 +227,7 @@ public class PublicUIManager : MonoBehaviour {
     }
     
     public void SetUIInteractivity(bool on) {
-        helpBtn.interactable = on;
+        // helpBtn.interactable = on;
         scenariosBtn.interactable = on;
         funFactsBtn.interactable = on;
         if (unstickBtn) {

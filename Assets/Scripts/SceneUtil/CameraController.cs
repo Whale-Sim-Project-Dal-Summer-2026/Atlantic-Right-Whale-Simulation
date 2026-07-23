@@ -40,6 +40,8 @@ public class CameraController : MonoBehaviour{
 
     public static event CamSwitchEvent OnCamSwitch;
 
+    bool forceLock;
+
     enum CameraState {
         ORBIT,
         FREE,
@@ -47,7 +49,8 @@ public class CameraController : MonoBehaviour{
     }
 
     void Awake() {
-        Scrubber.OnCamSwitch += changeToCam;
+
+
         lastTimePressed = Time.realtimeSinceStartupAsDouble * 1000;
 
         
@@ -70,10 +73,21 @@ public class CameraController : MonoBehaviour{
         controls.Player.Sprint.performed += ctx => sprinting = true;
         controls.Player.Sprint.canceled += ctx => sprinting = false;
     }
+
+
     
 
-    void OnEnable() => controls.Enable();
-    void OnDisable() => controls.Disable();
+    void OnEnable()
+    {
+        Scrubber.OnCamSwitch += changeToCam;
+        HelpPopup.OnSwapStates += toggleForceLock;
+        controls.Enable();  
+    } 
+    void OnDisable(){
+        Scrubber.OnCamSwitch -= changeToCam;
+        HelpPopup.OnSwapStates -= toggleForceLock;
+        controls.Disable();
+    }
 
     void Start(){
 
@@ -81,6 +95,10 @@ public class CameraController : MonoBehaviour{
         yaw   = transform.eulerAngles.y;
         pitch = transform.eulerAngles.x;
 
+    }
+
+    void toggleForceLock(){
+        forceLock = !forceLock;
     }
 
     void lockUnLockCamera() {
@@ -123,6 +141,8 @@ public class CameraController : MonoBehaviour{
     }
 
     void Update() {
+        if(forceLock) return;
+
         changeCams();
         lockUnLockCamera();
         

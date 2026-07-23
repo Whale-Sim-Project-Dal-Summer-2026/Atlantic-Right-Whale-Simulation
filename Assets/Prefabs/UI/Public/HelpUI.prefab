@@ -51,6 +51,7 @@ MonoBehaviour:
   closeBtns:
   - {fileID: 6301338536061627840}
   - {fileID: 3316578859995291543}
+  simUIManager: {fileID: 0}
 --- !u!1 &3374226667778259870
 GameObject:
   m_ObjectHideFlags: 0

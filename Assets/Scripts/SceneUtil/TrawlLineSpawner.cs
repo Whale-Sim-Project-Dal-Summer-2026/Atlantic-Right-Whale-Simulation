@@ -68,9 +68,6 @@ public class TrawlLineSpawner : ScriptComponent{
 
         }
         GetSimulation().add(wire.Native);
-
-
-        Debug.Log(wire.Route.NumNodes);
         
     }
 
