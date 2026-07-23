@@ -100,6 +100,7 @@ public class PublicUIManager : MonoBehaviour {
         sceneSwitcher = GameObject.Find("Scene Switcher").GetComponent<SceneSwitcher>();
     }
 
+// camera event subscriber
     void GetCurrCam(int camIndex) {
         
     }
