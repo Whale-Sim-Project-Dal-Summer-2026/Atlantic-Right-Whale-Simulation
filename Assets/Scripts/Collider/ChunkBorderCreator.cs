@@ -125,8 +125,8 @@ public class ChunkBorderCreator : ScriptComponent {
         wallInfo bot = new wallInfo();
 
 
-        bot.leftPoint = new Vector2(x.x,z.x);
-        bot.rightPoint = new Vector2(x.y,z.x);
+        bot.leftPoint = new Vector2(x.y,z.x);
+        bot.rightPoint = new Vector2(x.x,z.x);
 
         wallInfo left = new wallInfo();
 
@@ -135,8 +135,8 @@ public class ChunkBorderCreator : ScriptComponent {
 
         wallInfo right = new wallInfo();
 
-        right.leftPoint = new Vector2(x.y,z.x);
-        right.rightPoint = new Vector2(x.y,z.y);
+        right.leftPoint = new Vector2(x.y,z.y);
+        right.rightPoint = new Vector2(x.y,z.x);
 
 
         chunkBorderInfo chunkBorderInfo = new chunkBorderInfo();
@@ -152,35 +152,26 @@ public class ChunkBorderCreator : ScriptComponent {
     }
 
 // loop over each mesh walls check for mesh neighbors
-    void createFinalWallList(){
-        foreach(chunkBorderInfo chunkBorderInfo in chunkWalls){
-            
-            int currWest = chunkBorderInfo.west;
-            int currNorth = chunkBorderInfo.north;
+    void createFinalWallList() {
+        foreach (chunkBorderInfo borderInfo in chunkWalls) {
+            int currWest = borderInfo.west;
+            int currNorth = borderInfo.north;
 
-            Vector2 northNeighbor = new Vector2(currWest, currNorth - chunkSize);
-            Vector2 southNeighbor = new Vector2(currWest, currNorth + chunkSize);
+            Vector2 northNeighbor = new Vector2(currWest, currNorth + chunkSize);
+            Vector2 southNeighbor = new Vector2(currWest, currNorth - chunkSize);
+            Vector2 westNeighbor = new Vector2(currWest + chunkSize, currNorth);
+            Vector2 eastNeighbor = new Vector2(currWest - chunkSize, currNorth);
 
-            Vector2 westNeighbor = new Vector2(currWest - chunkSize, currNorth);
-            Vector2 eastNeighbor = new Vector2(currWest + chunkSize, currNorth);
-
-
-            if(!neighborExists(chunkBorderInfo, northNeighbor)){
-                finalWalls.Add(chunkBorderInfo.topWall);
-            }
-
-            if(!neighborExists(chunkBorderInfo, southNeighbor)){
-                finalWalls.Add(chunkBorderInfo.botWall);
-            }
-
-            if(!neighborExists(chunkBorderInfo, westNeighbor)){
-                finalWalls.Add(chunkBorderInfo.leftWall);
-            }
-
-            if(!neighborExists(chunkBorderInfo, eastNeighbor)){
-                finalWalls.Add(chunkBorderInfo.rightWall);
-            }
+            evaluateAndAddWall(borderInfo, northNeighbor, borderInfo.rightWall);
+            evaluateAndAddWall(borderInfo, southNeighbor, borderInfo.leftWall);
+            evaluateAndAddWall(borderInfo, westNeighbor, borderInfo.topWall);
+            evaluateAndAddWall(borderInfo, eastNeighbor, borderInfo.botWall);
         }
+    }
+
+    void evaluateAndAddWall(chunkBorderInfo borderInfo, Vector2 neighborPos, wallInfo wall) {
+        if (neighborExists(borderInfo, neighborPos)) return;
+        finalWalls.Add(wall);
     }
 
     bool neighborExists(chunkBorderInfo currChunk, Vector2 neighborPos){
