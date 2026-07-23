@@ -8,7 +8,7 @@ using FlukeWaveAmplitudeLookUpClass;
 /// <summary>
 /// Real Time User input turned into whale movement, No Saving or Streaming, WhaleState Processed in Real Time
 /// </summary>
-public class WhaleMotionFromUserInputRT : DataSource
+public class WhaleMotionFromUserInputRT_AGX : DataSource
 {
     //not real value since we are getting real time user input
     int totalTimesteps = -1; 

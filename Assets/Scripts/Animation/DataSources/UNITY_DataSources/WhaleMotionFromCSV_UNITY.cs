@@ -7,7 +7,7 @@ using AnimationDataStorageManager;
 using MotionDataPacketClass;
 using FlukeWaveAmplitudeLookUpClass;
 
-public class WhaleMotionFromCSV : DataSource{
+public class WhaleMotionFromCSV_UNITY : DataSource{
 
     public List<MotionDataPacket> motionDataPacketList = new List<MotionDataPacket>();
     private float fixedTimeStep = 0.004f;

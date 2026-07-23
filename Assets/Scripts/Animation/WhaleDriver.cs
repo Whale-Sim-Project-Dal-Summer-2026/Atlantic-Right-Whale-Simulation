@@ -46,6 +46,15 @@ using agxDriveTrain;
 
 //SAME THING WITH THE MULTIPLE DATA SOURCES!!!
 
+
+
+
+//TO DO:
+// MAKE BETTER FILE SYSTEM FOR SAVING THINGS - no overwriting
+// set up agx forces saving
+// complete whale destruvtion and re-creation for better consistancy 
+// refactor the user manager stuff 
+
 public enum DataSourceType
 {
     ClassicMotionDataCSV,
@@ -116,11 +125,10 @@ public class WhaleDriver : MonoBehaviour
         // set data source based on the enum value
         dataSource = dataSourceType switch{
             DataSourceType.ClassicMotionDataCSV => new ClassicMotionDataCSV(),
-            DataSourceType.MotionDataCSV => new MotionDataCSV(),
-            DataSourceType.WhaleMotionFromCSV => new WhaleMotionFromCSV(),
+            DataSourceType.WhaleMotionFromCSV => new WhaleMotionFromCSV_UNITY(),
             DataSourceType.RandomWalk => new RandomWalk(),
             DataSourceType.WhaleMotionFromCSV_AGX => new WhaleMotionFromCSV_AGX(),
-            DataSourceType.WhaleMotionFromUserInputRT => new WhaleMotionFromUserInputRT(),
+            DataSourceType.WhaleMotionFromUserInputRT => new WhaleMotionFromUserInputRT_AGX(),
             _ => throw new System.ArgumentOutOfRangeException()
         };
 
