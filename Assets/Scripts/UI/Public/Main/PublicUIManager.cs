@@ -42,9 +42,7 @@ public class PublicUIManager : MonoBehaviour {
     public ResetManager resetManager;
     
     private WhaleTrail whaleTrail;
-    private int currCam;
-        
-    
+    private int currCam = 1;
     
     void Awake() {
         CameraController.OnCamSwitch += GetCurrCam;
@@ -102,7 +100,40 @@ public class PublicUIManager : MonoBehaviour {
 
 // camera event subscriber
     void GetCurrCam(int camIndex) {
-        
+        currCam = camIndex; 
+        if (currCam == 1) {
+            if (controlHintsFreeCam) { 
+                controlHintsFreeCam.SetActive(false);
+            }
+            if (controlHintsFollowCam) { 
+                controlHintsFollowCam.SetActive(true);
+            }
+            if (controlHintsPOVCam) { 
+                controlHintsPOVCam.SetActive(false);
+            }
+        } 
+        if (currCam == 2) {
+            if (controlHintsFreeCam) { 
+                controlHintsFreeCam.SetActive(true);
+            }
+            if (controlHintsFollowCam) { 
+                controlHintsFollowCam.SetActive(false);
+            }
+            if (controlHintsPOVCam) { 
+                controlHintsPOVCam.SetActive(false);
+            }
+        }
+        if (currCam == 3) {
+            if (controlHintsFreeCam) { 
+                controlHintsFreeCam.SetActive(false);
+            }
+            if (controlHintsFollowCam) { 
+                controlHintsFollowCam.SetActive(false);
+            }
+            if (controlHintsPOVCam) { 
+                controlHintsPOVCam.SetActive(true);
+            }
+        }
     }
 
     void Start() {
@@ -123,15 +154,8 @@ public class PublicUIManager : MonoBehaviour {
                 SetIdleMode(false);
             }
         }
-
-        bool camSwitched = false; // TODO
-
     }
     
-    
-    
-    
-
     private void SetIdleMode(bool on) {
         isIdle = on;
         simUIManager.SetUIVisibility(!on);
