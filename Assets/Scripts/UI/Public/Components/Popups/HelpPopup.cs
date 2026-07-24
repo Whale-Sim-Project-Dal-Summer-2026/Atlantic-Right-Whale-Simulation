@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -14,19 +16,54 @@ public class HelpPopup : MonoBehaviour {
     [SerializeField] private GameObject helpPopup;
     [SerializeField] private Button[] closeBtns;
     // extern
-    [SerializeField] private SimulationUIManager simUIManager; // TODO: not good dependency
-    private Scrubber scrubber;
-
+    [SerializeField] SimulationUIManager simUIManager; // TODO: not good dependency
     PopupState currState;
 
+    InputAction helpAction;
+    InputAction backAction;
+    double lastPressTime;
+// MS between presses
+    float pressBuffer = 300;
     public delegate void PopupSwapStateEvent();
 
     public static event PopupSwapStateEvent OnSwapStates;
+
+    List<InputAction> actionsToListenFor;
     
-    void Awake() {
+
+    void Start() {
+        // set up btns
+        helpBtn.onClick.AddListener(helpPress);
+        for (int x = 0; x < closeBtns.Length; x++) {
+            closeBtns[x].onClick.AddListener(() => SetHelpPopupVisibility(false));
+        }
+
+        lastPressTime = Time.time;
         currState = PopupState.CLOSED;
+        helpAction = InputSystem.actions.FindAction("OpenHelp");
+        backAction = InputSystem.actions.FindAction("BackAction");
+
+        actionsToListenFor = new List<InputAction>();
+        actionsToListenFor.Add(helpAction);
     }
 
+    void Update()
+    {
+        bool interaction = false;
+
+        foreach(InputAction action in actionsToListenFor){
+            interaction = (action?.ReadValue<float>() ?? 0.0f) == 1.0f;
+            if(interaction) break;
+        }
+
+        if(!interaction) return;
+
+        double currTime = Time.unscaledTimeAsDouble * 1000;
+        if (currTime - lastPressTime > pressBuffer){
+            helpPress();
+            lastPressTime = currTime;
+        } 
+    }
     void OnEnable(){
         PublicUIManager.OnMenuToggle += setButtonVisibility;
     }
@@ -46,13 +83,6 @@ public class HelpPopup : MonoBehaviour {
         SetHelpPopupVisibility(!currVisibility);
     }
 
-    void Start() {
-        // set up btns
-        helpBtn.onClick.AddListener(helpPress);
-        for (int x = 0; x < closeBtns.Length; x++) {
-            closeBtns[x].onClick.AddListener(() => SetHelpPopupVisibility(false));
-        }
-    }
     
     void swapState(bool on){
         currState = on ? PopupState.OPEN : PopupState.CLOSED;
@@ -65,12 +95,14 @@ public class HelpPopup : MonoBehaviour {
             case (PopupState.OPEN):{
                 helpPopup.SetActive(true);
                 simUIManager.SetUIInteractivity(false);
+                actionsToListenFor.Add(backAction);
                 break;
             }
             
             case (PopupState.CLOSED):{
                 helpPopup.SetActive(false);
                 simUIManager.SetUIInteractivity(true);
+                actionsToListenFor.Remove(backAction);
                 break;
             }
         }

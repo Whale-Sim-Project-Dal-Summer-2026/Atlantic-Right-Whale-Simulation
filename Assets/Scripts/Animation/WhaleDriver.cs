@@ -120,7 +120,7 @@ public class WhaleDriver : MonoBehaviour
     void Start(){
 
 
-        StartingPauseTime = PauseTime;
+        StartingPauseTime = PauseTime;  
 
         // set data source based on the enum value
         dataSource = dataSourceType switch{

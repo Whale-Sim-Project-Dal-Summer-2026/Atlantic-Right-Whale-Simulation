@@ -239,6 +239,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "BackAction",
+                    "type": "Button",
+                    "id": "f359162f-540e-4497-b4b9-ab93d4e6027d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -899,6 +908,17 @@
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "CamLock",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "32b44c55-462a-4579-8752-fd668aa490d5",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "BackAction",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

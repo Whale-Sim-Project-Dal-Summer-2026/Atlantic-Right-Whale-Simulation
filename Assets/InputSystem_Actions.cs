@@ -325,6 +325,15 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BackAction"",
+                    ""type"": ""Button"",
+                    ""id"": ""f359162f-540e-4497-b4b9-ab93d4e6027d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -987,6 +996,17 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
                     ""action"": ""CamLock"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""32b44c55-462a-4579-8752-fd668aa490d5"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""BackAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -1598,6 +1618,7 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
         m_Player_Cam2 = m_Player.FindAction("Cam2", throwIfNotFound: true);
         m_Player_Cam3 = m_Player.FindAction("Cam3", throwIfNotFound: true);
         m_Player_CamLock = m_Player.FindAction("CamLock", throwIfNotFound: true);
+        m_Player_BackAction = m_Player.FindAction("BackAction", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1717,6 +1738,7 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Cam2;
     private readonly InputAction m_Player_Cam3;
     private readonly InputAction m_Player_CamLock;
+    private readonly InputAction m_Player_BackAction;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1833,6 +1855,10 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @CamLock => m_Wrapper.m_Player_CamLock;
         /// <summary>
+        /// Provides access to the underlying input action "Player/BackAction".
+        /// </summary>
+        public InputAction @BackAction => m_Wrapper.m_Player_BackAction;
+        /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -1936,6 +1962,9 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
             @CamLock.started += instance.OnCamLock;
             @CamLock.performed += instance.OnCamLock;
             @CamLock.canceled += instance.OnCamLock;
+            @BackAction.started += instance.OnBackAction;
+            @BackAction.performed += instance.OnBackAction;
+            @BackAction.canceled += instance.OnBackAction;
         }
 
         /// <summary>
@@ -2025,6 +2054,9 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
             @CamLock.started -= instance.OnCamLock;
             @CamLock.performed -= instance.OnCamLock;
             @CamLock.canceled -= instance.OnCamLock;
+            @BackAction.started -= instance.OnBackAction;
+            @BackAction.performed -= instance.OnBackAction;
+            @BackAction.canceled -= instance.OnBackAction;
         }
 
         /// <summary>
@@ -2507,6 +2539,13 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnCamLock(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "BackAction" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnBackAction(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
