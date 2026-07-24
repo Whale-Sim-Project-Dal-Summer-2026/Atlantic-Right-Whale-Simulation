@@ -52,7 +52,6 @@ public class BackscatterReader : MonoBehaviour {
         }
 
         projectTiffs(croppedChunks);
-
         writeTiffsToDisk(croppedChunks, bathyDir, bsOutDir);
 
         Debug.Log("Backscatter baking complete. Data is ready for runtime loading.");
@@ -65,8 +64,8 @@ public class BackscatterReader : MonoBehaviour {
             Debug.LogError("Bathymetry directory missing: " + bathyDir);
             return croppedChunks;
         }
+
         int validCount = 0;
-        
         Debug.Log(validCount + " valid points out of " + masterBackscatter.Data.Count);
 
         string[] bathyFiles = Directory.GetFiles(bathyDir, "*.bytes", SearchOption.TopDirectoryOnly);
@@ -74,6 +73,9 @@ public class BackscatterReader : MonoBehaviour {
 
         float resolutionX = (float)masterBackscatter.PixelScale[0];
         float resolutionY = Mathf.Abs((float)masterBackscatter.PixelScale[1]);
+
+        int masterWidth = masterBackscatter.Width;
+        int masterHeight = masterBackscatter.Height;
 
         for (int i = 0; i < numFiles; i++) {
             if (numToRun != -1 && i >= numToRun) {
@@ -89,30 +91,33 @@ public class BackscatterReader : MonoBehaviour {
             Vector2 chunkPos = CoordinateProjector.GeoToUTM(depthRecord.tiffData.startCoordsMeters);
             Vector2 backScatterPos = masterBackscatter.startCoordsMeters;
 
-            float offsetX = (chunkPos.x - backScatterPos.x) / resolutionX;
-            float offsetY = (backScatterPos.y - chunkPos.y) / resolutionY;
-
-            int width = masterBackscatter.Width;
-            int height = masterBackscatter.Height;
+            int baseOffsetX = Mathf.FloorToInt((chunkPos.x - backScatterPos.x) / resolutionX);
+            int baseOffsetY = Mathf.FloorToInt((backScatterPos.y - chunkPos.y) / resolutionY);
             
-            List<float> chunkBS = new List<float>(chunkWidth * chunkHeight);
+            List<float> chunkBS = new List<float>(new float[chunkWidth * chunkHeight]);
 
-            float startIdx = (width * offsetY) + offsetX;
+            for (int x = 0; x < chunkWidth; x++) {
+                int sourceX = baseOffsetX + x;
+                for (int y = 0; y < chunkHeight; y++) {
+                    int sourceY = baseOffsetY + y;
 
-            for(int j = 0; j < chunkHeight; j++){
-                int heightOffset = j * width;
-                int currRowStart = Mathf.FloorToInt(heightOffset + startIdx);
+                    int destIndex = (x * chunkHeight) + y;
 
-                // grab starting at this row start and append, no other fancy logic. 
-                chunkBS.AddRange(masterBackscatter.Data.GetRange(currRowStart, chunkWidth));
-            } 
+                    if (sourceX < 0 || sourceX >= masterWidth || sourceY < 0 || sourceY >= masterHeight) {
+                        chunkBS[destIndex] = 0.0f;
+                        continue;
+                    }
+
+                    int sourceIndex = (sourceY * masterWidth) + sourceX;
+                    chunkBS[destIndex] = masterBackscatter.Data[sourceIndex];
+                }
+            }
 
             GeoTiffData chunkTiff = new GeoTiffData();
             chunkTiff.Data = chunkBS;
             chunkTiff.Width = chunkWidth;
             chunkTiff.Height = chunkHeight;
             chunkTiff.startCoordsMeters = depthRecord.tiffData.startCoordsMeters;
-            
             chunkTiff.PixelScale = new double[] { resolutionX, resolutionY, 0.0 };
 
             croppedChunks.Add(chunkTiff);
@@ -126,13 +131,11 @@ public class BackscatterReader : MonoBehaviour {
             return;
         }
 
-
         int chunkCount = tiffChunks.Count;
         for (int i = 0; i < chunkCount; i++) {
             rasterProjector.UTMtoGEO(tiffChunks[i]);
         }
     }
-
 
     void normalizeTiff(GeoTiffData tiff){
         List<float> rawData = tiff.Data;
@@ -140,12 +143,10 @@ public class BackscatterReader : MonoBehaviour {
         float min = rawData.Min();
         float max = rawData.Max();
 
-        // remove the max then nornamlize
         float newMax = float.MinValue;
         foreach(float val in rawData){
-            if(val > newMax && val != max) newMax = val;
+            if(val > newMax && val != max) { newMax = val; }
         }
-        // rawData.RemoveAll(n => n == max);
 
         float range = newMax - min;
         
@@ -156,15 +157,15 @@ public class BackscatterReader : MonoBehaviour {
             float dataPoint = rawData[i];
             float normal = (dataPoint - min) / range;
             normalized.Add(normal);
-            if(normal == max) numberNoData++;
+            if(normal == max) { numberNoData++; }
         }
 
         Debug.LogFormat("There are {0} max points, out of {1} total", numberNoData, rawDataCount);
-
         tiff.Data = normalized;
     }
+
     GeoTiffData processMasterBS(List<GeoTiffData> masterTiffs) {
-        if (masterTiffs == null || masterTiffs.Count == 0) return null;
+        if (masterTiffs == null || masterTiffs.Count == 0) { return null; }
 
         GeoTiffData masterTiff = masterTiffs[0];
         normalizeTiff(masterTiff);
@@ -222,11 +223,7 @@ public class BackscatterReader : MonoBehaviour {
     }
 
     public void writeTiffsToDisk(List<GeoTiffData> tiffChunks, string bathyDir, string bsOutDir) {
-        if (tiffChunks == null) {
-            return;
-        }
-
-        if (tiffChunks.Count == 0) {
+        if (tiffChunks == null || tiffChunks.Count == 0) {
             return;
         }
 
