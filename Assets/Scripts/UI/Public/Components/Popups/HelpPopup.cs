@@ -47,8 +47,7 @@ public class HelpPopup : MonoBehaviour {
         actionsToListenFor.Add(helpAction);
     }
 
-    void Update()
-    {
+    bool checkActions(){
         bool interaction = false;
 
         foreach(InputAction action in actionsToListenFor){
@@ -56,13 +55,27 @@ public class HelpPopup : MonoBehaviour {
             if(interaction) break;
         }
 
-        if(!interaction) return;
+        return interaction;
 
+    }
+
+    void registerPress(){
         double currTime = Time.unscaledTimeAsDouble * 1000;
+
         if (currTime - lastPressTime > pressBuffer){
             helpPress();
             lastPressTime = currTime;
         } 
+    }
+
+    void Update()
+    {
+        bool interaction = checkActions();
+
+        if(!interaction) return;
+
+        registerPress();
+
     }
     void OnEnable(){
         PublicUIManager.OnMenuToggle += setButtonVisibility;
@@ -75,8 +88,6 @@ public class HelpPopup : MonoBehaviour {
     void setButtonVisibility(bool visible){
         helpBtn.gameObject.SetActive(visible);
     }
-
-
 
     void helpPress(){
         bool currVisibility = currState == PopupState.OPEN;
