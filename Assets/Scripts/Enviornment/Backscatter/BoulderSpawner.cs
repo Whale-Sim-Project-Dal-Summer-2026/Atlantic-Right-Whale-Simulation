@@ -105,24 +105,11 @@ public class BoulderSpawner : MonoBehaviour
             float chunkBSAverage = vals.Average();
 
             MeshFilter currentFilter = meshFilters[i];
-            Renderer currentRenderer = currentFilter.GetComponent<Renderer>();
-
-            if (currentRenderer == null) {
-                Debug.LogWarning("MeshFilter does not have an attached Renderer to calculate bounds.");
-                continue;
-            }
-
-            Vector3 minBounds = currentRenderer.bounds.min;
-            Vector3 maxBounds = currentRenderer.bounds.max;
-            
-            Vector2 chunkMinBounds2D = new Vector2(minBounds.x, minBounds.z);
-            Vector2 chunkMaxBounds2D = new Vector2(maxBounds.x, maxBounds.z);
-
-            spawnBoulders(chunkMinBounds2D, chunkMaxBounds2D, chunkBSAverage, currentFilter);
+            spawnBoulders(chunkBSAverage, currentFilter);
         }
     }
 
-    public void spawnBoulders(Vector2 chunkMinBounds, Vector2 chunkMaxBounds, float chunkBSAverage, MeshFilter meshFilter) {
+    public void spawnBoulders(float chunkBSAverage, MeshFilter meshFilter) {
         Mesh mesh = meshFilter.mesh;
         Vector3[] vertices = mesh.vertices;
 

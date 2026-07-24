@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 3779291633818497197}
   - component: {fileID: 3279337911827244798}
   - component: {fileID: 7300797691032534734}
-  - component: {fileID: 3433046153330010773}
+  - component: {fileID: 4557444759072157234}
+  - component: {fileID: 7443876463977415939}
   m_Layer: 0
   m_Name: Boulder
   m_TagString: Untagged
@@ -135836,25 +135837,34 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7699822575351861095}
   m_Mesh: {fileID: 0}
---- !u!64 &3433046153330010773
-MeshCollider:
+--- !u!114 &4557444759072157234
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7699822575351861095}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fdc260c5bb3b204f8756df30f067823, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AGXUnity::AGXUnity.Collide.Sphere
+  m_serializationVersion: 1
+  m_collisionsEnabled: 1
+  m_isSensor: 0
+  m_enableMassProperties: 1
+  m_material: {fileID: 0}
+  m_radius: 50
+--- !u!114 &7443876463977415939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7699822575351861095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09c789bc535029c4db7c1b687b878378, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BoulderSphereCollider
+  m_serializationVersion: 1
