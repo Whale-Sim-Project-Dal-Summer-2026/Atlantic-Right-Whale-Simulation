@@ -1,0 +1,67 @@
+/**
+ * TelemetryUI.cs: Script which implements
+ * the heading ball functionality.
+ *
+ * @author Mars Semenova 
+ */
+
+using System;
+using TMPro;
+using UnityEngine;
+
+public class TelemetryUI : MonoBehaviour {
+    // labels
+    private TextMeshProUGUI speedText;
+    private TextMeshProUGUI headingText;
+    private TextMeshProUGUI rollText;
+    private TextMeshProUGUI pitchText;
+    private GameObject rollTexture;
+    private GameObject pitchTexture;
+    private RectTransform pitchTextureRectTransform;
+
+    public WhaleDriver whaleDriver; // TODO: bad dependency to have
+
+    private int counter = 0;
+    
+    void Awake() {
+        // get refs
+        speedText = GameObject.Find("Speed").GetComponent<TextMeshProUGUI>();
+        headingText = GameObject.Find("Heading").GetComponent<TextMeshProUGUI>();
+        rollText = GameObject.Find("Roll").GetComponent<TextMeshProUGUI>();
+        pitchText = GameObject.Find("Pitch").GetComponent<TextMeshProUGUI>();
+        rollTexture = GameObject.Find("TelemetryBGRoll");
+        pitchTexture = GameObject.Find("TelemetryBGPitch");
+        pitchTextureRectTransform = pitchTexture.GetComponent<RectTransform>();
+    }
+
+    void Update() {
+        // update ball
+        // TODO
+        counter ++;
+
+        if (counter >= 50){
+        // set speed
+        speedText.text = whaleDriver.whaleSpeed.ToString("F0") + " m/s"; // TODO
+        counter =0; 
+        }
+        // set heading
+        int heading = Mathf.CeilToInt(whaleDriver.whaleYaw) % 360; // TODO
+        headingText.text = heading + "\u00b0"; 
+        headingText.transform.rotation = Quaternion.Euler(headingText.transform.eulerAngles.x, headingText.transform.eulerAngles.y, -1*heading); 
+        
+        // set roll
+        int roll = Mathf.CeilToInt(whaleDriver.whaleRoll); // TODO
+        rollText.text = roll + "\u00b0";
+        rollTexture.transform.rotation = Quaternion.Euler(headingText.transform.eulerAngles.x, headingText.transform.eulerAngles.y, roll);
+
+        // set pitch
+        float pitch = Mathf.CeilToInt(whaleDriver.whalePitch); // TODO
+        Vector3 pitchCenter = pitchTexture.transform.position;
+        float maxOffsetLen = pitchTextureRectTransform.rect.height*pitchTextureRectTransform.lossyScale.y / 2;
+        pitchText.text = pitch + "\u00b0";
+        float offsetLen = (maxOffsetLen-20) * (Math.Abs(pitch) / 90);
+        Vector3 offset = new Vector3(-60, -maxOffsetLen + (pitch < 0 ? -offsetLen : offsetLen), 0);
+        pitchText.transform.position = pitchCenter + offset;
+        
+    }
+}

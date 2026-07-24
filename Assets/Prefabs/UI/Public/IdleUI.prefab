@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab213ce710ac4bc3a4d1f9e5295f20a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IdleMode
-  IdleUI: {fileID: 5446064563111558701}
+  idleUI: {fileID: 5446064563111558701}
   idleTime: 300
 --- !u!1 &3965135272615244594
 GameObject:

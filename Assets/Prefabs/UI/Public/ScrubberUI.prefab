@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scrubber
   whaleDriver: {fileID: 0}
-  currentTimeStepDelta: 0
+  currentTimeStepDelta: 0.004
   pauseManager: {fileID: 0}
   resetManager: {fileID: 0}
 --- !u!1 &186856415661389428
