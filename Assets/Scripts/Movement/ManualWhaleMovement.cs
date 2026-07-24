@@ -144,6 +144,7 @@ public class ManualWhaleController : MonoBehaviour{
         yaw += yawDelta;
         pitch += pitchDelta;
 
+        yaw = Mathf.Repeat(yaw, 360f);
         pitch = Mathf.Clamp(pitch, -90, 90);
     }
 
