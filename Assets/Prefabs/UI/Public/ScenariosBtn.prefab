@@ -149,6 +149,8 @@ GameObject:
   - component: {fileID: 4911655117628645290}
   - component: {fileID: 5039977964057478274}
   - component: {fileID: 6229323698623730893}
+  - component: {fileID: 2187457874811971404}
+  - component: {fileID: 7010130480565984555}
   m_Layer: 5
   m_Name: ScenariosBtn
   m_TagString: Untagged
@@ -258,3 +260,30 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2187457874811971404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6514255794177426226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72b51aad72e0460eaaef46e2694c0e4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ToggleItem
+--- !u!114 &7010130480565984555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6514255794177426226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f8447f4ed0f4104bf044794bc2def67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ToggleItemInteractivity
+  btns:
+  - {fileID: 6229323698623730893}
+  colliders: []

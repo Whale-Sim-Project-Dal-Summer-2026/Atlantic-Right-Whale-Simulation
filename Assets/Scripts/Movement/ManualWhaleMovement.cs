@@ -76,7 +76,7 @@ public class ManualWhaleController : MonoBehaviour{
         speedAcceleration = 1f;
 
 
-        ResetManager.OnReset += resetWhalePosition;
+        WhaleConnector.OnReset += resetWhalePosition; // TODO: Mars added
     }
 
 

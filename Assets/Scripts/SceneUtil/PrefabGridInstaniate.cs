@@ -23,7 +23,7 @@ public class RopePositioning : MonoBehaviour
         ropes = new List<GameObject>();
         spawnRopes = true;
         // when reset is triggered
-        ResetManager.OnReset += ClearAndCreate;
+        WhaleConnector.OnReset += ClearAndCreate; // TODO: Mars added
     }
 
     void ClearAndCreate()

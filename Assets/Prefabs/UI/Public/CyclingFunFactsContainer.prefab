@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 5035058237533270239}
   - component: {fileID: 8633697973234344007}
   - component: {fileID: 9077004875610205566}
+  - component: {fileID: 9005470035272222338}
+  - component: {fileID: 528734952772717873}
   m_Layer: 5
   m_Name: CyclingFunFactsContainer
   m_TagString: Untagged
@@ -78,6 +80,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!114 &9005470035272222338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4076052854096998951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72b51aad72e0460eaaef46e2694c0e4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ToggleItem
+--- !u!114 &528734952772717873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4076052854096998951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f8447f4ed0f4104bf044794bc2def67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ToggleItemInteractivity
+  btns:
+  - {fileID: 8335211438642312801}
+  colliders: []
 --- !u!1 &6694057720651003716
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,8 +258,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 038df5eee72e46841804cc3fbe40de77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CyclingText
-  funFactsFile: {fileID: 4900000, guid: fa918c777094466c98c6f231b532a860, type: 3}
   repeatRate: 15
+  textFile: {fileID: 4900000, guid: fa918c777094466c98c6f231b532a860, type: 3}
 --- !u!114 &8335211438642312801
 MonoBehaviour:
   m_ObjectHideFlags: 0

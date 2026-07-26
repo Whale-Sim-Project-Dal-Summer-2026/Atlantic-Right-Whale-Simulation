@@ -83,6 +83,7 @@ GameObject:
   - component: {fileID: 436074847947625623}
   - component: {fileID: 5819990501301496751}
   - component: {fileID: 1559916783082937347}
+  - component: {fileID: 4923491740704708797}
   m_Layer: 5
   m_Name: ViewerBG
   m_TagString: Untagged
@@ -148,6 +149,18 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &4923491740704708797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3021848615605963925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f279eb2b38664eee861f90415a3b7ac7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CloseItem
 --- !u!1 &4454192863159097203
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,7 +290,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1662693528111175147}
+  - component: {fileID: 3730565693956819843}
   - component: {fileID: 3329082819545981396}
+  - component: {fileID: 4507782832537828133}
   m_Layer: 5
   m_Name: ViewerUI
   m_TagString: Untagged
@@ -301,6 +316,23 @@ Transform:
   - {fileID: 436074847947625623}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3730565693956819843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4973756695994819665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74c70063d077455183a5ae35a64a0945, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Popup
+  popupBtns: []
+  popupObj: {fileID: 3021848615605963925}
+  closeBtns:
+  - {fileID: 3429843531972314170}
+  - {fileID: 7840083504280275058}
 --- !u!114 &3329082819545981396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,12 +345,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31c9cd300521b0d4e9b1e1405f604520, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ViewerPopup
-  viewerPopup: {fileID: 3021848615605963925}
+  viewerPopup: {fileID: 3730565693956819843}
   viewerImg: {fileID: 7831560227728156559}
   viewerTxt: {fileID: 1508965043839210072}
-  closeBtns:
+--- !u!114 &4507782832537828133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4973756695994819665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f8447f4ed0f4104bf044794bc2def67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ToggleItemInteractivity
+  btns:
   - {fileID: 3429843531972314170}
   - {fileID: 7840083504280275058}
+  colliders: []
 --- !u!1 &5832771393726781263
 GameObject:
   m_ObjectHideFlags: 0

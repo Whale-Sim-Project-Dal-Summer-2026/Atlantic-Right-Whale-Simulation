@@ -298,6 +298,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: IdleUI
       objectReference: {fileID: 0}
+    - target: {fileID: 5557634060668166497, guid: 3e75b7b86ed13b84680309ce14faa680, type: 3}
+      propertyPath: toggles
+      value: 
+      objectReference: {fileID: 850295283}
+    - target: {fileID: 5557634060668166497, guid: 3e75b7b86ed13b84680309ce14faa680, type: 3}
+      propertyPath: scrubber
+      value: 
+      objectReference: {fileID: 888979262}
+    - target: {fileID: 5557634060668166497, guid: 3e75b7b86ed13b84680309ce14faa680, type: 3}
+      propertyPath: toggleUIBtn
+      value: 
+      objectReference: {fileID: 850295284}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2744,7 +2756,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1f29d0c01872a749b17c2c8bbc5d493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseManager
-  allowUserInput: 1
 --- !u!4 &392961704
 Transform:
   m_ObjectHideFlags: 0
@@ -4993,6 +5004,9 @@ GameObject:
   - component: {fileID: 806279214}
   - component: {fileID: 806279213}
   - component: {fileID: 806279212}
+  - component: {fileID: 806279215}
+  - component: {fileID: 806279217}
+  - component: {fileID: 806279216}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -5012,7 +5026,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a85111d3fe4e01801528f62f92de63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PublicUIManager
-  resetManager: {fileID: 1522814764}
+  sceneSwitcher: {fileID: 861356813}
+  scenariosBtn: {fileID: 922289860}
 --- !u!114 &806279213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5025,7 +5040,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cbfd58f7105f994d8241123cd379108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainUIManager
-  animationSettings: {fileID: 11400000, guid: a079734cd265a3648b27716324684644, type: 2}
+  scrubber: {fileID: 888979262}
+  toggles: {fileID: 850295283}
+  viewerColliders:
+  - {fileID: 6824787337333441231}
 --- !u!4 &806279214
 Transform:
   m_ObjectHideFlags: 0
@@ -5044,6 +5062,53 @@ Transform:
   - {fileID: 1641714762}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &806279215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 806279211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6a5e28c9e5e43e4baac1c42313bce41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ControllerInputManagerUI
+  pressBuffer: 300
+  helpPopup: {fileID: 1247788094}
+  viewerPopup: {fileID: 1734023031}
+  scrubber: {fileID: 888979262}
+  publicUIManager: {fileID: 806279212}
+--- !u!114 &806279216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 806279211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d5acd9e0e964d81af5653dd7fb775b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WhaleConnector
+  whaleDriver: {fileID: 6824787337333441232}
+  scrubber: {fileID: 888979262}
+  telemetry: {fileID: 1907246624}
+--- !u!114 &806279217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 806279211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04bbeb5795e84065a57b4ac8583f27ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PopupEventManager
+  helpPopup: {fileID: 1247788095}
+  scrubber: {fileID: 888979262}
+  simUIManager: {fileID: 806279213}
 --- !u!1 &812134962
 GameObject:
   m_ObjectHideFlags: 0
@@ -5254,6 +5319,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1126706788}
     m_Modifications:
+    - target: {fileID: 339207957768772415, guid: d048ea5d3e60e574fbc50183f4ebffab, type: 3}
+      propertyPath: whaleTrail
+      value: 
+      objectReference: {fileID: 1028117630}
     - target: {fileID: 463158284528865238, guid: d048ea5d3e60e574fbc50183f4ebffab, type: 3}
       propertyPath: m_Name
       value: ToggleBtns
@@ -5306,6 +5375,22 @@ PrefabInstance:
 --- !u!4 &850295282 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6454711327911404320, guid: d048ea5d3e60e574fbc50183f4ebffab, type: 3}
+  m_PrefabInstance: {fileID: 850295281}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &850295283 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 339207957768772415, guid: d048ea5d3e60e574fbc50183f4ebffab, type: 3}
+  m_PrefabInstance: {fileID: 850295281}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e853b27373204792a2453c41aa2cdc6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Toggles
+--- !u!1 &850295284 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9122529411013426640, guid: d048ea5d3e60e574fbc50183f4ebffab, type: 3}
   m_PrefabInstance: {fileID: 850295281}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &858841746
@@ -5563,6 +5648,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3888214335219583769, guid: af894e0831850ea45bbf60cb1083922c, type: 3}
   m_PrefabInstance: {fileID: 888979260}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &888979262 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4601650997053863039, guid: af894e0831850ea45bbf60cb1083922c, type: 3}
+  m_PrefabInstance: {fileID: 888979260}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42a210e2d67a62342806c0e42e8d92c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Scrubber
 --- !u!1 &903233292
 GameObject:
   m_ObjectHideFlags: 0
@@ -5746,6 +5842,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2662218322789519266, guid: 45389024b5d37dd46a640eeb96749778, type: 3}
   m_PrefabInstance: {fileID: 922289858}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &922289860 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6229323698623730893, guid: 45389024b5d37dd46a640eeb96749778, type: 3}
+  m_PrefabInstance: {fileID: 922289858}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &956253293
 GameObject:
   m_ObjectHideFlags: 0
@@ -6352,6 +6459,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3372512778657564920, guid: 5bb3004edeef18f45b1f0b99c92e93d7, type: 3}
   m_PrefabInstance: {fileID: 1028117628}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1028117630 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7561531391325771536, guid: 5bb3004edeef18f45b1f0b99c92e93d7, type: 3}
+  m_PrefabInstance: {fileID: 1028117628}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b473505b6d0d42919a073131b4c12a7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DynamicSpline
 --- !u!21 &1033314657
 Material:
   serializedVersion: 8
@@ -8067,6 +8185,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6516652904964345063, guid: 11d2352ce9cfdfb4ca1f05f1d5b57f25, type: 3}
   m_PrefabInstance: {fileID: 1247788092}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1247788094 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6061372162176588824, guid: 11d2352ce9cfdfb4ca1f05f1d5b57f25, type: 3}
+  m_PrefabInstance: {fileID: 1247788092}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74c70063d077455183a5ae35a64a0945, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Popup
+--- !u!1 &1247788095 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7170085108513337919, guid: 11d2352ce9cfdfb4ca1f05f1d5b57f25, type: 3}
+  m_PrefabInstance: {fileID: 1247788092}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1248363651
 GameObject:
   m_ObjectHideFlags: 0
@@ -9240,7 +9374,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57f5baeaceadc6c47883b7b96caad3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ResetManager
-  holdTimeForReset: 3
 --- !u!4 &1522814765
 Transform:
   m_ObjectHideFlags: 0
@@ -10991,6 +11124,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1662693528111175147, guid: 7c3a8eaed4b3d7d44835eb830b6044d7, type: 3}
   m_PrefabInstance: {fileID: 1734023029}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1734023031 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3730565693956819843, guid: 7c3a8eaed4b3d7d44835eb830b6044d7, type: 3}
+  m_PrefabInstance: {fileID: 1734023029}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74c70063d077455183a5ae35a64a0945, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Popup
 --- !u!114 &1755101217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11741,6 +11885,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7907019953812785564, guid: c907aeca67a6f9242b04b5904859ddad, type: 3}
   m_PrefabInstance: {fileID: 1907246622}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1907246624 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8975167117216619673, guid: c907aeca67a6f9242b04b5904859ddad, type: 3}
+  m_PrefabInstance: {fileID: 1907246622}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 143c44046f88cfb49adf53a70026424e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HeadingBall
 --- !u!114 &1909670158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11941,6 +12096,17 @@ MonoBehaviour:
   m_bottomRadius: 0
   m_thickness: 0
   m_height: 0
+--- !u!114 &2027627948 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3329082819545981396, guid: 7c3a8eaed4b3d7d44835eb830b6044d7, type: 3}
+  m_PrefabInstance: {fileID: 1734023029}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31c9cd300521b0d4e9b1e1405f604520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ViewerPopup
 --- !u!1 &2058705600
 GameObject:
   m_ObjectHideFlags: 0
@@ -13864,6 +14030,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3524128933481675689, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6824787337333441230}
+    - targetCorrespondingSourceObject: {fileID: 3524128933481675689, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6824787337333441234}
   m_SourcePrefab: {fileID: 100100000, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
 --- !u!1 &6824787337333441229 stripped
 GameObject:
@@ -13882,9 +14051,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6426e986cb9dfcd4983b61b50081362f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ViewerItem
-  collider: {fileID: 6824787337333441231}
   image: {fileID: 2800000, guid: aa0676e890382b34dbf6dc19294c2340, type: 3}
   text: North Atlantic Right Whale
+  collider: {fileID: 6824787337333441231}
+  popup: {fileID: 2027627948}
 --- !u!65 &6824787337333441231
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13922,6 +14092,21 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4821498246770036369, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
   m_PrefabInstance: {fileID: 6824787337333441228}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6824787337333441234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6824787337333441229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f8447f4ed0f4104bf044794bc2def67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ToggleItemInteractivity
+  btns: []
+  colliders:
+  - {fileID: 6824787337333441231}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

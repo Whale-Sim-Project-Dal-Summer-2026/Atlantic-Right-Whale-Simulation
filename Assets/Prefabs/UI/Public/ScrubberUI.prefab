@@ -48,10 +48,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42a210e2d67a62342806c0e42e8d92c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scrubber
-  whaleDriver: {fileID: 0}
-  currentTimeStepDelta: 0.004
-  pauseManager: {fileID: 0}
-  resetManager: {fileID: 0}
+  pinBtn: {fileID: 0}
+  cam1Btn: {fileID: 4670790805416182351}
+  cam2Btn: {fileID: 510151752244660632}
+  cam3Btn: {fileID: 2650635540981374694}
+  restartBtn: {fileID: 8281818981384703832}
+  bwdBtn: {fileID: 0}
+  pausePlayBtn: {fileID: 7582631971824143965}
+  fwdBtn: {fileID: 0}
+  slowerBtn: {fileID: 0}
+  fasterBtn: {fileID: 0}
+  timeText: {fileID: 5635800614498357517}
+  speedText: {fileID: 0}
+  animator: {fileID: 0}
+  timeline: {fileID: 6666219178184710863}
 --- !u!1 &186856415661389428
 GameObject:
   m_ObjectHideFlags: 0

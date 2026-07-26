@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6516652904964345063}
-  - component: {fileID: 4505869503805513057}
+  - component: {fileID: 6061372162176588824}
   m_Layer: 5
   m_Name: HelpUI
   m_TagString: Untagged
@@ -34,7 +34,7 @@ Transform:
   - {fileID: 8951253098447164868}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4505869503805513057
+--- !u!114 &6061372162176588824
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,15 +43,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1873073947615177185}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6a5e28c9e5e43e4baac1c42313bce41, type: 3}
+  m_Script: {fileID: 11500000, guid: 74c70063d077455183a5ae35a64a0945, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HelpPopup
-  helpBtn: {fileID: 6732853669070264272}
-  helpPopup: {fileID: 7170085108513337919}
+  m_EditorClassIdentifier: Assembly-CSharp::Popup
+  popupBtns:
+  - {fileID: 6732853669070264272}
+  popupObj: {fileID: 7170085108513337919}
   closeBtns:
   - {fileID: 6301338536061627840}
   - {fileID: 3316578859995291543}
-  simUIManager: {fileID: 0}
 --- !u!1 &3374226667778259870
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,6 +440,7 @@ GameObject:
   - component: {fileID: 8951253098447164868}
   - component: {fileID: 213174196336857638}
   - component: {fileID: 7068072516877225970}
+  - component: {fileID: 7627644194141576708}
   m_Layer: 5
   m_Name: HelpPopup
   m_TagString: Untagged
@@ -504,6 +505,18 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &7627644194141576708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7170085108513337919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f279eb2b38664eee861f90415a3b7ac7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CloseItem
 --- !u!1 &7977665928218884129
 GameObject:
   m_ObjectHideFlags: 0
@@ -516,6 +529,7 @@ GameObject:
   - component: {fileID: 4199946314098994099}
   - component: {fileID: 7556416243460370932}
   - component: {fileID: 6732853669070264272}
+  - component: {fileID: 4732082465691989362}
   m_Layer: 5
   m_Name: HelpBtn
   m_TagString: Untagged
@@ -624,3 +638,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4732082465691989362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7977665928218884129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72b51aad72e0460eaaef46e2694c0e4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ToggleItem

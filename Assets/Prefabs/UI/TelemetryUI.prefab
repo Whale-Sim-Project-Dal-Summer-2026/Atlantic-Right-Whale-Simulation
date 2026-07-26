@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7907019953812785564}
   - component: {fileID: 8975167117216619673}
+  - component: {fileID: 1614549895058791575}
   m_Layer: 5
   m_Name: TelemetryUI
   m_TagString: Untagged
@@ -50,7 +51,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 143c44046f88cfb49adf53a70026424e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HeadingBall
-  whaleDriver: {fileID: 0}
+  speedText: {fileID: 8878881779802393738}
+  headingText: {fileID: 1013010344281770664}
+  rollText: {fileID: 5223141356470842516}
+  pitchText: {fileID: 8898679131294817095}
+  rollTexture: {fileID: 5199103265114056207}
+  pitchTexture: {fileID: 6297457854512266033}
+--- !u!114 &1614549895058791575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 679077576099659671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72b51aad72e0460eaaef46e2694c0e4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ToggleItem
 --- !u!1 &3292718158356319847
 GameObject:
   m_ObjectHideFlags: 0

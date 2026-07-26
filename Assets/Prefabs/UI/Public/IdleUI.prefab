@@ -47,6 +47,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IdleMode
   idleUI: {fileID: 5446064563111558701}
   idleTime: 300
+  toggles: {fileID: 0}
+  scrubber: {fileID: 0}
+  toggleUIBtn: {fileID: 0}
 --- !u!1 &3965135272615244594
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,8 +201,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 038df5eee72e46841804cc3fbe40de77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CyclingText
-  funFactsFile: {fileID: 4900000, guid: fa918c777094466c98c6f231b532a860, type: 3}
   repeatRate: 15
+  textFile: {fileID: 4900000, guid: fa918c777094466c98c6f231b532a860, type: 3}
 --- !u!1 &5446064563111558701
 GameObject:
   m_ObjectHideFlags: 0

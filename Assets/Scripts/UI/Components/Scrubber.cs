@@ -13,116 +13,80 @@ using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class Scrubber : MonoBehaviour {
-    // obj
-    private Animator animator;
-    private Button pinBtn;
-    private Color pinBtnColor;
-    private Slider timeline;
-    // labels
-    private TextMeshProUGUI timeText;
-    private TextMeshProUGUI speedText;
-    private String[] speedsLabel = {"0.25", "0.5", "0.75", "1", "1.5", "2", "3", "4", "5"}; // TODO: may be able to do this programmatically
+    // params
+    // btns
+    [Header("Buttons")]
+    [SerializeField] private Button pinBtn;
     // cam btns
-    private Button cam1Btn;
-    private Button cam2Btn;
-    private Button cam3Btn;
+    [SerializeField] private Button cam1Btn;
+    [SerializeField] private Button cam2Btn;
+    [SerializeField] private Button cam3Btn;
     // playback btns
-    private Button restartBtn;
-    private Button bwdBtn;
-    private Button pausePlayBtn;
+    [SerializeField] private Button restartBtn;
+    [SerializeField] private Button bwdBtn;
+    [SerializeField] private Button pausePlayBtn;
+    [SerializeField] private Button fwdBtn;
+    // speed btns
+    [SerializeField] private Button slowerBtn;
+    [SerializeField] private Button fasterBtn;
+    // labels
+    [Header("Labels")]
+    [SerializeField] private TextMeshProUGUI timeText;
+    [SerializeField] private TextMeshProUGUI speedText;
+    // etc
+    [Header("Other")]
+    [SerializeField] private Animator animator;
+    [SerializeField] private Slider timeline;
+    
+    // vars
+    private String[] speedsLabel = {"0.25", "0.5", "0.75", "1", "1.5", "2", "3", "4", "5"}; // TODO: may be able to do this programmatically
+    private Color pinBtnColor;
     private Image pausePlayBtnImage;
     private Sprite pauseSprite;
     private Sprite playSprite;
-    private Button fwdBtn;
-    // speed btns
-    private Button slowerBtn;
-    private Button fasterBtn;
-
+    
     // states
     private bool paused = false;
     private bool pinned  = true;
     private float[] speeds = {0.25f, 0.5f, 0.75f, 1.0f, 1.5f, 2.0f, 3.0f, 4.0f, 5.0f};
     private int speedsInd = 3;
 
-
-    // used for the scrubber percentages and time
-    public WhaleDriver whaleDriver; // TODO: bad dependency
-    public float currentTimeStepDelta; 
-
-    //used for the play/pause
-    public PauseManager pauseManager; // TODO: bad dependency
-
-    public ResetManager resetManager; // TODO: bad dependency
-
-    public static event PauseEvent OnPause;
-
+    // events
     public delegate void PauseEvent();
-    public static event CamSwitchEvent OnCamSwitch;
-
+    public static event PauseEvent OnPause;
+    public delegate void PlayEvent();
+    public static event PlayEvent OnPlay;
     public delegate void CamSwitchEvent(int index);
-
-    private WhaleTrail whaleTrail;
+    public static event CamSwitchEvent OnCamSwitch;
+    public delegate void RestartEvent();
+    public static event RestartEvent OnRestart;
     
     void Awake() {
-        // get refs
-        
-        animator = GetComponent<Animator>();
-        GameObject check = GameObject.Find("PinBtn");
-        if (check) {
-            pinBtn = check.GetComponent<Button>();
-            pinBtnColor = pinBtn.GetComponent<Button>().colors.normalColor;
-            ColorBlock newColors = pinBtn.GetComponent<Button>().colors;
+        // pin btn colour setup
+        if (pinBtn) {
+            pinBtnColor = pinBtn.colors.normalColor;
+            ColorBlock newColors = pinBtn.colors;
             newColors.normalColor = pinned ? Color.white : pinBtnColor;
-            pinBtn.GetComponent<Button>().colors = newColors;
-        }
-        timeline = GameObject.Find("Timeline").GetComponent<Slider>();
-        // labels
-        timeText = GameObject.Find("Time").GetComponent<TextMeshProUGUI>();
-        check = GameObject.Find("Speed");
-        if (check) {
-            speedText = check.GetComponent<TextMeshProUGUI>();
-        }
-        // cam btns
-        cam1Btn = GameObject.Find("Cam1Btn").GetComponent<Button>();
-        cam2Btn = GameObject.Find("Cam2Btn").GetComponent<Button>();
-        cam3Btn = GameObject.Find("Cam3Btn").GetComponent<Button>();
-        // playback btns
-        restartBtn = GameObject.Find("RestartBtn").GetComponent<Button>();
-        check = GameObject.Find("BwdBtn");
-        if (check) {
-            bwdBtn = check.GetComponent<Button>();
-        }
-        pausePlayBtn = GameObject.Find("PausePlayBtn").GetComponent<Button>(); 
-        pausePlayBtnImage = pausePlayBtn.GetComponent<Image>();
-        pauseSprite = Resources.Load<Sprite>("UI/Scrubber/play");
-        playSprite = Resources.Load<Sprite>("UI/Scrubber/pause");
-        check = GameObject.Find("FwdBtn");
-        if (check) {
-            fwdBtn = check.GetComponent<Button>();
-        }
-        // speed btns 
-        check = GameObject.Find("SlowerBtn");
-        if (check) {
-            slowerBtn = check.GetComponent<Button>();
-        }
-        check = GameObject.Find("FasterBtn");
-        if (check) {
-            fasterBtn = check.GetComponent<Button>();
+            pinBtn.colors = newColors;
         }
         
-        check = GameObject.Find("WhaleTrail");
-        if (check) {
-            whaleTrail = check.GetComponent<WhaleTrail>();
+        // pause/play btn setup
+        if (pausePlayBtn) {
+            pausePlayBtnImage = pausePlayBtn.GetComponent<Image>();
+            pauseSprite = Resources.Load<Sprite>("UI/Scrubber/play");
+            playSprite = Resources.Load<Sprite>("UI/Scrubber/pause");
         }
     }
+    
 
-    void addButtonListeners() {
+    void Start() {
+        // set up btns
         if (pinBtn) {
             pinBtn.onClick.AddListener(() => {
                 pinned = !pinned;
-                ColorBlock newColors = pinBtn.GetComponent<Button>().colors;
+                ColorBlock newColors = pinBtn.colors;
                 newColors.normalColor = pinned ? Color.white : pinBtnColor;
-                pinBtn.GetComponent<Button>().colors = newColors;
+                pinBtn.colors = newColors;
             });
         }
 
@@ -141,12 +105,6 @@ public class Scrubber : MonoBehaviour {
                 OnCamSwitch?.Invoke(3);
             });
         }
-    }
-
-    void Start() {
-        // set up btns
-        addButtonListeners();
-        
         if (pausePlayBtn) {
             pausePlayBtn.onClick.AddListener(() => SetPause(!paused));
         }
@@ -157,12 +115,7 @@ public class Scrubber : MonoBehaviour {
             fasterBtn.onClick.AddListener(() => SetSpeed(speedsInd + 1));
         }
         if (restartBtn) {
-            restartBtn.onClick.AddListener(() => {
-                if (whaleTrail) {
-                    whaleTrail.ResetPath();
-                }
-                resetManager.TriggerReset();
-            });
+            restartBtn.onClick.AddListener(Restart);
         }
     }
 
@@ -178,57 +131,11 @@ public class Scrubber : MonoBehaviour {
                 }
             }
         }
-        
-        updateTime();
-        // set scrubber percentage
-        float percent = ((float)whaleDriver.currentTimestep / whaleDriver.CSV_ResetTimeStep) * 100; 
-        //Debug.Log("Current Prercent: " + percent);
-
-        // this will get the current timne 
-        timeline.value = percent;
-        
-        // shortcuts (TODO)
-        if (Keyboard.current.spaceKey.wasPressedThisFrame || Keyboard.current.mediaPlayPause.wasPressedThisFrame) {
-            SetPause(!paused);
-        }
-        if (Keyboard.current.rightArrowKey.wasPressedThisFrame) {
-            // TODO: time+=1
-        }
-        if (Keyboard.current.leftArrowKey.wasPressedThisFrame) {
-            // TODO: time-=1
-        }
-        if (Keyboard.current.ctrlKey.isPressed) {
-            // cams
-            if (Keyboard.current.numpad1Key.wasPressedThisFrame || Keyboard.current.digit1Key.wasPressedThisFrame) {
-                // TODO: cam 1
-            }
-            if (Keyboard.current.numpad2Key.wasPressedThisFrame || Keyboard.current.digit2Key.wasPressedThisFrame) {
-                // TODO: cam 2
-            }
-            if (Keyboard.current.numpad3Key.wasPressedThisFrame || Keyboard.current.digit3Key.wasPressedThisFrame) {
-                // TODO: cam 3
-            }
-            
-            // speed
-            if (Keyboard.current.equalsKey.wasPressedThisFrame) {
-                SetSpeed(speedsInd + 1);
-            }
-            if (Keyboard.current.minusKey.wasPressedThisFrame) {
-                SetSpeed(speedsInd - 1);
-            }
-            
-            // scrub back/ahead
-            if (Keyboard.current.rightArrowKey.wasPressedThisFrame) {
-                // TODO: time+=10
-            }
-            if (Keyboard.current.leftArrowKey.wasPressedThisFrame) {
-                // TODO: time-=10
-            }
-        }
     }
 
     /**
-     * Toggle pause.
+     * Set pause.
+     * @param on - Whether pause is on or off.
      */
     public void SetPause(bool on) {
         paused = on;
@@ -236,12 +143,26 @@ public class Scrubber : MonoBehaviour {
             pausePlayBtnImage.sprite = paused ? pauseSprite : playSprite;
 
         }
-        OnPause?.Invoke();
+
+        if (on) {
+            OnPause?.Invoke();
+        } else {
+            OnPlay?.Invoke();
+        }
     }
-    
+    public void Pause() { // TODO
+        SetPause(true);
+    }
+    public void Play() { // TODO
+        SetPause(false);
+    }
+    public void TogglePause() { // TODO
+        SetPause(!paused);
+    }
+
     /**
      * Set speed of playback and update UI.
-     * @param speedInt - Index of speed in speeds array.
+     * @param speedInd - Index of speed in speeds array.
      */
     private void SetSpeed(int speedInd) {
         speedsInd = speedInd;
@@ -272,11 +193,11 @@ public class Scrubber : MonoBehaviour {
         }
     }
 
-    public bool IsPaused() {
-        return paused;
-    }
-
-    public void ToggleScrubberInteractivity(bool on) {
+    /**
+     * Set the interactivity of the scrubber btns.
+     * @param on - Whether the btns should be enabled or not.
+     */
+    public void SetScrubberInteractivity(bool on) {
         if (pinBtn) {
             pinBtn.interactable = on;
         }
@@ -308,27 +229,28 @@ public class Scrubber : MonoBehaviour {
             fasterBtn.interactable = on;
         }
     }
-    void updateTime() {
-        
-        float currentTimeStep = whaleDriver.currentTimestep; 
-        float secondsConvert = currentTimeStep * currentTimeStepDelta;
+    
+    /**
+     * Update the time display.
+     * @param mins - Minutes to set.
+     * @param secs - Seconds to set.
+     */
+    public void UpdateTime(int mins, int secs) { 
+        timeText.text = $"{mins:00}:{secs:00}";
+    }
 
-        float mins = secondsConvert / 60;
-        
-        float secs = secondsConvert % 60; 
-        int minsInt = Mathf.CeilToInt(mins);
-        minsInt--;
-        int secsInt = Mathf.CeilToInt(secs); 
-        secsInt--;
+    /**
+     * Set the percentage of the timeline.
+     * @param percent - Percent (0-100) of the timeline.
+     */
+    public void UpdateTimelineProgress(float percent) {
+        timeline.value = percent;
+    }
 
-        if (minsInt < 0) {
-            minsInt = 0;
-        }
-
-        if (secsInt < 0) {
-            secsInt = 0;
-        }
-        timeText.text = $"{minsInt:00}:{secsInt:00}";
-
+    /**
+     * Invoke the restart event.
+     */
+    public void Restart() {
+        OnRestart?.Invoke();
     }
 }

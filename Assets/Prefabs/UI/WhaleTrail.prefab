@@ -172,7 +172,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3372512778657564920
 Transform:
   m_ObjectHideFlags: 0
@@ -373,3 +373,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b473505b6d0d42919a073131b4c12a7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DynamicSpline
+  interval: 10
+  whale: {fileID: 0}
+  whaleTrail: {fileID: 3959274088241637910}

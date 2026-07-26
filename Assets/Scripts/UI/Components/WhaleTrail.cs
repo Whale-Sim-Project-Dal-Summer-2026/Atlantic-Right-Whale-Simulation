@@ -1,5 +1,5 @@
 /**
- * DynamicSpline.cs: Script which implements the whale's trail
+ * WhaleTrail.cs: Script which implements the whale's trail
  * using a spline.
  *
  * @author Mars Semenova 
@@ -10,18 +10,33 @@ using UnityEngine;
 using UnityEngine.Splines;
 
 public class WhaleTrail : MonoBehaviour {
+    // params
+    // options
+    [Header("Options")]
+    [SerializeField] private int interval = 10;
+    // refs
+    [Header("References")]
+    [SerializeField] private GameObject whale;
+    [SerializeField] private GameObject whaleTrail;
+    
+    // vars
     private Spline spline;
-    private GameObject whale;
+    private MeshRenderer whaleTrailMesh;
     private Vector3 whalePos;
     private int liveKnot = 1;
-    private int interval = 10;
+    private bool isVisible = true;
     
     void Awake() {
-        whale = GameObject.Find("Right Whale SF Mouth Articulation 1");
-        GameObject whaleTrail = GameObject.Find("WhaleTrail");
+        whaleTrailMesh = GetComponent<MeshRenderer>();
         whaleTrail.transform.position = whale.transform.position;
         spline = whaleTrail.GetComponent<SplineContainer>()[0];
         
+        // events
+        WhaleConnector.OnReset += ResetPath;
+        Toggles.OnToggleUIOn += SetPathVisibilityOn; // TODO: only for pub side
+        Toggles.OnToggleUIOff += SetPathVisibilityOff; // TODO: only for pub side
+        Toggles.OnTogglePathOn += SetPathVisibilityOn;
+        Toggles.OnTogglePathOff += SetPathVisibilityOff;
     }
 
     void Start() {
@@ -50,11 +65,12 @@ public class WhaleTrail : MonoBehaviour {
             spline.Add(newKnotObj, TangentMode.AutoSmooth);
             liveKnot++;
         }
-
-        //spline.EnforceTangentModeNoNotify(new SplineRange(0, liveKnot));
     }
 
-    public void ResetPath() {
+    /**
+     * Reset path on whale reset.
+     */
+    private void ResetPath() {
         whalePos = whale.transform.position;
         spline.Clear();
         spline.SetTangentMode(TangentMode.AutoSmooth);
@@ -63,5 +79,30 @@ public class WhaleTrail : MonoBehaviour {
         spline.Add(newKnotObj, TangentMode.AutoSmooth);
         spline.Add(newKnotObj, TangentMode.AutoSmooth);
         liveKnot = 1;
-    } 
+    }
+
+    /**
+     * Set the path visibility.
+     * @param on - Whether to set it on or off.
+     */
+    private void SetPathVisibility(bool on) {
+        isVisible = on;
+        if (whaleTrailMesh) { 
+            whaleTrailMesh.enabled = on;
+        }
+    }
+    private void SetPathVisibilityOn() { // TODO
+        SetPathVisibility(true);
+    }
+    private void SetPathVisibilityOff() { // TODO
+        SetPathVisibility(false);
+    }
+
+    /**
+     * Check whether the path is visible.
+     * @return Whether the path is visible.
+     */
+    public bool IsVisible() {
+        return isVisible;
+    }
 }

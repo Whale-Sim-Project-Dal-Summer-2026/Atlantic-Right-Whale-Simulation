@@ -6110,6 +6110,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3068399108699939534}
+  - component: {fileID: 1552439221825339753}
+  - component: {fileID: 2734022068551146356}
   m_Layer: 5
   m_Name: ControlHintsUI
   m_TagString: Untagged
@@ -6136,6 +6138,34 @@ Transform:
   - {fileID: 8711592344781607795}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1552439221825339753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7523839474557519275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e05dfd6d16a43f3b01e3d794f86802d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ControlHints
+  controlHintsFreeCam: {fileID: 5736586593011829273}
+  controlHintsFollowCam: {fileID: 3981035095427646186}
+  controlHintsPOVCam: {fileID: 599229086095319654}
+  unstickBtn: {fileID: 2208497664284398458}
+--- !u!114 &2734022068551146356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7523839474557519275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72b51aad72e0460eaaef46e2694c0e4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ToggleItem
 --- !u!1 &7537127763870832322
 GameObject:
   m_ObjectHideFlags: 0
@@ -7800,6 +7830,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ad8c5c0d6f10e8449fc4b43c9ddad92, type: 3}
+--- !u!114 &2208497664284398458 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2245128431059817128, guid: 6ad8c5c0d6f10e8449fc4b43c9ddad92, type: 3}
+  m_PrefabInstance: {fileID: 112137563636023762}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!224 &7769555731983149150 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7664393470264764812, guid: 6ad8c5c0d6f10e8449fc4b43c9ddad92, type: 3}

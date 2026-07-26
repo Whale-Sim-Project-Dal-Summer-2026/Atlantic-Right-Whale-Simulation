@@ -1,3 +1,9 @@
+/**
+ * CyclingText.cs: Implements a cycling text widget from a text file bank.
+ *
+ * @author Mars Semenova
+ */
+
 using System;
 using TMPro;
 using UnityEngine;
@@ -5,42 +11,51 @@ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class CyclingText : MonoBehaviour {
-    // refs
-    public TextAsset funFactsFile;
-    private Button funFactsBtn;
-    private TextMeshProUGUI funFactsTxt;
+    // params
+    // file
+    [Header("Options")]
+    [SerializeField] private float repeatRate = 15;
+    [Header("Text File")]
+    [SerializeField] private TextAsset textFile;
     
     // vars
-    private String[] funFacts;
-    private int currFactInd;
-    public float repeatRate;
+    private Button txtBtn;
+    private TextMeshProUGUI txt;
+    private String[] lines;
+    private int currInd;
     
     void Awake() {
         // get refs
-        funFactsTxt = GetComponent<TextMeshProUGUI>();
-        funFactsBtn = GetComponent<Button>();
+        txt = GetComponent<TextMeshProUGUI>();
+        txtBtn = GetComponent<Button>();
     }
     
     void Start () {
         // load facts
-        LoadFunFacts();
+        LoadLines();
         // dispatch update events
-        InvokeRepeating(nameof(UpdateFunFact), 0.01f, repeatRate);
-        if (funFactsBtn) {
-            funFactsBtn.onClick.AddListener(UpdateFunFact);
+        InvokeRepeating(nameof(UpdateLine), 0.01f, repeatRate);
+        if (txtBtn) {
+            txtBtn.onClick.AddListener(UpdateLine);
         }
     }
 
-    private void LoadFunFacts() {
-        funFacts = funFactsFile.text.Split('\n');
+    /**
+     * Load line from passed text file.
+     */
+    private void LoadLines() {
+        lines = textFile.text.Split('\n');
     }
 
-    private void UpdateFunFact() {
-        int newFactInd = Random.Range(0, funFacts.Length);
-        while (funFacts.Length > 1 && newFactInd == currFactInd) { 
-            newFactInd = Random.Range(0, funFacts.Length); 
+    /**
+     * Update displayed line.
+     */
+    private void UpdateLine() {
+        int newInd = Random.Range(0, lines.Length);
+        while (lines.Length > 1 && newInd == currInd) { 
+            newInd = Random.Range(0, lines.Length); 
         }
-        currFactInd = newFactInd;
-        funFactsTxt.text = funFacts[currFactInd];
+        currInd = newInd;
+        txt.text = lines[currInd];
     }
 }

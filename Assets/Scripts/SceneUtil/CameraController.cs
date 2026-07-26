@@ -80,12 +80,14 @@ public class CameraController : MonoBehaviour{
     void OnEnable()
     {
         Scrubber.OnCamSwitch += changeToCam;
-        HelpPopup.OnSwapStates += toggleForceLock;
+        PopupEventManager.OnHelpPopupOn += SetForceLockOn; // TODO: Mars added
+        PopupEventManager.OnHelpPopupOff += SetForceLockOff; // TODO: Mars added
         controls.Enable();  
     } 
     void OnDisable(){
         Scrubber.OnCamSwitch -= changeToCam;
-        HelpPopup.OnSwapStates -= toggleForceLock;
+        PopupEventManager.OnHelpPopupOn -= SetForceLockOn; // TODO: Mars added
+        PopupEventManager.OnHelpPopupOff -= SetForceLockOff; // TODO: Mars added
         controls.Disable();
     }
 
@@ -97,8 +99,14 @@ public class CameraController : MonoBehaviour{
 
     }
 
-    void toggleForceLock(){
-        forceLock = !forceLock;
+    void SetForceLock(bool on){ // TODO: Mars added
+        forceLock = on;
+    }
+    void SetForceLockOn(){ // TODO
+        SetForceLock(true);
+    }
+    void SetForceLockOff(){ // TODO
+        SetForceLock(false);
     }
 
     void lockUnLockCamera() {

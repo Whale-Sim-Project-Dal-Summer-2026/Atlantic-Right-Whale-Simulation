@@ -101,7 +101,6 @@ public class WhaleDriver : MonoBehaviour
 // we care about seaLevel only here
     public ProcessingSettings processingSettings;
     
-    public ResetManager ResetManager;
    
 
     WhaleModelAbstract whaleModel;
@@ -115,7 +114,9 @@ public class WhaleDriver : MonoBehaviour
     public float whalePitch;
     public float whaleRoll;
 
-    public float whaleSpeed; 
+    public float whaleSpeed;
+    public Scrubber scrubber; // TODO: Mars added
+    public WhaleConnector whaleConnector; // TODO: Mars added
     
     void Start(){
 
@@ -159,7 +160,7 @@ public class WhaleDriver : MonoBehaviour
              int totalTimeStes = dataSource.GetTotalTimesteps();
         this.totalTimesteps = totalTimeStes;
 
-        ResetManager.OnReset += () => {
+        WhaleConnector.OnReset += () => { // TODO: Mars added
             jumpToTimestep = 0;
             PauseTime = StartingPauseTime;
         };
@@ -241,12 +242,20 @@ public class WhaleDriver : MonoBehaviour
     // looping parameter
     if (currentTimestep >= CSV_ResetTimeStep){
         currentTimestep = 0;
-        ResetManager.TriggerReset();
+        if (scrubber) { // TODO: Mars added
+            scrubber.Restart();
+        } else {
+            whaleConnector.Reset();  
+        }
     }
     
     if (controls.Player.Reset.triggered){
        jumpToTimestep = 0;
-       ResetManager.TriggerReset();
+       if (scrubber) { // TODO: Mars added
+           scrubber.Restart();
+       } else {
+           whaleConnector.Reset();
+       }
        //animator.Play("R Whale Armature|Whale Swimming",0,0);  
     }
 
