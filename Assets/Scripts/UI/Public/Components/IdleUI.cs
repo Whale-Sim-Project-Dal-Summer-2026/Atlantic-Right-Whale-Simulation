@@ -15,7 +15,7 @@ public class IdleUI : MonoBehaviour {
     [SerializeField] private float idleTime;
     // extra things to toggle
     [Header("Additional Parameters to be Hidden")]
-    [SerializeField] private Toggles toggles;
+    [SerializeField] private TogglesManager toggles;
     [SerializeField] private Scrubber scrubber;
     [SerializeField] private GameObject toggleUIBtn;
     

@@ -2786,50 +2786,6 @@ Material:
     - _Tiling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!1 &392961702
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 392961704}
-  - component: {fileID: 392961703}
-  m_Layer: 0
-  m_Name: PauseManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &392961703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 392961702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1f29d0c01872a749b17c2c8bbc5d493, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PauseManager
---- !u!4 &392961704
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 392961702}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 377.43063, y: 0, z: 553.2726}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &397927179
 GameObject:
   m_ObjectHideFlags: 0
@@ -12308,50 +12264,6 @@ MonoBehaviour:
   m_bottomRadius: 0
   m_thickness: 0
   m_height: 0
---- !u!1 &1737455056
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1737455058}
-  - component: {fileID: 1737455057}
-  m_Layer: 0
-  m_Name: ResetManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1737455057
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1737455056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57f5baeaceadc6c47883b7b96caad3f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ResetManager
---- !u!4 &1737455058
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1737455056}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1755101217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14388,15 +14300,15 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: d048ea5d3e60e574fbc50183f4ebffab, type: 3}
 --- !u!114 &2029064746965722375 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 339207957768772415, guid: d048ea5d3e60e574fbc50183f4ebffab, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4726672964631486046, guid: d048ea5d3e60e574fbc50183f4ebffab, type: 3}
   m_PrefabInstance: {fileID: 2029064746965722374}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e853b27373204792a2453c41aa2cdc6c, type: 3}
+  m_Script: {fileID: 11500000, guid: cea32385d6acf484ebf2397f32dd828f, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Toggles
+  m_EditorClassIdentifier: Assembly-CSharp::TogglesManager
 --- !u!1 &2029064746965722376 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9122529411013426640, guid: d048ea5d3e60e574fbc50183f4ebffab, type: 3}
@@ -15366,7 +15278,7 @@ PrefabInstance:
     - target: {fileID: 6231168970818655502, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
       propertyPath: ResetManager
       value: 
-      objectReference: {fileID: 1737455057}
+      objectReference: {fileID: 0}
     - target: {fileID: 6231168970818655502, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
       propertyPath: dataSourceFile
       value: 
@@ -15947,8 +15859,6 @@ SceneRoots:
   - {fileID: 52838562}
   - {fileID: 3087820724641203354}
   - {fileID: 6824787337333441228}
-  - {fileID: 392961704}
-  - {fileID: 1737455058}
   - {fileID: 1458736383}
   - {fileID: 1785273720}
   - {fileID: 1940174812}

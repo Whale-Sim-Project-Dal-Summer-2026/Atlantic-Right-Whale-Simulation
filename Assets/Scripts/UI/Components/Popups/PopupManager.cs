@@ -1,5 +1,5 @@
 /**
- * PopupEventManager.cs: Implements custom behaviour for the popups in the scene.
+ * PopupManager.cs: Implements custom behaviour for the popups in the scene.
  *
  * @author Mars Semenova
  */
@@ -7,7 +7,7 @@
 using System;
 using UnityEngine;
 
-public class PopupEventManager : MonoBehaviour {
+public class PopupManager : MonoBehaviour {
     // params
     // help popup params
     [Header("Help Popup Parameters")]
@@ -27,7 +27,9 @@ public class PopupEventManager : MonoBehaviour {
         Popup.OnPopupOff += PopupOffEvent;
         
         // help events setup
-        OnHelpPopupOn += scrubber.Pause;
+        if (scrubber) {
+            OnHelpPopupOn += scrubber.Pause;
+        }
         OnHelpPopupOn += simUIManager.SetUIInteractivityOff;
         OnHelpPopupOff += simUIManager.SetUIInteractivityOn;
     }

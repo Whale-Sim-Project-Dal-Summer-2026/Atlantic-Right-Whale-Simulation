@@ -33,10 +33,10 @@ public class WhaleTrail : MonoBehaviour {
         
         // events
         WhaleConnector.OnReset += ResetPath;
-        Toggles.OnToggleUIOn += SetPathVisibilityOn; // TODO: only for pub side
-        Toggles.OnToggleUIOff += SetPathVisibilityOff; // TODO: only for pub side
-        Toggles.OnTogglePathOn += SetPathVisibilityOn;
-        Toggles.OnTogglePathOff += SetPathVisibilityOff;
+        TogglesManager.OnToggleUIOn += SetPathVisibilityOn; // TODO: only for pub side
+        TogglesManager.OnToggleUIOff += SetPathVisibilityOff; // TODO: only for pub side
+        TogglesManager.OnTogglePathOn += SetPathVisibilityOn;
+        TogglesManager.OnTogglePathOff += SetPathVisibilityOff;
     }
 
     void Start() {

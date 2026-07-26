@@ -80,14 +80,14 @@ public class CameraController : MonoBehaviour{
     void OnEnable()
     {
         Scrubber.OnCamSwitch += changeToCam;
-        PopupEventManager.OnHelpPopupOn += SetForceLockOn; // TODO: Mars added
-        PopupEventManager.OnHelpPopupOff += SetForceLockOff; // TODO: Mars added
+        PopupManager.OnHelpPopupOn += SetForceLockOn; // TODO: Mars added
+        PopupManager.OnHelpPopupOff += SetForceLockOff; // TODO: Mars added
         controls.Enable();  
     } 
     void OnDisable(){
         Scrubber.OnCamSwitch -= changeToCam;
-        PopupEventManager.OnHelpPopupOn -= SetForceLockOn; // TODO: Mars added
-        PopupEventManager.OnHelpPopupOff -= SetForceLockOff; // TODO: Mars added
+        PopupManager.OnHelpPopupOn -= SetForceLockOn; // TODO: Mars added
+        PopupManager.OnHelpPopupOff -= SetForceLockOff; // TODO: Mars added
         controls.Disable();
     }
 

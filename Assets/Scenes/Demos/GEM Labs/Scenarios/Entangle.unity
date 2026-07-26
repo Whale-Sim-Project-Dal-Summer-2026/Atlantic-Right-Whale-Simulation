@@ -1933,6 +1933,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1126706788}
     m_Modifications:
+    - target: {fileID: 258501777564101422, guid: 1a513e6f387aa7e4d873b54be62188e3, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 258501777564101422, guid: 1a513e6f387aa7e4d873b54be62188e3, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4076052854096998951, guid: 1a513e6f387aa7e4d873b54be62188e3, type: 3}
       propertyPath: m_Name
       value: CyclingFunFactsContainer
@@ -2727,50 +2735,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Utils.OnSelectionProxy
   m_serializationVersion: 2
   m_component: {fileID: 1755101217}
---- !u!1 &392961702
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 392961704}
-  - component: {fileID: 392961703}
-  m_Layer: 0
-  m_Name: PauseManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &392961703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 392961702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1f29d0c01872a749b17c2c8bbc5d493, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PauseManager
---- !u!4 &392961704
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 392961702}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 377.43063, y: 0, z: 553.2726}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &397927179
 GameObject:
   m_ObjectHideFlags: 0
@@ -5327,6 +5291,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ToggleBtns
       objectReference: {fileID: 0}
+    - target: {fileID: 4726672964631486046, guid: d048ea5d3e60e574fbc50183f4ebffab, type: 3}
+      propertyPath: whaleTrail
+      value: 
+      objectReference: {fileID: 1028117630}
     - target: {fileID: 6454711327911404320, guid: d048ea5d3e60e574fbc50183f4ebffab, type: 3}
       propertyPath: m_LocalPosition.x
       value: -31
@@ -5379,15 +5347,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &850295283 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 339207957768772415, guid: d048ea5d3e60e574fbc50183f4ebffab, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4726672964631486046, guid: d048ea5d3e60e574fbc50183f4ebffab, type: 3}
   m_PrefabInstance: {fileID: 850295281}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e853b27373204792a2453c41aa2cdc6c, type: 3}
+  m_Script: {fileID: 11500000, guid: cea32385d6acf484ebf2397f32dd828f, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Toggles
+  m_EditorClassIdentifier: Assembly-CSharp::TogglesManager
 --- !u!1 &850295284 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9122529411013426640, guid: d048ea5d3e60e574fbc50183f4ebffab, type: 3}
@@ -5629,11 +5597,11 @@ PrefabInstance:
     - target: {fileID: 4601650997053863039, guid: af894e0831850ea45bbf60cb1083922c, type: 3}
       propertyPath: pauseManager
       value: 
-      objectReference: {fileID: 392961703}
+      objectReference: {fileID: 0}
     - target: {fileID: 4601650997053863039, guid: af894e0831850ea45bbf60cb1083922c, type: 3}
       propertyPath: resetManager
       value: 
-      objectReference: {fileID: 1522814764}
+      objectReference: {fileID: 0}
     - target: {fileID: 4601650997053863039, guid: af894e0831850ea45bbf60cb1083922c, type: 3}
       propertyPath: currentTimeStepDelta
       value: 0.004
@@ -9345,50 +9313,6 @@ MonoBehaviour:
     m_reductionRatio: 0.5
     m_reductionAggressiveness: 7
     m_elementResolutionPerAxis: 50
---- !u!1 &1522814763
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1522814765}
-  - component: {fileID: 1522814764}
-  m_Layer: 0
-  m_Name: ResetManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1522814764
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1522814763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57f5baeaceadc6c47883b7b96caad3f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ResetManager
---- !u!4 &1522814765
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1522814763}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 377.43066, y: 0, z: 553.2726}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1525260069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13623,7 +13547,7 @@ PrefabInstance:
     - target: {fileID: 6231168970818655502, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
       propertyPath: ResetManager
       value: 
-      objectReference: {fileID: 1522814764}
+      objectReference: {fileID: 0}
     - target: {fileID: 6231168970818655502, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
       propertyPath: dataSourceType
       value: 3
@@ -14120,6 +14044,4 @@ SceneRoots:
   - {fileID: 52838562}
   - {fileID: 3087820724641203354}
   - {fileID: 6824787337333441228}
-  - {fileID: 392961704}
-  - {fileID: 1522814765}
   - {fileID: 806279214}

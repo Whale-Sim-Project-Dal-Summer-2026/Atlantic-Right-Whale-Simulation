@@ -3045,7 +3045,7 @@ PrefabInstance:
     - target: {fileID: 5557634060668166497, guid: 3e75b7b86ed13b84680309ce14faa680, type: 3}
       propertyPath: toggles
       value: 
-      objectReference: {fileID: 1724747919}
+      objectReference: {fileID: 1724747922}
     - target: {fileID: 5557634060668166497, guid: 3e75b7b86ed13b84680309ce14faa680, type: 3}
       propertyPath: scrubber
       value: 
@@ -6959,7 +6959,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainUIManager
   scrubber: {fileID: 1970795745}
-  toggles: {fileID: 1724747919}
+  toggles: {fileID: 1724747922}
   viewerColliders:
   - {fileID: 6824787337333441231}
 --- !u!4 &1148659900
@@ -10530,14 +10530,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 15016971}
     m_Modifications:
-    - target: {fileID: 339207957768772415, guid: d048ea5d3e60e574fbc50183f4ebffab, type: 3}
-      propertyPath: whaleTrail
-      value: 
-      objectReference: {fileID: 1193858187}
     - target: {fileID: 463158284528865238, guid: d048ea5d3e60e574fbc50183f4ebffab, type: 3}
       propertyPath: m_Name
       value: ToggleBtns
       objectReference: {fileID: 0}
+    - target: {fileID: 4726672964631486046, guid: d048ea5d3e60e574fbc50183f4ebffab, type: 3}
+      propertyPath: whaleTrail
+      value: 
+      objectReference: {fileID: 1193858187}
     - target: {fileID: 6454711327911404320, guid: d048ea5d3e60e574fbc50183f4ebffab, type: 3}
       propertyPath: m_LocalPosition.x
       value: -31
@@ -10588,17 +10588,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6454711327911404320, guid: d048ea5d3e60e574fbc50183f4ebffab, type: 3}
   m_PrefabInstance: {fileID: 1724747917}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1724747919 stripped
+--- !u!114 &1724747922 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 339207957768772415, guid: d048ea5d3e60e574fbc50183f4ebffab, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4726672964631486046, guid: d048ea5d3e60e574fbc50183f4ebffab, type: 3}
   m_PrefabInstance: {fileID: 1724747917}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e853b27373204792a2453c41aa2cdc6c, type: 3}
+  m_Script: {fileID: 11500000, guid: cea32385d6acf484ebf2397f32dd828f, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Toggles
+  m_EditorClassIdentifier: Assembly-CSharp::TogglesManager
 --- !u!1 &1730710819
 GameObject:
   m_ObjectHideFlags: 0
@@ -11869,61 +11869,6 @@ MonoBehaviour:
   m_bottomRadius: 0
   m_thickness: 0
   m_height: 0
---- !u!1 &2035111052
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2035111054}
-  - component: {fileID: 2035111053}
-  m_Layer: 0
-  m_Name: ResetManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2035111053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2035111052}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57f5baeaceadc6c47883b7b96caad3f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ResetManager
-  holdTimeForReset: 3
-  currTimeHeld: 0
-  resetButton:
-    m_Name: 
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: c8d437be-d526-4436-b0b5-e41d6f9ce3f1
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
---- !u!4 &2035111054
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2035111052}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 377.43057, y: 0, z: 553.2725}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2058705600
 GameObject:
   m_ObjectHideFlags: 0
@@ -13452,7 +13397,7 @@ PrefabInstance:
     - target: {fileID: 6231168970818655502, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
       propertyPath: ResetManager
       value: 
-      objectReference: {fileID: 2035111053}
+      objectReference: {fileID: 0}
     - target: {fileID: 6231168970818655502, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
       propertyPath: dataSourceFile
       value: 
@@ -14033,5 +13978,4 @@ SceneRoots:
   - {fileID: 52838562}
   - {fileID: 3087820724641203354}
   - {fileID: 6824787337333441228}
-  - {fileID: 2035111054}
   - {fileID: 1148659900}

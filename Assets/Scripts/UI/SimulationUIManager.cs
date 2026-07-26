@@ -12,7 +12,7 @@ public class SimulationUIManager : MonoBehaviour {
     // scripts
     [Header("Scripts")]
     [SerializeField] private Scrubber scrubber;
-    [SerializeField] private Toggles toggles;
+    [SerializeField] private TogglesManager toggles;
     // viewer colliders
     [Header("Viewer Colliders to Disable when Hiding UI")]
     [SerializeField] private Collider[] viewerColliders;
@@ -25,11 +25,11 @@ public class SimulationUIManager : MonoBehaviour {
     
     void Awake() {
         // toggle UI interactivity when help popup is toggled
-        PopupEventManager.OnHelpPopupOn += SetUIInteractivityOff;
-        PopupEventManager.OnHelpPopupOff += SetUIInteractivityOn;
+        PopupManager.OnHelpPopupOn += SetUIInteractivityOff;
+        PopupManager.OnHelpPopupOff += SetUIInteractivityOn;
         // toggle viewer collider interactivity on UI toggle
-        Toggles.OnToggleUIOn += SetViewerCollidersInteractivityOn;
-        Toggles.OnToggleUIOff += SetViewerCollidersInteractivityOff;
+        TogglesManager.OnToggleUIOn += SetViewerCollidersInteractivityOn;
+        TogglesManager.OnToggleUIOff += SetViewerCollidersInteractivityOff;
     }
 
     /**
