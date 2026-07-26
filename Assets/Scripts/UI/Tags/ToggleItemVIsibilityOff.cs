@@ -10,14 +10,14 @@ using UnityEngine;
 
 public class ToggleItemVisibilityOff : MonoBehaviour {
     void Awake() {
-        TogglesManager.OnToggleUIOn += ToggleVisibilityOff;
-        TogglesManager.OnToggleUIOff += ToggleVisibilityOff;
+        TogglesManager.OnToggleUIOn += SetVisibilityOff;
+        TogglesManager.OnToggleUIOff += SetVisibilityOff;
     }
 
     /**
      * Turn visibility off.
      */
-    private void ToggleVisibilityOff() {
+    private void SetVisibilityOff() {
         gameObject.SetActive(false);
     }
 }

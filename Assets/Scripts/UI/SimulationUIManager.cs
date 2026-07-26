@@ -13,9 +13,6 @@ public class SimulationUIManager : MonoBehaviour {
     [Header("Scripts")]
     [SerializeField] private Scrubber scrubber;
     [SerializeField] private TogglesManager toggles;
-    // viewer colliders
-    [Header("Viewer Colliders to Disable when Hiding UI")]
-    [SerializeField] private Collider[] viewerColliders;
     
     // events
     public delegate void DisableInteractivityEvent();
@@ -27,9 +24,6 @@ public class SimulationUIManager : MonoBehaviour {
         // toggle UI interactivity when help popup is toggled
         PopupManager.OnHelpPopupOn += SetUIInteractivityOff;
         PopupManager.OnHelpPopupOff += SetUIInteractivityOn;
-        // toggle viewer collider interactivity on UI toggle
-        TogglesManager.OnToggleUIOn += SetViewerCollidersInteractivityOn;
-        TogglesManager.OnToggleUIOff += SetViewerCollidersInteractivityOff;
     }
 
     /**
@@ -55,21 +49,5 @@ public class SimulationUIManager : MonoBehaviour {
     }
     public void SetUIInteractivityOff() { // TODO
         SetUIInteractivity(false);
-    }
-
-    /**
-     * Set viewer colliders interactivity. Used when UI is disabled.
-     * @param on - Whether to disable the colliders.
-     */
-    private void SetViewerCollidersInteractivity(bool on) {
-        for (int x = 0; x < viewerColliders.Length; x++) {
-            viewerColliders[x].enabled = on;
-        }
-    }
-    private void SetViewerCollidersInteractivityOn() { // TODO
-        SetViewerCollidersInteractivity(true);
-    }
-    private void SetViewerCollidersInteractivityOff() { // TODO
-        SetViewerCollidersInteractivity(false);
     }
 }

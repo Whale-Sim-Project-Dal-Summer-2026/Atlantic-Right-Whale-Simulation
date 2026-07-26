@@ -15,29 +15,45 @@ public class ToggleItemInteractivity : MonoBehaviour {
     [SerializeField] private Collider[] colliders;
     
     void Awake() {
-        SimulationUIManager.OnInteractivityEnabled += ToggleInteractivityOn;
-        SimulationUIManager.OnInteractivityDisabled += ToggleInteractivityOff;
+        SimulationUIManager.OnInteractivityEnabled += SetInteractivityOn;
+        SimulationUIManager.OnInteractivityDisabled += SetInteractivityOff;
+        TogglesManager.OnToggleUIOn += SetColliderInteractivityOn;
+        TogglesManager.OnToggleUIOff += SetColliderInteractivityOff;
     }
 
     /**
      * Make buttons and/or colliders interactable.
      */
-    private void ToggleInteractivityOn() {
+    private void SetInteractivityOn() {
         for (int x = 0; x < btns.Length; x++) {
             btns[x].interactable = true;
         }
+        SetColliderInteractivityOn();
+    }
+    
+    /**
+     * Make buttons and/or colliders not interactable.
+     */
+    private void SetInteractivityOff() {
+        for (int x = 0; x < btns.Length; x++) {
+            btns[x].interactable = false;
+        }
+        SetColliderInteractivityOff();
+    }
+    
+    /**
+     * Make colliders interactable.
+     */
+    private void SetColliderInteractivityOn() {
         for (int x = 0; x < colliders.Length; x++) {
             colliders[x].enabled = true;
         }
     }
     
     /**
-     * Make buttons and/or colliders not interactable.
+     * Make colliders not interactable.
      */
-    private void ToggleInteractivityOff() {
-        for (int x = 0; x < btns.Length; x++) {
-            btns[x].interactable = false;
-        }
+    private void SetColliderInteractivityOff() {
         for (int x = 0; x < colliders.Length; x++) {
             colliders[x].enabled = false;
         }
