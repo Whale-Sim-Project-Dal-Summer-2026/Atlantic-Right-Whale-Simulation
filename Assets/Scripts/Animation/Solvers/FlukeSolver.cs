@@ -144,5 +144,8 @@ public class FlukeSolver {
         return output; 
     }
 
-
+public void resetSolver(WhaleState startState) {
+        
+        
+    }
 }

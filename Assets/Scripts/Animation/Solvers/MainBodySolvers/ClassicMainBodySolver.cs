@@ -27,4 +27,8 @@ public class ClassicMainBodySolver : MainBodySolverAbstract {
 
         return newState;
     }
+      public override void resetSolver(WhaleState startState) {
+        this.targetPosition = startState.Root.Position;
+        this.targetRotation = startState.Root.Rotation;
+    }
 }

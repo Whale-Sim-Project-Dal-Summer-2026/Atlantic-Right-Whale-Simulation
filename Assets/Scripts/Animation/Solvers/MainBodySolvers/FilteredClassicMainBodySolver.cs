@@ -39,4 +39,10 @@ public class FilteredClassicMainBodySolver : MainBodySolverAbstract {
 
         return newState;
     }
+      public override void resetSolver(WhaleState startState) {
+        this.targetPosition = startState.Root.Position;
+        this.targetRotation = startState.Root.Rotation;
+        this.filteredDepth = startState.Root.Position.y;
+        this.filteredRotation = startState.Root.Rotation;
+    }
 }

@@ -100,4 +100,8 @@ public class BodyRollSolver
 
         return newState;
     }
+    public void resetSolver(WhaleState startState) {
+        
+        
+    }
 }

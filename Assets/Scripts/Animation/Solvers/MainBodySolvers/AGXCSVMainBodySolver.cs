@@ -159,4 +159,9 @@ public class AGXCSVMainBodySolver : MainBodySolverAbstract {
         newState.Root.Speed = solvedRoot.Speed;
         return newState;
     }
+    public override void resetSolver(WhaleState startState) {
+        this.targetRotation = startState.Root.Rotation;
+        this.targetPosition = startState.Root.Position;
+        currentState = startState;
+    }
 }

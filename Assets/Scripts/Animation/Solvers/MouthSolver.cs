@@ -41,6 +41,9 @@ public class MouthSolver {
         return solvedMouthData;
     }
     
-
+    public void resetSolver(WhaleState startState) {
+        
+        
+    }
 
 }

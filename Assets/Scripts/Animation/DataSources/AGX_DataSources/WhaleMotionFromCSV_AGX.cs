@@ -34,8 +34,6 @@ using FlukeWaveAmplitudeLookUpClass;
 //save the forces into the position vector for 
 
 
-
-
 public class WhaleMotionFromCSV_AGX : DataSource{
 
     
@@ -242,17 +240,37 @@ public class WhaleMotionFromCSV_AGX : DataSource{
 
         currentTimestep = timestep;
         previousWhaleState = whaleStartState;
+        currentWhaleState = whaleStartState;
+        
+        resetSolvers();
+
+        userInputManager.rb.Native.setMotionControl(agx.RigidBody.MotionControl.KINEMATICS);
+
+
         userInputManager.rb.LinearVelocity = Vector3.zero;
         userInputManager.rb.AngularVelocity = Vector3.zero;
 
+        userInputManager.rb.Native.setAngularVelocity(new agx.Vec3(0, 0, 0));
+
+
+        userInputManager.rb.Native.addForce(-userInputManager.rb.Native.getForce());
+        userInputManager.rb.Native.addTorque(-userInputManager.rb.Native.getTorque());
         userInputManager.rb.Native.setPosition(new agx.Vec3(-500, -25, 500));
         userInputManager.rb.Native.setRotation(new agx.Quat(0, 0, 0,1));
-        userInputManager.rb.GameObject().transform.position = new Vector3(-500, -25, 500);
-        userInputManager.rb.GameObject().transform.rotation = Quaternion.identity;
+
+        userInputManager.rb.Native.setMotionControl(agx.RigidBody.MotionControl.DYNAMICS);
+      
     }
 
     public override int GetTotalTimesteps()
     {
         return this.totalTimesteps;
+    }
+    void resetSolvers() {
+        
+        mainBodySolver.resetSolver(whaleStartState);
+        mouthSolver.resetSolver(whaleStartState);
+        flukeSolver.resetSolver(whaleStartState);
+
     }
 }

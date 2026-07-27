@@ -55,4 +55,9 @@ public class FinSolver {
 
         return currentFinStates;
     }
+
+    public void resetSolver(WhaleState startState) {
+        
+        
+    }
 }
