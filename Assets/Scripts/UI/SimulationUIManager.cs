@@ -15,6 +15,8 @@ public class SimulationUIManager : MonoBehaviour {
     [SerializeField] private TogglesManager toggles;
     
     // events
+
+    // use only 1 event for these 2, pass bool into it to say wheter it should be on or off
     public delegate void DisableInteractivityEvent();
     public static event DisableInteractivityEvent OnInteractivityDisabled;
     public delegate void EnableInteractivityEvent();

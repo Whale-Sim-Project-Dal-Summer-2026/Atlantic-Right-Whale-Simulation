@@ -16,6 +16,7 @@ public class PopupManager : MonoBehaviour {
     [SerializeField] private SimulationUIManager simUIManager;
     
     // events
+    // make this 1 event
     public delegate void HelpPopupOnEvent(); 
     public static event HelpPopupOnEvent OnHelpPopupOn;
     public delegate void HelpPopupOffEvent(); 

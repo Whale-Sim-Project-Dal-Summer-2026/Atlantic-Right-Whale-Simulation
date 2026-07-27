@@ -80,14 +80,14 @@ public class CameraController : MonoBehaviour{
     void OnEnable()
     {
         Scrubber.OnCamSwitch += changeToCam;
-        PopupManager.OnHelpPopupOn += SetForceLockOn; // TODO: Mars added
-        PopupManager.OnHelpPopupOff += SetForceLockOff; // TODO: Mars added
+        PopupManager.OnHelpPopupOn += SetForceLockOn;
+        PopupManager.OnHelpPopupOff += SetForceLockOff;
         controls.Enable();  
     } 
     void OnDisable(){
         Scrubber.OnCamSwitch -= changeToCam;
-        PopupManager.OnHelpPopupOn -= SetForceLockOn; // TODO: Mars added
-        PopupManager.OnHelpPopupOff -= SetForceLockOff; // TODO: Mars added
+        PopupManager.OnHelpPopupOn -= SetForceLockOn;
+        PopupManager.OnHelpPopupOff -= SetForceLockOff;
         controls.Disable();
     }
 
@@ -99,13 +99,13 @@ public class CameraController : MonoBehaviour{
 
     }
 
-    void SetForceLock(bool on){ // TODO: Mars added
+    void SetForceLock(bool on){
         forceLock = on;
     }
-    void SetForceLockOn(){ // TODO
+    void SetForceLockOn(){
         SetForceLock(true);
     }
-    void SetForceLockOff(){ // TODO
+    void SetForceLockOff(){
         SetForceLock(false);
     }
 

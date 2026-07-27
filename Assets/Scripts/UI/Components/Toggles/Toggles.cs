@@ -15,6 +15,8 @@ struct Toggle {
     public  String spriteRsrcPath;
     public bool on;
     private Sprite spriteOff;
+
+    // I personally advise against the use of getters/setters, it often means that one class is dependant on another, which makes the code less modular
     public void SetSpriteOff (Sprite s) {
         spriteOff = s; 
     }

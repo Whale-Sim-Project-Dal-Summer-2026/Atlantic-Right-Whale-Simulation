@@ -23,12 +23,17 @@ public class WhaleConnector : MonoBehaviour {
     // vars
     private float currentTimeStepDelta = 0.004f; 
     
+    // I like this!
+
     void Awake() {
+
         // attach reset function to events
         Scrubber.OnRestart += Reset;
         ControlHints.OnUnstick += Reset;
         
         // attach whale pause/play to scrubber btns
+
+// Maybe could be 1 event, but not a huge deal
         Scrubber.OnPause += PauseWhale;
         Scrubber.OnPlay += PlayWhale;
     }
@@ -69,6 +74,7 @@ public class WhaleConnector : MonoBehaviour {
      * Update the time in the scrubber.
      */
     private void UpdateTime() {
+        // use if inversion
         if (scrubber) {
             float currentTimeStep = whaleDriver.currentTimestep;
             float secondsConvert = currentTimeStep * currentTimeStepDelta;
@@ -97,6 +103,7 @@ public class WhaleConnector : MonoBehaviour {
      * Update telemetry data.
      */
     private void UpdateTelemetry() {
+        // if inversion
         if (telemetry) {
             // speed
             String speed = whaleDriver.whaleSpeed.ToString("F0") + " m/s";

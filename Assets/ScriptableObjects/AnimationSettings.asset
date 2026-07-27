@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AnimationSettings
   MotionData_csv: {fileID: 4900000, guid: 3918953992e35c145b1fd914e5006382, type: 3}
   MotionData_ContainsHeaders: 1
-  FlukeAmpLookUp_csv: {fileID: 4900000, guid: bb1400570db43e44098280174210ea50, type: 3}
+  FlukeAmpLookUp_csv: {fileID: 4900000, guid: f5a8a0e2193d7d6479d8cd14d0cb0f48, type: 3}
   FlukeAmp_ContainsHeaders: 1

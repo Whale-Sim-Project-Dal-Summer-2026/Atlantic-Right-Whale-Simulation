@@ -76,12 +76,13 @@ public class ManualWhaleController : MonoBehaviour{
         speedAcceleration = 1f;
 
 
-        WhaleConnector.OnReset += resetWhalePosition; // TODO: Mars added
+        WhaleConnector.OnReset += resetWhalePosition;
     }
 
 
     void resetWhalePosition(){
         rb.Native.setPosition(whaleStartPos);
+        // maybe reset yaw pitch etc... here
     }
 
 
@@ -150,7 +151,7 @@ public class ManualWhaleController : MonoBehaviour{
 
     void Update()
     {
-        updateMoveInfo();
+        // updateMoveInfo();
         
         readInputs();
 

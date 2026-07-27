@@ -23,6 +23,8 @@ public class TogglesManager : MonoBehaviour {
     [SerializeField] private WhaleTrail whaleTrail;
     
     // events
+
+    // dont need 2 events, have 1 event, and pass either true or false into them
     public delegate void ToggleUIOnEvent();
     public static event ToggleUIOnEvent OnToggleUIOn;
     public delegate void ToggleUIOffEvent();
@@ -42,6 +44,8 @@ public class TogglesManager : MonoBehaviour {
      * @param label - Name of a toggle's GameObject passed through the generic toggle's events.
      * @param on - Whether the toggle was toggled on or off.
      */
+
+    //  should likely just pass a gameobject into this
     private void ToggleEvent(String label, bool on) {
         if (toggleUIBtn && label == toggleUIBtn.gameObject.name) {
             SetUIVisibility(on);

@@ -46,6 +46,8 @@ public class Scrubber : MonoBehaviour {
     private Sprite playSprite;
     
     // states
+    
+    // I recommend using enums to keep track of state rather than bool's, I find its more explicit
     private bool paused = false;
     private bool pinned  = true;
     private float[] speeds = {0.25f, 0.5f, 0.75f, 1.0f, 1.5f, 2.0f, 3.0f, 4.0f, 5.0f};
