@@ -6,7 +6,9 @@
  */
 
 using System;
+using NUnit.Framework.Constraints;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class WhaleConnector : MonoBehaviour {
     // params
@@ -41,6 +43,15 @@ public class WhaleConnector : MonoBehaviour {
     void Update() {
         UpdateTelemetry();
         UpdateTime();
+
+        if (whaleDriver.check()) {
+            if (scrubber) {
+                scrubber.Restart();
+            }
+            else {
+                Reset();
+            }
+        }
         
         // set scrubber percentage
         if (scrubber) {

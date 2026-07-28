@@ -47,38 +47,21 @@ public class ControlHints : MonoBehaviour {
 
     // this would allow you to have ode that is easier to read and is less redundant
     private void SetCurrCam(int currCam) {
-        if (currCam == 1) {
-            if (controlHintsFreeCam) {
-                controlHintsFreeCam.SetActive(false);
-            }
-            if (controlHintsFollowCam) {
+        if (controlHintsFollowCam) {
+            controlHintsFollowCam.SetActive(false);
+            if (currCam == 1) {
                 controlHintsFollowCam.SetActive(true);
             }
-            if (controlHintsPOVCam) {
-                controlHintsPOVCam.SetActive(false);
-            }
         }
-
-        if (currCam == 2) {
-            if (controlHintsFreeCam) {
+        if (controlHintsFreeCam) {
+            controlHintsFreeCam.SetActive(false);
+            if (currCam == 2) {
                 controlHintsFreeCam.SetActive(true);
             }
-            if (controlHintsFollowCam) {
-                controlHintsFollowCam.SetActive(false);
-            }
-            if (controlHintsPOVCam) {
-                controlHintsPOVCam.SetActive(false);
-            }
         }
-
-        if (currCam == 3) {
-            if (controlHintsFreeCam) {
-                controlHintsFreeCam.SetActive(false);
-            }
-            if (controlHintsFollowCam) {
-                controlHintsFollowCam.SetActive(false);
-            }
-            if (controlHintsPOVCam) {
+        if (controlHintsPOVCam) {
+            controlHintsPOVCam.SetActive(false);
+            if (currCam == 3) {
                 controlHintsPOVCam.SetActive(true);
             }
         }

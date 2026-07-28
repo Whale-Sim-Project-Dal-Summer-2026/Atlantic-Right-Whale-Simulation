@@ -13,31 +13,34 @@ public class IdleUI : MonoBehaviour {
     [Header("Idle Mode Parameters")]
     [SerializeField] private GameObject idleUI;
     [SerializeField] private float idleTime;
-    // extra things to toggle
-    [Header("Additional Parameters to be Hidden")]
-    [SerializeField] private TogglesManager toggles;
-    [SerializeField] private Scrubber scrubber;
-    [SerializeField] private GameObject toggleUIBtn;
+    
+    // events
+    public delegate void IdleEvent(bool on);
+    public static event IdleEvent OnIdle;
     
     // vars
     private float lastInput;
+    private double lastMouseInput;
     private bool forceIdle = false;
     private bool isIdle = false;
     
     void Awake() {
         lastInput = Time.time;
+        lastMouseInput = Mouse.current.lastUpdateTime;
     }
         
     private void Update() {
         // check for input
-        bool keyboardPress = (Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame);
+        bool keyboardPress = Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame;
         bool controllerPress = Gamepad.current != null && Gamepad.current.wasUpdatedThisFrame;
-        if (keyboardPress || controllerPress) { // TODO: mouse input
+        bool mouseInput = Mouse.current != null && Mouse.current.lastUpdateTime != lastMouseInput;
+        if (keyboardPress || controllerPress || mouseInput) { 
             lastInput = Time.time;
+            lastMouseInput = Mouse.current.lastUpdateTime;
         }
 
         // force idle (largely for dev purposes)
-        if (Keyboard.current.f10Key.wasPressedThisFrame) {
+        if (Keyboard.current.f10Key.wasPressedThisFrame) { // TODO: nuke?
             forceIdle = !forceIdle;
         }
         
@@ -64,18 +67,11 @@ public class IdleUI : MonoBehaviour {
     }
 
     /**
-     * Set idle mode.
+     * Enter idle mode by displaying the UI and invoking an event.
      * @param on - Whether idle mode is on or off.
      */
     private void IdleMode(bool on) {
         idleUI.SetActive(on);
-        toggles.SetUIVisibility(!on);
-        if (scrubber) {
-            if (on) {
-                scrubber.Play(); // TODO: loop
-            }
-            scrubber.gameObject.SetActive(!on);
-        }
-        toggleUIBtn.SetActive(!on);
+        OnIdle?.Invoke(on);
     }
 }

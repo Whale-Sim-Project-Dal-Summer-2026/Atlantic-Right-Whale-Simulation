@@ -21,7 +21,7 @@ public class ViewerItem : MonoBehaviour {
     [SerializeField] private ViewerPopup popup;
 
     void Update() {
-        if (collider.bounds.IntersectRay(Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue())) && Mouse.current.leftButton.wasPressedThisFrame && Cursor.lockState != CursorLockMode.Locked) {
+        if (popup && collider.bounds.IntersectRay(Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue())) && Mouse.current.leftButton.wasPressedThisFrame && Cursor.lockState != CursorLockMode.Locked) {
             popup.ShowViewer(image, text);
         }
     }

@@ -24,7 +24,7 @@ public class ToggleItemInteractivity : MonoBehaviour {
     /**
      * Make buttons and/or colliders interactable.
      */
-    private void SetInteractivityOn() {
+    private void SetInteractivityOn() { 
         for (int x = 0; x < btns.Length; x++) {
             btns[x].interactable = true;
         }

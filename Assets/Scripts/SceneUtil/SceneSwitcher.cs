@@ -27,20 +27,20 @@ public class SceneSwitcher : MonoBehaviour
 
     void Start()
     {
-        openMenuAction = InputSystem.actions.FindAction("OpenMenu");
+        openMenuAction = InputSystem.actions.FindAction("OpenMenu"); // TODO
         currScene = SceneManager.GetActiveScene().name;
     }
 
     void checkForMenuPress() {
-        openMenu = (openMenuAction?.ReadValue<float>() ?? 0.0f) == 1.0f;
+        openMenu = (openMenuAction?.ReadValue<float>() ?? 0.0f) == 1.0f; // TODO
     }
 
     void Update()
     {
         if (Keyboard.current.escapeKey.isPressed) {
-            Application.Quit();
+            Application.Quit(); // TODO
         }
-        checkForMenuPress();
+        checkForMenuPress(); // TODO
 
         if (openMenu) {
             changeToScenarios();

@@ -46,25 +46,25 @@ public class TogglesManager : MonoBehaviour {
      */
 
     //  should likely just pass a gameobject into this
-    private void ToggleEvent(String label, bool on) {
-        if (toggleUIBtn && label == toggleUIBtn.gameObject.name) {
+    private void ToggleEvent(GameObject obj, bool on) {
+        if (toggleUIBtn && obj == toggleUIBtn.gameObject) {
             SetUIVisibility(on);
         }
-        if (toggleDragBtn && label == toggleDragBtn.gameObject.name) {
+        if (toggleDragBtn && obj == toggleDragBtn.gameObject) {
             // TODO
         }
-        if (toggleStressBtn && label == toggleStressBtn.gameObject.name) {
+        if (toggleStressBtn && obj == toggleStressBtn.gameObject) {
             // TODO
         }
-        if (togglePathBtn && label == togglePathBtn.gameObject.name) {
+        if (togglePathBtn && obj == togglePathBtn.gameObject) {
             SetPathVisibility(on);
         }
     }
-    private void ToggleOnEvent(String label) { // TODO
-        ToggleEvent(label, true);
+    private void ToggleOnEvent(GameObject obj) { // TODO
+        ToggleEvent(obj, true);
     }
-    private void ToggleOffEvent(String label) { // TODO
-        ToggleEvent(label, false);
+    private void ToggleOffEvent(GameObject obj) { // TODO
+        ToggleEvent(obj, false);
     }
 
     /**
@@ -96,6 +96,8 @@ public class TogglesManager : MonoBehaviour {
      * @param on - Whether the buttons should be interactive or not.
      */
     public void SetTogglesInteractivity(bool on) {
-        toggles.SetTogglesInteractivity(on);
+        if (toggles) {
+            toggles.SetTogglesInteractivity(on);
+        }
     }
 }

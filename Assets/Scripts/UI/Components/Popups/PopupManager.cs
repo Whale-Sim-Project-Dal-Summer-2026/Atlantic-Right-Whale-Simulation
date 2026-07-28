@@ -29,18 +29,18 @@ public class PopupManager : MonoBehaviour {
         
         // help events setup
         if (scrubber) {
-            OnHelpPopupOn += scrubber.Pause;
+            OnHelpPopupOn += scrubber.Pause; 
         }
-        OnHelpPopupOn += simUIManager.SetUIInteractivityOff;
-        OnHelpPopupOff += simUIManager.SetUIInteractivityOn;
+        OnHelpPopupOn += simUIManager.SetUIInteractivityOff; // TODO: bool inversion needed
+        OnHelpPopupOff += simUIManager.SetUIInteractivityOn; // TODO: here
     }
 
     /**
      * Invoke events for when a popup is opened.
      * @param label - Name of a popup's GameObject passed through the generic popup's events.
      */
-    private void PopupOnEvent(String label) {
-        if (label == helpPopup.name) {
+    private void PopupOnEvent(GameObject obj) {
+        if (obj == helpPopup) {
             OnHelpPopupOn?.Invoke();
         }
     }
@@ -49,8 +49,8 @@ public class PopupManager : MonoBehaviour {
      * Invoke events for when a popup is closed.
      * @param label - Name of a popup's GameObject passed through the generic popup's events.
      */
-    private void PopupOffEvent(String label) {
-        if (label == helpPopup.name) {
+    private void PopupOffEvent(GameObject obj) {
+        if (obj == helpPopup) {
             OnHelpPopupOff?.Invoke();
         }
     }

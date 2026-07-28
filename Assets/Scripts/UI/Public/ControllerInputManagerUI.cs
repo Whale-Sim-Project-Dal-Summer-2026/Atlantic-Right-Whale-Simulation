@@ -90,34 +90,44 @@ public class ControllerInputManagerUI : MonoBehaviour {
      * Implements the help button press functionality.
      */
     private void HelpBtnPressed() {
-        helpPopup.PopupBtnPressed();
+        if (helpPopup) {
+            helpPopup.PopupBtnPressed();
+        }
     }
 
     /**
      * Implements back button functionality for the help popup.
      */
     private void HelpCloseBtnPressed() { // TODO: make sure this plays nice with multiple popups/other back actions
-        helpPopup.SetPopupVisibility(false);
+        if (helpPopup) {
+            helpPopup.SetPopupVisibility(false);
+        }
     }
     
     /**
      * Implements back button functionality for the viewer popup.
      */
     private void ViewerCloseBtnPressed() { // TODO: make sure this plays nice with multiple popups/other back actions
-        viewerPopup.SetPopupVisibility(false);
+        if (viewerPopup) {
+            viewerPopup.SetPopupVisibility(false);
+        }
     }
 
     /**
      * Implements pause/play button functionality.
      */
     private void PausePlayBtnPressed() {
-        scrubber.TogglePause();
+        if (scrubber) {
+            scrubber.TogglePause();
+        }
     }
     
     /**
      * Implements reset button functionality.
      */
     private void ResetBtnPressed() {
-        scrubber.Restart();
+        if (scrubber) {
+            scrubber.Restart();
+        }
     }
 }

@@ -115,8 +115,7 @@ public class WhaleDriver : MonoBehaviour
     public float whaleRoll;
 
     public float whaleSpeed;
-    public Scrubber scrubber; // TODO: Mars added
-    public WhaleConnector whaleConnector; // TODO: Mars added
+
     
     void Start(){
 
@@ -242,20 +241,10 @@ public class WhaleDriver : MonoBehaviour
     // looping parameter
     if (currentTimestep >= CSV_ResetTimeStep){
         currentTimestep = 0;
-        if (scrubber) { // TODO: Mars added
-            scrubber.Restart();
-        } else {
-            whaleConnector.Reset();  
-        }
     }
     
     if (controls.Player.Reset.triggered){
        jumpToTimestep = 0;
-       if (scrubber) { // TODO: Mars added
-           scrubber.Restart();
-       } else {
-           whaleConnector.Reset();
-       }
        //animator.Play("R Whale Armature|Whale Swimming",0,0);  
     }
 
@@ -264,5 +253,8 @@ public class WhaleDriver : MonoBehaviour
 
 }
 
+public bool check() { // TODO
+    return currentTimestep >= CSV_ResetTimeStep || controls.Player.Reset.triggered;
+}
 
 }

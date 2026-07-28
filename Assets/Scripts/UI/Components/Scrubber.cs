@@ -12,8 +12,16 @@ using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 
+public enum EndOfPlaybackBehaviour {
+    Pause,
+    Restart
+}
+
 public class Scrubber : MonoBehaviour {
     // params
+    // options
+    [Header("Options")]
+    [SerializeField] private EndOfPlaybackBehaviour endBehaviour;
     // btns
     [Header("Buttons")]
     [SerializeField] private Button pinBtn;
@@ -247,12 +255,33 @@ public class Scrubber : MonoBehaviour {
      */
     public void UpdateTimelineProgress(float percent) {
         timeline.value = percent;
+        
+        // behaviour on reset
+        if (99.999 < percent && percent <= 100.0) {
+            if (endBehaviour == EndOfPlaybackBehaviour.Restart) {
+                Restart();
+            }
+            if (endBehaviour == EndOfPlaybackBehaviour.Pause) {
+                Pause();
+                pausePlayBtn.interactable = false;
+            }
+        }
     }
 
     /**
      * Invoke the restart event.
      */
     public void Restart() {
+        pausePlayBtn.interactable = true;
+        Play();
         OnRestart?.Invoke();
+    }
+
+    /**
+     * Set end of playback behaviour.
+     * @param behaviour - Behaviour.
+     */
+    public void SetEndOfPlaybackBehaviour(EndOfPlaybackBehaviour behaviour) {
+        endBehaviour = behaviour;
     }
 }
