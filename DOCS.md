@@ -353,9 +353,116 @@ As the above has mentioned, working with AGX has been quite tricky. The document
 
 As well as that, due to the fact of a section of the code being decompiled, it is harder to read and make out the purpose, and often times is hard to call certain functions due to parameters that are unclear. 
 
-I have found that AGX struggles heavily with collisions with planes. Our mesh collider for the whale uses a trimesh (triangle mesh). When interacting with many wires, often the wires will clip through the model. The solver will then overcompensate with large forces, shooting the whale off. Often in these cases, performance of the simulation severely degrades, in terms of FPS and Memory. These situations MUST be avoided at all costs. As when this happens it is possible for agx to use over 30GBs of RAM, and to drop the fps from over 60 to less than 1, and in some cases crash. 
+I have found that AGX struggles heavily with collisions with planes. Our mesh collider for the whale uses a trimesh (triangle mesh). When interacting with many wires, often the wires will clip through the model. The solver will then overcompensate with large forces, shooting the whale off. Often in these cases, performance of the simulation severely degrades, in terms of FPS and Memory. These situations MUST be avoided at all costs. As when this happens it is possible for agx to use over 30GBs of RAM, and to drop the fps from over 60 to less than 1, and in some cases crash.
 
 
+## Future Works
+
+This section will outline items that I did not have time to come around to. this systems will need to be implemented to make a complete, thorough, and phyisical based system.
+
+
+- Better Force Movement
+- 1 Rigidbody Per Joint System
+- Better Primitives for Colliders
+
+### Better Force Movement
+
+Currently to move the whale using agx colliders, that uses a dynamic rigidbody approach, we need to move with forces. The dynamic rigidbody is essential, as without it, agx will not calculate its own forces, such as buoyancy, gravity, rope drag etc...
+
+The only way to include these *external* forces is to include the movement of the whale itself as a force. 
+
+I faced difficulties creating this system. I currently add a large force in the desired that is not based on real physics. Adding such a large force allows the whale to move towards the intended position, however due to the nature of the large force, smaller forces get trumped. 
+
+Buoyancy and gravity, which pale in comparison in terms of size are completly overturned by the much larger force that is moving the whale to its target position. This means that while we successfully can move the whale with forces, it is largely unaffected by external forces. A better system would not add such a large force to overturn other forces that AGX adds at each step.
+
+
+### 1 Rigidbody Per Joint (Dual-Whale Architecture)
+
+The next system that needs to be improved is the animation rotation syncing with AGX's native tracking system. Currently, the AGX system is completely unaware of internal skeletal rotations occurring within the animation loop. This is because our current implementation uses a single `Rigidbody` for the entire whale model.
+
+#### Limitations of the Current Model
+* **Single Rigid Body Constraint:** A `Rigidbody` can only represent a single rigid physical body at a time. Consequently, our system can only track the global position and rotation of the entire whale—or, in terms of the animation system, the root transform.
+* **Nested Hierarchy Conflicts:** The current whale model relies on heavy object nesting to hierarchically organize different sections of the whale (where rotating a parent segment propagates transforms down to child segments). However, `Rigidbody` components cannot be nested within each other in AGX. 
+
+#### Proposed System: Decoupled Dual-Whale Architecture
+To solve these limitations, the new system will adopt a flattened physical approach while decoupling AGX physics collisions from mesh rendering through a **Dual-Whale System**:
+
+1. **The AGX Collision Whale (Flattened Rig):**
+   * Uses a flattened hierarchy containing one `Rigidbody` per joint/segment that needs independent rotation.
+   * Outfitted with primitive colliders (e.g., sphere colliders) and handles all physical collision calculations. (These are already created and can be created using AGX's system)
+   * Serves as the ground truth containing all positional and rotational data that AGX requires.
+
+2. **The Visual Shell Whale (Nested Skinned Mesh Renderer):**
+   * Positioned and aligned directly over the collision whale.
+   * Retains the nested transform hierarchy required by Unity’s `SkinnedMeshRenderer`.
+   * **Note on SkinnedMeshRenderer:** Experiments and collaboration with Nick confirmed that `SkinnedMeshRenderer` deformation cannot easily be controlled in a flattened layout, it depends on the nested organization.
+
+#### Data Encoding & Transformation Strategies
+When mapping rotational and positional transforms to the flattened AGX rigidbodies, there are two potential data-encoding approaches to consider:
+
+* **Relative Delta Encoding (Offset-Based):**
+  * Stores relative positional and rotational offsets sequentially from joint $N$ to joint $N+1$.
+  * **Advantage:** Likely minimizes memory consumption by storing localized deltas.
+* **Absolute Root-Space Encoding (Global-Based):**
+  * Stores explicit global positions and rotations for every segment relative to the main root.
+  * **Advantage:** Eliminates cumulative precision drift down the joint chain during transformation updates.
+
+#### Synchronization ("Gluing" Script)
+A custom synchronization component will act as a bridge between the two models. This script will read internal positions and rotations from AGX’s native tracking engine (the flattened collision whale), convert those flattened transformation matrices back into the hierarchcal organization , and apply them directly to the nested visual whale carrying the `SkinnedMeshRenderer`.
+
+
+### Better Primitives for Colliders
+
+The collider layout for the whale model requires further refinement. Currently, the colliders were generated using AGX's built-in collider creation system, which attempts to approximate a mesh collider using primitive shapes. 
+
+#### Current System & Limitations
+* **Primitive Selection:** While the built-in system offers multiple primitive options, brief experimentation showed that sphere colliders were the only option that functioned reliably for this setup.
+* **Shape Discrepancies:** Inspecting the colliders using AGX's Debug Render Manager reveals clear physical discrepancies between the colliders and the actual mesh. For example, the head of the whale is shaped more like a capsule, but it is currently represented by sphere colliders.
+
+#### Proposed Improvement
+To make the collision geometry match the whale model more accurately, the collider generation needs to be refined using one of two approaches:
+1. **Manual Adjustment:** Manually tweaking and placing the AGX primitive colliders to fit the geometry.
+2. **Automated Generation:** Writing a custom script to dynamically generate and align AGX primitive colliders to the mesh rather than relying on the default AGX tool.
+
+
+### Improved Backscatter Usage
+
+The placement of procedural boulders using backscatter data can be further refined to improve accuracy and address data coverage issues.
+
+#### Current System & Limitations
+* **Average Intensity Approximation:** Currently, the system takes the average backscatter value of an entire $10\text{ km}^2$ chunk to drive boulder density and clumping. While taking an average works as a general approximation due to the similarity across a chunk, it discards localized variations in seabed roughness.
+* **Missing Data Bug:** Certain chunks currently fail to load backscatter data entirely, resulting in no boulders spawning in those areas. This issue is likely caused by a projection error during preprocessing.
+
+#### Proposed Improvement
+* **Localized Backscatter Sampling:** Shift from a single chunk-wide average to a localized approach, sampling backscatter intensity across smaller regions of the chunk to place boulders more accurately.
+* **Projection Bug Fix:** Investigate and resolve the underlying data loading/projection bug preventing backscatter data from populating in affected chunks.
+
+*For more details on how backscatter and bathymetry data are currently processed and rendered, refer to the **Backscatter Preprocess Step** and **Backscatter Runtime Step** sections in this document and consult the source code.*
+
+
+### Environment and Movement Synchronization
+
+Currently, the movement data for the whale and the environment loading pipeline operate completely independently of each other. A system needs to be implemented to synchronize the physical movement dataset with the visual and physical environment.
+
+#### Current Limitations
+* **Unlinked Coordinate Systems:** Environment chunks are loaded independently of the actual real-world location represented in the whale's movement data.
+* **Surface Glitching & Depth Mismatches:** Because the terrain depth does not reflect the actual location where the movement data was recorded, shallow bathymetry chunks cause physics artifacts. For example, if a shallow chunk is loaded while the movement script attempts to move the whale to a deeper coordinate, AGX gravity forces the whale back down to the water line, making the model appear to glide awkwardly across the surface.
+
+#### Proposed Improvement
+* **Unified Position Interface:** Develop an interface bridging the movement system with the environment pipeline. This system will read the position coordinates (e.g., from CSV movement logs) and pass those exact coordinates to the bathymetry and backscatter pipelines.
+* **Coherent Data Loading:** Ensure the environment automatically loads the specific real-world bathymetry and backscatter chunks corresponding to the whale's actual geographic position during that tracking sequence.
+
+### Cohesive Water Chunk Mesh Integration
+
+The visual representation of adjacent water volumes requires adjustments to eliminate internal seams.
+
+#### Current System & Limitations
+* **Individual Block Volumes:** Water volumes are currently instantiated as individual block/box meshes with direct textures applied, which are then registered directly with the AGX native hydrodynamics manager.
+* **Visible Internal Walls:** Because each water chunk is rendered as a distinct closed box volume, the internal boundary faces ("walls") between adjacent water chunks remain visible. This breaks the visual continuity of the continuous ocean surface and underwater volume.
+
+#### Proposed Improvement
+* **Boundary Face Elimination:** Implement a system or custom mesh-generation pass that identifies internal boundaries between adjacent water chunks and removes or hides the intersecting interior walls, producing a single, visually seamless water surface and volume while preserving individual AGX hydrodynamics registrations.
+* **Single Bounding Box Alternative:** Alternatively, replace individual chunk blocks with a single large bounding box covering the entire simulation domain, while this places water over areas where data chunks may not exist, it completely eliminates internal seams while remaining acceptable due to the environment's outer border.
 
 ## References
 
