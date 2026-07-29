@@ -1973,7 +1973,6 @@ MonoBehaviour:
   image: {fileID: 2800000, guid: aa0676e890382b34dbf6dc19294c2340, type: 3}
   text: North Atlantic Right Whale
   collider: {fileID: 187546740}
-  popup: {fileID: 901559841}
 --- !u!65 &187546740
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5700,17 +5699,6 @@ MonoBehaviour:
   m_bottomRadius: 0
   m_thickness: 0
   m_height: 0
---- !u!114 &901559841 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2660540612198733182, guid: fdfda3911e159fe4c82b140d0728b028, type: 3}
-  m_PrefabInstance: {fileID: 2432568881693197619}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31c9cd300521b0d4e9b1e1405f604520, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ViewerPopup
 --- !u!1 &903233292
 GameObject:
   m_ObjectHideFlags: 0
@@ -13329,10 +13317,6 @@ PrefabInstance:
     - target: {fileID: 92734363402911726, guid: fdfda3911e159fe4c82b140d0728b028, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5172624810789402756, guid: fdfda3911e159fe4c82b140d0728b028, type: 3}
-      propertyPath: sceneSwitcher
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6058383128658464594, guid: fdfda3911e159fe4c82b140d0728b028, type: 3}
       propertyPath: m_AnchorMax.y

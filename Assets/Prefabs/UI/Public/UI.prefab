@@ -934,10 +934,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: HelpUI
       objectReference: {fileID: 0}
-    - target: {fileID: 4505869503805513057, guid: 11d2352ce9cfdfb4ca1f05f1d5b57f25, type: 3}
-      propertyPath: simUIManager
+    - target: {fileID: 1997977469690359606, guid: 11d2352ce9cfdfb4ca1f05f1d5b57f25, type: 3}
+      propertyPath: m_text
+      value: In this scenario, you get a chance to be the whale yourself! Use the
+        controller to speed up the whale and then move in a direction by turning
+        or going up or down using the left stick.
+      objectReference: {fileID: 0}
+    - target: {fileID: 5148889399704764534, guid: 11d2352ce9cfdfb4ca1f05f1d5b57f25, type: 3}
+      propertyPath: m_Texture
       value: 
-      objectReference: {fileID: 5096721975378707492}
+      objectReference: {fileID: 2800000, guid: 2e7bcfd22af299c4a88129ad20ce6dcf, type: 3}
     - target: {fileID: 6516652904964345063, guid: 11d2352ce9cfdfb4ca1f05f1d5b57f25, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

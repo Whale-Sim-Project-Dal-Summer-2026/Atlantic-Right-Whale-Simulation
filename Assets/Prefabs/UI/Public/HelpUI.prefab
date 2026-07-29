@@ -64,7 +64,7 @@ GameObject:
   - component: {fileID: 5340866196631821588}
   - component: {fileID: 1997977469690359606}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: HelpTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86,8 +86,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 0, y: 301}
+  m_SizeDelta: {x: 378.08, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5340866196631821588
 CanvasRenderer:
@@ -117,7 +117,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: hi! :)
+  m_text: Watch a simulation of a whale swimming in the real world! Use the controls
+    below to navigate around the scene and explore to your heart's content!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 14fca0116cbaf454f95408a68ced3f3b, type: 2}
   m_sharedMaterial: {fileID: -5018882589952362811, guid: 14fca0116cbaf454f95408a68ced3f3b, type: 2}
@@ -144,15 +145,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 10
+  m_fontSizeBase: 10
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_characterHorizontalScale: 1
@@ -189,6 +190,78 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &4175109025455877437
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3054385321657811057}
+  - component: {fileID: 6225732073840008033}
+  - component: {fileID: 5148889399704764534}
+  m_Layer: 5
+  m_Name: Controls
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3054385321657811057
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4175109025455877437}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8951253098447164868}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1920, y: 1080}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &6225732073840008033
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4175109025455877437}
+  m_CullTransparentMesh: 1
+--- !u!114 &5148889399704764534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4175109025455877437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RawImage
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 2800000, guid: 0a263cf400236f740a3bd1e1709a6607, type: 3}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1 &4393870655067214545
 GameObject:
   m_ObjectHideFlags: 0
@@ -441,6 +514,7 @@ GameObject:
   - component: {fileID: 213174196336857638}
   - component: {fileID: 7068072516877225970}
   - component: {fileID: 7627644194141576708}
+  - component: {fileID: 5204827600139041618}
   m_Layer: 5
   m_Name: HelpPopup
   m_TagString: Untagged
@@ -463,6 +537,7 @@ RectTransform:
   - {fileID: 6120433981919061940}
   - {fileID: 119391680442193665}
   - {fileID: 8996956206458510955}
+  - {fileID: 3054385321657811057}
   m_Father: {fileID: 6516652904964345063}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -517,6 +592,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f279eb2b38664eee861f90415a3b7ac7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CloseItem
+--- !u!114 &5204827600139041618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7170085108513337919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3044cb77802446709003fd9832d62451, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HelpPopup
+  controlsHelp: {fileID: 5148889399704764534}
+  helpText: {fileID: 1997977469690359606}
+  freeCamHelp: Watch a simulation of a whale swimming in the real world! Use the
+    controls below to navigate around the scene and explore to your heart's content!
+    This camera allows you to explore the entire scene without following the whale.
+  whalePOVHelp: Watch a simulation of a whale swimming in the real world! Use the
+    controls below to navigate around the scene and explore to your heart's content!
+    This camera allows you to get a closer look at the whale's perspective.
 --- !u!1 &7977665928218884129
 GameObject:
   m_ObjectHideFlags: 0

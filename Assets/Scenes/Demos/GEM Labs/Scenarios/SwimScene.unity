@@ -11311,6 +11311,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 896997972095330808, guid: 872f9a361f2c03b42ac50a90ed5481df, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 896997972095330808, guid: 872f9a361f2c03b42ac50a90ed5481df, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1309690408596671325, guid: 872f9a361f2c03b42ac50a90ed5481df, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -11319,10 +11327,6 @@ PrefabInstance:
       propertyPath: whaleDriver
       value: 
       objectReference: {fileID: 6824787337333441233}
-    - target: {fileID: 2278608710739573500, guid: 872f9a361f2c03b42ac50a90ed5481df, type: 3}
-      propertyPath: unstickBtn
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 2483621184890041015, guid: 872f9a361f2c03b42ac50a90ed5481df, type: 3}
       propertyPath: m_Name
       value: PlaybackUI

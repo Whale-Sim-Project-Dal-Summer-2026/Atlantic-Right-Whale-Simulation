@@ -24,20 +24,22 @@ public class ControlHints : MonoBehaviour {
     public static event UnstickEvent OnUnstick;
     
     void Awake() {
-        CameraController.OnCamSwitch += SetCurrCam;
+        // add to event
+        CameraController.OnCamSwitch += UpdateControlHints;
+        
+        // set up unstick btn
         if (unstickBtn) {
             unstickBtn.onClick.AddListener(() => OnUnstick?.Invoke());
         }
     }
 
-    // camera event subscriber
     /**
      * Camera event subscriber which sets the corresponding
      * hints UI based on camera.
      * @param currCam - Current active camera.
      */
 
-    //  I would use a state machine using an enum
+    // TODO: I would use a state machine using an enum
     //  It would work like the following: 
     //  set all hints to false
     // switch (currcam)
@@ -46,7 +48,7 @@ public class ControlHints : MonoBehaviour {
     //  break;
 
     // this would allow you to have ode that is easier to read and is less redundant
-    private void SetCurrCam(int currCam) {
+    private void UpdateControlHints(int currCam) {
         if (controlHintsFollowCam) {
             controlHintsFollowCam.SetActive(false);
             if (currCam == 1) {

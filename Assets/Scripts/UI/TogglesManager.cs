@@ -35,6 +35,7 @@ public class TogglesManager : MonoBehaviour {
     public static event TogglePathOffEvent OnTogglePathOff;
 
     void Awake() {
+        // add to events
         Toggles.OnToggleOn += ToggleOnEvent;
         Toggles.OnToggleOff += ToggleOffEvent;
     }
