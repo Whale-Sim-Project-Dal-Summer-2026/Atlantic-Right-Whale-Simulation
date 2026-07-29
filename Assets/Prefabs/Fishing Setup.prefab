@@ -77,7 +77,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc1da254c9bff594286fda746af12fb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrawlLineSpawner
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   lobsterTrap: {fileID: 1356546218376360735, guid: 2aa2e8ea51b44a74b856a6e5381ff052, type: 3}
   buoy: {fileID: 4345060032287545016}
   wireMat: {fileID: -876546973899608171, guid: 0ce2014a67ddf2143bf8022ca7f3767c, type: 3}
@@ -93,23 +93,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 133075433714662398, guid: a3887040c24be094fa18b93f8a40f63c, type: 3}
       propertyPath: <MassProperties>k__BackingField.m_mass.m_defaultValue
-      value: 6018.6626
+      value: 18298.727
       objectReference: {fileID: 0}
     - target: {fileID: 133075433714662398, guid: a3887040c24be094fa18b93f8a40f63c, type: 3}
       propertyPath: <MassProperties>k__BackingField.m_inertiaDiagonal.m_defaultValue.x
-      value: 10023.407
+      value: 27369.732
       objectReference: {fileID: 0}
     - target: {fileID: 133075433714662398, guid: a3887040c24be094fa18b93f8a40f63c, type: 3}
       propertyPath: <MassProperties>k__BackingField.m_inertiaDiagonal.m_defaultValue.y
-      value: 2941.796
+      value: 12662.799
       objectReference: {fileID: 0}
     - target: {fileID: 133075433714662398, guid: a3887040c24be094fa18b93f8a40f63c, type: 3}
       propertyPath: <MassProperties>k__BackingField.m_inertiaDiagonal.m_defaultValue.z
-      value: 10023.407
+      value: 27369.732
       objectReference: {fileID: 0}
     - target: {fileID: 133075433714662398, guid: a3887040c24be094fa18b93f8a40f63c, type: 3}
       propertyPath: <MassProperties>k__BackingField.m_centerOfMassOffset.m_defaultValue.y
-      value: -1.4608339
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1499691146711412478, guid: a3887040c24be094fa18b93f8a40f63c, type: 3}
       propertyPath: m_lift

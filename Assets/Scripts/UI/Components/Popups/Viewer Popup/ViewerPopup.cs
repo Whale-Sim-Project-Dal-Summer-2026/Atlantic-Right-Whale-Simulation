@@ -18,7 +18,12 @@ public class ViewerPopup : MonoBehaviour {
     [Header("Content")]
     [SerializeField] private RawImage viewerImg;
     [SerializeField] private TextMeshProUGUI viewerTxt;
-    
+
+    private void Awake() {
+        // sub to event
+        ViewerItem.OnShowViewer += ShowViewer;
+    }
+
     /**
      * Show viewer with passed params.
      * @param img - Image to set.

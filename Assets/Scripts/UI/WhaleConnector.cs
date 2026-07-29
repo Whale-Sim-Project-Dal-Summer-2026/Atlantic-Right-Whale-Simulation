@@ -43,20 +43,15 @@ public class WhaleConnector : MonoBehaviour {
     void Update() {
         UpdateTelemetry();
         UpdateTime();
-
-        if (whaleDriver.check()) {
-            if (scrubber) {
-                scrubber.Restart();
-            }
-            else {
-                Reset();
-            }
-        }
         
         // set scrubber percentage
+        float percent = (float)whaleDriver.currentTimestep / whaleDriver.CSV_ResetTimeStep * 100;
         if (scrubber) {
-            float percent = (float)whaleDriver.currentTimestep / whaleDriver.CSV_ResetTimeStep * 100;
             scrubber.UpdateTimelineProgress(percent);
+        } else {
+            if (percent >= 100) {
+                Reset();
+            }
         }
     }
     

@@ -4684,17 +4684,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Utils.OnSelectionProxy
   m_serializationVersion: 2
   m_component: {fileID: 426476698}
---- !u!114 &824439309 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3699224049912632445, guid: 872f9a361f2c03b42ac50a90ed5481df, type: 3}
-  m_PrefabInstance: {fileID: 614156910329013177}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31c9cd300521b0d4e9b1e1405f604520, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ViewerPopup
 --- !u!1 &836899486
 GameObject:
   m_ObjectHideFlags: 0
@@ -11322,18 +11311,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 511269200875523646, guid: 872f9a361f2c03b42ac50a90ed5481df, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 896997972095330808, guid: 872f9a361f2c03b42ac50a90ed5481df, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 896997972095330808, guid: 872f9a361f2c03b42ac50a90ed5481df, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1309690408596671325, guid: 872f9a361f2c03b42ac50a90ed5481df, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -11342,6 +11319,10 @@ PrefabInstance:
       propertyPath: whaleDriver
       value: 
       objectReference: {fileID: 6824787337333441233}
+    - target: {fileID: 2278608710739573500, guid: 872f9a361f2c03b42ac50a90ed5481df, type: 3}
+      propertyPath: unstickBtn
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2483621184890041015, guid: 872f9a361f2c03b42ac50a90ed5481df, type: 3}
       propertyPath: m_Name
       value: PlaybackUI
@@ -11398,10 +11379,6 @@ PrefabInstance:
       propertyPath: whale
       value: 
       objectReference: {fileID: 6824787337333441229}
-    - target: {fileID: 7417757549569700014, guid: 872f9a361f2c03b42ac50a90ed5481df, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12719,7 +12696,8 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4298231024211797830, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7005710207572005585, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
@@ -12756,7 +12734,6 @@ MonoBehaviour:
   image: {fileID: 2800000, guid: aa0676e890382b34dbf6dc19294c2340, type: 3}
   text: North Atlantic Right Whale
   collider: {fileID: 6824787337333441231}
-  popup: {fileID: 824439309}
 --- !u!65 &6824787337333441231
 BoxCollider:
   m_ObjectHideFlags: 0

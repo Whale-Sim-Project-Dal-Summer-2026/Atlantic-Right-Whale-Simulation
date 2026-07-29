@@ -247,14 +247,5 @@ public class WhaleDriver : MonoBehaviour
        jumpToTimestep = 0;
        //animator.Play("R Whale Armature|Whale Swimming",0,0);  
     }
-
-
-
-
 }
-
-public bool check() { // TODO
-    return currentTimestep >= CSV_ResetTimeStep || controls.Player.Reset.triggered;
-}
-
 }

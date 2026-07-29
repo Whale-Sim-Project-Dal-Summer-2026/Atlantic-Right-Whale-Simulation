@@ -104,7 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a39fce5ca1a43ed488bf0d4d38bbabea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Rendering.ShapeVisualBox
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_shape: {fileID: 3440462827841683111}
 --- !u!114 &1025780985560547928
 MonoBehaviour:
@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51c5940a8ebcfc4997616eb2929ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Utils.OnSelectionProxy
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_component: {fileID: 3440462827841683111}
 --- !u!1 &3286757493048133323
 GameObject:
@@ -165,11 +165,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a9ab00a2b035f9478e3faf9f46c0b2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Collide.Box
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_collisionsEnabled: 1
   m_isSensor: 0
   m_enableMassProperties: 1
   m_material: {fileID: 11400000, guid: 70023d4ec488a4b4a8d6c32cb750971b, type: 2}
+  m_isPulley: 0
   m_halfExtents: {x: 0.833, y: 0.5, z: 0.613}
 --- !u!1001 &2166796882464329294
 PrefabInstance:
@@ -249,6 +250,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e7438ef32ce2b5c498fec067f019fecb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 257279670184309854}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e7438ef32ce2b5c498fec067f019fecb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8133857305281644088}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e7438ef32ce2b5c498fec067f019fecb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7471799895288182332}
   m_SourcePrefab: {fileID: 100100000, guid: e7438ef32ce2b5c498fec067f019fecb, type: 3}
 --- !u!1 &1356546218376360735 stripped
 GameObject:
@@ -267,7 +274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e01f271d05be96f44852cb49dfac5711, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.RigidBody
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   <MassProperties>k__BackingField:
     <RigidBody>k__BackingField: {fileID: 257279670184309854}
     m_mass:
@@ -284,7 +291,7 @@ MonoBehaviour:
       m_userValue: {x: 1, y: 1, z: 1}
     m_centerOfMassOffset:
       m_defaultToggle: 1
-      m_defaultValue: {x: -0.4, y: 0.25, z: -0.3}
+      m_defaultValue: {x: -0, y: 0, z: 0}
       m_userValue: {x: 0, y: 0, z: 0}
     m_massCoefficients: {x: 0, y: 0, z: 0}
     m_inertiaCoefficients: {x: 0, y: 0, z: 0}
@@ -294,6 +301,42 @@ MonoBehaviour:
   m_angularVelocity: {x: 0, y: 0, z: 0}
   m_linearVelocityDamping: {x: 0, y: 0, z: 0}
   m_angularVelocityDamping: {x: 0, y: 0, z: 0}
+--- !u!65 &8133857305281644088
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356546218376360735}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.21, y: 2.01, z: 2.17}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7471799895288182332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356546218376360735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6426e986cb9dfcd4983b61b50081362f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ViewerItem
+  image: {fileID: 2800000, guid: aa0676e890382b34dbf6dc19294c2340, type: 3}
+  text: Lobster trap
+  collider: {fileID: 8133857305281644088}
 --- !u!4 &1844429886686013861 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e7438ef32ce2b5c498fec067f019fecb, type: 3}

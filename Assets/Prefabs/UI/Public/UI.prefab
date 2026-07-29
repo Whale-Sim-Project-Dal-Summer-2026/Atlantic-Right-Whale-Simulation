@@ -253,7 +253,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a85111d3fe4e01801528f62f92de63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PublicUIManager
-  sceneSwitcher: {fileID: 0}
   scenariosBtn: {fileID: 8017263789704846574}
   toggles: {fileID: 1952269297791087791}
   scrubber: {fileID: 0}
@@ -629,10 +628,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ControlHintsUI
       objectReference: {fileID: 0}
-    - target: {fileID: 7578469641411572701, guid: 185ff3170786f054b95342358584421e, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 1331b232aacca2549a3c8c87d58080c6, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 5736586593011829273, guid: 185ff3170786f054b95342358584421e, type: 3}

@@ -3015,17 +3015,6 @@ MonoBehaviour:
     m_reductionRatio: 0.5
     m_reductionAggressiveness: 7
     m_elementResolutionPerAxis: 50
---- !u!114 &470585230 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3699224049912632445, guid: 872f9a361f2c03b42ac50a90ed5481df, type: 3}
-  m_PrefabInstance: {fileID: 334698189}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31c9cd300521b0d4e9b1e1405f604520, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ViewerPopup
 --- !u!1 &473453034
 GameObject:
   m_ObjectHideFlags: 0
@@ -12855,7 +12844,6 @@ MonoBehaviour:
   image: {fileID: 2800000, guid: aa0676e890382b34dbf6dc19294c2340, type: 3}
   text: North Atlantic Right Whale
   collider: {fileID: 6824787337333441231}
-  popup: {fileID: 470585230}
 --- !u!65 &6824787337333441231
 BoxCollider:
   m_ObjectHideFlags: 0

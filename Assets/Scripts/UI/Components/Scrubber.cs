@@ -257,7 +257,7 @@ public class Scrubber : MonoBehaviour {
         timeline.value = percent;
         
         // behaviour on reset
-        if (99.999 < percent && percent <= 100.0) {
+        if (percent >= 100.0) {
             if (endBehaviour == EndOfPlaybackBehaviour.Restart) {
                 Restart();
             }

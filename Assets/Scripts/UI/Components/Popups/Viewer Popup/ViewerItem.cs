@@ -7,6 +7,7 @@
 
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class ViewerItem : MonoBehaviour {
@@ -18,11 +19,14 @@ public class ViewerItem : MonoBehaviour {
     // refs
     [Header("References")]
     [SerializeField] private Collider collider;
-    [SerializeField] private ViewerPopup popup;
+    
+    // events
+    public delegate void ShowViewerEvent(Texture img, String txt);
+    public static event ShowViewerEvent OnShowViewer;
 
     void Update() {
-        if (popup && collider.bounds.IntersectRay(Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue())) && Mouse.current.leftButton.wasPressedThisFrame && Cursor.lockState != CursorLockMode.Locked) {
-            popup.ShowViewer(image, text);
+        if (collider.bounds.IntersectRay(Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue())) && Mouse.current.leftButton.wasPressedThisFrame && Cursor.lockState != CursorLockMode.Locked && !EventSystem.current.IsPointerOverGameObject()) {
+            OnShowViewer?.Invoke(image, text);
         }
     }
 }
