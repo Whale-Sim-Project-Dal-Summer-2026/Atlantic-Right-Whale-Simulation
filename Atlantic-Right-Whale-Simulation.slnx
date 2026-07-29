@@ -1,9 +1,9 @@
 ﻿<Solution>
   <Project Path="AGXUnityEditor.csproj" />
   <Project Path="Obi.csproj" />
-  <Project Path="Obi.Editor.csproj" />
   <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="Obi.Editor.csproj" />
   <Project Path="AGXUnity.csproj" />
-  <Project Path="Assembly-CSharp-Editor.csproj" />
   <Project Path="AGXUnityUpdateHandler.csproj" />
+  <Project Path="Assembly-CSharp-Editor.csproj" />
 </Solution>

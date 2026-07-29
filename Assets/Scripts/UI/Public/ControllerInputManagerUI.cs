@@ -40,6 +40,7 @@ public class ControllerInputManagerUI : MonoBehaviour {
     }
 
     void Update() {
+        // please use seperate variables, it makes the code more readable
         bool interaction;
         
         interaction = (helpAction?.ReadValue<float>() ?? 0.0f) == 1.0f;

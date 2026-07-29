@@ -151,16 +151,13 @@ public class ManualWhaleController : MonoBehaviour{
 
     void Update()
     {
-        // updateMoveInfo();
+        updateMoveInfo();
         
         readInputs();
 
         updateSpeed();
 
         updateYawPitch();
-
-
-        // float accelerationDelta = 
 
     }
 }
