@@ -48,7 +48,7 @@ namespace MeshGeneration {
             records = new List<DepthDataRecord>();
             fileUtil = new FileUtilities();
             string areaPath = processingSettings.AreaToFilePath();
-            byteFileDir = Path.Combine(Application.dataPath, "Data", "Processed", areaPath);
+            byteFileDir = Path.Combine(Application.dataPath, "Private", "Processed", areaPath);
             // reloadMesh = true;
             startMeshPipeline();
         }

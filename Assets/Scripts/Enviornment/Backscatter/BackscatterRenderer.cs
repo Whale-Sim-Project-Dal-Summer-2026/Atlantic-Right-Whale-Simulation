@@ -33,7 +33,7 @@ public class BackscatterRenderer : MonoBehaviour {
 
     void loadAndAssignTextures() {
         string area = processingSettings.AreaToFilePath();
-        string dir = Path.Combine(Application.dataPath, "Data", "Processed", "Backscatter", area);
+        string dir = Path.Combine(Application.dataPath, "Private", "Processed", "Backscatter", area);
 
         if(!Directory.Exists(dir)) {
             Debug.LogError("The backscatter directory is missing: " + dir);

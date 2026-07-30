@@ -21,8 +21,8 @@ public class BathymetryReader : MonoBehaviour {
  
         string path = processingSettings.AreaToFilePath();
 
-        string readingDir = Path.Combine(Application.dataPath,"Data", "Bathymetry", path);
-        string writingDir = Path.Combine(Application.dataPath, "Data", "Processed", path);
+        string readingDir = Path.Combine(Application.dataPath,"Private", "Bathymetry", path);
+        string writingDir = Path.Combine(Application.dataPath, "Private", "Processed", path);
         
         if (!Directory.Exists(writingDir)) {
             Directory.CreateDirectory(writingDir);

@@ -86,6 +86,9 @@ crashlytics-build.properties
 /Assets/Obi.meta
 /Assets/Data
 Assets/Data.meta
+/Assets/Private
+Assets/Private.meta
+
 Assets/ObiEditorSettings.asset
 Assets/ObiEditorSettings.asset.meta
 Atlantic-Right-Whale-Simulation.slnx

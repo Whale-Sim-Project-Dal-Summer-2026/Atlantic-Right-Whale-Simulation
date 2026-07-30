@@ -13,6 +13,7 @@ public class BackscatterReader : MonoBehaviour {
 
     [Header("Scriptable Objects")]
     [SerializeField] ProcessingSettings processingSettings;
+    string parentDir = "Private";
 
     [ContextMenu("Bake Backscatter Data")]
     public void BakeData() {
@@ -20,9 +21,9 @@ public class BackscatterReader : MonoBehaviour {
         fileUtil = new FileUtilities();
 
         string area = processingSettings.AreaToFilePath();
-        string bsInPath = Path.Combine(Application.dataPath, "Data", "Backscatter", area);
-        string bsOutDir = Path.Combine(Application.dataPath, "Data", "Processed", "Backscatter", area);
-        string bathyDir = Path.Combine(Application.dataPath, "Data", "Processed", area);
+        string bsInPath = Path.Combine(Application.dataPath, parentDir, "Backscatter", area);
+        string bsOutDir = Path.Combine(Application.dataPath, parentDir, "Processed", "Backscatter", area);
+        string bathyDir = Path.Combine(Application.dataPath, parentDir, "Processed", area);
 
         if (!Directory.Exists(bsOutDir)) {
             Directory.CreateDirectory(bsOutDir);

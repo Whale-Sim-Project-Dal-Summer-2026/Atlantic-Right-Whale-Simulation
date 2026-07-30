@@ -61,7 +61,7 @@ public class BoulderSpawner : MonoBehaviour
 
     public void ReadBackscatterAndSpawnBoulders() {
         string area = processingSettings.AreaToFilePath();
-        string bsDir = Path.Combine(Application.dataPath, "Data", "Processed", "Backscatter", area);
+        string bsDir = Path.Combine(Application.dataPath, "Private", "Processed", "Backscatter", area);
 
         if (!Directory.Exists(bsDir)) {
             Debug.LogError("The backscatter directory is missing: " + bsDir);
@@ -110,7 +110,7 @@ public class BoulderSpawner : MonoBehaviour
             }
 
             float chunkBSAverage = vals.Average();
-            globalAverage += chunkBsAverage;
+            globalAverage += chunkBSAverage;
 
             spawnBoulders(chunkBSAverage, currentFilter);
         }
