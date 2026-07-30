@@ -35,10 +35,15 @@ public class BoulderSpawner : MonoBehaviour
     [SerializeField] ProcessingSettings processingSettings;
 
     List<GameObject> activeBoulders;
-    FileUtilities fileUtil;
     [SerializeField] bool shouldSpawnBoulders;
+    FileUtilities fileUtil;
+
+    float globalAverage = 0;
+
+    List<MeshFilter> fallback;
 
     void Start(){
+        fallback = new List<MeshFilter>();
         activeBoulders = new List<GameObject>();
         fileUtil = new FileUtilities();
         shouldSpawnBoulders = true;
@@ -91,22 +96,31 @@ public class BoulderSpawner : MonoBehaviour
             if (chunkData == null || chunkData.Data == null) {
                 continue;
             }
-
-            if (chunkData.Data.Count(x => x > 1.0f) == chunkData.Data.Count()) {
-                Debug.LogWarning("Renderer: this entire grabbed chunk is invalid!");
-                continue;
-            }
-
+            
             List<float> vals = chunkData.Data;
             if (vals.Count == 0) {
                 continue;
             }
+            MeshFilter currentFilter = meshFilters[i];
+
+            if (chunkData.Data.Count(x => x > 1.0f) == chunkData.Data.Count()) {
+                Debug.LogWarning("Renderer: this entire grabbed chunk is invalid!");
+                fallback.Add(currentFilter);
+                continue;
+            }
 
             float chunkBSAverage = vals.Average();
+            globalAverage += chunkBsAverage;
 
-            MeshFilter currentFilter = meshFilters[i];
             spawnBoulders(chunkBSAverage, currentFilter);
         }
+
+// process invalid chunks, using global average across entire environment
+        foreach(MeshFilter mf in fallback){
+            spawnBoulders(globalAverage, mf);
+        }
+        globalAverage = 0;
+        fallback.Clear();
     }
 
     public void spawnBoulders(float chunkBSAverage, MeshFilter meshFilter) {
