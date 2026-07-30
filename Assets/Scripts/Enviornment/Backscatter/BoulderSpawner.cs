@@ -64,7 +64,7 @@ public class BoulderSpawner : MonoBehaviour
         string bsDir = Path.Combine(Application.dataPath, "Private", "Processed", "Backscatter", area);
 
         if (!Directory.Exists(bsDir)) {
-            Debug.LogError("The backscatter directory is missing: " + bsDir);
+            Debug.LogError("The Processed backscatter directory is missing: " + bsDir + " | Try to run the BackscatterReader.cs Bake");
             return;
         }
 

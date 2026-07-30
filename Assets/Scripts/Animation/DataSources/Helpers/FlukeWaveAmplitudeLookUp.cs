@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 namespace FlukeWaveAmplitudeLookUpClass{
@@ -58,8 +59,9 @@ public class FlukeWaveAmplitudeLookUp{
         double[] output= new double[2];
 
         float clampedSpeed = Mathf.Clamp(speed,minSpeed,maxSpeed);
+        string cleanPhase =  Regex.Replace(phase, "[^a-zA-Z0-9]", ""); 
 
-        string hashedName = hashName(phase,clampedSpeed,mouthOpen);
+        string hashedName = hashName(cleanPhase,clampedSpeed,mouthOpen);
 
         FlukeWaveAmplitudeInstance foundInstance = lookUpTable[hashedName];
 
