@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51c5940a8ebcfc4997616eb2929ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Utils.OnSelectionProxy
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_component: {fileID: 0}
 --- !u!114 &175926767041038212
 MonoBehaviour:
@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e953fbe6d85b8b4e9603017a53ca472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Rendering.ShapeVisualMesh
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_shape: {fileID: 0}
 --- !u!33 &498004743476094113
 MeshFilter:
@@ -165,11 +165,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdc260c5bb3b204f8756df30f067823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Collide.Sphere
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_collisionsEnabled: 1
   m_isSensor: 0
   m_enableMassProperties: 1
   m_material: {fileID: 0}
+  m_isPulley: 0
   m_radius: 1.4678953
 --- !u!1 &455912798194684755
 GameObject:
@@ -215,11 +216,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdc260c5bb3b204f8756df30f067823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Collide.Sphere
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_collisionsEnabled: 1
   m_isSensor: 0
   m_enableMassProperties: 1
   m_material: {fileID: 0}
+  m_isPulley: 0
   m_radius: 0.49437657
 --- !u!1 &486526835576159662
 GameObject:
@@ -265,11 +267,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdc260c5bb3b204f8756df30f067823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Collide.Sphere
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_collisionsEnabled: 1
   m_isSensor: 0
   m_enableMassProperties: 1
   m_material: {fileID: 0}
+  m_isPulley: 0
   m_radius: 0.48810402
 --- !u!1 &669783410124503896
 GameObject:
@@ -315,11 +318,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdc260c5bb3b204f8756df30f067823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Collide.Sphere
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_collisionsEnabled: 1
   m_isSensor: 0
   m_enableMassProperties: 1
   m_material: {fileID: 0}
+  m_isPulley: 0
   m_radius: 0.6642843
 --- !u!1 &938991292995222074
 GameObject:
@@ -365,11 +369,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdc260c5bb3b204f8756df30f067823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Collide.Sphere
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_collisionsEnabled: 1
   m_isSensor: 0
   m_enableMassProperties: 1
   m_material: {fileID: 0}
+  m_isPulley: 0
   m_radius: 0.5345397
 --- !u!1 &976570399802765501
 GameObject:
@@ -419,7 +424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51c5940a8ebcfc4997616eb2929ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Utils.OnSelectionProxy
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_component: {fileID: 0}
 --- !u!114 &2473056493515211691
 MonoBehaviour:
@@ -433,7 +438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e953fbe6d85b8b4e9603017a53ca472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Rendering.ShapeVisualMesh
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_shape: {fileID: 0}
 --- !u!33 &8935080535791651821
 MeshFilter:
@@ -540,7 +545,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51c5940a8ebcfc4997616eb2929ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Utils.OnSelectionProxy
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_component: {fileID: 0}
 --- !u!114 &8386520732694294376
 MonoBehaviour:
@@ -554,7 +559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e953fbe6d85b8b4e9603017a53ca472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Rendering.ShapeVisualMesh
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_shape: {fileID: 0}
 --- !u!33 &5971643875751352032
 MeshFilter:
@@ -661,7 +666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51c5940a8ebcfc4997616eb2929ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Utils.OnSelectionProxy
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_component: {fileID: 0}
 --- !u!114 &4770174104621121624
 MonoBehaviour:
@@ -675,7 +680,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e953fbe6d85b8b4e9603017a53ca472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Rendering.ShapeVisualMesh
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_shape: {fileID: 0}
 --- !u!33 &1207718874981927849
 MeshFilter:
@@ -782,7 +787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51c5940a8ebcfc4997616eb2929ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Utils.OnSelectionProxy
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_component: {fileID: 0}
 --- !u!114 &7299432234299561805
 MonoBehaviour:
@@ -796,7 +801,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e953fbe6d85b8b4e9603017a53ca472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Rendering.ShapeVisualMesh
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_shape: {fileID: 0}
 --- !u!33 &4618434903119275615
 MeshFilter:
@@ -903,7 +908,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51c5940a8ebcfc4997616eb2929ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Utils.OnSelectionProxy
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_component: {fileID: 0}
 --- !u!114 &6986486834213491800
 MonoBehaviour:
@@ -917,7 +922,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e953fbe6d85b8b4e9603017a53ca472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Rendering.ShapeVisualMesh
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_shape: {fileID: 0}
 --- !u!33 &3231866106676958520
 MeshFilter:
@@ -1024,7 +1029,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51c5940a8ebcfc4997616eb2929ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Utils.OnSelectionProxy
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_component: {fileID: 0}
 --- !u!114 &5305534208654739698
 MonoBehaviour:
@@ -1038,7 +1043,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e953fbe6d85b8b4e9603017a53ca472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Rendering.ShapeVisualMesh
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_shape: {fileID: 0}
 --- !u!33 &2700197316955979327
 MeshFilter:
@@ -1141,11 +1146,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdc260c5bb3b204f8756df30f067823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Collide.Sphere
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_collisionsEnabled: 1
   m_isSensor: 0
   m_enableMassProperties: 1
   m_material: {fileID: 0}
+  m_isPulley: 0
   m_radius: 0.48796022
 --- !u!1 &1793806499679832617
 GameObject:
@@ -1191,11 +1197,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdc260c5bb3b204f8756df30f067823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Collide.Sphere
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_collisionsEnabled: 1
   m_isSensor: 0
   m_enableMassProperties: 1
   m_material: {fileID: 0}
+  m_isPulley: 0
   m_radius: 0.5296194
 --- !u!1 &2486824073577069928
 GameObject:
@@ -1241,11 +1248,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdc260c5bb3b204f8756df30f067823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Collide.Sphere
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_collisionsEnabled: 1
   m_isSensor: 0
   m_enableMassProperties: 1
   m_material: {fileID: 0}
+  m_isPulley: 0
   m_radius: 0.62739104
 --- !u!1 &2680690780708464586
 GameObject:
@@ -1295,7 +1303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51c5940a8ebcfc4997616eb2929ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Utils.OnSelectionProxy
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_component: {fileID: 0}
 --- !u!114 &1715282817422567958
 MonoBehaviour:
@@ -1309,7 +1317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e953fbe6d85b8b4e9603017a53ca472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Rendering.ShapeVisualMesh
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_shape: {fileID: 0}
 --- !u!33 &8534048415407298887
 MeshFilter:
@@ -1416,7 +1424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51c5940a8ebcfc4997616eb2929ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Utils.OnSelectionProxy
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_component: {fileID: 0}
 --- !u!114 &2984000166233828895
 MonoBehaviour:
@@ -1430,7 +1438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e953fbe6d85b8b4e9603017a53ca472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Rendering.ShapeVisualMesh
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_shape: {fileID: 0}
 --- !u!33 &7902826163468378163
 MeshFilter:
@@ -1537,7 +1545,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51c5940a8ebcfc4997616eb2929ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Utils.OnSelectionProxy
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_component: {fileID: 0}
 --- !u!114 &3075319851656367572
 MonoBehaviour:
@@ -1551,7 +1559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e953fbe6d85b8b4e9603017a53ca472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Rendering.ShapeVisualMesh
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_shape: {fileID: 0}
 --- !u!33 &9095666944527669210
 MeshFilter:
@@ -1658,7 +1666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51c5940a8ebcfc4997616eb2929ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Utils.OnSelectionProxy
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_component: {fileID: 0}
 --- !u!114 &6228702308099572573
 MonoBehaviour:
@@ -1672,7 +1680,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e953fbe6d85b8b4e9603017a53ca472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Rendering.ShapeVisualMesh
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_shape: {fileID: 0}
 --- !u!33 &91690740813692850
 MeshFilter:
@@ -1779,7 +1787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51c5940a8ebcfc4997616eb2929ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Utils.OnSelectionProxy
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_component: {fileID: 0}
 --- !u!114 &4617928311444395060
 MonoBehaviour:
@@ -1793,7 +1801,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e953fbe6d85b8b4e9603017a53ca472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Rendering.ShapeVisualMesh
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_shape: {fileID: 0}
 --- !u!33 &1390414141651570856
 MeshFilter:
@@ -1896,11 +1904,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdc260c5bb3b204f8756df30f067823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Collide.Sphere
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_collisionsEnabled: 1
   m_isSensor: 0
   m_enableMassProperties: 1
   m_material: {fileID: 0}
+  m_isPulley: 0
   m_radius: 0.43665203
 --- !u!1 &3629753832759514524
 GameObject:
@@ -1946,11 +1955,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdc260c5bb3b204f8756df30f067823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Collide.Sphere
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_collisionsEnabled: 1
   m_isSensor: 0
   m_enableMassProperties: 1
   m_material: {fileID: 0}
+  m_isPulley: 0
   m_radius: 0.5461096
 --- !u!1 &3638798093728453436
 GameObject:
@@ -1999,7 +2009,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51c5940a8ebcfc4997616eb2929ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Utils.OnSelectionProxy
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_component: {fileID: 0}
 --- !u!114 &3609207129168066300
 MonoBehaviour:
@@ -2013,7 +2023,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e953fbe6d85b8b4e9603017a53ca472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Rendering.ShapeVisualMesh
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_shape: {fileID: 0}
 --- !u!33 &1193488708870186999
 MeshFilter:
@@ -2120,7 +2130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51c5940a8ebcfc4997616eb2929ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Utils.OnSelectionProxy
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_component: {fileID: 0}
 --- !u!114 &776719170597227897
 MonoBehaviour:
@@ -2134,7 +2144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e953fbe6d85b8b4e9603017a53ca472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Rendering.ShapeVisualMesh
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_shape: {fileID: 0}
 --- !u!33 &4716717129537356144
 MeshFilter:
@@ -2247,6 +2257,8 @@ MonoBehaviour:
   maxSpeed: 5
   turningSpeed: 1
   rb: {fileID: 8170248270554834483}
+  WhaleEnd: {fileID: 0}
+  settings: {fileID: 0}
 --- !u!1 &3871935934165055072
 GameObject:
   m_ObjectHideFlags: 0
@@ -2295,7 +2307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51c5940a8ebcfc4997616eb2929ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Utils.OnSelectionProxy
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_component: {fileID: 0}
 --- !u!114 &7211763597913878693
 MonoBehaviour:
@@ -2309,7 +2321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e953fbe6d85b8b4e9603017a53ca472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Rendering.ShapeVisualMesh
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_shape: {fileID: 0}
 --- !u!33 &5268349470662371520
 MeshFilter:
@@ -2412,11 +2424,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdc260c5bb3b204f8756df30f067823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Collide.Sphere
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_collisionsEnabled: 1
   m_isSensor: 0
   m_enableMassProperties: 1
   m_material: {fileID: 0}
+  m_isPulley: 0
   m_radius: 0.59089655
 --- !u!1 &3988716895401309407
 GameObject:
@@ -2466,7 +2479,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51c5940a8ebcfc4997616eb2929ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Utils.OnSelectionProxy
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_component: {fileID: 0}
 --- !u!114 &5652599930448023652
 MonoBehaviour:
@@ -2480,7 +2493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e953fbe6d85b8b4e9603017a53ca472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Rendering.ShapeVisualMesh
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_shape: {fileID: 0}
 --- !u!33 &5347228083488021959
 MeshFilter:
@@ -2583,11 +2596,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdc260c5bb3b204f8756df30f067823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Collide.Sphere
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_collisionsEnabled: 1
   m_isSensor: 0
   m_enableMassProperties: 1
   m_material: {fileID: 0}
+  m_isPulley: 0
   m_radius: 0.38065702
 --- !u!1 &4185305114902006698
 GameObject:
@@ -2637,7 +2651,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51c5940a8ebcfc4997616eb2929ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Utils.OnSelectionProxy
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_component: {fileID: 0}
 --- !u!114 &5086064829282883908
 MonoBehaviour:
@@ -2651,7 +2665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e953fbe6d85b8b4e9603017a53ca472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Rendering.ShapeVisualMesh
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_shape: {fileID: 0}
 --- !u!33 &6099439796217043429
 MeshFilter:
@@ -2754,11 +2768,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdc260c5bb3b204f8756df30f067823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Collide.Sphere
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_collisionsEnabled: 1
   m_isSensor: 0
   m_enableMassProperties: 1
   m_material: {fileID: 0}
+  m_isPulley: 0
   m_radius: 1.4813514
 --- !u!1 &4448530403587854535
 GameObject:
@@ -2804,11 +2819,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdc260c5bb3b204f8756df30f067823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Collide.Sphere
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_collisionsEnabled: 1
   m_isSensor: 0
   m_enableMassProperties: 1
   m_material: {fileID: 0}
+  m_isPulley: 0
   m_radius: 1.3800676
 --- !u!1 &4512027210307264381
 GameObject:
@@ -2854,11 +2870,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdc260c5bb3b204f8756df30f067823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Collide.Sphere
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_collisionsEnabled: 1
   m_isSensor: 0
   m_enableMassProperties: 1
   m_material: {fileID: 0}
+  m_isPulley: 0
   m_radius: 1.0078008
 --- !u!1 &4748488539006079358
 GameObject:
@@ -2904,11 +2921,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdc260c5bb3b204f8756df30f067823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Collide.Sphere
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_collisionsEnabled: 1
   m_isSensor: 0
   m_enableMassProperties: 1
   m_material: {fileID: 0}
+  m_isPulley: 0
   m_radius: 0.63201797
 --- !u!1 &4753617911670036388
 GameObject:
@@ -2954,11 +2972,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdc260c5bb3b204f8756df30f067823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Collide.Sphere
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_collisionsEnabled: 1
   m_isSensor: 0
   m_enableMassProperties: 1
   m_material: {fileID: 0}
+  m_isPulley: 0
   m_radius: 1.1527804
 --- !u!1 &5058902761778671518
 GameObject:
@@ -3008,7 +3027,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51c5940a8ebcfc4997616eb2929ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Utils.OnSelectionProxy
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_component: {fileID: 0}
 --- !u!114 &3915944676343767432
 MonoBehaviour:
@@ -3022,7 +3041,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e953fbe6d85b8b4e9603017a53ca472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Rendering.ShapeVisualMesh
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_shape: {fileID: 0}
 --- !u!33 &2642064774947625529
 MeshFilter:
@@ -3129,7 +3148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51c5940a8ebcfc4997616eb2929ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Utils.OnSelectionProxy
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_component: {fileID: 0}
 --- !u!114 &8808275898655539236
 MonoBehaviour:
@@ -3143,7 +3162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e953fbe6d85b8b4e9603017a53ca472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Rendering.ShapeVisualMesh
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_shape: {fileID: 0}
 --- !u!33 &6538593466936093962
 MeshFilter:
@@ -3250,7 +3269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51c5940a8ebcfc4997616eb2929ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Utils.OnSelectionProxy
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_component: {fileID: 0}
 --- !u!114 &6253225819829496904
 MonoBehaviour:
@@ -3264,7 +3283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e953fbe6d85b8b4e9603017a53ca472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Rendering.ShapeVisualMesh
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_shape: {fileID: 0}
 --- !u!33 &5539477781220497089
 MeshFilter:
@@ -3367,11 +3386,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdc260c5bb3b204f8756df30f067823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Collide.Sphere
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_collisionsEnabled: 1
   m_isSensor: 0
   m_enableMassProperties: 1
   m_material: {fileID: 0}
+  m_isPulley: 0
   m_radius: 1.4309918
 --- !u!1 &5404787495786888690
 GameObject:
@@ -3417,11 +3437,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdc260c5bb3b204f8756df30f067823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Collide.Sphere
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_collisionsEnabled: 1
   m_isSensor: 0
   m_enableMassProperties: 1
   m_material: {fileID: 0}
+  m_isPulley: 0
   m_radius: 1.168903
 --- !u!1 &5416406620842536898
 GameObject:
@@ -3467,11 +3488,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdc260c5bb3b204f8756df30f067823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Collide.Sphere
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_collisionsEnabled: 1
   m_isSensor: 0
   m_enableMassProperties: 1
   m_material: {fileID: 0}
+  m_isPulley: 0
   m_radius: 1.481951
 --- !u!1 &5569689723076305114
 GameObject:
@@ -3521,7 +3543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51c5940a8ebcfc4997616eb2929ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Utils.OnSelectionProxy
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_component: {fileID: 0}
 --- !u!114 &6268915562881475061
 MonoBehaviour:
@@ -3535,7 +3557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e953fbe6d85b8b4e9603017a53ca472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Rendering.ShapeVisualMesh
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_shape: {fileID: 0}
 --- !u!33 &4850168798511904906
 MeshFilter:
@@ -3642,7 +3664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51c5940a8ebcfc4997616eb2929ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Utils.OnSelectionProxy
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_component: {fileID: 0}
 --- !u!114 &7650045960076981688
 MonoBehaviour:
@@ -3656,7 +3678,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e953fbe6d85b8b4e9603017a53ca472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Rendering.ShapeVisualMesh
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_shape: {fileID: 0}
 --- !u!33 &6991209634207392020
 MeshFilter:
@@ -3759,11 +3781,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdc260c5bb3b204f8756df30f067823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Collide.Sphere
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_collisionsEnabled: 1
   m_isSensor: 0
   m_enableMassProperties: 1
   m_material: {fileID: 0}
+  m_isPulley: 0
   m_radius: 1.0966668
 --- !u!1 &6081280788416284898
 GameObject:
@@ -3813,7 +3836,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51c5940a8ebcfc4997616eb2929ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Utils.OnSelectionProxy
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_component: {fileID: 0}
 --- !u!114 &5567034254166052125
 MonoBehaviour:
@@ -3827,7 +3850,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e953fbe6d85b8b4e9603017a53ca472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Rendering.ShapeVisualMesh
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_shape: {fileID: 0}
 --- !u!33 &6012891613013368851
 MeshFilter:
@@ -3934,7 +3957,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51c5940a8ebcfc4997616eb2929ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Utils.OnSelectionProxy
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_component: {fileID: 0}
 --- !u!114 &5775444296447643120
 MonoBehaviour:
@@ -3948,7 +3971,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e953fbe6d85b8b4e9603017a53ca472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Rendering.ShapeVisualMesh
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_shape: {fileID: 0}
 --- !u!33 &6003391436701890285
 MeshFilter:
@@ -4051,11 +4074,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdc260c5bb3b204f8756df30f067823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Collide.Sphere
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_collisionsEnabled: 1
   m_isSensor: 0
   m_enableMassProperties: 1
   m_material: {fileID: 0}
+  m_isPulley: 0
   m_radius: 1.505391
 --- !u!1 &6424061582078505254
 GameObject:
@@ -4105,7 +4129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51c5940a8ebcfc4997616eb2929ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Utils.OnSelectionProxy
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_component: {fileID: 0}
 --- !u!114 &6892991703753390064
 MonoBehaviour:
@@ -4119,7 +4143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e953fbe6d85b8b4e9603017a53ca472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Rendering.ShapeVisualMesh
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_shape: {fileID: 0}
 --- !u!33 &541725849078207087
 MeshFilter:
@@ -4222,11 +4246,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdc260c5bb3b204f8756df30f067823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Collide.Sphere
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_collisionsEnabled: 1
   m_isSensor: 0
   m_enableMassProperties: 1
   m_material: {fileID: 0}
+  m_isPulley: 0
   m_radius: 0.6086579
 --- !u!1 &6924569478797741262
 GameObject:
@@ -4272,11 +4297,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdc260c5bb3b204f8756df30f067823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Collide.Sphere
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_collisionsEnabled: 1
   m_isSensor: 0
   m_enableMassProperties: 1
   m_material: {fileID: 0}
+  m_isPulley: 0
   m_radius: 0.49328452
 --- !u!1 &7026530508005183211
 GameObject:
@@ -4326,7 +4352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51c5940a8ebcfc4997616eb2929ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Utils.OnSelectionProxy
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_component: {fileID: 0}
 --- !u!114 &4330274592574780950
 MonoBehaviour:
@@ -4340,7 +4366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e953fbe6d85b8b4e9603017a53ca472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Rendering.ShapeVisualMesh
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_shape: {fileID: 0}
 --- !u!33 &1169481181899789871
 MeshFilter:
@@ -4443,11 +4469,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdc260c5bb3b204f8756df30f067823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Collide.Sphere
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_collisionsEnabled: 1
   m_isSensor: 0
   m_enableMassProperties: 1
   m_material: {fileID: 0}
+  m_isPulley: 0
   m_radius: 0.52512425
 --- !u!1 &7326562189600837810
 GameObject:
@@ -4497,7 +4524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51c5940a8ebcfc4997616eb2929ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Utils.OnSelectionProxy
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_component: {fileID: 0}
 --- !u!114 &8530865479348135217
 MonoBehaviour:
@@ -4511,7 +4538,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e953fbe6d85b8b4e9603017a53ca472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Rendering.ShapeVisualMesh
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_shape: {fileID: 0}
 --- !u!33 &3027019889132618724
 MeshFilter:
@@ -4618,7 +4645,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51c5940a8ebcfc4997616eb2929ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Utils.OnSelectionProxy
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_component: {fileID: 0}
 --- !u!114 &3122998101231124685
 MonoBehaviour:
@@ -4632,7 +4659,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e953fbe6d85b8b4e9603017a53ca472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Rendering.ShapeVisualMesh
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_shape: {fileID: 0}
 --- !u!33 &8821628178681267998
 MeshFilter:
@@ -4739,7 +4766,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51c5940a8ebcfc4997616eb2929ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Utils.OnSelectionProxy
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_component: {fileID: 0}
 --- !u!114 &6635453600282220234
 MonoBehaviour:
@@ -4753,7 +4780,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e953fbe6d85b8b4e9603017a53ca472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Rendering.ShapeVisualMesh
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_shape: {fileID: 0}
 --- !u!33 &5858118314633681536
 MeshFilter:
@@ -4860,7 +4887,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51c5940a8ebcfc4997616eb2929ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Utils.OnSelectionProxy
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_component: {fileID: 0}
 --- !u!114 &4894129267610804923
 MonoBehaviour:
@@ -4874,7 +4901,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e953fbe6d85b8b4e9603017a53ca472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Rendering.ShapeVisualMesh
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_shape: {fileID: 0}
 --- !u!33 &5449786592039154157
 MeshFilter:
@@ -4977,11 +5004,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdc260c5bb3b204f8756df30f067823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Collide.Sphere
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_collisionsEnabled: 1
   m_isSensor: 0
   m_enableMassProperties: 1
   m_material: {fileID: 0}
+  m_isPulley: 0
   m_radius: 1.7712332
 --- !u!1 &8121870552059510836
 GameObject:
@@ -5031,7 +5059,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51c5940a8ebcfc4997616eb2929ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Utils.OnSelectionProxy
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_component: {fileID: 0}
 --- !u!114 &4077995687214771975
 MonoBehaviour:
@@ -5045,7 +5073,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e953fbe6d85b8b4e9603017a53ca472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Rendering.ShapeVisualMesh
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_shape: {fileID: 0}
 --- !u!33 &7615169873647848463
 MeshFilter:
@@ -5148,11 +5176,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdc260c5bb3b204f8756df30f067823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Collide.Sphere
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_collisionsEnabled: 1
   m_isSensor: 0
   m_enableMassProperties: 1
   m_material: {fileID: 0}
+  m_isPulley: 0
   m_radius: 0.842512
 --- !u!1 &8348926254465217367
 GameObject:
@@ -5202,7 +5231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51c5940a8ebcfc4997616eb2929ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Utils.OnSelectionProxy
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_component: {fileID: 0}
 --- !u!114 &324669662134613909
 MonoBehaviour:
@@ -5216,7 +5245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e953fbe6d85b8b4e9603017a53ca472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Rendering.ShapeVisualMesh
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_shape: {fileID: 0}
 --- !u!33 &3746391142364849078
 MeshFilter:
@@ -5323,7 +5352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51c5940a8ebcfc4997616eb2929ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Utils.OnSelectionProxy
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_component: {fileID: 0}
 --- !u!114 &2136079934596425269
 MonoBehaviour:
@@ -5337,7 +5366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e953fbe6d85b8b4e9603017a53ca472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Rendering.ShapeVisualMesh
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_shape: {fileID: 0}
 --- !u!33 &99041181932993521
 MeshFilter:
@@ -5440,11 +5469,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdc260c5bb3b204f8756df30f067823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Collide.Sphere
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_collisionsEnabled: 1
   m_isSensor: 0
   m_enableMassProperties: 1
   m_material: {fileID: 0}
+  m_isPulley: 0
   m_radius: 0.6656488
 --- !u!1 &8660220088246062781
 GameObject:
@@ -5490,11 +5520,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdc260c5bb3b204f8756df30f067823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Collide.Sphere
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_collisionsEnabled: 1
   m_isSensor: 0
   m_enableMassProperties: 1
   m_material: {fileID: 0}
+  m_isPulley: 0
   m_radius: 0.6019493
 --- !u!1 &8674786167633828886
 GameObject:
@@ -5540,11 +5571,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdc260c5bb3b204f8756df30f067823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Collide.Sphere
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_collisionsEnabled: 1
   m_isSensor: 0
   m_enableMassProperties: 1
   m_material: {fileID: 0}
+  m_isPulley: 0
   m_radius: 0.37845716
 --- !u!1 &9048027695646474024
 GameObject:
@@ -5590,11 +5622,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdc260c5bb3b204f8756df30f067823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Collide.Sphere
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_collisionsEnabled: 1
   m_isSensor: 0
   m_enableMassProperties: 1
   m_material: {fileID: 0}
+  m_isPulley: 0
   m_radius: 1.4072901
 --- !u!1 &9107511371746149308
 GameObject:
@@ -5640,11 +5673,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdc260c5bb3b204f8756df30f067823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Collide.Sphere
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_collisionsEnabled: 1
   m_isSensor: 0
   m_enableMassProperties: 1
   m_material: {fileID: 0}
+  m_isPulley: 0
   m_radius: 1.2983252
 --- !u!1001 &7766317752276869524
 PrefabInstance:
@@ -6131,7 +6165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc38363f1e98c7e42bb386d273d203f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ColliderSwapper
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   parent: {fileID: 2960392107434542760}
   shapeMaterial: {fileID: 11400000, guid: 76b35cadf2ade2b4082c7228429402ed, type: 2}
 --- !u!114 &8170248270554834483
@@ -6146,7 +6180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e01f271d05be96f44852cb49dfac5711, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.RigidBody
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   <MassProperties>k__BackingField:
     <RigidBody>k__BackingField: {fileID: 8170248270554834483}
     m_mass:
@@ -6190,11 +6224,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85e5dfc463eef1d499cfc0f62bd45311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AGXUnity::AGXUnity.Collide.Mesh
-  m_serializationVersion: 1
+  m_serializationVersion: 2
   m_collisionsEnabled: 1
   m_isSensor: 0
   m_enableMassProperties: 1
   m_material: {fileID: 11400000, guid: 76b35cadf2ade2b4082c7228429402ed, type: 2}
+  m_isPulley: 0
   m_legacySourceObject: {fileID: 0}
   m_sourceObjects: []
   m_precomputedCollisionMeshes: []

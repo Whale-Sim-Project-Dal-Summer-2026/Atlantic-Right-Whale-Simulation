@@ -22,14 +22,10 @@ public class ManualWhaleController : MonoBehaviour{
     [SerializeField] float maxSpeed = 5f;
     [SerializeField] float turningSpeed = .5f;
 
-
-
-
-
-
-
     [Header("References")]
     [SerializeField] AGXUnity.RigidBody rb;
+    [SerializeField] GameObject WhaleEnd;
+    [SerializeField] ProcessingSettings settings;
     InputAction moveInput;
     InputAction accelerateInput;
     InputAction deccelerateInput;
@@ -51,6 +47,10 @@ public class ManualWhaleController : MonoBehaviour{
 
     float speedAcceleration;
     agx.Vec3 whaleStartPos;
+    float timeOutOfWater = 0.0f;
+    float pitchNoseDownForceMult = 1.0f;
+    float pitchNoiseDownCurrForce = 0.0f;
+    float seaLevel;
 
 
 
@@ -77,6 +77,10 @@ public class ManualWhaleController : MonoBehaviour{
 
 
         WhaleConnector.OnReset += resetWhalePosition;
+    }
+
+    void Start() {
+       seaLevel = settings.SeaLevel; 
     }
 
 
@@ -145,8 +149,27 @@ public class ManualWhaleController : MonoBehaviour{
         yaw += yawDelta;
         pitch += pitchDelta;
 
+
+        pitchNoseDownOutOfWater();
         yaw = Mathf.Repeat(yaw, 360f);
         pitch = Mathf.Clamp(pitch, -90, 90);
+
+
+    }
+
+    void pitchNoseDownOutOfWater() {
+        if(WhaleEnd.transform.position.y < seaLevel) {
+            timeOutOfWater = 0.0f;
+            pitchNoiseDownCurrForce = 0.0f;
+            return;
+        }
+
+        timeOutOfWater += Time.deltaTime;
+
+        pitchNoiseDownCurrForce = pitchNoseDownForceMult * timeOutOfWater;
+
+        pitch += pitchNoiseDownCurrForce;
+
     }
 
     void Update()

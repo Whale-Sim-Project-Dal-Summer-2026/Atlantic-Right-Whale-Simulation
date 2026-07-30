@@ -156,9 +156,7 @@ public class WhaleModelAGX : WhaleModelAbstract {
         
         float velocityDamping = 10f; 
 
-        float inWater = currPos.y < seaLevel ? 1.0f : 0.0f;
-
-        agx.Vec3 desiredVelocity = displacement * positionalStiffness * inWater;
+        agx.Vec3 desiredVelocity = displacement * positionalStiffness;
 
         agx.Vec3 velocityError = desiredVelocity - currentVelocity;
 

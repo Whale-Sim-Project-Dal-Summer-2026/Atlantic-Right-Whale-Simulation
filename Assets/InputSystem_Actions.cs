@@ -890,7 +890,7 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""75edae5b-3f3b-41e4-9583-6385c4672d2a"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
