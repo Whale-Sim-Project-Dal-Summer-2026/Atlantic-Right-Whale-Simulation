@@ -17,41 +17,31 @@ public class PopupManager : MonoBehaviour {
     
     // events
     // make this 1 event
-    public delegate void HelpPopupOnEvent(); 
-    public static event HelpPopupOnEvent OnHelpPopupOn;
-    public delegate void HelpPopupOffEvent(); 
-    public static event HelpPopupOffEvent OnHelpPopupOff;
+    public delegate void HelpPopupEvent(bool on); 
+    public static event HelpPopupEvent OnHelpPopup;
     
     void Awake() {
         // attach methods to generic popup events
-        Popup.OnPopupOn += PopupOnEvent;
-        Popup.OnPopupOff += PopupOffEvent;
-        
-        // help events setup
-        if (scrubber) {
-            OnHelpPopupOn += scrubber.Pause; 
-        }
-        OnHelpPopupOn += simUIManager.SetUIInteractivityOff; // TODO: bool inversion needed
-        OnHelpPopupOff += simUIManager.SetUIInteractivityOn; // TODO: here
+        Popup.OnPopup += PopupEvent;
+    }
+
+    private void OnDestroy() {
+        // unsub
+        Popup.OnPopup -= PopupEvent;
     }
 
     /**
-     * Invoke events for when a popup is opened.
+     * Invoke events for when a popup is opened or closed.
+     * @param on - Whether the popup is on or off.
      * @param label - Name of a popup's GameObject passed through the generic popup's events.
      */
-    private void PopupOnEvent(GameObject obj) {
+    private void PopupEvent(bool on, GameObject obj) {
         if (obj == helpPopup) {
-            OnHelpPopupOn?.Invoke();
-        }
-    }
-    
-    /**
-     * Invoke events for when a popup is closed.
-     * @param label - Name of a popup's GameObject passed through the generic popup's events.
-     */
-    private void PopupOffEvent(GameObject obj) {
-        if (obj == helpPopup) {
-            OnHelpPopupOff?.Invoke();
+            OnHelpPopup?.Invoke(on);
+            if (on && scrubber) {
+                scrubber.Pause();
+            }
+            simUIManager.SetUIInteractivity(!on);
         }
     }
 }

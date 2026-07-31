@@ -38,7 +38,12 @@ public class HelpPopup : MonoBehaviour {
         // add to event
         CameraController.OnCamSwitch += UpdateControlsHelp;
     }
-    
+
+    private void OnDestroy() {
+        // unsub
+        CameraController.OnCamSwitch -= UpdateControlsHelp;
+    }
+
     /**
      * Camera event subscriber which sets the corresponding
      * control help UI based on camera.

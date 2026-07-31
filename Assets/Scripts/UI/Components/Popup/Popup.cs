@@ -15,10 +15,8 @@ public class Popup : MonoBehaviour {
     [SerializeField] private Button[] closeBtns;
     
     // events
-    public delegate void PopupOnEvent(GameObject obj);
-    public static event PopupOnEvent OnPopupOn;
-    public delegate void PopupOffEvent(GameObject obj);
-    public static event PopupOffEvent OnPopupOff;
+    public delegate void PopupEvent(bool on, GameObject obj);
+    public static event PopupEvent OnPopup;
 
     // vars
     private bool open = false;
@@ -37,7 +35,7 @@ public class Popup : MonoBehaviour {
     void Update() {
         if (!popupObj.activeSelf && !invoked) { // if popup obj ever deactivated manually should set popup state to closed
             open = false;
-            OnPopupOff?.Invoke(popupObj);
+            OnPopup?.Invoke(false, popupObj);
             invoked = true;
         }
 
@@ -60,11 +58,7 @@ public class Popup : MonoBehaviour {
     public void SetPopupVisibility(bool on) {
         open = on;
         popupObj.SetActive(on);
-        if (on) {
-            OnPopupOn?.Invoke(popupObj);
-        } else {
-            OnPopupOff?.Invoke(popupObj);
-        }
+        OnPopup?.Invoke(on, popupObj);
     }
 
     /**

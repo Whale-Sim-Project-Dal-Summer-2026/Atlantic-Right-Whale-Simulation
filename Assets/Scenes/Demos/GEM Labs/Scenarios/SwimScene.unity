@@ -12787,9 +12787,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f8447f4ed0f4104bf044794bc2def67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ToggleItemInteractivity
-  btns: []
-  colliders:
-  - {fileID: 6824787337333441231}
 --- !u!1001 &7793314521052104933
 PrefabInstance:
   m_ObjectHideFlags: 0

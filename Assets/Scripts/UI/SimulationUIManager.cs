@@ -5,6 +5,7 @@
  * @author Mars Semenova 
  */
 
+using System;
 using UnityEngine;
 
 public class SimulationUIManager : MonoBehaviour {
@@ -17,27 +18,25 @@ public class SimulationUIManager : MonoBehaviour {
     // events
 
     // use only 1 event for these 2, pass bool into it to say wheter it should be on or off
-    public delegate void DisableInteractivityEvent();
-    public static event DisableInteractivityEvent OnInteractivityDisabled;
-    public delegate void EnableInteractivityEvent();
-    public static event EnableInteractivityEvent OnInteractivityEnabled;
+    public delegate void ToggleInteractivityEvent(bool on);
+    public static event ToggleInteractivityEvent OnToggleInteractivity;
     
     void Awake() {
         // toggle UI interactivity when help popup is toggled
-        PopupManager.OnHelpPopupOn += SetUIInteractivityOff;
-        PopupManager.OnHelpPopupOff += SetUIInteractivityOn;
+        PopupManager.OnHelpPopup += SetUIInteractivityOnHelpPopup;
+    }
+
+    private void OnDestroy() {
+        // unsub
+        PopupManager.OnHelpPopup -= SetUIInteractivityOnHelpPopup;
     }
 
     /**
      * Disable all interactable UI elements.
      * @param on - Whether the elements should be disabled.
      */
-    private void SetUIInteractivity(bool on) { 
-        if (on) {
-            OnInteractivityEnabled?.Invoke();
-        } else {
-            OnInteractivityDisabled?.Invoke();
-        }
+    public void SetUIInteractivity(bool on) { 
+        OnToggleInteractivity?.Invoke(on);
         if (scrubber) {
             scrubber.SetScrubberInteractivity(on);
         }
@@ -46,10 +45,13 @@ public class SimulationUIManager : MonoBehaviour {
             toggles.SetTogglesInteractivity(on);
         }
     }
-    public void SetUIInteractivityOn() { // TODO
-        SetUIInteractivity(true);
-    }
-    public void SetUIInteractivityOff() { // TODO
-        SetUIInteractivity(false);
+    
+    /**
+     * A method which inverts the bool passed by the OnHelpPopup event
+     * before calling the set UI interactivity function.
+     * @param on - Whether the popup is on or off.
+     */
+    private void SetUIInteractivityOnHelpPopup(bool on) { 
+        SetUIInteractivity(!on);
     }
 }

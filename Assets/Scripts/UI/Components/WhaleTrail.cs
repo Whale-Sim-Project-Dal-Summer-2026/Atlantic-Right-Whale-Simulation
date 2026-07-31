@@ -5,6 +5,7 @@
  * @author Mars Semenova 
  */
 
+using System;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Splines;
@@ -33,10 +34,8 @@ public class WhaleTrail : MonoBehaviour {
         
         // events
         WhaleConnector.OnReset += ResetPath;
-        TogglesManager.OnToggleUIOn += SetPathVisibilityOn; // TODO: only for pub side
-        TogglesManager.OnToggleUIOff += SetPathVisibilityOff; // TODO: only for pub side
-        TogglesManager.OnTogglePathOn += SetPathVisibilityOn;
-        TogglesManager.OnTogglePathOff += SetPathVisibilityOff;
+        TogglesManager.OnToggleUI += SetPathVisibility; // TODO: only for pub side
+        TogglesManager.OnTogglePath += SetPathVisibility;
     }
 
     void Start() {
@@ -67,6 +66,13 @@ public class WhaleTrail : MonoBehaviour {
         }
     }
 
+    private void OnDestroy() {
+        // unsub
+        WhaleConnector.OnReset -= ResetPath;
+        TogglesManager.OnToggleUI -= SetPathVisibility; // TODO: only for pub side
+        TogglesManager.OnTogglePath-= SetPathVisibility;
+    }
+
     /**
      * Reset path on whale reset.
      */
@@ -90,12 +96,6 @@ public class WhaleTrail : MonoBehaviour {
         if (whaleTrailMesh) { 
             whaleTrailMesh.enabled = on;
         }
-    }
-    private void SetPathVisibilityOn() { // TODO
-        SetPathVisibility(true);
-    }
-    private void SetPathVisibilityOff() { // TODO
-        SetPathVisibility(false);
     }
 
     /**

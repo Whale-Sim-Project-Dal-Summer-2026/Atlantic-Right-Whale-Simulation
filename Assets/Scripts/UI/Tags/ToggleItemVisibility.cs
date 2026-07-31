@@ -10,21 +10,19 @@ using UnityEngine;
 
 public class ToggleItemVisibility : MonoBehaviour {
     void Awake() {
-        TogglesManager.OnToggleUIOn += SetVisibilityOn;
-        TogglesManager.OnToggleUIOff += SetVisibilityOff;
+        TogglesManager.OnToggleUI += SetVisibility;
+    }
+
+    private void OnDestroy() {
+        // unsub
+        TogglesManager.OnToggleUI -= SetVisibility;
     }
 
     /**
-     * Turn visibility on.
+     * Toggle visibility.
+     * @param on - Whether the object should be visible or not.
      */
-    private void SetVisibilityOn() {
-        gameObject.SetActive(true);
-    }
-    
-    /**
-     * Turn visibility off.
-     */
-    private void SetVisibilityOff() {
-        gameObject.SetActive(false);
+    private void SetVisibility(bool on) {
+        gameObject.SetActive(on);
     }
 }

@@ -5,57 +5,48 @@
  * @author Mars Semenova
  */
 
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ToggleItemInteractivity : MonoBehaviour {
-    [Header("Buttons")]
-    [SerializeField] private Button[] btns;
-    [Header("Colliders")]
-    [SerializeField] private Collider[] colliders;
+    private Button btn;
+    private Collider collider;
     
     void Awake() {
-        SimulationUIManager.OnInteractivityEnabled += SetInteractivityOn;
-        SimulationUIManager.OnInteractivityDisabled += SetInteractivityOff;
-        TogglesManager.OnToggleUIOn += SetColliderInteractivityOn;
-        TogglesManager.OnToggleUIOff += SetColliderInteractivityOff;
+        // get refs
+        btn = GetComponent<Button>();
+        collider = GetComponent<Collider>();
+        
+        // add func to events
+        SimulationUIManager.OnToggleInteractivity += SetInteractivity;
+        TogglesManager.OnToggleUI += SetColliderInteractivity;
+    }
+
+    private void OnDestroy() {
+        // unsub
+        SimulationUIManager.OnToggleInteractivity -= SetInteractivity;
+        TogglesManager.OnToggleUI -= SetColliderInteractivity;
     }
 
     /**
-     * Make buttons and/or colliders interactable.
+     * Toggle the interactivity of the buttons and/or colliders.
+     * @param on - Whether the colliders should be interactable or not.
      */
-    private void SetInteractivityOn() { 
-        for (int x = 0; x < btns.Length; x++) {
-            btns[x].interactable = true;
+    private void SetInteractivity(bool on) {
+        if (btn) {
+            btn.interactable = on;
         }
-        SetColliderInteractivityOn();
+        SetColliderInteractivity(on);
     }
     
     /**
-     * Make buttons and/or colliders not interactable.
+     * Toggle interactivity of colliders.
+     * @param on - Whether the colliders should be interactable or not.
      */
-    private void SetInteractivityOff() {
-        for (int x = 0; x < btns.Length; x++) {
-            btns[x].interactable = false;
-        }
-        SetColliderInteractivityOff();
-    }
-    
-    /**
-     * Make colliders interactable.
-     */
-    private void SetColliderInteractivityOn() {
-        for (int x = 0; x < colliders.Length; x++) {
-            colliders[x].enabled = true;
-        }
-    }
-    
-    /**
-     * Make colliders not interactable.
-     */
-    private void SetColliderInteractivityOff() {
-        for (int x = 0; x < colliders.Length; x++) {
-            colliders[x].enabled = false;
+    private void SetColliderInteractivity(bool on) {
+        if (collider) {
+            collider.enabled = on;
         }
     }
 }

@@ -6,18 +6,24 @@
  * @author Mars Semenova
  */
 
+using System;
 using UnityEngine;
 
 public class ToggleItemVisibilityOff : MonoBehaviour {
     void Awake() {
-        TogglesManager.OnToggleUIOn += SetVisibilityOff;
-        TogglesManager.OnToggleUIOff += SetVisibilityOff;
+        TogglesManager.OnToggleUI += SetVisibilityOff;
+    }
+
+    private void OnDestroy() {
+        // unsub
+        TogglesManager.OnToggleUI -= SetVisibilityOff;
     }
 
     /**
      * Turn visibility off.
+     * @param on - Boolean passed by OnToggleUI event. Not used.
      */
-    private void SetVisibilityOff() {
+    private void SetVisibilityOff(bool on) {
         gameObject.SetActive(false);
     }
 }

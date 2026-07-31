@@ -76,33 +76,18 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
-
-
-*.lscache
-
-/Assets/Data/Processed/Backscatter/
 #ObiRope
 /Assets/Obi
 /Assets/Obi.meta
-/Assets/Data
-Assets/Data.meta
-/Assets/Private
-Assets/Private.meta
-
 Assets/ObiEditorSettings.asset
 Assets/ObiEditorSettings.asset.meta
-Atlantic-Right-Whale-Simulation.slnx
+
+#private
 /Assets/Scripts/Data
 Assets/Scripts/Data.meta
-
-
-#Whale Movement
-
+/Assets/Private
+Assets/Private.meta
 **/WhaleMovement*
-Assets/TextMesh Pro.meta
-Assets/TextMesh Pro/Examples & Extras.meta
-/Assets/TextMesh Pro
-/UIElementsSchema
 /Assets/AGXUnity_Demo/
 /Assets/AGXUnity_Demo.meta
 /Assets/AGXUnity
@@ -110,6 +95,16 @@ Assets/TextMesh Pro/Examples & Extras.meta
 ProjectSettings/Packages/com.algoryx.agxunity/
 Assets/agx.lfx
 Assets/agx.lfx.meta
+/Assets/Data/Processed/Backscatter/
 
+#etc
+Assets/TextMesh Pro.meta
+Assets/TextMesh Pro/Examples & Extras.meta
+/Assets/TextMesh Pro
+/UIElementsSchema
 *.zip
+*.lscache
+
+#IDEs
+Atlantic-Right-Whale-Simulation.slnx
 **/.idea/

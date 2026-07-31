@@ -173,6 +173,7 @@ GameObject:
   - component: {fileID: 3467610385868943929}
   - component: {fileID: 1343140332588744349}
   - component: {fileID: 7840083504280275058}
+  - component: {fileID: 1001457395833627676}
   m_Layer: 5
   m_Name: CloseViewerBtnController
   m_TagString: Untagged
@@ -281,6 +282,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1001457395833627676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4454192863159097203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f8447f4ed0f4104bf044794bc2def67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ToggleItemInteractivity
 --- !u!1 &4973756695994819665
 GameObject:
   m_ObjectHideFlags: 0
@@ -292,7 +305,6 @@ GameObject:
   - component: {fileID: 1662693528111175147}
   - component: {fileID: 3730565693956819843}
   - component: {fileID: 3329082819545981396}
-  - component: {fileID: 4507782832537828133}
   m_Layer: 5
   m_Name: ViewerUI
   m_TagString: Untagged
@@ -348,22 +360,6 @@ MonoBehaviour:
   viewerPopup: {fileID: 3730565693956819843}
   viewerImg: {fileID: 7831560227728156559}
   viewerTxt: {fileID: 1508965043839210072}
---- !u!114 &4507782832537828133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4973756695994819665}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f8447f4ed0f4104bf044794bc2def67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ToggleItemInteractivity
-  btns:
-  - {fileID: 3429843531972314170}
-  - {fileID: 7840083504280275058}
-  colliders: []
 --- !u!1 &5832771393726781263
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,6 +372,7 @@ GameObject:
   - component: {fileID: 2192808377027565684}
   - component: {fileID: 6483296023975746023}
   - component: {fileID: 3429843531972314170}
+  - component: {fileID: 2086534168595671528}
   m_Layer: 5
   m_Name: CloseViewerBtn
   m_TagString: Untagged
@@ -484,6 +481,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2086534168595671528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5832771393726781263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f8447f4ed0f4104bf044794bc2def67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ToggleItemInteractivity
 --- !u!1 &6397721036228422604
 GameObject:
   m_ObjectHideFlags: 0

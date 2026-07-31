@@ -80,14 +80,12 @@ public class CameraController : MonoBehaviour{
     void OnEnable()
     {
         Scrubber.OnCamSwitch += changeToCam;
-        PopupManager.OnHelpPopupOn += SetForceLockOn;
-        PopupManager.OnHelpPopupOff += SetForceLockOff;
+        PopupManager.OnHelpPopup += SetForceLock;
         controls.Enable();  
     } 
     void OnDisable(){
         Scrubber.OnCamSwitch -= changeToCam;
-        PopupManager.OnHelpPopupOn -= SetForceLockOn;
-        PopupManager.OnHelpPopupOff -= SetForceLockOff;
+        PopupManager.OnHelpPopup -= SetForceLock;
         controls.Disable();
     }
 
@@ -101,12 +99,6 @@ public class CameraController : MonoBehaviour{
 
     void SetForceLock(bool on){
         forceLock = on;
-    }
-    void SetForceLockOn(){
-        SetForceLock(true);
-    }
-    void SetForceLockOff(){
-        SetForceLock(false);
     }
 
     void lockUnLockCamera() {

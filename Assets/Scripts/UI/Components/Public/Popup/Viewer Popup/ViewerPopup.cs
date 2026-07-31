@@ -24,6 +24,11 @@ public class ViewerPopup : MonoBehaviour {
         ViewerItem.OnShowViewer += ShowViewer;
     }
 
+    private void OnDestroy() {
+        // unsub
+        ViewerItem.OnShowViewer -= ShowViewer;
+    }
+
     /**
      * Show viewer with passed params.
      * @param img - Image to set.

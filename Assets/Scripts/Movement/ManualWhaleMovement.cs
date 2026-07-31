@@ -1,3 +1,4 @@
+using System;
 using AGXUnity.Utils;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -83,6 +84,10 @@ public class ManualWhaleController : MonoBehaviour{
        seaLevel = settings.SeaLevel; 
     }
 
+    private void OnDestroy() {
+        // unsub
+        WhaleConnector.OnReset -= resetWhalePosition;
+    }
 
     void resetWhalePosition(){
         rb.Native.setPosition(whaleStartPos);

@@ -5,6 +5,7 @@
  * @author Mars Semenova 
  */
 
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,6 +32,11 @@ public class ControlHints : MonoBehaviour {
         if (unstickBtn) {
             unstickBtn.onClick.AddListener(() => OnUnstick?.Invoke());
         }
+    }
+
+    private void OnDestroy() {
+        // unsub
+        CameraController.OnCamSwitch -= UpdateControlHints;
     }
 
     /**

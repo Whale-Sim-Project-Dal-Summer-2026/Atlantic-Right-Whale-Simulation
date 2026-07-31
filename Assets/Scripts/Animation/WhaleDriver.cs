@@ -159,12 +159,13 @@ public class WhaleDriver : MonoBehaviour
              int totalTimeStes = dataSource.GetTotalTimesteps();
         this.totalTimesteps = totalTimeStes;
 
-        WhaleConnector.OnReset += () => { // TODO: Mars added
-            jumpToTimestep = 0;
-            PauseTime = StartingPauseTime;
-        };
+        WhaleConnector.OnReset += OnResetEvent;
     }
 
+    private void OnResetEvent() { 
+        jumpToTimestep = 0;
+        PauseTime = StartingPauseTime;
+    }
 
     void Awake(){
         controls = new CameraControls();
@@ -176,6 +177,11 @@ public class WhaleDriver : MonoBehaviour
 
     void OnDisable(){
         controls.Disable();
+    }
+    
+    void OnDestroy() {
+        // unsub
+        WhaleConnector.OnReset -= OnResetEvent;
     }
 
     void updateWhaleState() {

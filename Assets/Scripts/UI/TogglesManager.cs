@@ -25,19 +25,14 @@ public class TogglesManager : MonoBehaviour {
     // events
 
     // dont need 2 events, have 1 event, and pass either true or false into them
-    public delegate void ToggleUIOnEvent();
-    public static event ToggleUIOnEvent OnToggleUIOn;
-    public delegate void ToggleUIOffEvent();
-    public static event ToggleUIOffEvent OnToggleUIOff;
-    public delegate void TogglePathOnEvent();
-    public static event TogglePathOnEvent OnTogglePathOn;
-    public delegate void TogglePathOffEvent();
-    public static event TogglePathOffEvent OnTogglePathOff;
+    public delegate void ToggleUIEvent(bool on);
+    public static event ToggleUIEvent OnToggleUI;
+    public delegate void TogglePathEvent(bool on);
+    public static event TogglePathEvent OnTogglePath;
 
     void Awake() {
         // add to events
-        Toggles.OnToggleOn += ToggleOnEvent;
-        Toggles.OnToggleOff += ToggleOffEvent;
+        Toggles.OnToggle += ToggleEvent;
     }
 
     /**
@@ -47,7 +42,7 @@ public class TogglesManager : MonoBehaviour {
      */
 
     //  should likely just pass a gameobject into this
-    private void ToggleEvent(GameObject obj, bool on) {
+    private void ToggleEvent(bool on, GameObject obj) {
         if (toggleUIBtn && obj == toggleUIBtn.gameObject) {
             SetUIVisibility(on);
         }
@@ -61,23 +56,13 @@ public class TogglesManager : MonoBehaviour {
             SetPathVisibility(on);
         }
     }
-    private void ToggleOnEvent(GameObject obj) { // TODO
-        ToggleEvent(obj, true);
-    }
-    private void ToggleOffEvent(GameObject obj) { // TODO
-        ToggleEvent(obj, false);
-    }
 
     /**
      * Toggle UI visibility.
      * @param on - Whether the UI should be visible or not.
      */
     public void SetUIVisibility(bool on) {
-        if (on) {
-            OnToggleUIOn?.Invoke();
-        } else {
-            OnToggleUIOff?.Invoke();
-        }
+        OnToggleUI?.Invoke(on);
     }
 
     /**
@@ -85,11 +70,7 @@ public class TogglesManager : MonoBehaviour {
      * @param on - Whether the path should be visible or not.
      */
     public void SetPathVisibility(bool on) {
-        if (on) {
-            OnTogglePathOn?.Invoke();
-        } else {
-            OnTogglePathOff?.Invoke();
-        }
+        OnTogglePath?.Invoke(on);
     }
 
     /**

@@ -34,8 +34,6 @@ public class WhaleConnector : MonoBehaviour {
         ControlHints.OnUnstick += Reset;
         
         // attach whale pause/play to scrubber btns
-
-// Maybe could be 1 event, but not a huge deal
         Scrubber.OnPause += PauseWhale;
         Scrubber.OnPlay += PlayWhale;
     }
@@ -54,7 +52,15 @@ public class WhaleConnector : MonoBehaviour {
             }
         }
     }
-    
+
+    private void OnDestroy() {
+        // unsub
+        Scrubber.OnRestart -= Reset;
+        ControlHints.OnUnstick -= Reset;
+        Scrubber.OnPause -= PauseWhale;
+        Scrubber.OnPlay -= PlayWhale;
+    }
+
     /**
      * Function which invokes the reset event.
      */

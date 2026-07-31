@@ -45,10 +45,8 @@ public class Toggles : MonoBehaviour {
     [SerializeField] private Toggle[] toggles;
     
     // events
-    public delegate void ToggleOnEvent(GameObject obj);
-    public static event ToggleOnEvent OnToggleOn;
-    public delegate void ToggleOffEvent(GameObject obj);
-    public static event ToggleOffEvent OnToggleOff;
+    public delegate void ToggleEvent(bool on, GameObject obj);
+    public static event ToggleEvent OnToggle;
     
     void Awake() {
         // get refs
@@ -83,11 +81,7 @@ public class Toggles : MonoBehaviour {
      */
     private void Toggle(int x) {
         toggles[x].on = !toggles[x].on;
-        if (toggles[x].on) {
-            OnToggleOn?.Invoke(toggles[x].btn.gameObject);
-        } else {
-            OnToggleOff?.Invoke(toggles[x].btn.gameObject);
-        }
+        OnToggle?.Invoke(toggles[x].on, toggles[x].btn.gameObject);
         
         toggles[x].GetBtnImage().sprite = toggles[x].on ? toggles[x].GetSpriteOn() : toggles[x].GetSpriteOff();
     }
