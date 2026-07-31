@@ -50,7 +50,10 @@ public class FlukeWaveAmplitudeLookUp{
 
     private string hashName(string phase, float speed, bool mouthOpen){
         // hash is combo phase speed mouthOpen
-        string output = phase + "_" + speed + "_" + mouthOpen;
+
+         string cleanPhase =  Regex.Replace(phase, "[^a-zA-Z0-9]", ""); 
+
+        string output = cleanPhase + "_" + speed + "_" + mouthOpen;
         return output;        
     }
 
@@ -59,9 +62,8 @@ public class FlukeWaveAmplitudeLookUp{
         double[] output= new double[2];
 
         float clampedSpeed = Mathf.Clamp(speed,minSpeed,maxSpeed);
-        string cleanPhase =  Regex.Replace(phase, "[^a-zA-Z0-9]", ""); 
-
-        string hashedName = hashName(cleanPhase,clampedSpeed,mouthOpen);
+       
+        string hashedName = hashName(phase,clampedSpeed,mouthOpen);
 
         FlukeWaveAmplitudeInstance foundInstance = lookUpTable[hashedName];
 
