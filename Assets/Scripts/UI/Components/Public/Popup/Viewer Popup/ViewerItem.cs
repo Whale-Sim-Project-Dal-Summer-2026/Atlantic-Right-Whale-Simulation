@@ -15,6 +15,7 @@ public class ViewerItem : MonoBehaviour {
     // content
     [Header("Content")]
     [SerializeField] private Texture image;
+    [TextArea]
     [SerializeField] private String text;
     // refs
     [Header("References")]

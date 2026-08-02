@@ -471,11 +471,11 @@ MonoBehaviour:
     <RigidBody>k__BackingField: {fileID: 133075433714662398}
     m_mass:
       m_defaultToggle: 1
-      m_defaultValue: 18298.727
+      m_defaultValue: 1
       m_userValue: 5
     m_inertiaDiagonal:
       m_defaultToggle: 1
-      m_defaultValue: {x: 27369.732, y: 12662.799, z: 27369.732}
+      m_defaultValue: {x: 1, y: 1, z: 1}
       m_userValue: {x: 1, y: 1, z: 1}
     m_inertiaOffDiagonal:
       m_defaultToggle: 1
@@ -544,6 +544,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6426e986cb9dfcd4983b61b50081362f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ViewerItem
-  image: {fileID: 2800000, guid: aa0676e890382b34dbf6dc19294c2340, type: 3}
-  text: Buoy
+  image: {fileID: 2800000, guid: c96e09024ede1144db4b26a65498db68, type: 3}
+  text: Fish harvester coiling rope with a buoy
   collider: {fileID: 2926921820154068864}

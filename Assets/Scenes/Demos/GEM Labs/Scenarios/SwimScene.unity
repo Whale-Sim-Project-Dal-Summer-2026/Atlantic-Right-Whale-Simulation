@@ -13328,7 +13328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ViewerItem
   image: {fileID: 2800000, guid: aa0676e890382b34dbf6dc19294c2340, type: 3}
-  text: North Atlantic Right Whale
+  text: The North Atlantic Right Whale!
   collider: {fileID: 6824787337333441231}
 --- !u!65 &6824787337333441231
 BoxCollider:
