@@ -23,14 +23,22 @@ public class TogglesManager : MonoBehaviour {
     [SerializeField] private WhaleTrail whaleTrail;
     
     // events
-
-    // dont need 2 events, have 1 event, and pass either true or false into them
     public delegate void ToggleUIEvent(bool on);
     public static event ToggleUIEvent OnToggleUI;
     public delegate void TogglePathEvent(bool on);
     public static event TogglePathEvent OnTogglePath;
+    
+    // vars
+    private RectTransform toggleUIRect;
+    private Vector3 ogToggleUIPos;
+    private Vector3 newToggleUIPos;
 
     void Awake() {
+        // get init pos
+        toggleUIRect = toggleUIBtn.gameObject.GetComponent<RectTransform>();
+        ogToggleUIPos = toggleUIRect.transform.localPosition;
+        newToggleUIPos =  new Vector3(393.3f, ogToggleUIPos.y, ogToggleUIPos.z);
+        
         // add to events
         Toggles.OnToggle += ToggleEvent;
     }
@@ -44,6 +52,7 @@ public class TogglesManager : MonoBehaviour {
     //  should likely just pass a gameobject into this
     private void ToggleEvent(bool on, GameObject obj) {
         if (toggleUIBtn && obj == toggleUIBtn.gameObject) {
+            toggleUIRect.transform.localPosition = on ? ogToggleUIPos : newToggleUIPos;
             SetUIVisibility(on);
         }
         if (toggleDragBtn && obj == toggleDragBtn.gameObject) {
