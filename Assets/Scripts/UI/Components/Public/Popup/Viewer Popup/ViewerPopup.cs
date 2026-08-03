@@ -34,7 +34,7 @@ public class ViewerPopup : MonoBehaviour {
      * @param img - Image to set.
      * @param txt - Text to set.
      */
-    public void ShowViewer(Texture img, String txt) {
+    private void ShowViewer(Texture img, String txt) {
         viewerImg.texture = img;
         viewerTxt.text = txt;
         viewerPopup.SetPopupVisibility(true);

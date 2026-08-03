@@ -34,7 +34,7 @@ public class CameraController : MonoBehaviour{
     
     CameraState state;
     
-    public delegate void CamSwitchEvent(int index);
+    public delegate void CamSwitchEvent(int index); // TODO: should be passing CameraState or smth instead for uniformity 
 
     public static event CamSwitchEvent OnCamSwitch;
 

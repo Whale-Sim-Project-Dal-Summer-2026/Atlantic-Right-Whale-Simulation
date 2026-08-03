@@ -47,16 +47,14 @@ public class Scrubber : MonoBehaviour {
     [SerializeField] private Slider timeline;
     
     // vars
-    private String[] speedsLabel = {"0.25", "0.5", "0.75", "1", "1.5", "2", "3", "4", "5"}; // TODO: may be able to do this programmatically
+    private String[] speedsLabel = {"0.25", "0.5", "0.75", "1", "1.5", "2", "3", "4", "5"}; 
     private Color pinBtnColor;
     private Image pausePlayBtnImage;
     private Sprite pauseSprite;
     private Sprite playSprite;
     
     // states
-    
-    // I recommend using enums to keep track of state rather than bool's, I find its more explicit
-    private bool paused = false;
+    private bool paused;
     private bool pinned  = true;
     private float[] speeds = {0.25f, 0.5f, 0.75f, 1.0f, 1.5f, 2.0f, 3.0f, 4.0f, 5.0f};
     private int speedsInd = 3;
@@ -100,6 +98,7 @@ public class Scrubber : MonoBehaviour {
             });
         }
 
+        // cams btns
         if (cam1Btn) {
             cam1Btn.onClick.AddListener(() => {
                 OnCamSwitch?.Invoke(1);
@@ -115,17 +114,21 @@ public class Scrubber : MonoBehaviour {
                 OnCamSwitch?.Invoke(3);
             });
         }
+        
+        // playback btns
         if (pausePlayBtn) {
             pausePlayBtn.onClick.AddListener(() => SetPause(!paused));
         }
+        if (restartBtn) {
+            restartBtn.onClick.AddListener(Restart);
+        }
+        
+        // spd btns
         if (slowerBtn) {
             slowerBtn.onClick.AddListener(() => SetSpeed(speedsInd - 1));
         }
         if (fasterBtn) {
             fasterBtn.onClick.AddListener(() => SetSpeed(speedsInd + 1));
-        }
-        if (restartBtn) {
-            restartBtn.onClick.AddListener(Restart);
         }
     }
 
@@ -147,26 +150,25 @@ public class Scrubber : MonoBehaviour {
      * Set pause.
      * @param on - Whether pause is on or off.
      */
-    public void SetPause(bool on) {
+    private void SetPause(bool on) {
         paused = on;
         if (pausePlayBtnImage) {
             pausePlayBtnImage.sprite = paused ? pauseSprite : playSprite;
 
         }
-
         if (on) {
             OnPause?.Invoke();
         } else {
             OnPlay?.Invoke();
         }
     }
-    public void Pause() { // TODO
+    public void Pause() { 
         SetPause(true);
     }
-    public void Play() { // TODO
+    public void Play() { 
         SetPause(false);
     }
-    public void TogglePause() { // TODO
+    public void TogglePause() { 
         SetPause(!paused);
     }
 
@@ -271,7 +273,7 @@ public class Scrubber : MonoBehaviour {
     /**
      * Invoke the restart event.
      */
-    public void Restart() {
+    private void Restart() {
         pausePlayBtn.interactable = true;
         Play();
         OnRestart?.Invoke();

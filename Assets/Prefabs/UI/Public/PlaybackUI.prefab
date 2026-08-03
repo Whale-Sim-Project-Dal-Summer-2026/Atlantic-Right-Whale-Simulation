@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainUIManager
   scrubber: {fileID: 3375614894967582622}
-  toggles: {fileID: 1841583420093573899}
+  toggles: {fileID: 6675180784697699946}
   camController: {fileID: 0}
 --- !u!114 &2664028390671458319
 MonoBehaviour:
@@ -66,9 +66,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PublicUIManager
   scenariosBtn: {fileID: 5593500238905154061}
-  toggles: {fileID: 1841583420093573899}
   scrubber: {fileID: 3375614894967582622}
-  toggleUIBtn: {fileID: 2778622508971214981}
+  toggleUIBtnObj: {fileID: 2778622508971214981}
+  togglesManager: {fileID: 1841583420093573899}
 --- !u!114 &6965485243482777194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,9 +85,7 @@ MonoBehaviour:
   helpPopup: {fileID: 5094052710833034321}
   viewerPopup: {fileID: 3359876880226663978}
   scrubber: {fileID: 3375614894967582622}
-  publicUIManager: {fileID: 2664028390671458319}
   camController: {fileID: 0}
-  togglesManager: {fileID: 1841583420093573899}
   helpBtn: {fileID: 5746595958871154585}
   closeHelpBtn: {fileID: 4371093943031257054}
   scenariosBtn: {fileID: 5593500238905154061}
@@ -1739,3 +1737,14 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 9122529411013426640, guid: d048ea5d3e60e574fbc50183f4ebffab, type: 3}
   m_PrefabInstance: {fileID: 6347289697477227861}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6675180784697699946 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 339207957768772415, guid: d048ea5d3e60e574fbc50183f4ebffab, type: 3}
+  m_PrefabInstance: {fileID: 6347289697477227861}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e853b27373204792a2453c41aa2cdc6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Toggles

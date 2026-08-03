@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainUIManager
   scrubber: {fileID: 0}
-  toggles: {fileID: 1952269297791087791}
+  toggles: {fileID: 6789815557869498830}
   camController: {fileID: 0}
 --- !u!114 &5172624810789402756
 MonoBehaviour:
@@ -255,9 +255,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PublicUIManager
   scenariosBtn: {fileID: 8017263789704846574}
-  toggles: {fileID: 1952269297791087791}
   scrubber: {fileID: 0}
-  toggleUIBtn: {fileID: 2600515127747958561}
+  toggleUIBtnObj: {fileID: 2600515127747958561}
+  togglesManager: {fileID: 1952269297791087791}
 --- !u!114 &923358219229469170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,9 +274,7 @@ MonoBehaviour:
   helpPopup: {fileID: 2972206055707709199}
   viewerPopup: {fileID: 4114817826868559657}
   scrubber: {fileID: 0}
-  publicUIManager: {fileID: 5172624810789402756}
   camController: {fileID: 0}
-  togglesManager: {fileID: 1952269297791087791}
   helpBtn: {fileID: 2328029820574581959}
   closeHelpBtn: {fileID: 5992020141277564032}
   scenariosBtn: {fileID: 8017263789704846574}
@@ -1511,6 +1509,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 353086273014804010}
     m_Modifications:
+    - target: {fileID: 258501777564101422, guid: 1a513e6f387aa7e4d873b54be62188e3, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 258501777564101422, guid: 1a513e6f387aa7e4d873b54be62188e3, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4076052854096998951, guid: 1a513e6f387aa7e4d873b54be62188e3, type: 3}
       propertyPath: m_Name
       value: CyclingFunFactsContainer
@@ -1694,6 +1700,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 9122529411013426640, guid: d048ea5d3e60e574fbc50183f4ebffab, type: 3}
   m_PrefabInstance: {fileID: 6525538364143201009}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6789815557869498830 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 339207957768772415, guid: d048ea5d3e60e574fbc50183f4ebffab, type: 3}
+  m_PrefabInstance: {fileID: 6525538364143201009}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e853b27373204792a2453c41aa2cdc6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Toggles
 --- !u!1001 &8188828918359485540
 PrefabInstance:
   m_ObjectHideFlags: 0

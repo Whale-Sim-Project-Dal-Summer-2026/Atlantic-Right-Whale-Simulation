@@ -6,7 +6,6 @@
  * @author Mars Semenova 
  */
 
-using agxSDK;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,11 +15,19 @@ public class PublicUIManager : MonoBehaviour {
     [Header("Scenarios Button")]
     [SerializeField] private Button scenariosBtn;
     [Header("Idle Mode Dependencies")]
-    [SerializeField] private TogglesManager toggles;
     [SerializeField] private Scrubber scrubber;
-    [SerializeField] private GameObject toggleUIBtn;
+    [SerializeField] private GameObject toggleUIBtnObj;
+    [SerializeField] private TogglesManager togglesManager;
 
+    // vars
+    private Button toggleUIBtn;
+    
     void Awake() {
+        // get ref
+        if (toggleUIBtnObj) {
+            toggleUIBtn = toggleUIBtnObj.GetComponent<Button>();
+        }
+        
         // scenario btn functionality
         scenariosBtn.onClick.AddListener(() => {
             if (SceneSwitcher.Instance != null) {
@@ -32,13 +39,18 @@ public class PublicUIManager : MonoBehaviour {
         IdleUI.OnIdle += IdleMode;
     }
 
+    void OnDestroy() {
+        // unsub
+        IdleUI.OnIdle -= IdleMode;
+    }
+
     /**
      * Idle mode functionality.
      * @param on - Whether idle mode is on or off.
      */
     private void IdleMode(bool on) {
-        if (toggles) {
-            toggles.SetUIVisibility(!on);
+        if (toggleUIBtnObj && togglesManager.IsUIVisible() == on) {
+            toggleUIBtn.onClick.Invoke();
         }
 
         if (scrubber) {
@@ -50,6 +62,7 @@ public class PublicUIManager : MonoBehaviour {
             }
             scrubber.gameObject.SetActive(!on);
         }
-        toggleUIBtn.SetActive(!on);
+        
+        toggleUIBtnObj.SetActive(!on);
     }
 }

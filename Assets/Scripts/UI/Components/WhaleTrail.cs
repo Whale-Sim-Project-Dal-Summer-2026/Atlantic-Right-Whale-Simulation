@@ -25,7 +25,6 @@ public class WhaleTrail : MonoBehaviour {
     private MeshRenderer whaleTrailMesh;
     private Vector3 whalePos;
     private int liveKnot = 1;
-    private bool isVisible = true;
     
     void Awake() {
         whaleTrailMesh = GetComponent<MeshRenderer>();
@@ -92,17 +91,8 @@ public class WhaleTrail : MonoBehaviour {
      * @param on - Whether to set it on or off.
      */
     private void SetPathVisibility(bool on) {
-        isVisible = on;
         if (whaleTrailMesh) { 
             whaleTrailMesh.enabled = on;
         }
-    }
-
-    /**
-     * Check whether the path is visible.
-     * @return Whether the path is visible.
-     */
-    public bool IsVisible() {
-        return isVisible;
     }
 }

@@ -6,7 +6,6 @@
  * @author Mars Semenova
  */
 
-using System;
 using UnityEngine;
 
 public class ToggleItemVisibilityOff : MonoBehaviour {

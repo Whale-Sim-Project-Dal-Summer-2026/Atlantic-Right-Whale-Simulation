@@ -5,7 +5,6 @@
  * @author Mars Semenova 
  */
 
-using System;
 using UnityEngine;
 
 public class SimulationUIManager : MonoBehaviour {
@@ -13,7 +12,7 @@ public class SimulationUIManager : MonoBehaviour {
     // scripts
     [Header("Scripts")]
     [SerializeField] private Scrubber scrubber;
-    [SerializeField] private TogglesManager toggles;
+    [SerializeField] private Toggles toggles;
     [SerializeField] private CameraController camController;
     
     // events

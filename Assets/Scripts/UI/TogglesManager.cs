@@ -4,7 +4,6 @@
  * @author Mars Semenova 
  */
 
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,7 +31,7 @@ public class TogglesManager : MonoBehaviour {
     private RectTransform toggleUIRect;
     private Vector3 ogToggleUIPos;
     private Vector3 newToggleUIPos;
-    private bool isUIOn = true; 
+    private bool isUIOn = true;
 
     void Awake() {
         // get init pos
@@ -42,6 +41,11 @@ public class TogglesManager : MonoBehaviour {
         
         // add to events
         Toggles.OnToggle += ToggleEvent;
+    }
+
+    private void OnDestroy() {
+        // unsub
+        Toggles.OnToggle -= ToggleEvent;
     }
 
     /**
@@ -70,34 +74,25 @@ public class TogglesManager : MonoBehaviour {
      * Toggle UI visibility.
      * @param on - Whether the UI should be visible or not.
      */
-    public void SetUIVisibility(bool on) {
+    private void SetUIVisibility(bool on) {
         isUIOn = on;
         toggleUIRect.transform.localPosition = on ? ogToggleUIPos : newToggleUIPos;
         OnToggleUI?.Invoke(on);
     }
 
     /**
-     * Toggle UI visibility.
+     * Check whether the UI is visible
+     * @return Whether the UI is visible.
      */
-    public void ToggleUIVisibility() {
-        SetUIVisibility(!isUIOn);
+    public bool IsUIVisible() {
+        return isUIOn;
     }
-
+    
     /**
      * Toggle path visibility,
      * @param on - Whether the path should be visible or not.
      */
-    public void SetPathVisibility(bool on) {
+    private void SetPathVisibility(bool on) {
         OnTogglePath?.Invoke(on);
-    }
-
-    /**
-     * Set the interactivity of buttons. Connection to generic toggles functionality.
-     * @param on - Whether the buttons should be interactive or not.
-     */
-    public void SetTogglesInteractivity(bool on) {
-        if (toggles) {
-            toggles.SetTogglesInteractivity(on);
-        }
     }
 }

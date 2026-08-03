@@ -46,21 +46,11 @@ public class HelpPopup : MonoBehaviour {
 
     /**
      * Camera event subscriber which sets the corresponding
-     * control help UI based on camera.
+     * controls help UI based on the camera.
      * @param currCam - Current active camera.
      */
-
-    //  TODO: I would use a state machine using an enum
-    //  It would work like the following: 
-    //  set all hints to false
-    // switch (currcam)
-    // case: 1
-    //  controlHintsFollowCam.SetActive(true);
-    //  break;
-
-    // this would allow you to have ode that is easier to read and is less redundant
     private void UpdateControlsHelp(int currCam) {
-        if (currCam == 1) {
+        if (currCam == 1) { 
             controlsHelp.texture = followCamControls;
             helpText.text = followCamHelp;
         }

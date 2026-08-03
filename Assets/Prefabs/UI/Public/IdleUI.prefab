@@ -47,9 +47,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IdleMode
   idleUI: {fileID: 5446064563111558701}
   idleTime: 300
-  toggles: {fileID: 0}
-  scrubber: {fileID: 0}
-  toggleUIBtn: {fileID: 0}
 --- !u!1 &3965135272615244594
 GameObject:
   m_ObjectHideFlags: 0
@@ -116,8 +113,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: jkdfaslfha sldkfhsdklf lasjkdf sdklf asdkf hsdklf jhsadklf hasdklfh sdkf
-    asdkf asdklf sdklf aksdf askldf hasdklf k
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 14fca0116cbaf454f95408a68ced3f3b, type: 2}
   m_sharedMaterial: {fileID: -5018882589952362811, guid: 14fca0116cbaf454f95408a68ced3f3b, type: 2}
@@ -202,7 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CyclingText
   repeatRate: 15
-  textFile: {fileID: 4900000, guid: fa918c777094466c98c6f231b532a860, type: 3}
+  textFile: {fileID: 4900000, guid: 7d0594427f79fc04590348cbd7ba7e30, type: 3}
 --- !u!1 &5446064563111558701
 GameObject:
   m_ObjectHideFlags: 0

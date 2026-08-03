@@ -27,7 +27,6 @@ public class WhaleConnector : MonoBehaviour {
     private float currentTimeStepDelta = 0.004f; 
     
     void Awake() {
-
         // attach reset function to events
         Scrubber.OnRestart += Reset;
         ControlHints.OnUnstick += Reset;

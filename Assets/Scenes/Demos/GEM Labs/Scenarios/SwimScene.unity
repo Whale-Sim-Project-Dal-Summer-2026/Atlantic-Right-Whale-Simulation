@@ -11335,6 +11335,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 896997972095330808, guid: 872f9a361f2c03b42ac50a90ed5481df, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 896997972095330808, guid: 872f9a361f2c03b42ac50a90ed5481df, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1031586640933265698, guid: 872f9a361f2c03b42ac50a90ed5481df, type: 3}
       propertyPath: camController
       value: 

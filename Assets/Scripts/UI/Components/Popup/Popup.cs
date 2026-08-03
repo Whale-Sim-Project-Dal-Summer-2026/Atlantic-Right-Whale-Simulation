@@ -4,7 +4,6 @@
  * @author Mars Semenova
  */
 
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,8 +18,8 @@ public class Popup : MonoBehaviour {
     public static event PopupEvent OnPopup;
 
     // vars
-    private bool open = false;
-    private bool invoked = false;
+    private bool open;
+    private bool invoked;
 
     void Awake() {
         // set up btns

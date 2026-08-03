@@ -21,8 +21,7 @@ public class IdleUI : MonoBehaviour {
     // vars
     private float lastInput;
     private double lastMouseInput;
-    private bool forceIdle = false;
-    private bool isIdle = false;
+    private bool isIdle;
     
     void Awake() {
         lastInput = Time.time;
@@ -38,14 +37,9 @@ public class IdleUI : MonoBehaviour {
             lastInput = Time.time;
             lastMouseInput = Mouse.current.lastUpdateTime;
         }
-
-        // force idle (largely for dev purposes)
-        if (Keyboard.current.f10Key.wasPressedThisFrame) { // TODO: nuke?
-            forceIdle = !forceIdle;
-        }
         
         // go to idle mode
-        if (!isIdle && (IsIdle() || forceIdle)) {
+        if (!isIdle && IsIdle()) {
             IdleMode(true);
             isIdle = true;
         }
@@ -63,7 +57,7 @@ public class IdleUI : MonoBehaviour {
      * @return Whether the idle mode is on.
      */
     private bool IsIdle(){
-        return (Time.time - lastInput > idleTime) || forceIdle;
+        return (Time.time - lastInput) > idleTime;
     }
 
     /**

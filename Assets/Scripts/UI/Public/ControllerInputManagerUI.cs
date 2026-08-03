@@ -5,7 +5,6 @@
  * @author Mars Semenova, Dany Diab
  */
 
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -27,9 +26,7 @@ public class ControllerInputManagerUI : MonoBehaviour {
     [SerializeField] private Popup helpPopup;
     [SerializeField] private Popup viewerPopup;
     [SerializeField] private Scrubber scrubber;
-    [SerializeField] private PublicUIManager publicUIManager;
     [SerializeField] private CameraController camController;
-    [SerializeField] private TogglesManager togglesManager;
     // btns
     [Header("Buttons")] 
     [SerializeField] private Button helpBtn;
@@ -52,7 +49,6 @@ public class ControllerInputManagerUI : MonoBehaviour {
     private InputAction toggleUIInput;
     // sticks
     private InputAction camLockInput;
-    // bot implementation in CameraController
     
     // vars
     private double lastPressTime;
@@ -157,8 +153,7 @@ public class ControllerInputManagerUI : MonoBehaviour {
             }
         }
        
-        // sticks
-        // R
+        // R stick
         interaction = (camLockInput?.ReadValue<float>() ?? 0f) > .5f;
         if (interaction && PressAllowed() && !whaleController && cam == CameraState.ORBIT && currState != InputState.POPUP) { // rot lock in cam 1
             camController.lockUnLockCamera();
@@ -170,11 +165,12 @@ public class ControllerInputManagerUI : MonoBehaviour {
         // unsub
         CameraController.OnCamSwitch -= UpdateCam;
         PopupManager.OnHelpPopup -= SetStatePopup;
+        TogglesManager.OnToggleUI -= SetStateNoUI;
     }
 
     /**
      * Camera event subscriber which sets the corresponding
-     * state based on camera.
+     * state based on the camera.
      * @param currCam - Current active camera.
      */
     private void UpdateCam(int currCam) {

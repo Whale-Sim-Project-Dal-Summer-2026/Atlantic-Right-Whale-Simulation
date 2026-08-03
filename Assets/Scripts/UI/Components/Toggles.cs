@@ -15,7 +15,6 @@ struct Toggle {
     public bool on;
     private Sprite spriteOff;
 
-    // I personally advise against the use of getters/setters, it often means that one class is dependant on another, which makes the code less modular
     public void SetSpriteOff (Sprite s) {
         spriteOff = s; 
     }
@@ -82,7 +81,6 @@ public class Toggles : MonoBehaviour {
     private void Toggle(int x) {
         toggles[x].on = !toggles[x].on;
         OnToggle?.Invoke(toggles[x].on, toggles[x].btn.gameObject);
-        
         toggles[x].GetBtnImage().sprite = toggles[x].on ? toggles[x].GetSpriteOn() : toggles[x].GetSpriteOff();
     }
 

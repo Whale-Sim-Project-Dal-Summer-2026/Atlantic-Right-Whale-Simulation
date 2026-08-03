@@ -24,11 +24,11 @@ public class TelemetryUI : MonoBehaviour {
     
     // vars
     private RectTransform pitchTextureRectTransform;
-    private int counter = 0;
+    private int counter;
     private String speed = "0 m/s";
-    private int heading = 0;
-    private int roll = 0;
-    private int pitch = 0;
+    private int heading;
+    private int roll;
+    private int pitch;
     
     void Awake() {
         pitchTextureRectTransform = pitchTexture.GetComponent<RectTransform>();
@@ -57,7 +57,6 @@ public class TelemetryUI : MonoBehaviour {
         float offsetLen = (maxOffsetLen-20) * (Math.Abs(pitch) / 90.0f);
         Vector3 offset = new Vector3(-60, -maxOffsetLen + (pitch < 0 ? -offsetLen : offsetLen), 0);
         pitchText.transform.position = pitchCenter + offset;
-        
     }
 
     /**
