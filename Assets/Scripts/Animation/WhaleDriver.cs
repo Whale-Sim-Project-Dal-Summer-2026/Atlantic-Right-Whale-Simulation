@@ -158,11 +158,9 @@ public class WhaleDriver : MonoBehaviour
         dataSource.LoadSource(animationSettings, startState, blueprint);
              int totalTimeStes = dataSource.GetTotalTimesteps();
         this.totalTimesteps = totalTimeStes;
-
-        WhaleConnector.OnReset += OnResetEvent;
     }
 
-    private void OnResetEvent() { 
+    public void OnResetEvent() { 
         jumpToTimestep = 0;
         PauseTime = StartingPauseTime;
     }
@@ -177,11 +175,6 @@ public class WhaleDriver : MonoBehaviour
 
     void OnDisable(){
         controls.Disable();
-    }
-    
-    void OnDestroy() {
-        // unsub
-        WhaleConnector.OnReset -= OnResetEvent;
     }
 
     void updateWhaleState() {

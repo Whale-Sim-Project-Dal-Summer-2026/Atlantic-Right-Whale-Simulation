@@ -17,6 +17,7 @@ public class WhaleConnector : MonoBehaviour {
     [SerializeField] private WhaleDriver whaleDriver; 
     [SerializeField] private Scrubber scrubber;
     [SerializeField] private TelemetryUI telemetry;
+    [SerializeField] private ManualWhaleController whaleController;
     
     // event
     public delegate void ResetEvent();
@@ -25,8 +26,6 @@ public class WhaleConnector : MonoBehaviour {
     // vars
     private float currentTimeStepDelta = 0.004f; 
     
-    // I like this!
-
     void Awake() {
 
         // attach reset function to events
@@ -66,6 +65,12 @@ public class WhaleConnector : MonoBehaviour {
      */
     public void Reset() {
         OnReset?.Invoke();
+        if (whaleController) {
+            whaleController.resetWhalePosition();
+        }
+        if (whaleDriver) {
+            whaleDriver.OnResetEvent();
+        }
     }
     
     /**

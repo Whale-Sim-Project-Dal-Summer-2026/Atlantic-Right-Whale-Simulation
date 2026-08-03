@@ -2528,6 +2528,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1031586640933265698, guid: 872f9a361f2c03b42ac50a90ed5481df, type: 3}
+      propertyPath: camController
+      value: 
+      objectReference: {fileID: 1205938766}
     - target: {fileID: 1064458832359647688, guid: 872f9a361f2c03b42ac50a90ed5481df, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2932,6 +2936,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6965485243482777194, guid: 872f9a361f2c03b42ac50a90ed5481df, type: 3}
+      propertyPath: camController
+      value: 
+      objectReference: {fileID: 1205938766}
     - target: {fileID: 6967622870340560152, guid: 872f9a361f2c03b42ac50a90ed5481df, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -3140,6 +3148,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8800552339287443370, guid: 872f9a361f2c03b42ac50a90ed5481df, type: 3}
+      propertyPath: camController
+      value: 
+      objectReference: {fileID: 1205938766}
     - target: {fileID: 8993460970159613812, guid: 872f9a361f2c03b42ac50a90ed5481df, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -12189,7 +12201,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4306462175010258995, guid: 0fdbabdf737e52340b03ba4a03baedf8, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

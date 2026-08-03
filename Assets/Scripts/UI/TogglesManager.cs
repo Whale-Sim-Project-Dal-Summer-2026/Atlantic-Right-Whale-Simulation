@@ -32,6 +32,7 @@ public class TogglesManager : MonoBehaviour {
     private RectTransform toggleUIRect;
     private Vector3 ogToggleUIPos;
     private Vector3 newToggleUIPos;
+    private bool isUIOn = true; 
 
     void Awake() {
         // get init pos
@@ -52,7 +53,6 @@ public class TogglesManager : MonoBehaviour {
     //  should likely just pass a gameobject into this
     private void ToggleEvent(bool on, GameObject obj) {
         if (toggleUIBtn && obj == toggleUIBtn.gameObject) {
-            toggleUIRect.transform.localPosition = on ? ogToggleUIPos : newToggleUIPos;
             SetUIVisibility(on);
         }
         if (toggleDragBtn && obj == toggleDragBtn.gameObject) {
@@ -71,7 +71,16 @@ public class TogglesManager : MonoBehaviour {
      * @param on - Whether the UI should be visible or not.
      */
     public void SetUIVisibility(bool on) {
+        isUIOn = on;
+        toggleUIRect.transform.localPosition = on ? ogToggleUIPos : newToggleUIPos;
         OnToggleUI?.Invoke(on);
+    }
+
+    /**
+     * Toggle UI visibility.
+     */
+    public void ToggleUIVisibility() {
+        SetUIVisibility(!isUIOn);
     }
 
     /**

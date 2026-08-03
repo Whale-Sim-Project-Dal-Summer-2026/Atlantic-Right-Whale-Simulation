@@ -14,21 +14,20 @@ public class SimulationUIManager : MonoBehaviour {
     [Header("Scripts")]
     [SerializeField] private Scrubber scrubber;
     [SerializeField] private TogglesManager toggles;
+    [SerializeField] private CameraController camController;
     
     // events
-
-    // use only 1 event for these 2, pass bool into it to say wheter it should be on or off
     public delegate void ToggleInteractivityEvent(bool on);
     public static event ToggleInteractivityEvent OnToggleInteractivity;
-    
-    void Awake() {
-        // toggle UI interactivity when help popup is toggled
-        PopupManager.OnHelpPopup += SetUIInteractivityOnHelpPopup;
+
+    void Start() {
+        // sub
+        Scrubber.OnCamSwitch += camController.changeToCam;
     }
 
     private void OnDestroy() {
         // unsub
-        PopupManager.OnHelpPopup -= SetUIInteractivityOnHelpPopup;
+        Scrubber.OnCamSwitch -= camController.changeToCam;
     }
 
     /**
@@ -44,14 +43,5 @@ public class SimulationUIManager : MonoBehaviour {
         if (toggles) {
             toggles.SetTogglesInteractivity(on);
         }
-    }
-    
-    /**
-     * A method which inverts the bool passed by the OnHelpPopup event
-     * before calling the set UI interactivity function.
-     * @param on - Whether the popup is on or off.
-     */
-    private void SetUIInteractivityOnHelpPopup(bool on) { 
-        SetUIInteractivity(!on);
     }
 }

@@ -45,7 +45,7 @@ public class Popup : MonoBehaviour {
     }
 
     /**
-     * Implements popup functionality on popup btn press =.
+     * Implements popup functionality on popup btn press.
      */
     public void PopupBtnPressed(){
         SetPopupVisibility(!open);

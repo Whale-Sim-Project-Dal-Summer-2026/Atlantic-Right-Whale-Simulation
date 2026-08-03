@@ -44,16 +44,6 @@ public class ControlHints : MonoBehaviour {
      * hints UI based on camera.
      * @param currCam - Current active camera.
      */
-
-    // TODO: I would use a state machine using an enum
-    //  It would work like the following: 
-    //  set all hints to false
-    // switch (currcam)
-    // case: 1
-    //  controlHintsFollowCam.SetActive(true);
-    //  break;
-
-    // this would allow you to have ode that is easier to read and is less redundant
     private void UpdateControlHints(int currCam) {
         if (controlHintsFollowCam) {
             controlHintsFollowCam.SetActive(false);

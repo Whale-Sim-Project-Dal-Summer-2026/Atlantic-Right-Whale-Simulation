@@ -13283,6 +13283,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 36922868967594219, guid: fdfda3911e159fe4c82b140d0728b028, type: 3}
+      propertyPath: camController
+      value: 
+      objectReference: {fileID: 1205938766}
+    - target: {fileID: 36922868967594219, guid: fdfda3911e159fe4c82b140d0728b028, type: 3}
+      propertyPath: whaleController
+      value: 
+      objectReference: {fileID: 6824787337333441233}
     - target: {fileID: 92734363402911726, guid: fdfda3911e159fe4c82b140d0728b028, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -13347,6 +13355,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 923358219229469170, guid: fdfda3911e159fe4c82b140d0728b028, type: 3}
+      propertyPath: camController
+      value: 
+      objectReference: {fileID: 1205938766}
     - target: {fileID: 1102135860393067041, guid: fdfda3911e159fe4c82b140d0728b028, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -13643,6 +13655,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5096721975378707492, guid: fdfda3911e159fe4c82b140d0728b028, type: 3}
+      propertyPath: camController
+      value: 
+      objectReference: {fileID: 1205938766}
     - target: {fileID: 5118775536667444479, guid: fdfda3911e159fe4c82b140d0728b028, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -13751,6 +13767,10 @@ PrefabInstance:
       propertyPath: whaleDriver
       value: 
       objectReference: {fileID: 6824787337333441229}
+    - target: {fileID: 6292168261108798755, guid: fdfda3911e159fe4c82b140d0728b028, type: 3}
+      propertyPath: whaleController
+      value: 
+      objectReference: {fileID: 6824787337333441233}
     - target: {fileID: 6438090799560482649, guid: fdfda3911e159fe4c82b140d0728b028, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -15560,6 +15580,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f8447f4ed0f4104bf044794bc2def67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ToggleItemInteractivity
+--- !u!114 &6824787337333441233 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4298231024211797830, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
+  m_PrefabInstance: {fileID: 6824787337333441228}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfdcae53fb749754ea0f70fcb0459bce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ManualWhaleController
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -14,9 +14,10 @@ public class PopupManager : MonoBehaviour {
     [SerializeField] private GameObject helpPopup;
     [SerializeField] private Scrubber scrubber;
     [SerializeField] private SimulationUIManager simUIManager;
+    [SerializeField] private CameraController camController;
+    [SerializeField] private ManualWhaleController whaleController;
     
     // events
-    // make this 1 event
     public delegate void HelpPopupEvent(bool on); 
     public static event HelpPopupEvent OnHelpPopup;
     
@@ -42,6 +43,10 @@ public class PopupManager : MonoBehaviour {
                 scrubber.Pause();
             }
             simUIManager.SetUIInteractivity(!on);
+            camController.SetForceLock(on);
+            if (whaleController) {
+                whaleController.SetControlsStatus(!on);
+            } 
         }
     }
 }

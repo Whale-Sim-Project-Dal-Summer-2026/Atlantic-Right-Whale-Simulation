@@ -19,9 +19,6 @@ public class PublicUIManager : MonoBehaviour {
     [SerializeField] private TogglesManager toggles;
     [SerializeField] private Scrubber scrubber;
     [SerializeField] private GameObject toggleUIBtn;
-    
-    // vars
-    private bool allowInput = true; // TODO
 
     void Awake() {
         // scenario btn functionality
@@ -33,14 +30,6 @@ public class PublicUIManager : MonoBehaviour {
         
         // set up idle listener
         IdleUI.OnIdle += IdleMode;
-    }
-
-    /**
-     * Function to determine whether input is allowed.
-     * @return Whether input is allowed.
-     */
-    public bool IsInputAllowed() { // TODO
-        return allowInput;
     }
 
     /**

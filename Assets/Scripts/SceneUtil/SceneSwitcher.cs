@@ -9,8 +9,6 @@ public class SceneSwitcher : MonoBehaviour
 
     [SerializeField] List<string> scenes;
 
-    InputAction openMenuAction;
-
     bool openMenu;
     string currScene;
 
@@ -27,24 +25,7 @@ public class SceneSwitcher : MonoBehaviour
 
     void Start()
     {
-        openMenuAction = InputSystem.actions.FindAction("OpenMenu"); // TODO
         currScene = SceneManager.GetActiveScene().name;
-    }
-
-    void checkForMenuPress() {
-        openMenu = (openMenuAction?.ReadValue<float>() ?? 0.0f) == 1.0f; // TODO
-    }
-
-    void Update()
-    {
-        if (Keyboard.current.escapeKey.isPressed) {
-            Application.Quit(); // TODO
-        }
-        checkForMenuPress(); // TODO
-
-        if (openMenu) {
-            changeToScenarios();
-        }
     }
 
     void changeScene(string scene)

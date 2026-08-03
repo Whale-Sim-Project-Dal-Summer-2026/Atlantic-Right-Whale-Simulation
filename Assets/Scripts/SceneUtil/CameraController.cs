@@ -4,6 +4,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
+public enum CameraState {
+    ORBIT,
+    FREE,
+    POV,
+}
+
 public class CameraController : MonoBehaviour{
     [Header("Free Cam")]
     public float moveSpeed = 10f;
@@ -28,37 +34,13 @@ public class CameraController : MonoBehaviour{
     
     CameraState state;
     
-    InputAction Cam1;
-    InputAction Cam2;
-    InputAction Cam3;
-    InputAction CamLock;
-
-    float inputBuffer = 200;
-    double lastTimePressed;
-    
     public delegate void CamSwitchEvent(int index);
 
     public static event CamSwitchEvent OnCamSwitch;
 
     bool forceLock;
 
-    enum CameraState {
-        ORBIT,
-        FREE,
-        POV,
-    }
-
     void Awake() {
-
-
-        lastTimePressed = Time.realtimeSinceStartupAsDouble * 1000;
-
-        
-        Cam1 = InputSystem.actions.FindAction("Cam1");
-        Cam2 = InputSystem.actions.FindAction("Cam2");
-        Cam3 = InputSystem.actions.FindAction("Cam3");
-        CamLock = InputSystem.actions.FindAction("CamLock");
-    
         controls = new CameraControls();
 
         controls.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
@@ -73,48 +55,31 @@ public class CameraController : MonoBehaviour{
         controls.Player.Sprint.performed += ctx => sprinting = true;
         controls.Player.Sprint.canceled += ctx => sprinting = false;
     }
-
-
     
-
-    void OnEnable()
-    {
-        Scrubber.OnCamSwitch += changeToCam;
-        PopupManager.OnHelpPopup += SetForceLock;
+    void OnEnable() {
         controls.Enable();  
     } 
     void OnDisable(){
-        Scrubber.OnCamSwitch -= changeToCam;
-        PopupManager.OnHelpPopup -= SetForceLock;
         controls.Disable();
     }
 
     void Start(){
-
         // starting pitch and yaw based on the current state of camera
         yaw   = transform.eulerAngles.y;
         pitch = transform.eulerAngles.x;
-
     }
 
-    void SetForceLock(bool on){
+    public void SetForceLock(bool on){
         forceLock = on;
     }
 
-    void lockUnLockCamera() {
-        bool lockPressed = (CamLock?.ReadValue<float>() ?? 0f) > .5f;
-        if (!lockPressed) return;
-
-        double currTime = Time.realtimeSinceStartupAsDouble * 1000;
-        
-        if (currTime - lastTimePressed < inputBuffer) return;
-
-        lastTimePressed = currTime;
+   public void lockUnLockCamera() {
         rotationLocked = !rotationLocked;
     }
 
 
-    void changeToCam(int index) {
+    public void changeToCam(int index) {
+        rotationLocked = false;
         switch (index) {
             case 1:
                 state = CameraState.ORBIT;
@@ -129,22 +94,9 @@ public class CameraController : MonoBehaviour{
         
         OnCamSwitch?.Invoke(index);
     }
-    void changeCams() {
-        bool toCam1 = (Cam1?.ReadValue<float>() ?? 0f) == 1.0f;
-        bool toCam2 = (Cam2?.ReadValue<float>() ?? 0f) == 1.0f;
-        bool toCam3 = (Cam3?.ReadValue<float>() ?? 0f) == 1.0f;
-
-        if (toCam1) changeToCam(1);
-        if (toCam2) changeToCam(2);
-        if (toCam3) changeToCam(3);
-
-    }
 
     void Update() {
         if(forceLock) return;
-
-        changeCams();
-        lockUnLockCamera();
         
         switch (state) {
             case CameraState.ORBIT: {
@@ -169,7 +121,6 @@ public class CameraController : MonoBehaviour{
     }
 
     void UpdateFreeCam(){
-
         // rotate with look input 
         yaw += lookInput.x * sensitivity;
         pitch -= lookInput.y * sensitivity;
@@ -181,7 +132,7 @@ public class CameraController : MonoBehaviour{
         Vector3 move =  transform.forward * moveInput.y +
                         transform.right * moveInput.x +
                         transform.up * upDownInput.y;
-        transform.position += move * speed * Time.deltaTime;
+        transform.position += move * speed * Time.deltaTime; // TODO: use smth else bc time is set to 0 on pause 
     }
     void UpdateOrbit(){
         // If no target, do nothing

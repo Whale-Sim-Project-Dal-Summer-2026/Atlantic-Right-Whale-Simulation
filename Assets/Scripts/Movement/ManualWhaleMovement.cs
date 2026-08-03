@@ -53,7 +53,7 @@ public class ManualWhaleController : MonoBehaviour{
     float pitchNoiseDownCurrForce = 0.0f;
     float seaLevel;
 
-
+    private bool controlsEnabled = true;
 
     void Awake(){
         moveInput = InputSystem.actions.FindAction("Move");
@@ -65,31 +65,15 @@ public class ManualWhaleController : MonoBehaviour{
         controllerConnected = Gamepad.current != null;
 
         whaleInput.rb = rb.GetInitialized<AGXUnity.RigidBody>();
-
-
         whaleStartPos = rb.Native.getPosition();
-
-
-        if (!controllerConnected){
-            Debug.LogWarning("No Controller Detected!");
-        }
-
         speedAcceleration = 1f;
-
-
-        WhaleConnector.OnReset += resetWhalePosition;
     }
 
     void Start() {
        seaLevel = settings.SeaLevel; 
     }
 
-    private void OnDestroy() {
-        // unsub
-        WhaleConnector.OnReset -= resetWhalePosition;
-    }
-
-    void resetWhalePosition(){
+    public void resetWhalePosition(){
         rb.Native.setPosition(whaleStartPos);
         // maybe reset yaw pitch etc... here
     }
@@ -177,15 +161,21 @@ public class ManualWhaleController : MonoBehaviour{
 
     }
 
+    public void SetControlsStatus(bool on) {
+        controlsEnabled = on;
+    }
+    
     void Update()
     {
-        updateMoveInfo();
-        
-        readInputs();
+        if (controlsEnabled) {
+            updateMoveInfo();
+            
+            readInputs();
 
-        updateSpeed();
+            updateSpeed();
 
-        updateYawPitch();
+            updateYawPitch();
+        }
 
     }
 }

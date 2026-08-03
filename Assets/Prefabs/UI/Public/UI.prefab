@@ -241,6 +241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MainUIManager
   scrubber: {fileID: 0}
   toggles: {fileID: 1952269297791087791}
+  camController: {fileID: 0}
 --- !u!114 &5172624810789402756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,6 +275,13 @@ MonoBehaviour:
   viewerPopup: {fileID: 4114817826868559657}
   scrubber: {fileID: 0}
   publicUIManager: {fileID: 5172624810789402756}
+  camController: {fileID: 0}
+  togglesManager: {fileID: 1952269297791087791}
+  helpBtn: {fileID: 2328029820574581959}
+  closeHelpBtn: {fileID: 5992020141277564032}
+  scenariosBtn: {fileID: 8017263789704846574}
+  closeViewerBtn: {fileID: 7355212514805251288}
+  toggleUIBtn: {fileID: 1479979553257209088}
 --- !u!114 &36922868967594219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,6 +297,8 @@ MonoBehaviour:
   helpPopup: {fileID: 2206893689337438504}
   scrubber: {fileID: 0}
   simUIManager: {fileID: 5096721975378707492}
+  camController: {fileID: 0}
+  whaleController: {fileID: 0}
 --- !u!114 &6292168261108798755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,6 +314,7 @@ MonoBehaviour:
   whaleDriver: {fileID: 0}
   scrubber: {fileID: 0}
   telemetry: {fileID: 948749286726037757}
+  whaleController: {fileID: 0}
 --- !u!1001 &783455604080374954
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -377,6 +388,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74c70063d077455183a5ae35a64a0945, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Popup
+--- !u!114 &7355212514805251288 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7840083504280275058, guid: 7c3a8eaed4b3d7d44835eb830b6044d7, type: 3}
+  m_PrefabInstance: {fileID: 783455604080374954}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1001 &4120804749598935075
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -542,14 +564,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: IdleUI
       objectReference: {fileID: 0}
-    - target: {fileID: 5557634060668166497, guid: 3e75b7b86ed13b84680309ce14faa680, type: 3}
-      propertyPath: toggles
-      value: 
-      objectReference: {fileID: 1952269297791087791}
-    - target: {fileID: 5557634060668166497, guid: 3e75b7b86ed13b84680309ce14faa680, type: 3}
-      propertyPath: toggleUIBtn
-      value: 
-      objectReference: {fileID: 2600515127747958561}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1497,34 +1511,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 353086273014804010}
     m_Modifications:
-    - target: {fileID: 258501777564101422, guid: 1a513e6f387aa7e4d873b54be62188e3, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 258501777564101422, guid: 1a513e6f387aa7e4d873b54be62188e3, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 258501777564101422, guid: 1a513e6f387aa7e4d873b54be62188e3, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 258501777564101422, guid: 1a513e6f387aa7e4d873b54be62188e3, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 258501777564101422, guid: 1a513e6f387aa7e4d873b54be62188e3, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 258501777564101422, guid: 1a513e6f387aa7e4d873b54be62188e3, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3890910101879065877, guid: 1a513e6f387aa7e4d873b54be62188e3, type: 3}
-      propertyPath: m_text
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4076052854096998951, guid: 1a513e6f387aa7e4d873b54be62188e3, type: 3}
       propertyPath: m_Name
       value: CyclingFunFactsContainer
@@ -1681,6 +1667,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6454711327911404320, guid: d048ea5d3e60e574fbc50183f4ebffab, type: 3}
   m_PrefabInstance: {fileID: 6525538364143201009}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1479979553257209088 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5622373730220824561, guid: d048ea5d3e60e574fbc50183f4ebffab, type: 3}
+  m_PrefabInstance: {fileID: 6525538364143201009}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2600515127747958561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!114 &1952269297791087791 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4726672964631486046, guid: d048ea5d3e60e574fbc50183f4ebffab, type: 3}
@@ -1842,6 +1839,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7170085108513337919, guid: 11d2352ce9cfdfb4ca1f05f1d5b57f25, type: 3}
   m_PrefabInstance: {fileID: 9016545605891330839}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2328029820574581959 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6732853669070264272, guid: 11d2352ce9cfdfb4ca1f05f1d5b57f25, type: 3}
+  m_PrefabInstance: {fileID: 9016545605891330839}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!4 &2832475263041396720 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6516652904964345063, guid: 11d2352ce9cfdfb4ca1f05f1d5b57f25, type: 3}
@@ -1858,3 +1866,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74c70063d077455183a5ae35a64a0945, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Popup
+--- !u!114 &5992020141277564032 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3316578859995291543, guid: 11d2352ce9cfdfb4ca1f05f1d5b57f25, type: 3}
+  m_PrefabInstance: {fileID: 9016545605891330839}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button

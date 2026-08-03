@@ -25,10 +25,4 @@ public class SceneButtonBridge : MonoBehaviour
             SceneSwitcher.Instance.changeToFreeSwim();
         }
     }
-
-    public void ClickScenarios() { // TODO
-        if (SceneSwitcher.Instance != null) {
-            SceneSwitcher.Instance.changeToScenarios();
-        }
-    }
 }
