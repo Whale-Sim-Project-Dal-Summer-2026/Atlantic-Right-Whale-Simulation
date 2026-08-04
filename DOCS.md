@@ -461,6 +461,13 @@ The visual representation of adjacent water volumes requires adjustments to elim
 * **Boundary Face Elimination:** Implement a system or custom mesh-generation pass that identifies internal boundaries between adjacent water chunks and removes or hides the intersecting interior walls, producing a single, visually seamless water surface and volume while preserving individual AGX hydrodynamics registrations.
 * **Single Bounding Box Alternative:** Alternatively, replace individual chunk blocks with a single large bounding box covering the entire simulation domain, while this places water over areas where data chunks may not exist, it completely eliminates internal seams while remaining acceptable due to the environment's outer border.
 
+
+### What Happened at timestep X
+
+A key feature that Mars wanted to implement was to allow users to go back to a certain time step X. We would need a system that would allow users to pick a time step and 'scrub' forward and backward. This requires figuring out a way to know what happened at time step X.
+
+We could log the whale's position/rotation at each step, the main issue is what happens to the ropes. We would need to have information on those. One idea is just to use the whale position/rotation at each step and then re simulate it up to that point, in theory that would allow for knowing what would happen at each time step, however it is possible (and hopefully plausible) that a more elegant solution presents itself. 
+
 ## References
 
 https://en.wikipedia.org/wiki/Bathymetry
