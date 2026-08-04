@@ -5,20 +5,20 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
-    guid: 857b5778f086dd74f8f8a0c801659215
+    path: Assets/Scenes/Demos/GEM Labs/Scenarios/SwimScene.unity
+    guid: ba9e903c2ba3cc542b00b0cad8ee06c7
   - enabled: 1
-    path: Assets/Scenes/Main.unity
-    guid: 35757bf303bb183468691b117a3ee3a3
+    path: Assets/Scenes/Demos/GEM Labs/Scenarios/NoEntangle.unity
+    guid: e4e9b7d8c7f63444bb44924b393fa7eb
   - enabled: 1
-    path: Assets/Scenes/PhysicsDemo/UnityDemo.unity
-    guid: 4187b323c020fa8479efff5ae78dabcc
+    path: Assets/Scenes/Demos/GEM Labs/Scenarios/Entangle.unity
+    guid: 07350c960a498534ea71fff27644fae4
   - enabled: 1
-    path: Assets/Scenes/PhysicsDemo/ObiRopeDemo.unity
-    guid: 83ba1b20ea280f041a6913124613d33b
+    path: Assets/Scenes/Demos/GEM Labs/Scenarios/FreeSwim.unity
+    guid: 1b7cbec6c8fceb74d8d32b4f6a6fbd6e
+  - enabled: 1
+    path: Assets/Scenes/Demos/GEM Labs/Scenarios.unity
+    guid: 9008ae9a44552ff49839c3d7c708e421
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

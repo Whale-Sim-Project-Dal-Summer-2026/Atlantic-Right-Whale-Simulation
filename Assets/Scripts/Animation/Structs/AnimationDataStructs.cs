@@ -1,0 +1,146 @@
+using Unity.Mathematics;
+using UnityEngine;
+///Contains all of the data structs for the animation of the whale
+/// trying to minimize memory but idk if its actually doing much
+namespace AnimationDataStructs{
+
+/// <summary>
+/// Stores the tail/fin animation as 4 halves which are applied as a rotation
+/// </summary>
+/// 
+/// this should save on memory since a transform is apparently kinda hefty
+/// 
+/// switch back to float since it has difficuly being written to a binary fiel 
+/// 
+/// OTHER OPTION:
+/// Use giant arrays and then just store the index, this would be for literally every frame in the animation for each bone'
+/// basically use the amount of tail bones as an frame size 
+/// example: 
+///     {1,2,3,4,5,6,7,8,43,32,64,7,5,345,7,3,234,8,634,2...}  // list of all rotations to be applied to tail for all animation timesteps
+///   then there is frame number which denotes how many bones are in the tail 
+///    framewWindow = 4
+/// at timestep 1:  {[1,2,3,4],5,6,7,8,43,32,64,7,5,345,7,3,234,8,634,2...} // frame is first 4 roations in list'
+/// at timestep 2:  {1,2,3,4,[5,6,7,8],43,32,64,7,5,345,7,3,234,8,634,2...} // frame is second 4 roations in list'
+///  this contiunes 
+/// 
+/// this is better than storing whale state as a class object since it will be less memeroy used
+///  also faster to access since its in a giant array
+/// 
+/// cons:
+///     would be hard to manage this many windows for different sections of the whale,
+///     since each section has a different amount of bones, so a different frame size
+/// 
+/// I think this could be switched to later if needed, but for now just use the class object since its easier 
+
+
+
+public struct LocalRotation_AnimationData {
+    public Quaternion Rotation; 
+}
+
+
+/// <summary>
+/// Stores the global animation data such as body movements as transform vector and quaternion 
+/// </summary>
+/// 
+/// same here
+public struct Global_AnimationData {
+
+    /// <summary>
+    /// Can Either be Position Data or AGX Force Data, depending on the data source
+    /// </summary>
+    public Vector3 Position; 
+    /// <summary>
+    /// Rotation Data in Global Space
+    /// </summary>
+    public Quaternion Rotation; 
+    
+    /// <summary>
+    /// Speed of the whale at this timestep, if set to -1 then use position data is AGX Force
+    /// </summary>
+    public float Speed;
+}
+
+/// <summary>
+/// Defines the "Shape" of the whale, ie how many bones in each section
+/// </summary>
+public class WhaleBlueprint {
+    public int BodyLengthCount;
+    public int MouthCount;
+    public int LeftFinCount;
+    public int RightFinCount;
+    public int RootCount;
+    public int HeadCount;
+
+    /// <summary>
+    /// First Bone in the tail, last body bone is TailStartIndex - 1
+    /// </summary>
+    public int TailStartIndex;
+
+    /// <summary>
+    /// Count of Bones in Tail SubSection
+    /// </summary>
+    public int TailCount;
+    /// <summary>
+    /// Count of Bones in the Body SubSection
+    /// </summary>
+    public int BodyCount;
+    
+
+
+    public WhaleBlueprint(int bodyLength, int mouth, int lFin, int rFin, int root, int head, int tailStartIndex) {
+        BodyLengthCount = bodyLength;
+        MouthCount = mouth;
+        LeftFinCount = lFin;
+        RightFinCount = rFin;
+        RootCount = root;
+        HeadCount = head;
+        TailStartIndex = tailStartIndex;
+        TailCount = bodyLength - TailStartIndex;
+        BodyCount = TailStartIndex;
+    }
+}
+
+/// <summary>
+///  Defines a single frame/snapshot of the entires whales state
+/// </summary>
+public struct WhaleState
+{
+    // should just be a solid state of the whale, built from the whale blueprint 
+
+    // seems to be decently memory effcient???
+
+    public LocalRotation_AnimationData[] BodyLength;
+    public LocalRotation_AnimationData[] Mouth;
+    public LocalRotation_AnimationData[] LeftFin;
+    public LocalRotation_AnimationData[] RightFin;
+    public Global_AnimationData Root;
+    public LocalRotation_AnimationData Head;
+
+    public WhaleState(WhaleBlueprint blueprint) {
+        BodyLength = new LocalRotation_AnimationData[blueprint.BodyLengthCount];
+        Mouth = new LocalRotation_AnimationData[blueprint.MouthCount];
+        LeftFin = new LocalRotation_AnimationData[blueprint.LeftFinCount];
+        RightFin = new LocalRotation_AnimationData[blueprint.RightFinCount];
+        Root = new Global_AnimationData();
+        Head = new LocalRotation_AnimationData();
+    }
+    public WhaleState((Global_AnimationData, LocalRotation_AnimationData[], LocalRotation_AnimationData[], LocalRotation_AnimationData[], LocalRotation_AnimationData[], LocalRotation_AnimationData) stateTuple) {
+        Root = stateTuple.Item1;
+        BodyLength = stateTuple.Item2;
+        LeftFin = stateTuple.Item3;
+        RightFin = stateTuple.Item4;
+        Mouth = stateTuple.Item5;
+        Head = stateTuple.Item6;
+    }
+    public WhaleState(WhaleState other) {
+        BodyLength = new LocalRotation_AnimationData[other.BodyLength.Length];
+        Mouth = new LocalRotation_AnimationData[other.Mouth.Length];
+        LeftFin = new LocalRotation_AnimationData[other.LeftFin.Length];
+        RightFin = new LocalRotation_AnimationData[other.RightFin.Length];
+        Root = new Global_AnimationData();
+        Head = new LocalRotation_AnimationData();
+    }
+
+}
+}

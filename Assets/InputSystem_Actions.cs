@@ -150,7 +150,7 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
                     ""name"": ""Previous"",
                     ""type"": ""Button"",
                     ""id"": ""2776c80d-3c14-4091-8c56-d04ced07a2b0"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -213,6 +213,123 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
                     ""name"": ""Scene3"",
                     ""type"": ""Button"",
                     ""id"": ""dd3a2f11-7424-4148-bdef-3b2d33868f56"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Accelerate"",
+                    ""type"": ""Button"",
+                    ""id"": ""67f8f78e-e4fc-41e5-8938-b675e240936f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Deccelerate"",
+                    ""type"": ""Button"",
+                    ""id"": ""5c773616-42ae-46e1-8a99-5fd521bede49"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenMouth"",
+                    ""type"": ""Button"",
+                    ""id"": ""d3b76fe7-fddd-49fd-8af3-26989b4e755f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""cd2c8a61-7119-459e-89ca-d385b82c94c0"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SimulationSpeedUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""875b3226-b802-451a-9fb6-e6c64a3ce714"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""adf3abf0-8760-4f50-97b4-5b7bace333d5"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenHelp"",
+                    ""type"": ""Button"",
+                    ""id"": ""65de205c-309b-4f91-b99d-d94185cf65a5"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""HideUI"",
+                    ""type"": ""Button"",
+                    ""id"": ""71b5b0ca-be3e-45a3-95dd-b281814755ee"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Cam1"",
+                    ""type"": ""Button"",
+                    ""id"": ""34461a92-e89e-4c7e-817e-2889e6dffbc3"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Cam2"",
+                    ""type"": ""Button"",
+                    ""id"": ""fc153adb-edfd-4d5c-8ebd-cf3b69eb83bc"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Cam3"",
+                    ""type"": ""Button"",
+                    ""id"": ""c8b9e668-78d7-4a2a-a3ea-455bd78a286a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CamLock"",
+                    ""type"": ""Button"",
+                    ""id"": ""ba88cce8-1b51-49d3-930c-b6526b872585"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BackAction"",
+                    ""type"": ""Button"",
+                    ""id"": ""f359162f-540e-4497-b4b9-ab93d4e6027d"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -650,12 +767,34 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
+                    ""name"": ""up"",
+                    ""id"": ""5ede9c54-a324-4d0e-a308-0e01fdbcb882"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Up/Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": ""down"",
                     ""id"": ""b279e637-275f-4136-acee-2fffc5c40838"",
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
+                    ""action"": ""Up/Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""eb66a632-3f44-45c2-8701-f7c991786283"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
                     ""action"": ""Up/Down"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -695,17 +834,6 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""02af54f6-8558-40cb-89a5-349d4267386e"",
-                    ""path"": ""<Keyboard>/#(R)"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Reset"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""dab2d53d-d5e5-4e7e-8528-e9e9ceaa2c06"",
                     ""path"": ""<Keyboard>/1"",
                     ""interactions"": """",
@@ -734,6 +862,149 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Scene3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f447fa80-3316-412e-86d1-7036c31ebad6"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Accelerate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b5e5591e-31de-452e-9994-502d605b7df2"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Deccelerate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""75edae5b-3f3b-41e4-9583-6385c4672d2a"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""OpenMouth"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""91448a7d-96e7-41eb-ba95-a67aff957f71"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5197dcc0-82e8-405c-8d4b-6ba877f4e4d2"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SimulationSpeedUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""beafcc7b-a770-436a-a26d-bc655efdad69"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""OpenMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8809714a-c17c-4d98-b848-8e3c70fde57d"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenHelp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""afefafd9-d5f4-4e10-a275-b6d1608e0dc7"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HideUI"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2f62d8fb-7047-4fb3-8bd1-47ce4185ea0c"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cam1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5ad5726b-2229-4953-a70b-1d95ca2a16ec"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cam2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fa34c6ec-b031-4892-9b06-648233817794"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cam3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a1bb0bf6-12e6-423e-90b0-7bd6da2e5f0f"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""CamLock"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""32b44c55-462a-4579-8752-fd668aa490d5"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""BackAction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1335,6 +1606,19 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
         m_Player_Scene1 = m_Player.FindAction("Scene1", throwIfNotFound: true);
         m_Player_Scene2 = m_Player.FindAction("Scene2", throwIfNotFound: true);
         m_Player_Scene3 = m_Player.FindAction("Scene3", throwIfNotFound: true);
+        m_Player_Accelerate = m_Player.FindAction("Accelerate", throwIfNotFound: true);
+        m_Player_Deccelerate = m_Player.FindAction("Deccelerate", throwIfNotFound: true);
+        m_Player_OpenMouth = m_Player.FindAction("OpenMouth", throwIfNotFound: true);
+        m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+        m_Player_SimulationSpeedUp = m_Player.FindAction("SimulationSpeedUp", throwIfNotFound: true);
+        m_Player_OpenMenu = m_Player.FindAction("OpenMenu", throwIfNotFound: true);
+        m_Player_OpenHelp = m_Player.FindAction("OpenHelp", throwIfNotFound: true);
+        m_Player_HideUI = m_Player.FindAction("HideUI", throwIfNotFound: true);
+        m_Player_Cam1 = m_Player.FindAction("Cam1", throwIfNotFound: true);
+        m_Player_Cam2 = m_Player.FindAction("Cam2", throwIfNotFound: true);
+        m_Player_Cam3 = m_Player.FindAction("Cam3", throwIfNotFound: true);
+        m_Player_CamLock = m_Player.FindAction("CamLock", throwIfNotFound: true);
+        m_Player_BackAction = m_Player.FindAction("BackAction", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1442,6 +1726,19 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Scene1;
     private readonly InputAction m_Player_Scene2;
     private readonly InputAction m_Player_Scene3;
+    private readonly InputAction m_Player_Accelerate;
+    private readonly InputAction m_Player_Deccelerate;
+    private readonly InputAction m_Player_OpenMouth;
+    private readonly InputAction m_Player_Pause;
+    private readonly InputAction m_Player_SimulationSpeedUp;
+    private readonly InputAction m_Player_OpenMenu;
+    private readonly InputAction m_Player_OpenHelp;
+    private readonly InputAction m_Player_HideUI;
+    private readonly InputAction m_Player_Cam1;
+    private readonly InputAction m_Player_Cam2;
+    private readonly InputAction m_Player_Cam3;
+    private readonly InputAction m_Player_CamLock;
+    private readonly InputAction m_Player_BackAction;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1510,6 +1807,58 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Scene3 => m_Wrapper.m_Player_Scene3;
         /// <summary>
+        /// Provides access to the underlying input action "Player/Accelerate".
+        /// </summary>
+        public InputAction @Accelerate => m_Wrapper.m_Player_Accelerate;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Deccelerate".
+        /// </summary>
+        public InputAction @Deccelerate => m_Wrapper.m_Player_Deccelerate;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/OpenMouth".
+        /// </summary>
+        public InputAction @OpenMouth => m_Wrapper.m_Player_OpenMouth;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Pause".
+        /// </summary>
+        public InputAction @Pause => m_Wrapper.m_Player_Pause;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/SimulationSpeedUp".
+        /// </summary>
+        public InputAction @SimulationSpeedUp => m_Wrapper.m_Player_SimulationSpeedUp;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/OpenMenu".
+        /// </summary>
+        public InputAction @OpenMenu => m_Wrapper.m_Player_OpenMenu;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/OpenHelp".
+        /// </summary>
+        public InputAction @OpenHelp => m_Wrapper.m_Player_OpenHelp;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/HideUI".
+        /// </summary>
+        public InputAction @HideUI => m_Wrapper.m_Player_HideUI;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Cam1".
+        /// </summary>
+        public InputAction @Cam1 => m_Wrapper.m_Player_Cam1;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Cam2".
+        /// </summary>
+        public InputAction @Cam2 => m_Wrapper.m_Player_Cam2;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Cam3".
+        /// </summary>
+        public InputAction @Cam3 => m_Wrapper.m_Player_Cam3;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/CamLock".
+        /// </summary>
+        public InputAction @CamLock => m_Wrapper.m_Player_CamLock;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/BackAction".
+        /// </summary>
+        public InputAction @BackAction => m_Wrapper.m_Player_BackAction;
+        /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -1577,6 +1926,45 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
             @Scene3.started += instance.OnScene3;
             @Scene3.performed += instance.OnScene3;
             @Scene3.canceled += instance.OnScene3;
+            @Accelerate.started += instance.OnAccelerate;
+            @Accelerate.performed += instance.OnAccelerate;
+            @Accelerate.canceled += instance.OnAccelerate;
+            @Deccelerate.started += instance.OnDeccelerate;
+            @Deccelerate.performed += instance.OnDeccelerate;
+            @Deccelerate.canceled += instance.OnDeccelerate;
+            @OpenMouth.started += instance.OnOpenMouth;
+            @OpenMouth.performed += instance.OnOpenMouth;
+            @OpenMouth.canceled += instance.OnOpenMouth;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
+            @SimulationSpeedUp.started += instance.OnSimulationSpeedUp;
+            @SimulationSpeedUp.performed += instance.OnSimulationSpeedUp;
+            @SimulationSpeedUp.canceled += instance.OnSimulationSpeedUp;
+            @OpenMenu.started += instance.OnOpenMenu;
+            @OpenMenu.performed += instance.OnOpenMenu;
+            @OpenMenu.canceled += instance.OnOpenMenu;
+            @OpenHelp.started += instance.OnOpenHelp;
+            @OpenHelp.performed += instance.OnOpenHelp;
+            @OpenHelp.canceled += instance.OnOpenHelp;
+            @HideUI.started += instance.OnHideUI;
+            @HideUI.performed += instance.OnHideUI;
+            @HideUI.canceled += instance.OnHideUI;
+            @Cam1.started += instance.OnCam1;
+            @Cam1.performed += instance.OnCam1;
+            @Cam1.canceled += instance.OnCam1;
+            @Cam2.started += instance.OnCam2;
+            @Cam2.performed += instance.OnCam2;
+            @Cam2.canceled += instance.OnCam2;
+            @Cam3.started += instance.OnCam3;
+            @Cam3.performed += instance.OnCam3;
+            @Cam3.canceled += instance.OnCam3;
+            @CamLock.started += instance.OnCamLock;
+            @CamLock.performed += instance.OnCamLock;
+            @CamLock.canceled += instance.OnCamLock;
+            @BackAction.started += instance.OnBackAction;
+            @BackAction.performed += instance.OnBackAction;
+            @BackAction.canceled += instance.OnBackAction;
         }
 
         /// <summary>
@@ -1630,6 +2018,45 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
             @Scene3.started -= instance.OnScene3;
             @Scene3.performed -= instance.OnScene3;
             @Scene3.canceled -= instance.OnScene3;
+            @Accelerate.started -= instance.OnAccelerate;
+            @Accelerate.performed -= instance.OnAccelerate;
+            @Accelerate.canceled -= instance.OnAccelerate;
+            @Deccelerate.started -= instance.OnDeccelerate;
+            @Deccelerate.performed -= instance.OnDeccelerate;
+            @Deccelerate.canceled -= instance.OnDeccelerate;
+            @OpenMouth.started -= instance.OnOpenMouth;
+            @OpenMouth.performed -= instance.OnOpenMouth;
+            @OpenMouth.canceled -= instance.OnOpenMouth;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
+            @SimulationSpeedUp.started -= instance.OnSimulationSpeedUp;
+            @SimulationSpeedUp.performed -= instance.OnSimulationSpeedUp;
+            @SimulationSpeedUp.canceled -= instance.OnSimulationSpeedUp;
+            @OpenMenu.started -= instance.OnOpenMenu;
+            @OpenMenu.performed -= instance.OnOpenMenu;
+            @OpenMenu.canceled -= instance.OnOpenMenu;
+            @OpenHelp.started -= instance.OnOpenHelp;
+            @OpenHelp.performed -= instance.OnOpenHelp;
+            @OpenHelp.canceled -= instance.OnOpenHelp;
+            @HideUI.started -= instance.OnHideUI;
+            @HideUI.performed -= instance.OnHideUI;
+            @HideUI.canceled -= instance.OnHideUI;
+            @Cam1.started -= instance.OnCam1;
+            @Cam1.performed -= instance.OnCam1;
+            @Cam1.canceled -= instance.OnCam1;
+            @Cam2.started -= instance.OnCam2;
+            @Cam2.performed -= instance.OnCam2;
+            @Cam2.canceled -= instance.OnCam2;
+            @Cam3.started -= instance.OnCam3;
+            @Cam3.performed -= instance.OnCam3;
+            @Cam3.canceled -= instance.OnCam3;
+            @CamLock.started -= instance.OnCamLock;
+            @CamLock.performed -= instance.OnCamLock;
+            @CamLock.canceled -= instance.OnCamLock;
+            @BackAction.started -= instance.OnBackAction;
+            @BackAction.performed -= instance.OnBackAction;
+            @BackAction.canceled -= instance.OnBackAction;
         }
 
         /// <summary>
@@ -2028,6 +2455,97 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnScene3(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Accelerate" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnAccelerate(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Deccelerate" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDeccelerate(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "OpenMouth" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnOpenMouth(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Pause" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPause(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SimulationSpeedUp" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSimulationSpeedUp(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "OpenMenu" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnOpenMenu(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "OpenHelp" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnOpenHelp(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "HideUI" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnHideUI(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Cam1" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCam1(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Cam2" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCam2(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Cam3" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCam3(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "CamLock" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCamLock(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "BackAction" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnBackAction(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

@@ -1,0 +1,253 @@
+// other imports
+using System.Collections.Generic;
+using UnityEngine;
+using System;
+using Unity.VisualScripting;
+using AGXUnity;
+
+// own code
+using AnimationDataStructs;
+using Animation.DataSources;
+using AnimationDataStorageManager;
+using MotionDataPacketClass;
+using FlukeWaveAmplitudeLookUpClass;
+using AGXUnity.IO.OpenPLX;
+using AGXUnity.Utils;
+
+// current issue, due to the nature of agx reseting does not clear the previous forces/ targets so each time reset is pressed it deviates
+
+// solution, each reset completely destroy the whale and rigid body, create a new instance of it. 
+// Then use the below method which saves whale states to re-run the exact scenario again. 
+// this should make each run exactly the same as from each position the same exact force is applied
+
+// this will remove the compounding error present
+
+// since this requires the rigid body, it's not possible to completely precomput this before runtime
+// BUT, I think I could save each state as its running using the datastorage manager, and keep track of which sections have been run alreay.
+
+// Lets say the animation/m,ovement ran until timestep 100 and then was restarted
+// there would be 100 whale states calculated
+// as each state is calcualted it is written to the file.
+// then a reset happens and instead of recalculating, the states are read back from the file, 
+// once it would reach timestep 101, it begins reclactuing them live and saving to a file
+
+// this means that for each csv, only one full run through is needed to be able to save all states
+
+
+//save the forces into the position vector for 
+
+
+public class WhaleMotionFromCSV_AGX : DataSource{
+
+    
+    public List<MotionDataPacket> motionDataPacketList = new List<MotionDataPacket>();
+
+    private float fixedTimeStep;
+    private float timer = 0.0f;
+
+    public int totalTimesteps = 0;
+    int currentTimestep = 0;
+    CSVLoader cSVLoader; 
+
+    private WhaleState currentWhaleState;
+    private WhaleState whaleStartState;
+    private WhaleState previousWhaleState;
+    private WhaleBlueprint blueprint;
+    
+
+    // would love to be able to preprocess this???? 
+    MouthSolver mouthSolver;
+    FlukeSolver flukeSolver;
+    FinSolver finSolver;
+
+    MainBodySolverAbstract mainBodySolver;
+    int tailStartIndex = 0;
+  
+    // would loveee to ditch this
+    [SerializeField] UserInputManager userInputManager; //stolen for RigidBody 
+
+    //--Class Specific
+    FlukeWaveAmplitudeLookUp lookUp;
+
+    DataStorageManager dataStorageManager; 
+
+    bool loadingFromFile = false;
+    String dataStoragePath;
+    int fileEndTimestep = 0;
+
+    //THIS COUDL BE THE CONSTRUCTOR?????
+    public override void LoadSource(AnimationSettings animationSettings, WhaleState startState, WhaleBlueprint blueprint)
+    {
+
+        cSVLoader = new CSVLoader();
+        fixedTimeStep = Time.fixedDeltaTime;
+
+        // seed motion 
+        LoadMotionDataCSV(animationSettings);
+        loadFlukeWaveAmplitudeLookUpCSV(animationSettings);
+
+
+        userInputManager = GameObject.FindAnyObjectByType<UserInputManager>();
+
+        this.blueprint = blueprint;
+
+        //dataStorageManager = new DataStorageManager(this.blueprint);
+        //dataStoragePath = Application.dataPath+animationSettings.MotionData_csv.name.Replace(".csv","_AGX_States");
+
+       
+
+        //start streamer
+        //streamer = new WhaleAnimationStreamer(dataStorageManager, Application.dataPath+"/testDATA",
+                                               //batchSizeIn: 1500, refillThresholdIn: 500);
+        
+
+
+        mouthSolver = new MouthSolver(startState.Mouth);
+        flukeSolver = new FlukeSolver(blueprint.BodyLengthCount, fixedTimeStep, lookUp, tailStartIndex);
+        mainBodySolver = new AGXCSVMainBodySolver(fixedTimeStep, startState, userInputManager.rb);
+        finSolver = new FinSolver(startState.LeftFin.Length, fixedTimeStep);
+
+        int currentTotalTimesteps = motionDataPacketList.Count;
+        this.totalTimesteps = currentTotalTimesteps;
+        
+        this.currentWhaleState = startState;
+        this.whaleStartState = startState;
+        this.previousWhaleState = startState;
+
+        //clear data no longer needed 
+        cSVLoader = null; 
+        GC.Collect();
+        
+    }
+
+    void loadFlukeWaveAmplitudeLookUpCSV(AnimationSettings animationSettings){
+        var loaded_CsvData = cSVLoader.loadCSV(animationSettings.FlukeAmpLookUp_csv,animationSettings.FlukeAmp_ContainsHeaders);
+        string[][] csvData = loaded_CsvData.data;
+        Dictionary<string,int> columnIndices= loaded_CsvData.columnIndices;
+
+        lookUp = new FlukeWaveAmplitudeLookUp(csvData,columnIndices);
+
+    }
+
+     void LoadMotionDataCSV(AnimationSettings animationSettings){
+        var loaded_CsvData = cSVLoader.loadCSV(animationSettings.MotionData_csv,animationSettings.MotionData_ContainsHeaders);
+        string[][] motionData = loaded_CsvData.data;
+        Dictionary<string,int> columnIndices= loaded_CsvData.columnIndices;
+
+        for (int i = 0;i<motionData.Length; i++)
+        {
+            MotionDataPacket dataPacket = new MotionDataPacket {
+                timestep = float.Parse(motionData[i][columnIndices["Date"]]),
+                depth = float.Parse(motionData[i][columnIndices["Depth"]]),
+                head = float.Parse(motionData[i][columnIndices["head"]]) * Mathf.Rad2Deg,
+                pitch = -float.Parse(motionData[i][columnIndices["pitch"]]) * Mathf.Rad2Deg,
+                roll = float.Parse(motionData[i][columnIndices["roll"]]) * Mathf.Rad2Deg,
+                fluking_signal = float.Parse(motionData[i][columnIndices["fluking_signal"]])* Mathf.Rad2Deg,
+                body_signal = float.Parse(motionData[i][columnIndices["body_orientation"]]) * Mathf.Rad2Deg,
+                MouthOpen = int.Parse(motionData[i][columnIndices["MouthOpen"]]),
+                speed = motionData[i][columnIndices["speed"]] == "NaN" ? 0.0f : float.Parse(motionData[i][columnIndices["speed"]])
+            };
+           
+            motionDataPacketList.Add(dataPacket);
+        }
+    }
+
+    WhaleState calculateState(){
+
+        MotionDataPacket currentPacket = motionDataPacketList[currentTimestep];
+        currentTimestep++;
+
+        // Data integrity
+        if (float.IsNaN(currentPacket.speed) || float.IsNaN(currentPacket.pitch) ||
+            float.IsNaN(currentPacket.head)  || float.IsNaN(currentPacket.roll))
+        {
+            currentPacket.speed = 0f;
+            currentPacket.pitch = 0f;
+            currentPacket.head = 0f;
+            currentPacket.roll = 0f;
+        }
+
+        WhaleState newState = new WhaleState(this.blueprint);
+            
+        //Calculate Main Body
+        newState.Root = mainBodySolver.solveMainBody(currentPacket, this.previousWhaleState.Root);
+
+        if (mainBodySolver is AGXCSVMainBodySolver improvedSolver)
+        {
+            newState.Head = improvedSolver.getHeadState();
+            newState.BodyLength = improvedSolver.getBodyState();
+        }
+        else
+        {
+            newState.BodyLength = this.previousWhaleState.BodyLength;
+        }
+        newState.Mouth = mouthSolver.solveMouth(currentPacket.MouthOpen == 1 ? true : false , previousWhaleState.Mouth);
+        newState.LeftFin = finSolver.solveFin(currentPacket, true, previousWhaleState.LeftFin);
+        newState.RightFin = finSolver.solveFin(currentPacket,  false, this.previousWhaleState.RightFin);
+            
+        // set previous state to prevent compounding fluke calc
+        previousWhaleState = newState;
+
+        //Calculate Fluke based on body roll state
+        newState.BodyLength = flukeSolver.solveFuke(currentPacket, newState);
+
+        //newState.Root.Position = solveAGXForce(newState);
+        //newState.Root.Speed = -1; // flag to use position data as force instead of speed
+
+        return newState;
+    }
+
+    public override WhaleState getNextWhaleState()
+    {
+        // so basically if its the first run, save the next whale state into the file, then from there using the old saving and loading logic to get the next timesteps
+        // will have to update the model to basically detect if the force has been pre calcualted,flag speed to -1!!!
+        WhaleState next;
+
+        next = calculateState();
+        return next;
+    }
+
+    public override void loadWhaleStateAt(int timestep){
+
+        // SINCE NOT PREPROCCESSED NO OTHER TIMESTEP BESIDES RESTARTING CAN BE LOADED
+        if (timestep != 0) throw new NotImplementedException("Loading a state at a specific timestep is not implemented for WhaleMotionFromCSV_AGX.");
+
+        currentTimestep = timestep;
+        previousWhaleState = whaleStartState;
+        currentWhaleState = whaleStartState;
+
+        resetSolvers();
+
+        // write the total number of timesteps to the file for reference
+        //dataStorageManager.tallyStates(dataStoragePath);
+
+        //check that the number of states saved matches the number of timesteps in the csv
+        //int savedStatesCount = dataStorageManager.getSavedStatesCount(dataStoragePath);
+        
+        // set toggle point for when to start calculating states live instead of loading from file
+        //fileEndTimestep = savedStatesCount;
+
+        //loadingFromFile = true;
+
+        
+
+        userInputManager.rb.Native.setAngularVelocity(new agx.Vec3(0, 0, 0));
+
+
+        userInputManager.rb.Native.addForce(-userInputManager.rb.Native.getForce());
+        userInputManager.rb.Native.addTorque(-userInputManager.rb.Native.getTorque());
+        userInputManager.rb.Native.setPosition(new agx.Vec3(-500, -25, 500));
+        userInputManager.rb.Native.setRotation(new agx.Quat(whaleStartState.Root.Rotation.x, whaleStartState.Root.Rotation.y, whaleStartState.Root.Rotation.z, whaleStartState.Root.Rotation.w));      
+    }
+
+    public override int GetTotalTimesteps()
+    {
+        return this.totalTimesteps;
+    }
+    void resetSolvers() {
+        mainBodySolver.resetSolver(whaleStartState);
+        mouthSolver.resetSolver(whaleStartState);
+        flukeSolver.resetSolver(whaleStartState);
+
+    }
+}

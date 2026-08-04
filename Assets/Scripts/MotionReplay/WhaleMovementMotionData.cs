@@ -16,7 +16,7 @@ public class WhaleMovementMotionData : MonoBehaviour
     //List of columns need for motion data packet
     private int[] cols = { 0, 1, 8, 9, 10, 12, 14, 23 };
 
-    private int currentItemIndex = 0;
+    public int currentItemIndex = 0;
     private Vector3 startPos;
     private Quaternion startRot;
 
