@@ -140,7 +140,7 @@ public class WhaleModelAGX : WhaleModelAbstract {
 
     void updateMovement(WhaleState newState){
 
-        agx.Vec3 currPos = rootRB.Native.getPosition();
+        agx.Vec3 currPos =  rootRB.Native.getPosition();
 
         if (currPos.y >= seaLevel) {
            return;
@@ -167,7 +167,12 @@ public class WhaleModelAGX : WhaleModelAbstract {
 
     public override void updateWhaleState(WhaleState newState) {
 
-        updateMovement(newState);
+
+       // if (newState.Root.Speed != -1) {
+            // if speed is not -1 then use the speed to calculate the force
+            updateMovement(newState);
+        //}
+        
 
         rootRB.Native.setRotation(newState.Root.Rotation.ToHandedQuat());
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Unity.VisualScripting;
+using AGXUnity;
 
 // own code
 using AnimationDataStructs;
@@ -10,6 +11,8 @@ using Animation.DataSources;
 using AnimationDataStorageManager;
 using MotionDataPacketClass;
 using FlukeWaveAmplitudeLookUpClass;
+using AGXUnity.IO.OpenPLX;
+using AGXUnity.Utils;
 
 // current issue, due to the nature of agx reseting does not clear the previous forces/ targets so each time reset is pressed it deviates
 
@@ -39,7 +42,7 @@ public class WhaleMotionFromCSV_AGX : DataSource{
     
     public List<MotionDataPacket> motionDataPacketList = new List<MotionDataPacket>();
 
-    private float fixedTimeStep = 0.004f;
+    private float fixedTimeStep;
     private float timer = 0.0f;
 
     public int totalTimesteps = 0;
@@ -66,12 +69,18 @@ public class WhaleMotionFromCSV_AGX : DataSource{
     //--Class Specific
     FlukeWaveAmplitudeLookUp lookUp;
 
+    DataStorageManager dataStorageManager; 
+
+    bool loadingFromFile = false;
+    String dataStoragePath;
+    int fileEndTimestep = 0;
 
     //THIS COUDL BE THE CONSTRUCTOR?????
     public override void LoadSource(AnimationSettings animationSettings, WhaleState startState, WhaleBlueprint blueprint)
     {
 
         cSVLoader = new CSVLoader();
+        fixedTimeStep = Time.fixedDeltaTime;
 
         // seed motion 
         LoadMotionDataCSV(animationSettings);
@@ -81,6 +90,17 @@ public class WhaleMotionFromCSV_AGX : DataSource{
         userInputManager = GameObject.FindAnyObjectByType<UserInputManager>();
 
         this.blueprint = blueprint;
+
+        //dataStorageManager = new DataStorageManager(this.blueprint);
+        //dataStoragePath = Application.dataPath+animationSettings.MotionData_csv.name.Replace(".csv","_AGX_States");
+
+       
+
+        //start streamer
+        //streamer = new WhaleAnimationStreamer(dataStorageManager, Application.dataPath+"/testDATA",
+                                               //batchSizeIn: 1500, refillThresholdIn: 500);
+        
+
 
         mouthSolver = new MouthSolver(startState.Mouth);
         flukeSolver = new FlukeSolver(blueprint.BodyLengthCount, fixedTimeStep, lookUp, tailStartIndex);
@@ -132,58 +152,6 @@ public class WhaleMotionFromCSV_AGX : DataSource{
         }
     }
 
-    // THIS IS NOT USED SINCE ITS NOT PREPROCESSED BUT THAT WOULD BE NICE
-    WhaleState[] calculateStates(WhaleState startState, WhaleBlueprint blueprint){
-
-        WhaleState previousState = startState;
-     
-        WhaleState[] output = new WhaleState[motionDataPacketList.Count+1];
-        output[0]= startState;
-        for (int i = 0; i < motionDataPacketList.Count; i++)
-        {
-            MotionDataPacket currentPacket = motionDataPacketList[i];
-
-            // Data integrity
-            if (float.IsNaN(currentPacket.speed) || float.IsNaN(currentPacket.pitch) ||
-                float.IsNaN(currentPacket.head)  || float.IsNaN(currentPacket.roll))
-            {
-                currentPacket.speed = 0f;
-                currentPacket.pitch = 0f;
-                currentPacket.head = 0f;
-                currentPacket.roll = 0f;
-            }
-
-          
-            WhaleState newState = new WhaleState(blueprint);
-            
-            //Calculate Main Body
-            newState.Root = mainBodySolver.solveMainBody(currentPacket, previousState.Root);
-
-            if (mainBodySolver is AGXCSVMainBodySolver improvedSolver)
-            {
-                newState.Head = improvedSolver.getHeadState();
-                newState.BodyLength = improvedSolver.getBodyState();
-            }
-            else
-            {
-                newState.BodyLength = previousState.BodyLength;
-            }
-            newState.Mouth = mouthSolver.solveMouth(currentPacket.MouthOpen == 1 ? true : false , previousState.Mouth);
-            newState.LeftFin = finSolver.solveFin(currentPacket, true, previousState.LeftFin);
-            newState.RightFin = finSolver.solveFin(currentPacket,  false, previousState.RightFin);
-            
-            // set previous state to prevent compounding fluke calc
-            previousState = newState;
-
-            //Calculate Fluke based on body roll state
-            newState.BodyLength= flukeSolver.solveFuke(currentPacket, newState);
-           
-      
-            output[i+1] = newState;
-            
-        }
-        return output;
-    }
     WhaleState calculateState(){
 
         MotionDataPacket currentPacket = motionDataPacketList[currentTimestep];
@@ -221,15 +189,21 @@ public class WhaleMotionFromCSV_AGX : DataSource{
         previousWhaleState = newState;
 
         //Calculate Fluke based on body roll state
-        newState.BodyLength= flukeSolver.solveFuke(currentPacket, newState);
-           
+        newState.BodyLength = flukeSolver.solveFuke(currentPacket, newState);
+
+        //newState.Root.Position = solveAGXForce(newState);
+        //newState.Root.Speed = -1; // flag to use position data as force instead of speed
+
         return newState;
     }
 
-
     public override WhaleState getNextWhaleState()
     {
-        WhaleState next = calculateState();
+        // so basically if its the first run, save the next whale state into the file, then from there using the old saving and loading logic to get the next timesteps
+        // will have to update the model to basically detect if the force has been pre calcualted,flag speed to -1!!!
+        WhaleState next;
+
+        next = calculateState();
         return next;
     }
 
@@ -241,14 +215,21 @@ public class WhaleMotionFromCSV_AGX : DataSource{
         currentTimestep = timestep;
         previousWhaleState = whaleStartState;
         currentWhaleState = whaleStartState;
-        
+
         resetSolvers();
 
-        userInputManager.rb.Native.setMotionControl(agx.RigidBody.MotionControl.KINEMATICS);
+        // write the total number of timesteps to the file for reference
+        //dataStorageManager.tallyStates(dataStoragePath);
 
+        //check that the number of states saved matches the number of timesteps in the csv
+        //int savedStatesCount = dataStorageManager.getSavedStatesCount(dataStoragePath);
+        
+        // set toggle point for when to start calculating states live instead of loading from file
+        //fileEndTimestep = savedStatesCount;
 
-        userInputManager.rb.LinearVelocity = Vector3.zero;
-        userInputManager.rb.AngularVelocity = Vector3.zero;
+        //loadingFromFile = true;
+
+        
 
         userInputManager.rb.Native.setAngularVelocity(new agx.Vec3(0, 0, 0));
 
@@ -256,10 +237,7 @@ public class WhaleMotionFromCSV_AGX : DataSource{
         userInputManager.rb.Native.addForce(-userInputManager.rb.Native.getForce());
         userInputManager.rb.Native.addTorque(-userInputManager.rb.Native.getTorque());
         userInputManager.rb.Native.setPosition(new agx.Vec3(-500, -25, 500));
-        userInputManager.rb.Native.setRotation(new agx.Quat(0, 0, 0,1));
-
-        userInputManager.rb.Native.setMotionControl(agx.RigidBody.MotionControl.DYNAMICS);
-      
+        userInputManager.rb.Native.setRotation(new agx.Quat(whaleStartState.Root.Rotation.x, whaleStartState.Root.Rotation.y, whaleStartState.Root.Rotation.z, whaleStartState.Root.Rotation.w));      
     }
 
     public override int GetTotalTimesteps()
@@ -267,7 +245,6 @@ public class WhaleMotionFromCSV_AGX : DataSource{
         return this.totalTimesteps;
     }
     void resetSolvers() {
-        
         mainBodySolver.resetSolver(whaleStartState);
         mouthSolver.resetSolver(whaleStartState);
         flukeSolver.resetSolver(whaleStartState);

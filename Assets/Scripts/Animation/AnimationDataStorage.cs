@@ -14,6 +14,8 @@ namespace AnimationDataStorageManager {
     int root_Count;
     int head_Count;
     int tailStartIndex;
+
+    int currentOffset = 0;
   
 
     //byte sizes for getting offsets
@@ -57,6 +59,97 @@ namespace AnimationDataStorageManager {
             }
         }
     }
+      public void saveSingleWhaleState(WhaleState whaleState, string filePath) {
+        // Write the whale state
+        // Gets number of bytes for each local rotation sections
+        int bytesForLocalRotation = (bodyLength_Count + mouth_Count + leftFin_Count + rightFin_count+ head_Count) * NUM_BYTES_LOCALROTATION;
+        // gets number of bytes for the main body section
+        int bytesForGlobalAnimation = root_Count  * NUM_BYTES_GLOBALANIMATION;
+        // combine to get total bytes per frame
+        int bytesPerFrame = bytesForLocalRotation + bytesForGlobalAnimation;
+       
+
+        if (!File.Exists(filePath)) {
+            // If the file doesn't exist, create it and write the total frame count as -1
+            using (FileStream stream = new FileStream(filePath, FileMode.Create))
+            {
+                using (BinaryWriter writer = new BinaryWriter(stream)) {
+                    writer.Write((int)-1); 
+                }
+            }
+        }
+        using (FileStream stream = new FileStream(filePath, FileMode.Open))
+        {
+            using (BinaryWriter writer = new BinaryWriter(stream)) {
+                
+                // write current whale state to the file
+                WhaleState state = whaleState;
+
+                // start at beginning of the file and seek to the last frame offset, then write the new state
+                stream.Seek(currentOffset, SeekOrigin.Begin);
+                
+                if (state.BodyLength.Length > 0) WriteLocalRotationList(writer, state.BodyLength);
+                if (state.Mouth.Length > 0) WriteLocalRotationList(writer, state.Mouth);
+                if (state.LeftFin.Length > 0) WriteLocalRotationList(writer, state.LeftFin);
+                if (state.RightFin.Length > 0) WriteLocalRotationList(writer, state.RightFin);
+                if (head_Count > 0) WriteLocalRotation(writer, state.Head);
+                WriteBodyBlock(writer, state.Root);
+
+                currentOffset += bytesPerFrame;
+                }
+            }
+    }
+    
+    
+    public void tallyStates(String filePath) {
+            
+            // Gets number of bytes for each local rotation sections
+            int bytesForLocalRotation = (bodyLength_Count + mouth_Count + leftFin_Count + rightFin_count+ head_Count) * NUM_BYTES_LOCALROTATION;
+            // gets number of bytes for the main body section
+            int bytesForGlobalAnimation = root_Count  * NUM_BYTES_GLOBALANIMATION;
+            // combine to get total bytes per frame
+            int bytesPerFrame = bytesForLocalRotation + bytesForGlobalAnimation;
+            // skip the frame count header then jump ahead frameIndex frames
+
+            int currentOffset = sizeof(int);
+            int frameCount = 0;
+             using (FileStream stream = new FileStream(filePath, FileMode.Open))
+            {
+                using (BinaryReader reader = new BinaryReader(stream)) {
+                    
+                    while (currentOffset < stream.Length) {
+                        // seek to the current offset
+                        stream.Seek(currentOffset, SeekOrigin.Begin);
+                        // read the frame data (we don't actually need to store it, just move the offset)
+                        byte[] frameData = reader.ReadBytes(bytesPerFrame);
+                        // increment the offset by the size of one frame
+                        currentOffset += bytesPerFrame;
+                        // increment the frame count
+                        frameCount++;
+                    }
+                }
+            }
+            using (FileStream stream = new FileStream(filePath, FileMode.Open))
+            {
+                using (BinaryWriter writer = new BinaryWriter(stream)) {
+                    // seek to the beginning of the file
+                    stream.Seek(0, SeekOrigin.Begin);
+                    // write the total frame count
+                    writer.Write(frameCount);
+                }
+            }
+        }
+
+    public int getSavedStatesCount(string filePath) {
+        using (FileStream stream = new FileStream(filePath, FileMode.Open))
+        {
+            using (BinaryReader reader = new BinaryReader(stream)) {
+                // read the total frame count from the beginning of the file
+                return reader.ReadInt32();
+            }
+        }
+    }
+
     public WhaleState[] LoadAllWhaleAnimationData(string filePath) {
             using (FileStream stream = new FileStream(filePath, FileMode.Open))
             {

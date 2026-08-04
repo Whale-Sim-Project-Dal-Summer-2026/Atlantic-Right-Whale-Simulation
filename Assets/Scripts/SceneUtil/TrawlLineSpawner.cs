@@ -46,8 +46,8 @@ public class TrawlLineSpawner : ScriptComponent{
         wire.Route.Add(buoyRouteNode);
 
 
-        float randT = Random.Range(0.0f,1.0f);
-        int numTraps = Mathf.RoundToInt(Mathf.Lerp(minOnTrawl,maxOnTrawl, randT));
+        //float randT = Random.Range(0.0f,1.0f);
+        int numTraps = 5; //Mathf.RoundToInt(Mathf.Lerp(minOnTrawl,maxOnTrawl,randT));
         
         
         float trapHeight = lobsterTrap.GetComponentInChildren<AGXUnity.Collide.Box>().HalfExtents.y;

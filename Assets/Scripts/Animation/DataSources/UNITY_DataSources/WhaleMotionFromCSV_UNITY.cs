@@ -10,7 +10,7 @@ using FlukeWaveAmplitudeLookUpClass;
 public class WhaleMotionFromCSV_UNITY : DataSource{
 
     public List<MotionDataPacket> motionDataPacketList = new List<MotionDataPacket>();
-    private float fixedTimeStep = 0.004f;
+    private float fixedTimeStep;
     int totalTimesteps = 0;
     private float timer = 0.0f;
     DataStorageManager dataStorageManager;
@@ -40,7 +40,8 @@ public class WhaleMotionFromCSV_UNITY : DataSource{
         // seed motion 
         LoadMotionDataCSV(animationSettings);
         loadFlukeWaveAmplitudeLookUpCSV(animationSettings);
-
+        
+        fixedTimeStep = Time.fixedDeltaTime;
 
         this.blueprint = blueprint;
 
@@ -57,8 +58,10 @@ public class WhaleMotionFromCSV_UNITY : DataSource{
         totalTimesteps = temp.Length;
         currentWhaleState = startState;
 
-        //save states
-        dataStorageManager.SaveWhaleAnimationData(temp,Application.dataPath+"/testDATA");
+   
+            //save states
+
+        //dataStorageManager.SaveWhaleAnimationData(temp,Application.dataPath+"/testDATA");
 
         //start streamer
         streamer = new WhaleAnimationStreamer(dataStorageManager, Application.dataPath+"/testDATA",

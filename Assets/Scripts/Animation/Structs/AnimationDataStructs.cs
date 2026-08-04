@@ -46,11 +46,18 @@ public struct LocalRotation_AnimationData {
 /// same here
 public struct Global_AnimationData {
 
-    // used for dead reckoning
+    /// <summary>
+    /// Can Either be Position Data or AGX Force Data, depending on the data source
+    /// </summary>
     public Vector3 Position; 
+    /// <summary>
+    /// Rotation Data in Global Space
+    /// </summary>
     public Quaternion Rotation; 
     
-    // used for applying force
+    /// <summary>
+    /// Speed of the whale at this timestep, if set to -1 then use position data is AGX Force
+    /// </summary>
     public float Speed;
 }
 

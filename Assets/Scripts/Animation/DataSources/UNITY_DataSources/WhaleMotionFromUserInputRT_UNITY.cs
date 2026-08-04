@@ -20,8 +20,7 @@ public class WhaleMotionFromUserInputRT_UNITY
     int totalTimesteps = -1; 
     // same thing here
     int timestep = -1;
-    float fixedTimeStep = 0.004f;
-
+    private float fixedTimeStep;
     //might be cool to eventually be able to save user input to a file and then play it back as a motion data csv source
 
     // passes user input in 
@@ -47,6 +46,8 @@ public class WhaleMotionFromUserInputRT_UNITY
             // pitch, roll, yaw, speed, mouth open/close
 
         cSVLoader = new CSVLoader();
+
+        fixedTimeStep = Time.fixedDeltaTime;
 
         userInputManager = GameObject.FindAnyObjectByType<UserInputManager>();
 

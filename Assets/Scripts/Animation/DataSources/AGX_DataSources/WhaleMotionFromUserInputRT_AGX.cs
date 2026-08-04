@@ -14,7 +14,7 @@ public class WhaleMotionFromUserInputRT_AGX : DataSource
     int totalTimesteps = -1; 
     // same thing here
     int timestep = -1;
-    float fixedTimeStep = 0.004f;
+    private float fixedTimeStep;
 
     //might be cool to eventually be able to save user input to a file and then play it back as a motion data csv source
 
@@ -41,7 +41,7 @@ public class WhaleMotionFromUserInputRT_AGX : DataSource
             // pitch, roll, yaw, speed, mouth open/close
 
         cSVLoader = new CSVLoader();
-
+        fixedTimeStep = Time.fixedDeltaTime;
         userInputManager = GameObject.FindAnyObjectByType<UserInputManager>();
 
         loadFlukeWaveAmplitudeLookUpCSV(animationSettings);

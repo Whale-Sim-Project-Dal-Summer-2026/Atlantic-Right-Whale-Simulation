@@ -190,7 +190,7 @@ public class WhaleDriver : MonoBehaviour
         if (isPaused) return;
         if (jumpToTimestep >= 0){
             dataSource.loadWhaleStateAt(jumpToTimestep);
-            updateWhaleState();
+            //updateWhaleState();
         
             currentTimestep = jumpToTimestep;
             jumpToTimestep = -1; 
@@ -247,4 +247,6 @@ public class WhaleDriver : MonoBehaviour
        //animator.Play("R Whale Armature|Whale Swimming",0,0);  
     }
 }
+
+
 }
