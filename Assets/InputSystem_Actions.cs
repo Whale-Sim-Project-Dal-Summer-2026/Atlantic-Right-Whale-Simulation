@@ -282,7 +282,7 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""HideUI"",
+                    ""name"": ""ToggleUI"",
                     ""type"": ""Button"",
                     ""id"": ""71b5b0ca-be3e-45a3-95dd-b281814755ee"",
                     ""expectedControlType"": """",
@@ -949,7 +949,7 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""HideUI"",
+                    ""action"": ""ToggleUI"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -1613,7 +1613,7 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
         m_Player_SimulationSpeedUp = m_Player.FindAction("SimulationSpeedUp", throwIfNotFound: true);
         m_Player_OpenMenu = m_Player.FindAction("OpenMenu", throwIfNotFound: true);
         m_Player_OpenHelp = m_Player.FindAction("OpenHelp", throwIfNotFound: true);
-        m_Player_HideUI = m_Player.FindAction("HideUI", throwIfNotFound: true);
+        m_Player_ToggleUI = m_Player.FindAction("ToggleUI", throwIfNotFound: true);
         m_Player_Cam1 = m_Player.FindAction("Cam1", throwIfNotFound: true);
         m_Player_Cam2 = m_Player.FindAction("Cam2", throwIfNotFound: true);
         m_Player_Cam3 = m_Player.FindAction("Cam3", throwIfNotFound: true);
@@ -1733,7 +1733,7 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_SimulationSpeedUp;
     private readonly InputAction m_Player_OpenMenu;
     private readonly InputAction m_Player_OpenHelp;
-    private readonly InputAction m_Player_HideUI;
+    private readonly InputAction m_Player_ToggleUI;
     private readonly InputAction m_Player_Cam1;
     private readonly InputAction m_Player_Cam2;
     private readonly InputAction m_Player_Cam3;
@@ -1835,9 +1835,9 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @OpenHelp => m_Wrapper.m_Player_OpenHelp;
         /// <summary>
-        /// Provides access to the underlying input action "Player/HideUI".
+        /// Provides access to the underlying input action "Player/ToggleUI".
         /// </summary>
-        public InputAction @HideUI => m_Wrapper.m_Player_HideUI;
+        public InputAction @ToggleUI => m_Wrapper.m_Player_ToggleUI;
         /// <summary>
         /// Provides access to the underlying input action "Player/Cam1".
         /// </summary>
@@ -1947,9 +1947,9 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
             @OpenHelp.started += instance.OnOpenHelp;
             @OpenHelp.performed += instance.OnOpenHelp;
             @OpenHelp.canceled += instance.OnOpenHelp;
-            @HideUI.started += instance.OnHideUI;
-            @HideUI.performed += instance.OnHideUI;
-            @HideUI.canceled += instance.OnHideUI;
+            @ToggleUI.started += instance.OnToggleUI;
+            @ToggleUI.performed += instance.OnToggleUI;
+            @ToggleUI.canceled += instance.OnToggleUI;
             @Cam1.started += instance.OnCam1;
             @Cam1.performed += instance.OnCam1;
             @Cam1.canceled += instance.OnCam1;
@@ -2039,9 +2039,9 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
             @OpenHelp.started -= instance.OnOpenHelp;
             @OpenHelp.performed -= instance.OnOpenHelp;
             @OpenHelp.canceled -= instance.OnOpenHelp;
-            @HideUI.started -= instance.OnHideUI;
-            @HideUI.performed -= instance.OnHideUI;
-            @HideUI.canceled -= instance.OnHideUI;
+            @ToggleUI.started -= instance.OnToggleUI;
+            @ToggleUI.performed -= instance.OnToggleUI;
+            @ToggleUI.canceled -= instance.OnToggleUI;
             @Cam1.started -= instance.OnCam1;
             @Cam1.performed -= instance.OnCam1;
             @Cam1.canceled -= instance.OnCam1;
@@ -2505,12 +2505,12 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnOpenHelp(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "HideUI" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "ToggleUI" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnHideUI(InputAction.CallbackContext context);
+        void OnToggleUI(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Cam1" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

@@ -196,7 +196,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "HideUI",
+                    "name": "ToggleUI",
                     "type": "Button",
                     "id": "71b5b0ca-be3e-45a3-95dd-b281814755ee",
                     "expectedControlType": "",
@@ -863,7 +863,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "HideUI",
+                    "action": "ToggleUI",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

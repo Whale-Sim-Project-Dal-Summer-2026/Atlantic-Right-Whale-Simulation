@@ -18,9 +18,7 @@ public enum InputState {
 
 public class ControllerInputManagerUI : MonoBehaviour {
     // params
-    // options
-    [Header("Options")]
-    public float pressBuffer = 300; // ms
+
     // scripts
     [Header("Scripts")]
     [SerializeField] private Popup helpPopup;
@@ -94,13 +92,11 @@ public class ControllerInputManagerUI : MonoBehaviour {
         bool interaction;
         
         // mid btns
-        interaction = (openHelpInput?.ReadValue<float>() ?? 0.0f) == 1.0f;
         if (ButtonPressUtil.Pressed(openHelpInput) && currState != InputState.NOUI)  {
             if (helpBtn) {
                 helpBtn.onClick.Invoke();
             }
         }
-        interaction = (openMenuInput?.ReadValue<float>() ?? 0.0f) == 1.0f;
         if (ButtonPressUtil.Pressed(openMenuInput) && currState != InputState.POPUP && currState != InputState.NOUI) {
             if (scenariosBtn) {
                 scenariosBtn.onClick.Invoke();
@@ -109,7 +105,6 @@ public class ControllerInputManagerUI : MonoBehaviour {
         
         // btns
         // back btn
-        interaction = (backInput?.ReadValue<float>() ?? 0.0f) == 1.0f;
         if (ButtonPressUtil.Pressed(backInput))  {
             if (currState != InputState.POPUP && viewerPopup.IsOpen()) {
                 if (closeViewerBtn) {
@@ -123,7 +118,6 @@ public class ControllerInputManagerUI : MonoBehaviour {
             }
         }
         // top btn
-        interaction = (pauseInput?.ReadValue<float>() ?? 0.0f) == 1.0f;
         if (ButtonPressUtil.Pressed(pauseInput) && !whaleController && currState != InputState.POPUP)  { // paused disabled in free roam
             if (scrubber) {
                 scrubber.TogglePause();
@@ -198,22 +192,5 @@ public class ControllerInputManagerUI : MonoBehaviour {
      */
     private void SetStateNoUI(bool on) {
         currState = !on ? InputState.NOUI : InputState.ENABLED;
-    }
-    
-    /**
-     * Check if controller input is allowed. This is determined by a delay between inputs and
-     * whether user input is allowed by the program.
-     *
-     * @return Whether input is allowed.
-     */
-    private bool PressAllowed() {
-        double currTime = Time.unscaledTimeAsDouble * 1000;
-
-        if (currTime - lastPressTime > pressBuffer){
-            lastPressTime = currTime;
-            return true;
-        }
-
-        return false;
     }
 }
