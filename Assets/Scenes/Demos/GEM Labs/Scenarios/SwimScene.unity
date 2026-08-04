@@ -6811,7 +6811,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb4fe45720aa7437bbd501fc4a384d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
-  moveSpeed: 10
+  moveSpeed: 25
   fastSpeed: 25
   sensitivity: 1
   orbitTarget: {fileID: 146644512}

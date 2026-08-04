@@ -12,14 +12,14 @@ public enum CameraState {
 
 public class CameraController : MonoBehaviour{
     [Header("Free Cam")]
-    public float moveSpeed = 10f;
-    public float fastSpeed = 25f;
-    public float sensitivity = 2f;
+    public float moveSpeed = 25f;
+    public float fastSpeed = 35f;
+    public float sensitivity = 1.5f;
 
     [Header("Orbit")]
     public Transform orbitTarget;
     public float orbitDistance = 20f;
-    public float orbitSensitivity = 1f;
+    public float orbitSensitivity = 1.5f;
 
     CameraControls controls;
     Vector2 moveInput;
@@ -170,7 +170,7 @@ public class CameraController : MonoBehaviour{
     }
 
 
-    public void resetCamPos()
+    public void resetFreeCam()
     {
         freeCamReset = true;
     }

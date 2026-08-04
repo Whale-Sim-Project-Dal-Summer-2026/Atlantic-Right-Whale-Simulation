@@ -24,7 +24,7 @@ public class IdleUI : MonoBehaviour {
     private bool isIdle;
     
     void Awake() {
-        lastInput = Time.time;
+        lastInput = Time.unscaledTime;
         lastMouseInput = Mouse.current.lastUpdateTime;
     }
         
@@ -34,7 +34,7 @@ public class IdleUI : MonoBehaviour {
         bool controllerPress = Gamepad.current != null && Gamepad.current.wasUpdatedThisFrame;
         bool mouseInput = Mouse.current != null && Mouse.current.lastUpdateTime != lastMouseInput;
         if (keyboardPress || controllerPress || mouseInput) { 
-            lastInput = Time.time;
+            lastInput = Time.unscaledTime;
             lastMouseInput = Mouse.current.lastUpdateTime;
         }
         
@@ -57,7 +57,7 @@ public class IdleUI : MonoBehaviour {
      * @return Whether the idle mode is on.
      */
     private bool IsIdle(){
-        return (Time.time - lastInput) > idleTime;
+        return (Time.unscaledTime - lastInput) > idleTime;
     }
 
     /**

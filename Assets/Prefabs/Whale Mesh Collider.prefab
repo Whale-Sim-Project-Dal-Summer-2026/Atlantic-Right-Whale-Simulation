@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6355970337442254352}
-  - component: {fileID: 4306462175010258995}
   - component: {fileID: 7774635581264073852}
   m_Layer: 0
   m_Name: Whale Mesh Collider
@@ -34,29 +33,6 @@ Transform:
   - {fileID: 6643911898806686820}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4306462175010258995
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1856209555825987372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfdcae53fb749754ea0f70fcb0459bce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ManualWhaleController
-  whaleInput: {fileID: 0}
-  yaw: 0
-  pitch: 0
-  speed: 1
-  openMouth: 0
-  maxAcceleration: 1
-  maxSpeed: 5
-  turningSpeed: 1
-  rb: {fileID: 717363291495777369}
-  WhaleEnd: {fileID: 0}
-  settings: {fileID: 0}
 --- !u!114 &7774635581264073852
 MonoBehaviour:
   m_ObjectHideFlags: 0

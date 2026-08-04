@@ -95,13 +95,13 @@ public class ControllerInputManagerUI : MonoBehaviour {
         
         // mid btns
         interaction = (openHelpInput?.ReadValue<float>() ?? 0.0f) == 1.0f;
-        if (interaction && PressAllowed() && currState != InputState.NOUI)  {
+        if (ButtonPressUtil.Pressed(openHelpInput) && currState != InputState.NOUI)  {
             if (helpBtn) {
                 helpBtn.onClick.Invoke();
             }
         }
         interaction = (openMenuInput?.ReadValue<float>() ?? 0.0f) == 1.0f;
-        if (interaction && PressAllowed() && currState != InputState.POPUP && currState != InputState.NOUI) {
+        if (ButtonPressUtil.Pressed(openMenuInput) && currState != InputState.POPUP && currState != InputState.NOUI) {
             if (scenariosBtn) {
                 scenariosBtn.onClick.Invoke();
             }
@@ -110,7 +110,7 @@ public class ControllerInputManagerUI : MonoBehaviour {
         // btns
         // back btn
         interaction = (backInput?.ReadValue<float>() ?? 0.0f) == 1.0f;
-        if (interaction && PressAllowed())  {
+        if (ButtonPressUtil.Pressed(backInput))  {
             if (currState != InputState.POPUP && viewerPopup.IsOpen()) {
                 if (closeViewerBtn) {
                     closeViewerBtn.onClick.Invoke();
@@ -124,41 +124,40 @@ public class ControllerInputManagerUI : MonoBehaviour {
         }
         // top btn
         interaction = (pauseInput?.ReadValue<float>() ?? 0.0f) == 1.0f;
-        if (interaction && PressAllowed() && !whaleController && currState != InputState.POPUP)  { // paused disabled in free roam
+        if (ButtonPressUtil.Pressed(pauseInput) && !whaleController && currState != InputState.POPUP)  { // paused disabled in free roam
             if (scrubber) {
                 scrubber.TogglePause();
             }
         }
-        // TODO: select in scenarios
         
         // cross
         // cams
-        interaction = (cam1Input?.ReadValue<float>() ?? 0f) == 1.0f;
-        if (interaction && PressAllowed() && currState != InputState.POPUP) {
+        if (ButtonPressUtil.Pressed(cam1Input) && currState != InputState.POPUP) {
             camController.changeToCam(1);
         }
-        interaction = (cam2Input?.ReadValue<float>() ?? 0f) == 1.0f;
-        if (interaction && PressAllowed() && !whaleController && currState != InputState.POPUP) { // cam 2 disabled in free roam
+        if (ButtonPressUtil.Pressed(cam2Input) && !whaleController && currState != InputState.POPUP) { // cam 2 disabled in free roam
             camController.changeToCam(2);
         }
-        interaction = (cam3Input?.ReadValue<float>() ?? 0f) == 1.0f;
-        if (interaction && PressAllowed() && currState != InputState.POPUP) {
+        if (ButtonPressUtil.Pressed(cam3Input) && currState != InputState.POPUP) {
             camController.changeToCam(3);
         }
         // hide ui
-        interaction = (toggleUIInput?.ReadValue<float>() ?? 0f) == 1.0f;
-        if (interaction && PressAllowed() && currState != InputState.POPUP) {
+        if (ButtonPressUtil.Pressed(toggleUIInput) && currState != InputState.POPUP) {
             if (toggleUIBtn) {
                 toggleUIBtn.onClick.Invoke();
             }
         }
        
         // R stick
-        interaction = (camLockInput?.ReadValue<float>() ?? 0f) > .5f;
-        if (interaction && PressAllowed() && !whaleController && cam == CameraState.ORBIT && currState != InputState.POPUP) { // rot lock in cam 1
-            camController.lockUnLockCamera();
+        if (ButtonPressUtil.Pressed(camLockInput) && !whaleController && (cam == CameraState.ORBIT || cam == CameraState.FREE) && currState != InputState.POPUP) { // rot lock in cam 1
+            if (cam == CameraState.ORBIT) {
+                camController.lockUnLockCamera();
+            }
+
+            if (cam == CameraState.FREE) {
+                camController.resetFreeCam();
+            }
         }
-        // TODO: camera reset in cam 2 when not free roam
     }
 
     private void OnDestroy() {

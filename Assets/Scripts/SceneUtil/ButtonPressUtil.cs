@@ -16,7 +16,7 @@ public static class ButtonPressUtil {
             return false;
         }
 
-        double currentTime = Time.timeAsDouble * 1000f;
+        double currentTime = Time.unscaledTimeAsDouble * 1000f;
 
         if (pressTimes.TryGetValue(action, out double lastTimePressed)) {
             if (currentTime - lastTimePressed <= pressBufferMS) {
