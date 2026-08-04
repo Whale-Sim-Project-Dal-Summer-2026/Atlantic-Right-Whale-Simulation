@@ -155,24 +155,7 @@ namespace MeshGeneration {
 
     }
 
-        void SaveMeshPrefab(GameObject meshObj) {
-        string directoryPath = Application.dataPath + "/prefabs/";
-
-        string localPath = Application.dataPath + "/prefabs/" + meshObj.name + ".prefab";
-
-        string assetPath = "Assets/prefabs/" + meshObj.name + ".prefab";
-        string meshAssetPath = "Assets/prefabs/" + meshObj.name + "_Mesh.asset";
-
-        MeshFilter meshFilter = meshObj.GetComponent<MeshFilter>();
-        UnityMesh sharedMesh = meshFilter.sharedMesh;
-
-        AssetDatabase.CreateAsset(sharedMesh, meshAssetPath);
-        AssetDatabase.SaveAssets();
-
-        PrefabUtility.SaveAsPrefabAsset(meshObj, assetPath);
-        
-        AssetDatabase.Refresh();
-    }
+     
 
         Vector2 GetMinChunkPosition()
         {

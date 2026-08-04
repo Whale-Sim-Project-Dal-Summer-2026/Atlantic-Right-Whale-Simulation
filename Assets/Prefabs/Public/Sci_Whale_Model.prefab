@@ -863,10 +863,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6231168970818655502, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
-      propertyPath: PauseTime
-      value: 2500
-      objectReference: {fileID: 0}
-    - target: {fileID: 6231168970818655502, guid: 6727975dae4423f4195bbc4f9bc59cac, type: 3}
       propertyPath: ResetManager
       value: 
       objectReference: {fileID: 0}

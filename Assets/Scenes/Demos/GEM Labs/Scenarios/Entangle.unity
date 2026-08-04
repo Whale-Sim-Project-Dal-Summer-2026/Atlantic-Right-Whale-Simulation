@@ -1737,6 +1737,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sci_Whale_Model
       objectReference: {fileID: 0}
+    - target: {fileID: 8435254403895013602, guid: c73aa056ceeda714bad75c52d0319a55, type: 3}
+      propertyPath: PauseTime
+      value: 2500
+      objectReference: {fileID: 0}
     - target: {fileID: 8783632201509780730, guid: c73aa056ceeda714bad75c52d0319a55, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
