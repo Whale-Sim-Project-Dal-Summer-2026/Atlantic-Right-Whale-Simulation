@@ -26,10 +26,16 @@ public class RopePositioning : MonoBehaviour
         WhaleConnector.OnReset += ClearAndCreate;
     }
 
-    void ClearAndCreate()
+    public void ClearAndCreate()
     {
         ClearRopes();
         CreateRopes();
+    }
+
+    public void ClearAndCreate(Vector2Int dimensions, GameObject prefab){
+        spawnDimension = dimensions;
+        this.prefab = prefab;
+        ClearAndCreate();
     }
 
     // Destroys all currently tracked ropes and clears the list

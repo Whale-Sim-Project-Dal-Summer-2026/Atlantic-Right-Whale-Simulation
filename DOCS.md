@@ -2,17 +2,15 @@
 
 This markdown file contains documentation on Dany's work on the NARW summer 26 project. This will include information on both the systems I have engineered, as well as systems that I have used and worked with, such as Algoryx (AGX).
 
-Information contained will include design ideas, as well as how to operate the system.
-
-**Last Update: 07/06/26**
+Information contained will include design ideas, as well as how to operate the system. It will also include a roadmap/future work for future adopters.
 
 ## Document Layout
 
-This document will be comprised into 2 major sections. Those of which being 
+This document will be comprised into 3 major sections. Those of which being 
 
 1. Systems I created and how they operate, and why they are made the way they are.
 2. Systems I have **not** created but had to work with. (mainly AGX)
-
+3. Future Work
 
 ## My Systems
 
@@ -322,7 +320,6 @@ The documnetation also states that cables have a fixed resoultion vs wires have 
 However cables allow for modeling of torsion and plasticity that wires do not. I do not believe that these would be useful for our simulation. 
 
 More can be found here: "https://www.algoryx.se/documentation/complete/agx/tags/latest/doc/UserManual/source/agxcable.html"
-
 
 #### Solver Settings
 

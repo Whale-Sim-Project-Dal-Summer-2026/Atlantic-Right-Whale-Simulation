@@ -153,8 +153,8 @@ MonoBehaviour:
   m_fixedUpdateRealTimeFactor: 0
   m_updateRealTimeCorrectionFactor: 0.9
   m_gravity: {x: 0, y: -9.82, z: 0}
-  m_timeStep: 0.004999993
-  m_solverSettings: {fileID: 11400000, guid: 721a350ca544f2c478b40d577f7ca7a9, type: 2}
+  m_timeStep: 0.004
+  m_solverSettings: {fileID: 11400000, guid: 5f5f88de1c4933345b6b3745888e4925, type: 2}
   m_preIntegratePositions: 0
   m_displayStatistics: 1
   m_statisticsMovingAverage: 50
@@ -216,7 +216,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WirePositioning
   ropeParent: {fileID: 1921178750}
   prefab: {fileID: 76377871537406152, guid: e3660414e883b6c4880c31f2b7749dd2, type: 3}
-  spawnDimension: {x: 10, y: 10}
+  spawnDimension: {x: 1, y: 1}
   ropeSpacing: 2
   spawnRopes: 0
 --- !u!4 &257952611

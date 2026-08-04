@@ -83,6 +83,8 @@ Assets/ObiEditorSettings.asset
 Assets/ObiEditorSettings.asset.meta
 
 #private
+/Assets/Data
+Assets/Data.meta
 /Assets/Scripts/Data
 Assets/Scripts/Data.meta
 /Assets/Private

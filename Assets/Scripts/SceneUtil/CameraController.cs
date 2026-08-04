@@ -19,7 +19,7 @@ public class CameraController : MonoBehaviour{
     [Header("Orbit")]
     public Transform orbitTarget;
     public float orbitDistance = 20f;
-    public float orbitSensitivity = 2f;
+    public float orbitSensitivity = 1f;
 
     CameraControls controls;
     Vector2 moveInput;
@@ -31,6 +31,7 @@ public class CameraController : MonoBehaviour{
     float pitch;
     [SerializeField] bool rotationLocked;
     [SerializeField] GameObject POVTarget;
+    bool freeCamReset;
     
     CameraState state;
     
@@ -105,6 +106,11 @@ public class CameraController : MonoBehaviour{
             }
             case CameraState.FREE: {
                 UpdateFreeCam();
+                // if the free cam reset is pressed, set pos/rot to pov cam
+                if (freeCamReset){
+                    UpdatePOVCam();
+                    freeCamReset = false;       
+                }
                 break;
             }
             case CameraState.POV: {
@@ -132,7 +138,7 @@ public class CameraController : MonoBehaviour{
         Vector3 move =  transform.forward * moveInput.y +
                         transform.right * moveInput.x +
                         transform.up * upDownInput.y;
-        transform.position += move * speed * Time.deltaTime; // TODO: use smth else bc time is set to 0 on pause 
+        transform.position += move * speed * Time.unscaledDeltaTime; // TODO: use smth else bc time is set to 0 on pause 
     }
     void UpdateOrbit(){
         // If no target, do nothing
@@ -146,7 +152,7 @@ public class CameraController : MonoBehaviour{
         pitch = Mathf.Clamp(pitch, -80, 80);
         
         // calculate zoom based on up/down input (basically how close to the target))
-        float zoom   = upDownInput.y * moveSpeed * Time.deltaTime;
+        float zoom   = upDownInput.y * moveSpeed * Time.unscaledDeltaTime;
         
     
         // apply zoom to base orbit distance
@@ -162,5 +168,13 @@ public class CameraController : MonoBehaviour{
         
         transform.rotation = rot;
     }
+
+
+    public void resetCamPos()
+    {
+        freeCamReset = true;
+    }
+
+
 
 }
