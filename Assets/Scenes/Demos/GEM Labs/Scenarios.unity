@@ -177,7 +177,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: Watch the whale not get entangled in fishing gear using real data driven
-    by tagged Whales in the Bay of Fundy!
+    by tagged whales in the Gulf of St. Lawrence
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 14fca0116cbaf454f95408a68ced3f3b, type: 2}
   m_sharedMaterial: {fileID: -5018882589952362811, guid: 14fca0116cbaf454f95408a68ced3f3b, type: 2}
@@ -636,8 +636,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Watch the whale swim using real data driven by tagged Whales in the Bay
-    of Fundy!
+  m_text: Watch the whale swim using real data driven by tagged whales in the Gulf
+    of St. Lawrence
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 14fca0116cbaf454f95408a68ced3f3b, type: 2}
   m_sharedMaterial: {fileID: -5018882589952362811, guid: 14fca0116cbaf454f95408a68ced3f3b, type: 2}
@@ -1421,7 +1421,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: Watch the whale get entangled in fishing gear using real data driven by
-    tagged Whales in the Bay of Fundy!
+    tagged whales in the Gulf of St. Lawrence
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 14fca0116cbaf454f95408a68ced3f3b, type: 2}
   m_sharedMaterial: {fileID: -5018882589952362811, guid: 14fca0116cbaf454f95408a68ced3f3b, type: 2}
