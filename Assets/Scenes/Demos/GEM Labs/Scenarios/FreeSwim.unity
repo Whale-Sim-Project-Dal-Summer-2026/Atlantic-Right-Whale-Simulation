@@ -2346,7 +2346,7 @@ PrefabInstance:
     - target: {fileID: 36922868967594219, guid: fdfda3911e159fe4c82b140d0728b028, type: 3}
       propertyPath: whaleController
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 292524054}
     - target: {fileID: 92734363402911726, guid: fdfda3911e159fe4c82b140d0728b028, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2826,7 +2826,7 @@ PrefabInstance:
     - target: {fileID: 6292168261108798755, guid: fdfda3911e159fe4c82b140d0728b028, type: 3}
       propertyPath: whaleController
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 292524054}
     - target: {fileID: 6438090799560482649, guid: fdfda3911e159fe4c82b140d0728b028, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
