@@ -23,6 +23,7 @@ public class CyclingText : MonoBehaviour {
     private TextMeshProUGUI txt;
     private String[] lines;
     private int currInd;
+    private double lastChangeTime;
     
     void Awake() {
         // get refs
@@ -33,11 +34,23 @@ public class CyclingText : MonoBehaviour {
     void Start () {
         // load facts
         LoadLines();
-        // dispatch update events
-        InvokeRepeating(nameof(UpdateLine), 0.01f, repeatRate);
+        UpdateLine();
+        lastChangeTime = Time.unscaledTimeAsDouble;
+        
+        // set up btn
         if (txtBtn) {
             txtBtn.onClick.AddListener(UpdateLine);
         }
+    }
+
+    private void Update() {
+        // update line
+        double currentTime = Time.unscaledTimeAsDouble;
+        if (currentTime - lastChangeTime >= repeatRate) {
+            lastChangeTime = currentTime;
+            UpdateLine();
+        }
+        
     }
 
     /**
