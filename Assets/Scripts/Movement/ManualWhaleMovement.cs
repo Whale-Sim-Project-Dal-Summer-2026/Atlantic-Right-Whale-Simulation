@@ -56,7 +56,12 @@ public class ManualWhaleController : MonoBehaviour{
     private bool controlsEnabled = true;
 
     void Awake(){
-        moveInput = InputSystem.actions.FindAction("Move");
+        
+    }
+
+    void Start() {
+       seaLevel = settings.SeaLevel; 
+       moveInput = InputSystem.actions.FindAction("Move");
         accelerateInput = InputSystem.actions.FindAction("Accelerate");
         deccelerateInput = InputSystem.actions.FindAction("Deccelerate");
         openMouthInput = InputSystem.actions.FindAction("OpenMouth");
@@ -67,10 +72,6 @@ public class ManualWhaleController : MonoBehaviour{
         whaleInput.rb = rb.GetInitialized<AGXUnity.RigidBody>();
         whaleStartPos = rb.Native.getPosition();
         speedAcceleration = 1f;
-    }
-
-    void Start() {
-       seaLevel = settings.SeaLevel; 
     }
 
     public void resetWhalePosition(){
