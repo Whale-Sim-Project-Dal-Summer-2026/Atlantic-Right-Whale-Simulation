@@ -10,8 +10,7 @@ public class FlukeSolver {
     int tailCount;
     float timer = 0f;
     float currentPhase = 0f; 
-        float fixedTimeStep; 
-
+    float fixedTimeStep; 
     float frequency = 0.1f;
     float amplitude = 0.1f;   
     private float phaseShiftPerUnit = 1.25f;
@@ -22,7 +21,7 @@ public class FlukeSolver {
 
     FlukeWaveAmplitudeLookUp lookUp;
 
-    public List<float> boneMaxAngles = new List<float>
+    public List<float> boneStiffnessFactor = new List<float>
 {
     0.1f, 
     0.1f, 
@@ -36,24 +35,18 @@ public class FlukeSolver {
     0.2f, 
     0.2f, 
     0.2f, 
-    0.3f, 
-    0.3f, 
-    0.8f,
-    0.15f, 
-    0.15f, 
-    0.15f, 
-    0.15f,
-    0.15f, 
-    0.15f, 
-    0.15f,
-    0.15f, 
-    0.15f, 
-    0.15f,
-    0.15f, 
-    0.15f, 
-    0.15f,
-    0.15f, 
-    0.15f 
+    //FLUKE BONES ALL THE SAME first bone moves at 1/10 of the amount as the medial notch, in terms of angle
+    1f, 
+    1f, 
+    //FLUKE SECTIONS 
+    .1f, 
+    .1f, 
+    .1f, 
+    .1f, 
+    .1f,
+    .1f, 
+    .1f,
+    .1f
 };
 
     public FlukeSolver(int tailCountIn, float fixedTimeStepIn, FlukeWaveAmplitudeLookUp lookUpIn, int tailStartIndexIn){
@@ -84,7 +77,7 @@ public class FlukeSolver {
         float cumulativeDistance = 0f;  
         for (int i = tailStartIndex; i < tailCount; i++){  
             // adjusts amplitude to be within range of motion for bone (could try clamping the final angle too??) LOOKS OKAY JUST NEED TO TUNE
-            float A_i   = (float)amplitude* boneMaxAngles[i];        
+            float A_i   = (float)amplitude* boneStiffnessFactor[i];        
             //   the shift of amount of the wave based on the distance (negative since going backwards) LOWER THIS!!!!!
             float phi_i = -(cumulativeDistance * phaseShiftPerUnit);   
             // static wave offset (not sure if this can be tuned withouxt breaking anything so keeping it 0)
