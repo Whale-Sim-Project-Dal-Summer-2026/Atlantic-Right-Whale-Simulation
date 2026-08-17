@@ -860,7 +860,7 @@ GameObject:
   - component: {fileID: 810597158}
   - component: {fileID: 810597157}
   m_Layer: 5
-  m_Name: AFollowCam
+  m_Name: A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1108,7 +1108,7 @@ GameObject:
   - component: {fileID: 977050317}
   - component: {fileID: 977050316}
   m_Layer: 5
-  m_Name: ATxtFollowCam
+  m_Name: ATxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1153,7 +1153,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: pause/play
+  m_text: select
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 14fca0116cbaf454f95408a68ced3f3b, type: 2}
   m_sharedMaterial: {fileID: -5018882589952362811, guid: 14fca0116cbaf454f95408a68ced3f3b, type: 2}
@@ -2231,7 +2231,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1947953365}
   m_Layer: 5
-  m_Name: AUIFollowCam
+  m_Name: AUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
