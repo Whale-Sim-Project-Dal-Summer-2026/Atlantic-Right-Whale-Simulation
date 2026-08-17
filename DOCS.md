@@ -4,6 +4,10 @@ This markdown file contains documentation on Dany's work on the NARW summer 26 p
 
 Information contained will include design ideas, as well as how to operate the system. It will also include a roadmap/future work for future adopters.
 
+**Date:** 8/15/2026 <br>
+**Unity Version:** 6000.4.5f1 <br>
+**AGX Version:** 5.6.0 <br>
+
 ## Document Layout
 
 This document will be comprised into 3 major sections. Those of which being 
@@ -65,16 +69,27 @@ The Bathymetry Preprocess step contains 3 steps, those being
     | dataCount | `int` | 4 |
     | dataPoints | `List<float>` | 4 * dataCount |
 
+**How to Run**:
+
+1. **Obtain the Data:** Download the bathymetry dataset from the CHS Sonar dataset ([CHS_NONA_DATASET](https://data.chs-shc.ca/dashboard/map)). Ensure you download the data at 10 m resolution (the highest resolution possible).
+2. **File Placement:** Place the downloaded files into the `Assets/Private/` directory. Inside this directory, place the data under `Bathymetry/BoF` (for Bay of Fundy) or `Bathymetry/GSL` (for Gulf of St. Lawrence).
+3. **GameObject Setup:** In your Unity scene, create a new `GameObject` and attach the `BathymetryReader` component to it.
+4. **Assign Settings:** Assign the `ProcessingSettings` ScriptableObject to the reader's field. Ensure its parameters (such as sea level, max depth, num to run, etc.) are properly configured.
+5. **Bake:** In the Unity Inspector, right-click the `BathymetryReader` component header to open its Context Menu and select **Bake Bathymetry Data**. The simulation does not need to be running to execute this step.
+
 ### Bathymetry Runtime Step
 
-The Bathymetry runtime step involves the construction of a mesh and displaying chunks of data. IT is relatively simple and follows a conventional data process for mesh construction.
+The Bathymetry runtime step involves the construction of a mesh and displaying chunks of data. It is relatively simple and follows a conventional data process for mesh construction.
 
-This step as mentioned previously will use the data from the process step to display. 
+This step utilizes `Mesh.cs` to read the preprocessed binary files (represented via the `DepthDataRecord` struct) and generate the Unity terrain meshes.
 
-First, we read in the binary file containing the preprocessed data. The organization of this binary file can be found in the previous section. These Binary files can and should be represent using the ```DepthDataRecord``` struct
+**Requirements & Dependencies:**
+* **AGX Dependency:** `Mesh.cs` requires AGX Dynamics to function because it generates and attaches AGX colliders to the terrain geometry. If you do not have access to AGX, you will need to go back to a previous commit in the git.
 
-Then for each DepthDataRecord, we first construct a unity mesh. Then we position it using the relative chunks position, as well as the chunk size which is defined in the ScriptableObject ```./Assets/Scripts/ProcessingSettings.cs```. We then parent this game object to a set Gameobject parent.
-
+**How to Run:**
+1. Attach the `Mesh.cs` component to a `GameObject` in the scene.
+2. Assign all serialized fields in the Inspector, including the target parent `Transform` to parent the instantiated mesh chunks to, as well as the `ProcessingSettings` ScriptableObject.
+3. Start the simulation. The script will automatically execute on `Awake()` and construct the terrain through the AGX system.
 
 ### Backscatter Preprocess Step
 
@@ -149,7 +164,8 @@ The process of writing to a binary file is trivial. It follows the following str
 | Width | `float` | 4 |
 | Height | `float` | 4 |
 | dataCount | `int` | 4 |
-| dataPoints | `List<float
+| dataPoints | `List<float>` | 4 * dataCount |
+
 The backscatter runtime step includes the mapping of a flat mud texture to the bathymetry driven mesh, then the inclusion of procededurally generated boulders. While this approach sacrifices some bathymetry realism, we can achieve greater plausibility. 
 
 Generally the process follows these steps:
@@ -160,6 +176,23 @@ Generally the process follows these steps:
 
 Step 1 and 2 are relatively trivial as it consits of reading in the processed work that we have completed before. The layout of backscatter binary file can be found in the section above.
 
+**How to Run**:
+
+1. **Obtain the Data:** Download the backscatter dataset from the CHS Sonar dataset ([CHS_NONA_DATASET](https://data.chs-shc.ca/dashboard/map)).
+2. **File Placement:** Place the raw files into the `Assets/Private/` directory under `Backscatter/BOF` or `Backscatter/GSL`, matching the structure used in the bathymetry pipeline.
+3. **GameObject Setup & Assignment:** Create a `GameObject` and attach the `BackscatterReader` component. Ensure all serialized references and settings fields are assigned to avoid null reference exceptions.
+4. **Bake:** Right-click the component header in the Inspector and select **Bake Backscatter Data** from the Context Menu. The script will process the data, write out the binary file, and notify you when it is ready to be used.
+
+### Backscatter Runtime Step
+
+The backscatter runtime step handles the placement and instantiation of procedural seabed boulders on top of the terrain mesh. 
+
+> **Important Note:** `BackscatterRenderer.cs` is deprecated and no longer used. Do not use it. The runtime generation is now driven entirely by `BoulderSpawner.cs`.
+
+**How to Run**:
+1. Add the `BoulderSpawner.cs` component to the scene.
+2. Configure the serialized parameters exposed in the Inspector. These parameters control boulder variations, minimum/maximum scale, clump counts, and positional deviations.
+3. Run the scene. The spawner will read the preprocessed backscatter binary data, sample the chunk intensity averages, and automatically instantiate the procedural boulders at runtime.
 
 #### Pseudorandom Properties
 
@@ -276,10 +309,25 @@ The control points in this case are the points that are defined in our height ma
 Alternatively, fBm coupled with perlin noise can be called, using 
 ```fBmNoise()```
 
+
+#### ButtonPressUtil.cs
+
+A helper utility created to simplify checking whether a given `InputAction` is pressed, while providing built-in input buffering. 
+
+* **Usage:** Pass in an `InputAction` to query press states easily (useful for actions like opening menus via controller buttons).
+* **Cleanup (`Unregister`):** Because this utility uses an internal dictionary-based tracking system, you **must** call the `Unregister` function when destroying or disabling the caller to cleanly remove the action from the dictionary.
+
 ## Systems I have worked with
 
 This section will act as a reference for all the knowledge I have on different systems, how they operate, how to use them, and other importnat infomration relating to the system.
 
+### Controller Input
+
+The simulation input handling utilizes Unity's **New Input System**, supporting cross-device input mapping across gamepad/controller, keyboard, and touchscreen devices through Input Actions.
+
+#### Input Architecture & Handling
+* **Whale Locomotion:** Direct control for the whale is located in `Assets/Scripts/Movement/ManualWhaleMovement.cs`. This script reads movement-specific input actions directly from Unity's new input system to drive the whale model.
+* **UI & Menu Inputs:** UI navigation and secondary interactions were refactored by Mars to integrate with her workflow. Refer to Mars or her components on how her UI input processing is structured and where those handlers reside.
 
 ### Algoryx for Unity (AGX)
 
@@ -330,15 +378,34 @@ I have tested numerous different solver settings. The 2 goals that drove the exp
 
 A sub goal of keeping memory usage as minimal as possible was kept in mind as well.
 
-The most important discovery in the solver settings is the setting **Real Time Rendering**.
+The physics solver configuration is managed through AGX's simulation components. At the root/scene level, locate the **`AGXUnity.Simulation`** `GameObject`. Selecting this object in the Unity Inspector provides access to the main `Simulation (Script)` component as well as references to solver configuration assets:
+* **Global Simulation Parameters:** Exposes settings such as **Gravity** (`(0, -9.82, 0)`), **Time Step** (`0.004` — altered from the default `0.02`), **Auto Stepping Mode** (`Fixed Update`), and **Real Time Factor** (`Fixed Update Real Time Factor`).
+* **Solver Settings ScriptableObject:** The `Solver Settings` field references a dedicated ScriptableObject asset (`SolverSettings.asset`) containing the granular numerical solver parameters.
+
+The most important discovery in the solver settings is the setting **Real Time Factor** (previously referred to as Real Time Rendering in earlier notes).
 
 When set to 1, the solver, when under heavy simulation, sacrifices FPS in a traditional sense, lowering the FPS.
 When set to 0, the solver when under heavy simulation, slows down the simulation, attempting to keep FPS higher.
 
 I have found that setting this parameter to 0 allows us to keep realtime playback. Without it, its very possible to have 1-2 FPS under heavy load.
 
-Another important note is number of threads. I have noiticed that changing this value did not effect performance at all. Unsure if it is a bug, but either way, I kept this on 4, as this is noted as the max in the documentation.  
+Another important note is number of threads. I have noiticed that changing this value did not effect performance at all. Unsure if it is a bug, but either way, I kept this on 4, as this is noted as the max in the documentation. 
 
+##### Solver Settings Asset Parameters
+Below is the parameter breakdown comparing our active configuration with AGX defaults. For full parameter definitions, see the [AGX Unity Solver Documentation](https://us.download.algoryx.se/AGXUnity/documentation/current/editor_interface.html#solver-settings-ref).
+
+| Parameter | Active Value | Default Value | Notes |
+| :--- | :--- | :--- | :--- |
+| **Number Of Threads** | `4` | Calculated (`logical cores / 2 - 1`, max `4`) | Max allowed threads according to AGX documentation. Tested variations showed no noticeable performance impact. |
+| **Warm Start Direct Contacts** | `true` (Checked) | `false` | **Modified:** Toggled on for frictional contacts solved with direct solver. |
+| **Resting Iterations** | `16` | `16` | Default setting (iterative solver iterations). |
+| **Dry Friction Iterations** | `7` | `7` | Default setting (friction refinement during direct/iterative coupling). |
+| **Mcp Algorithm** | `Hybrid Pivot` | `Hybrid Pivot` | Default setting (options: `Hybrid Pivot`, `Keller`, `Block Pivot`). |
+| **Mcp Inner Iterations** | `7` | `7` | Default setting (max iterations to reach inner tolerance). |
+| **Mcp Inner Tolerance** | `1e-06` | `1.0E-6` | Default setting (max tolerated residual of the solution). |
+| **Mcp Outer Iterations** | `5` | `5` | Default setting (max non-linear iterations to reach outer tolerance). |
+| **Mcp Outer Tolerance** | `0.01` | `1.0E-2` | Default setting (max tolerated non-linear residual). |
+| **Ppgs Resting Iterations** | `25` | `25` | Default setting (Parallel Projected Gauss Seidel resting iterations). |
 
 #### HydroDyanamics (Water)
 
@@ -359,8 +426,14 @@ This section will outline items that I did not have time to come around to. this
 
 
 - Better Force Movement
-- 1 Rigidbody Per Joint System
+- 1 Rigidbody Per Joint System (Dual-Whale Architecture)
 - Better Primitives for Colliders
+- Improved Backscatter Usage
+- Environment and Movement Synchronization
+- Cohesive Water Chunk Mesh Integration
+- What Happened at timestep X
+- Terrain Metric Alignment & UTM Dynamic Scaling (Small-Scope Fix)
+- Dynamic Triangle Streaming & LOD System (Large-Scope UTM Overhaul)
 
 ### Better Force Movement
 
@@ -467,6 +540,34 @@ The visual representation of adjacent water volumes requires adjustments to elim
 A key feature that Mars wanted to implement was to allow users to go back to a certain time step X. We would need a system that would allow users to pick a time step and 'scrub' forward and backward. This requires figuring out a way to know what happened at time step X.
 
 We could log the whale's position/rotation at each step, the main issue is what happens to the ropes. We would need to have information on those. One idea is just to use the whale position/rotation at each step and then re simulate it up to that point, in theory that would allow for knowing what would happen at each time step, however it is possible (and hopefully plausible) that a more elegant solution presents itself. 
+
+### Terrain Metric Alignment & UTM Dynamic Scaling (Small-Scope Fix)
+
+To make the environment physically accurate without needing a ground-up pipeline rebuild, we can standardize chunk rendering in **UTM** rather than raw latitude and longitude.
+
+#### Motivation
+* **Units in Meters:** Latitude and longitude are measured in angular degrees, which causes physical distortion when mapped directly to Unity. UTM is measured directly in **meters**, providing a 1:1 match with Unity’s physics and coordinate space.
+* **Physical Consistency:** The whale model, ropes, and AGX physics elements already operate in real-world meters. Bringing the terrain into UTM ensures the seabed agrees physically with the rest of the simulation.
+
+#### Proposed Solution: Aspect Ratio Scaling
+Instead of rebuilding the entire meshing pipeline, we can keep the rigid chunk workflow and dynamically correct the chunk dimensions into true UTM metric space:
+* **Aspect Ratio Multiplication:** Compute the physical aspect ratio between the chunk's north–south and east–west extents in meters.
+* **Preserve Square Chunks:** Multiply the chunk dimensions by this aspect ratio scaling factor at render time. This preserves a consistent, square chunk size in engine space while keeping the terrain in real-world UTM meters.
+* **Seamless Tiling:** Because the dynamic scaling factor is derived directly from the chunk's UTM coordinates, adjacent chunks scale consistently and continue to tile together without gaps or overlapping seams.
+
+### Dynamic Triangle Streaming & LOD System (Large-Scope UTM Overhaul)
+
+If the simulation platform expands from localized areas (such as the Bay of Fundy) to wide-area regional coverage (such as the entire Gulf of St. Lawrence), the rigid-chunk pipeline will encounter significant geometric distortion under UTM projections.
+
+#### Limitations of Rigid Chunking in UTM
+* **Coordinate Discontinuities & Trapezia:** In UTM space, lines of latitude and longitude curve. Slicing geographic datasets into rigid square chunks causes tiles at higher latitudes to distort into non-square trapezoids with variable boundary lengths.
+* **Seam Misalignment:** Attempting to force variable UTM chunk sizes into a rigid grid creates gaps and overlaps between adjacent tiles.
+
+#### Proposed System: Frustum-Based Triangle Streaming
+To support massive regional scale and true UTM projection without tile warping, the terrain pipeline should be redesigned from the ground up:
+1. **Dynamic Streaming:** Load raw bathymetry data dynamically within a specified radius around the player/camera, filtering out triangles that fall outside the camera's view frustum.
+2. **Distance-Based Level of Detail (LOD):** Subdivide and mesh the seabed dynamically based on camera distance, rendering high-density geometry near the whale and lower-resolution meshes in the background.
+3. **Tool Repurposing:** While the mesh instantiation and layout logic will require a complete rewrite, the low-level GeoTIFF readers, IDW patching algorithms, and binary serialization tools from the current pipeline can be repurposed.
 
 ## References
 
