@@ -55,7 +55,8 @@ public class TelemetryUI : MonoBehaviour {
         float maxOffsetLen = pitchTextureRectTransform.rect.height*pitchTextureRectTransform.lossyScale.y / 2;
         pitchText.text = pitch + "\u00b0";
         float offsetLen = (maxOffsetLen-20) * (Math.Abs(pitch) / 90.0f);
-        Vector3 offset = new Vector3(-60, -maxOffsetLen + (pitch < 0 ? -offsetLen : offsetLen), 0);
+        float xOffset = pitchTextureRectTransform.rect.width*pitchTextureRectTransform.lossyScale.x*(-0.3f);
+        Vector3 offset = new Vector3(xOffset, -maxOffsetLen + (pitch < 0 ? -offsetLen : offsetLen), 0);
         pitchText.transform.position = pitchCenter + offset;
     }
 
