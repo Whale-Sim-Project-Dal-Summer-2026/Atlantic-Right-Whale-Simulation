@@ -38,12 +38,16 @@ public class WhaleConnector : MonoBehaviour {
         Scrubber.OnPlay += PlayWhale;
     }
 
-    void Update() {
+    void FixedUpdate() {
         UpdateTelemetry();
         UpdateTime();
         
         // set scrubber percentage
-        float percent = (float)whaleDriver.currentTimestep / whaleDriver.CSV_ResetTimeStep * 100;
+        float percent = (float)(whaleDriver.currentTimestep) / whaleDriver.CSV_ResetTimeStep * 100;
+        if (whaleDriver.currentTimestep + 1 >= whaleDriver.CSV_ResetTimeStep) {
+            percent = 100;
+        }
+        
         if (scrubber) {
             scrubber.UpdateTimelineProgress(percent);
         } else {
@@ -59,6 +63,9 @@ public class WhaleConnector : MonoBehaviour {
         ControlHints.OnUnstick -= Reset;
         Scrubber.OnPause -= PauseWhale;
         Scrubber.OnPlay -= PlayWhale;
+
+        // reset timescale
+        Time.timeScale = 1.0f;
     }
 
     /**

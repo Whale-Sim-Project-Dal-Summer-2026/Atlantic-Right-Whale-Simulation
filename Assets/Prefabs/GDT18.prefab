@@ -544,6 +544,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6426e986cb9dfcd4983b61b50081362f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ViewerItem
-  image: {fileID: 2800000, guid: c96e09024ede1144db4b26a65498db68, type: 3}
+  image: {fileID: 2800000, guid: 5bf17be5649c3f34a9466ec562297669, type: 3}
   text: Fish harvester coiling rope with a buoy
   collider: {fileID: 2926921820154068864}

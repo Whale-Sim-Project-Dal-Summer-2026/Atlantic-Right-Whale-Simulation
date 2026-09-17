@@ -145,9 +145,6 @@ public class Scrubber : MonoBehaviour {
             }
         }
     }
-    void OnDestroy() {
-        SetPause(false); 
-    }
     
     /**
      * Set pause.
