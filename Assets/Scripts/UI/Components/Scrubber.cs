@@ -29,6 +29,15 @@ public class Scrubber : MonoBehaviour {
     [SerializeField] private Button cam1Btn;
     [SerializeField] private Button cam2Btn;
     [SerializeField] private Button cam3Btn;
+    [SerializeField] private Sprite cam1OffSprite;
+    [SerializeField] private Sprite cam2OnSprite;
+    [SerializeField] private Sprite cam3OnSprite;
+    private Sprite cam1OnSprite;
+    private Sprite cam2OffSprite;
+    private Sprite cam3OffSprite;
+    private Image cam1Img;
+    private Image cam2Img;
+    private Image cam3Img;
     // playback btns
     [SerializeField] private Button restartBtn;
     [SerializeField] private Button bwdBtn;
@@ -84,7 +93,21 @@ public class Scrubber : MonoBehaviour {
             pauseSprite = Resources.Load<Sprite>("UI/Scrubber/play");
             playSprite = Resources.Load<Sprite>("UI/Scrubber/pause");
         }
-    }
+
+        // get og cam btns
+        if (cam1Btn) {
+            cam1Img = cam1Btn.GetComponent<Image>();
+            cam1OnSprite = cam1Img.sprite;
+        }
+        if (cam2Btn) {
+            cam2Img = cam2Btn.GetComponent<Image>();
+            cam2OffSprite = cam2Img.sprite;
+        }
+        if (cam3Btn) {
+            cam3Img = cam3Btn.GetComponent<Image>();
+            cam3OffSprite = cam3Img.sprite;
+        }
+    } 
     
 
     void Start() {
@@ -101,16 +124,25 @@ public class Scrubber : MonoBehaviour {
         // cams btns
         if (cam1Btn) {
             cam1Btn.onClick.AddListener(() => {
+                cam1Img.sprite = cam1OnSprite;
+                cam2Img.sprite = cam2OffSprite;
+                cam3Img.sprite = cam3OffSprite;
                 OnCamSwitch?.Invoke(1);
             });
         }
         if (cam2Btn) {
             cam2Btn.onClick.AddListener(() => {
+                cam1Img.sprite = cam1OffSprite;
+                cam2Img.sprite = cam2OnSprite;
+                cam3Img.sprite = cam3OffSprite;
                 OnCamSwitch?.Invoke(2);
             });
         }
         if (cam3Btn) {
             cam3Btn.onClick.AddListener(() => {
+                cam1Img.sprite = cam1OffSprite;
+                cam2Img.sprite = cam2OffSprite;
+                cam3Img.sprite = cam3OnSprite;
                 OnCamSwitch?.Invoke(3);
             });
         }

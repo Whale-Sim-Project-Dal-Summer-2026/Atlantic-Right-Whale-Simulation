@@ -203,6 +203,7 @@ GameObject:
   - component: {fileID: 923358219229469170}
   - component: {fileID: 36922868967594219}
   - component: {fileID: 6292168261108798755}
+  - component: {fileID: 3630395549001564695}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -257,7 +258,7 @@ MonoBehaviour:
   scenariosBtn: {fileID: 8017263789704846574}
   scrubber: {fileID: 0}
   toggleUIBtnObj: {fileID: 2600515127747958561}
-  togglesManager: {fileID: 1952269297791087791}
+  togglesManager: {fileID: 0}
 --- !u!114 &923358219229469170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,7 +271,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6a5e28c9e5e43e4baac1c42313bce41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ControllerInputManagerUI
-  pressBuffer: 300
   helpPopup: {fileID: 2972206055707709199}
   viewerPopup: {fileID: 4114817826868559657}
   scrubber: {fileID: 0}
@@ -313,6 +313,27 @@ MonoBehaviour:
   scrubber: {fileID: 0}
   telemetry: {fileID: 948749286726037757}
   whaleController: {fileID: 0}
+--- !u!114 &3630395549001564695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8378635479767010812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cea32385d6acf484ebf2397f32dd828f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TogglesManager
+  camBtnsToggles: {fileID: 0}
+  toggleUIBtn: {fileID: 1479979553257209088}
+  toggleDragBtn: {fileID: 0}
+  toggleStressBtn: {fileID: 0}
+  togglePathBtn: {fileID: 0}
+  cam1Btn: {fileID: 0}
+  cam2Btn: {fileID: 0}
+  cam3Btn: {fileID: 0}
+  whaleTrail: {fileID: 0}
 --- !u!1001 &783455604080374954
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1684,17 +1705,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
---- !u!114 &1952269297791087791 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4726672964631486046, guid: d048ea5d3e60e574fbc50183f4ebffab, type: 3}
-  m_PrefabInstance: {fileID: 6525538364143201009}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cea32385d6acf484ebf2397f32dd828f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TogglesManager
 --- !u!1 &2600515127747958561 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9122529411013426640, guid: d048ea5d3e60e574fbc50183f4ebffab, type: 3}

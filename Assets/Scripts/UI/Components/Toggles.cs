@@ -78,7 +78,7 @@ public class Toggles : MonoBehaviour {
      * Toggle.
      * @param x - Index of toggle to toggle.
      */
-    private void Toggle(int x) {
+    private void Toggle(int x) { // TODO: if exposed shouldn't be indexed 
         toggles[x].on = !toggles[x].on;
         OnToggle?.Invoke(toggles[x].on, toggles[x].btn.gameObject);
         toggles[x].GetBtnImage().sprite = toggles[x].on ? toggles[x].GetSpriteOn() : toggles[x].GetSpriteOff();
