@@ -64,9 +64,7 @@ public class Toggles : MonoBehaviour {
                 toggles[x].SetSpriteOff(toggles[x].GetBtnImage().sprite);
             }
         }
-    }
-    
-    void Start() {
+        
         // add event listeners
         for (int x = 0; x < toggles.Length; x++) {
             int param = x;

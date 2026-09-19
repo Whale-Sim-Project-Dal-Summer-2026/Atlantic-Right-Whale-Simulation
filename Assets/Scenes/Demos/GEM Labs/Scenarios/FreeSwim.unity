@@ -1683,6 +1683,17 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!114 &1343911183 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3630395549001564695, guid: fdfda3911e159fe4c82b140d0728b028, type: 3}
+  m_PrefabInstance: {fileID: 2432568881693197619}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cea32385d6acf484ebf2397f32dd828f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TogglesManager
 --- !u!114 &1363442016
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -2763,6 +2774,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5172624810789402756, guid: fdfda3911e159fe4c82b140d0728b028, type: 3}
+      propertyPath: togglesManager
+      value: 
+      objectReference: {fileID: 1343911183}
     - target: {fileID: 5182508203346874967, guid: fdfda3911e159fe4c82b140d0728b028, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2992,30 +3007,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8145792173630542065, guid: fdfda3911e159fe4c82b140d0728b028, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8335488793795439814, guid: fdfda3911e159fe4c82b140d0728b028, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8335488793795439814, guid: fdfda3911e159fe4c82b140d0728b028, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8335488793795439814, guid: fdfda3911e159fe4c82b140d0728b028, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8335488793795439814, guid: fdfda3911e159fe4c82b140d0728b028, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8335488793795439814, guid: fdfda3911e159fe4c82b140d0728b028, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8335488793795439814, guid: fdfda3911e159fe4c82b140d0728b028, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}

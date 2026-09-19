@@ -84,14 +84,14 @@ public class WhaleConnector : MonoBehaviour {
     /**
      * Function which pauses the whale.
      */
-    private void PauseWhale() { // TODO
+    public static void PauseWhale() { // TODO
         Time.timeScale = 0.0f;
     }
 
     /**
      * Function which resumes the whale.
      */
-    private void PlayWhale() { // TODO
+    public static void PlayWhale() { // TODO
         Time.timeScale = 1.0f;
     }
     

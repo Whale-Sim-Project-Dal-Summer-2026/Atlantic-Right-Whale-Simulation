@@ -47,9 +47,10 @@ public class ControllerInputManagerUI : MonoBehaviour {
     private InputAction toggleUIInput;
     // sticks
     private InputAction camLockInput;
+    // top
+    InputAction accelerateInput;
     
     // vars
-    private double lastPressTime;
     private InputState currState = InputState.ENABLED;
     private CameraState cam = CameraState.ORBIT;
     private bool whaleController;
@@ -73,13 +74,13 @@ public class ControllerInputManagerUI : MonoBehaviour {
         toggleUIInput = InputSystem.actions.FindAction("ToggleUI");
         // sticks
         camLockInput = InputSystem.actions.FindAction("CamLock");
+        // top
+        accelerateInput = InputSystem.actions.FindAction("Accelerate");
         
         // sub
         CameraController.OnCamSwitch += UpdateCam;
         PopupManager.OnHelpPopup += SetStatePopup;
         TogglesManager.OnToggleUI += SetStateNoUI;
-        
-        lastPressTime = Time.time;
     }
 
     void Update() {
@@ -89,8 +90,6 @@ public class ControllerInputManagerUI : MonoBehaviour {
         }
         
         // process input
-        bool interaction;
-        
         // mid btns
         if (ButtonPressUtil.Pressed(openHelpInput) && currState != InputState.NOUI)  {
             if (helpBtn) {

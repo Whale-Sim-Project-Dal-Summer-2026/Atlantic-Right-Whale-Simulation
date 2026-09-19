@@ -49,7 +49,6 @@ public class IdleUI : MonoBehaviour {
             IdleMode(false);
             isIdle = false;
         }
-        
     }
         
     /**

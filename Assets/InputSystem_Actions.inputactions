@@ -142,15 +142,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Deccelerate",
-                    "type": "Button",
-                    "id": "5c773616-42ae-46e1-8a99-5fd521bede49",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "OpenMouth",
                     "type": "Button",
                     "id": "d3b76fe7-fddd-49fd-8af3-26989b4e755f",
@@ -792,12 +783,12 @@
                 },
                 {
                     "name": "",
-                    "id": "b5e5591e-31de-452e-9994-502d605b7df2",
+                    "id": "a92ebee2-973f-4a72-9df8-aefc5ed0c866",
                     "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
-                    "action": "Deccelerate",
+                    "action": "Accelerate",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

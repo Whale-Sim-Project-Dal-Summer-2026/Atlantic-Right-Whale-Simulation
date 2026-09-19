@@ -14,9 +14,10 @@ public class PublicUIManager : MonoBehaviour {
     // scenarios btn
     [Header("Scenarios Button")]
     [SerializeField] private Button scenariosBtn;
+    // idle mode
     [Header("Idle Mode Dependencies")]
     [SerializeField] private Scrubber scrubber;
-    [SerializeField] private GameObject toggleUIBtnObj;
+    [SerializeField] private GameObject toggleUIBtnObj; // TODO: could probably just have this be button in
     [SerializeField] private TogglesManager togglesManager;
 
     // vars
@@ -29,7 +30,7 @@ public class PublicUIManager : MonoBehaviour {
         }
         
         // scenario btn functionality
-        scenariosBtn.onClick.AddListener(() => {
+        scenariosBtn.onClick.AddListener(() => { // TODO: make part of separate component
             if (SceneSwitcher.Instance != null) {
                 SceneSwitcher.Instance.changeToScenarios();
             }
