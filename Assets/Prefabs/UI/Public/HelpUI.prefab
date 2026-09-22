@@ -200,7 +200,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3054385321657811057}
   - component: {fileID: 6225732073840008033}
-  - component: {fileID: 5148889399704764534}
+  - component: {fileID: 6369970415650115615}
   m_Layer: 5
   m_Name: Controls
   m_TagString: Untagged
@@ -235,7 +235,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4175109025455877437}
   m_CullTransparentMesh: 1
---- !u!114 &5148889399704764534
+--- !u!114 &6369970415650115615
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -244,24 +244,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 4175109025455877437}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RawImage
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 0a263cf400236f740a3bd1e1709a6607, type: 3}
-  m_UVRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
+  m_Sprite: {fileID: 21300000, guid: 0a263cf400236f740a3bd1e1709a6607, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &4393870655067214545
 GameObject:
   m_ObjectHideFlags: 0
@@ -512,7 +515,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8951253098447164868}
   - component: {fileID: 213174196336857638}
-  - component: {fileID: 7068072516877225970}
+  - component: {fileID: 7784270429401297324}
   - component: {fileID: 7627644194141576708}
   - component: {fileID: 5204827600139041618}
   m_Layer: 5
@@ -553,7 +556,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7170085108513337919}
   m_CullTransparentMesh: 1
---- !u!114 &7068072516877225970
+--- !u!114 &7784270429401297324
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -562,9 +565,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7170085108513337919}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RawImage
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
@@ -573,13 +576,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 770ec6dce906a8f46b55c169f84b160b, type: 3}
-  m_UVRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
+  m_Sprite: {fileID: 21300000, guid: 770ec6dce906a8f46b55c169f84b160b, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &7627644194141576708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -604,7 +610,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3044cb77802446709003fd9832d62451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HelpPopup
-  controlsHelp: {fileID: 5148889399704764534}
+  controlsHelp: {fileID: 6369970415650115615}
+  freeCamControls: {fileID: 21300000, guid: 0ec74c3030d02ef4dbd2bd9e0aecfabc, type: 3}
+  whalePOVControls: {fileID: 21300000, guid: f31bcd5b977630c42b398c22a2e46b5a, type: 3}
   helpText: {fileID: 1997977469690359606}
   freeCamHelp: Watch a simulation of a whale swimming in the real world! Use the
     controls below to navigate around the scene and explore to your heart's content!

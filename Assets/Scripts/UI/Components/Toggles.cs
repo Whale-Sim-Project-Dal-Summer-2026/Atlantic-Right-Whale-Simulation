@@ -11,30 +11,29 @@ using UnityEngine.UI;
 [Serializable]
 struct Toggle {
     public Button btn;
-    public  String spriteRsrcPath;
+    public  Sprite altSprite;
     public bool on;
     private Sprite spriteOff;
-
-    public void SetSpriteOff (Sprite s) {
-        spriteOff = s; 
-    }
-    public Sprite GetSpriteOff() {
-        return spriteOff;
-    }
+        public void SetSpriteOff (Sprite s) {
+            spriteOff = s; 
+        }
+        public Sprite GetSpriteOff() {
+            return spriteOff;
+        }
     private Sprite spriteOn;
-    public void SetSpriteOn (Sprite s) {
-        spriteOn = s; 
-    }
-    public Sprite GetSpriteOn() {
-        return spriteOn;
-    }
+        public void SetSpriteOn (Sprite s) {
+            spriteOn = s; 
+        }
+        public Sprite GetSpriteOn() {
+            return spriteOn;
+        }
     private Image btnImage;
-    public void SetBtnImage (Image i) {
-        btnImage = i; 
-    }
-    public Image GetBtnImage() {
-        return btnImage;
-    }
+        public void SetBtnImage (Image i) {
+            btnImage = i; 
+        }
+        public Image GetBtnImage() {
+            return btnImage;
+        }
 }
 
 public class Toggles : MonoBehaviour {
@@ -51,12 +50,12 @@ public class Toggles : MonoBehaviour {
         // get refs
         for (int x = 0; x < toggles.Length; x++) {
             toggles[x].SetBtnImage(toggles[x].btn.GetComponent<Image>());
-            if (toggles[x].spriteRsrcPath != "") {
+            if (toggles[x].altSprite != null) {
                 if (toggles[x].on) {
-                    toggles[x].SetSpriteOff(Resources.Load<Sprite>(toggles[x].spriteRsrcPath));
+                    toggles[x].SetSpriteOff(toggles[x].altSprite);
                     toggles[x].SetSpriteOn(toggles[x].GetBtnImage().sprite);
                 } else {
-                    toggles[x].SetSpriteOn(Resources.Load<Sprite>(toggles[x].spriteRsrcPath));
+                    toggles[x].SetSpriteOn(toggles[x].altSprite);
                     toggles[x].SetSpriteOff(toggles[x].GetBtnImage().sprite);
                 }
             } else {

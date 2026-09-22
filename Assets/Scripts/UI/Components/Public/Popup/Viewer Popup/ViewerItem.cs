@@ -14,7 +14,7 @@ public class ViewerItem : MonoBehaviour {
     // params
     // content
     [Header("Content")]
-    [SerializeField] private Texture image;
+    [SerializeField] private Sprite image;
     [TextArea]
     [SerializeField] private String text;
     // refs
@@ -22,7 +22,7 @@ public class ViewerItem : MonoBehaviour {
     [SerializeField] private Collider collider;
     
     // events
-    public delegate void ShowViewerEvent(Texture img, String txt);
+    public delegate void ShowViewerEvent(Sprite img, String txt);
     public static event ShowViewerEvent OnShowViewer;
 
     void Update() {

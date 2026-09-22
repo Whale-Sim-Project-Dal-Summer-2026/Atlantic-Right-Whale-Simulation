@@ -42,6 +42,9 @@ public class Scrubber : MonoBehaviour {
     [SerializeField] private Button restartBtn;
     [SerializeField] private Button bwdBtn;
     [SerializeField] private Button pausePlayBtn;
+    [SerializeField] private Sprite pauseSprite;
+    [SerializeField] private Sprite playSprite;
+    
     [SerializeField] private Button fwdBtn;
     // speed btns
     [SerializeField] private Button slowerBtn;
@@ -59,8 +62,6 @@ public class Scrubber : MonoBehaviour {
     private String[] speedsLabel = {"0.25", "0.5", "0.75", "1", "1.5", "2", "3", "4", "5"}; 
     private Color pinBtnColor;
     private Image pausePlayBtnImage;
-    private Sprite pauseSprite;
-    private Sprite playSprite;
     
     // states
     private bool paused;
@@ -90,8 +91,13 @@ public class Scrubber : MonoBehaviour {
         // pause/play btn setup
         if (pausePlayBtn) {
             pausePlayBtnImage = pausePlayBtn.GetComponent<Image>();
-            pauseSprite = Resources.Load<Sprite>("UI/Scrubber/play");
-            playSprite = Resources.Load<Sprite>("UI/Scrubber/pause");
+            if (pauseSprite == null) {
+                pauseSprite = pausePlayBtnImage.sprite;
+            }
+
+            if (playSprite == null) {
+                playSprite = pausePlayBtnImage.sprite;
+            }
         }
 
         // get og cam btns
@@ -194,14 +200,20 @@ public class Scrubber : MonoBehaviour {
             OnPlay?.Invoke();
         }
     }
-    public void Pause() { 
-        SetPause(true);
+    public void Pause() {
+        if (pausePlayBtn.interactable) { // TODO: make sure this and next 2 funcs aren't called by anything that can be called even if btns aren't on 
+            SetPause(true);
+        }
     }
-    public void Play() { 
-        SetPause(false);
+    public void Play() {
+        if (pausePlayBtn.interactable) {
+            SetPause(false);
+        }
     }
-    public void TogglePause() { 
-        SetPause(!paused);
+    public void TogglePause() {
+        if (pausePlayBtn.interactable) {
+            SetPause(!paused);
+        }
     }
 
     /**

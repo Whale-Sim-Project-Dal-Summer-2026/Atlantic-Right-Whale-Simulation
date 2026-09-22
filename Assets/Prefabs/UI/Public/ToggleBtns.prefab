@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Toggles
   toggles:
   - btn: {fileID: 5622373730220824561}
-    spriteRsrcPath: UI/Toggles/yesui
+    altSprite: {fileID: 21300000, guid: 79e32de43b876e64b87d0c2bbc3ee8f4, type: 3}
     on: 1
 --- !u!1 &9122529411013426640
 GameObject:

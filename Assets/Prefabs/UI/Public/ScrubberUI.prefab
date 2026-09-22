@@ -59,6 +59,8 @@ MonoBehaviour:
   restartBtn: {fileID: 8281818981384703832}
   bwdBtn: {fileID: 0}
   pausePlayBtn: {fileID: 7582631971824143965}
+  pauseSprite: {fileID: 21300000, guid: dd2db20e16839964c89e5a1321547272, type: 3}
+  playSprite: {fileID: 0}
   fwdBtn: {fileID: 0}
   slowerBtn: {fileID: 0}
   fasterBtn: {fileID: 0}
@@ -1395,13 +1397,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Toggles
   toggles:
   - btn: {fileID: 4670790805416182351}
-    spriteRsrcPath: UI/Scrubber/cam1
+    altSprite: {fileID: 0}
     on: 1
   - btn: {fileID: 510151752244660632}
-    spriteRsrcPath: UI/Scrubber/cam2on
+    altSprite: {fileID: 0}
     on: 0
   - btn: {fileID: 2650635540981374694}
-    spriteRsrcPath: UI/Scrubber/cam3on
+    altSprite: {fileID: 0}
     on: 0
 --- !u!1 &7906591543664402362
 GameObject:

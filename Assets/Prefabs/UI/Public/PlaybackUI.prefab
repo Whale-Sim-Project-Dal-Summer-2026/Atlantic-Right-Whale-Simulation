@@ -86,11 +86,15 @@ MonoBehaviour:
   viewerPopup: {fileID: 3359876880226663978}
   scrubber: {fileID: 3375614894967582622}
   camController: {fileID: 0}
+  whaleConnector: {fileID: 1770328308888451641}
   helpBtn: {fileID: 5746595958871154585}
   closeHelpBtn: {fileID: 4371093943031257054}
   scenariosBtn: {fileID: 5593500238905154061}
   closeViewerBtn: {fileID: 8189969558027484635}
   toggleUIBtn: {fileID: 1589969988245824164}
+  cam1Btn: {fileID: 5896678191015582126}
+  cam2Btn: {fileID: 1589949613655118457}
+  cam3Btn: {fileID: 3876539436451792135}
 --- !u!114 &8800552339287443370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1236,6 +1240,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af894e0831850ea45bbf60cb1083922c, type: 3}
+--- !u!114 &1589949613655118457 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 510151752244660632, guid: af894e0831850ea45bbf60cb1083922c, type: 3}
+  m_PrefabInstance: {fileID: 1226332525429316577}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!4 &2662041592593944824 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3888214335219583769, guid: af894e0831850ea45bbf60cb1083922c, type: 3}
@@ -1252,6 +1267,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42a210e2d67a62342806c0e42e8d92c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scrubber
+--- !u!114 &3876539436451792135 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2650635540981374694, guid: af894e0831850ea45bbf60cb1083922c, type: 3}
+  m_PrefabInstance: {fileID: 1226332525429316577}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+--- !u!114 &5896678191015582126 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4670790805416182351, guid: af894e0831850ea45bbf60cb1083922c, type: 3}
+  m_PrefabInstance: {fileID: 1226332525429316577}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1001 &1346545702136416329
 PrefabInstance:
   m_ObjectHideFlags: 0

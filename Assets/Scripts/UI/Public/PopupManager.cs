@@ -42,7 +42,6 @@ public class PopupManager : MonoBehaviour {
             if (on && scrubber) {
                 scrubber.Pause();
             } else { // pause in free roam
-                print("raaaa");
                 WhaleConnector.PauseWhale();
             }
             if (!on && !scrubber) { // unpause in free roam on popup close

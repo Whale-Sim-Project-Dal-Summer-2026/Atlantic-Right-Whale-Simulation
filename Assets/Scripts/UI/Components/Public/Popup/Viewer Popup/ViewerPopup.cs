@@ -16,7 +16,7 @@ public class ViewerPopup : MonoBehaviour {
     [SerializeField] private Popup viewerPopup;
     // objs for content
     [Header("Content")]
-    [SerializeField] private RawImage viewerImg;
+    [SerializeField] private Image viewerImg;
     [SerializeField] private TextMeshProUGUI viewerTxt;
 
     private void Awake() {
@@ -34,8 +34,8 @@ public class ViewerPopup : MonoBehaviour {
      * @param img - Image to set.
      * @param txt - Text to set.
      */
-    private void ShowViewer(Texture img, String txt) {
-        viewerImg.texture = img;
+    private void ShowViewer(Sprite img, String txt) {
+        viewerImg.sprite = img;
         viewerTxt.text = txt;
         viewerPopup.SetPopupVisibility(true);
     }
