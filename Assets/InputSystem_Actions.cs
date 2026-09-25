@@ -913,8 +913,8 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""beafcc7b-a770-436a-a26d-bc655efdad69"",
-                    ""path"": ""<Gamepad>/start"",
+                    ""id"": ""64ca0228-aff8-4a16-bf42-1a51f39d6a9c"",
+                    ""path"": ""<Gamepad>/select"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
@@ -924,11 +924,11 @@ public partial class @CameraControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""8809714a-c17c-4d98-b848-8e3c70fde57d"",
-                    ""path"": ""<Gamepad>/select"",
+                    ""id"": ""49d3b29a-03b1-43e6-910f-d5654edf8e37"",
+                    ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Gamepad"",
                     ""action"": ""OpenHelp"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
