@@ -10,6 +10,7 @@ using UnityEngine;
 
 public class ToggleItemVisibilityOff : MonoBehaviour {
     void Awake() {
+        // sub
         TogglesManager.OnToggleUI += SetVisibilityOff;
     }
 

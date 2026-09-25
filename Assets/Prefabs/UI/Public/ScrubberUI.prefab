@@ -53,9 +53,14 @@ MonoBehaviour:
   cam1Btn: {fileID: 4670790805416182351}
   cam2Btn: {fileID: 510151752244660632}
   cam3Btn: {fileID: 2650635540981374694}
+  cam1OffSprite: {fileID: 21300000, guid: 9bde7643e84c7c848ae99903ca86479e, type: 3}
+  cam2OnSprite: {fileID: 21300000, guid: 43c200554771a7940bfe6abf4a8af028, type: 3}
+  cam3OnSprite: {fileID: 21300000, guid: ff9410f33ada056499dce8a85269c8cf, type: 3}
   restartBtn: {fileID: 8281818981384703832}
   bwdBtn: {fileID: 0}
   pausePlayBtn: {fileID: 7582631971824143965}
+  pauseSprite: {fileID: 21300000, guid: dd2db20e16839964c89e5a1321547272, type: 3}
+  playSprite: {fileID: 0}
   fwdBtn: {fileID: 0}
   slowerBtn: {fileID: 0}
   fasterBtn: {fileID: 0}
@@ -1308,6 +1313,7 @@ GameObject:
   - component: {fileID: 8694396888250739096}
   - component: {fileID: 8814311372769352977}
   - component: {fileID: 1720255441288130459}
+  - component: {fileID: 7701825370241996797}
   m_Layer: 5
   m_Name: CamBtns
   m_TagString: Untagged
@@ -1377,6 +1383,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
   m_HorizontalFit: 2
   m_VerticalFit: 2
+--- !u!114 &7701825370241996797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6459011948342359263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e853b27373204792a2453c41aa2cdc6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Toggles
+  toggles:
+  - btn: {fileID: 4670790805416182351}
+    altSprite: {fileID: 0}
+    on: 1
+  - btn: {fileID: 510151752244660632}
+    altSprite: {fileID: 0}
+    on: 0
+  - btn: {fileID: 2650635540981374694}
+    altSprite: {fileID: 0}
+    on: 0
 --- !u!1 &7906591543664402362
 GameObject:
   m_ObjectHideFlags: 0
@@ -1444,7 +1472,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9bde7643e84c7c848ae99903ca86479e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6efa08781d924e04d99c76987d2f32b7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -142,15 +142,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Deccelerate",
-                    "type": "Button",
-                    "id": "5c773616-42ae-46e1-8a99-5fd521bede49",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "OpenMouth",
                     "type": "Button",
                     "id": "d3b76fe7-fddd-49fd-8af3-26989b4e755f",
@@ -792,12 +783,12 @@
                 },
                 {
                     "name": "",
-                    "id": "b5e5591e-31de-452e-9994-502d605b7df2",
+                    "id": "a92ebee2-973f-4a72-9df8-aefc5ed0c866",
                     "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
-                    "action": "Deccelerate",
+                    "action": "Accelerate",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -836,8 +827,8 @@
                 },
                 {
                     "name": "",
-                    "id": "beafcc7b-a770-436a-a26d-bc655efdad69",
-                    "path": "<Gamepad>/start",
+                    "id": "64ca0228-aff8-4a16-bf42-1a51f39d6a9c",
+                    "path": "<Gamepad>/select",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
@@ -847,11 +838,11 @@
                 },
                 {
                     "name": "",
-                    "id": "8809714a-c17c-4d98-b848-8e3c70fde57d",
-                    "path": "<Gamepad>/select",
+                    "id": "49d3b29a-03b1-43e6-910f-d5654edf8e37",
+                    "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Gamepad",
                     "action": "OpenHelp",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -919,6 +910,17 @@
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "BackAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "faafde51-6053-40e3-9757-ff07315d4274",
+                    "path": "<Gamepad>/leftStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Reset",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

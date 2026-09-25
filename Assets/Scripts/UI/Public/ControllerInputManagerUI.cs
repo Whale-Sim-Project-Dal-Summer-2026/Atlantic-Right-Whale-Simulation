@@ -25,6 +25,8 @@ public class ControllerInputManagerUI : MonoBehaviour {
     [SerializeField] private Popup viewerPopup;
     [SerializeField] private Scrubber scrubber;
     [SerializeField] private CameraController camController;
+    [SerializeField] private WhaleConnector whaleConnector;
+
     // btns
     [Header("Buttons")] 
     [SerializeField] private Button helpBtn;
@@ -32,6 +34,9 @@ public class ControllerInputManagerUI : MonoBehaviour {
     [SerializeField] private Button scenariosBtn;
     [SerializeField] private Button closeViewerBtn;
     [SerializeField] private Button toggleUIBtn;
+    [SerializeField] private Button cam1Btn;
+    [SerializeField] private Button cam2Btn;
+    [SerializeField] private Button cam3Btn;
 
     // actions for controller input
     // mid btns
@@ -47,9 +52,11 @@ public class ControllerInputManagerUI : MonoBehaviour {
     private InputAction toggleUIInput;
     // sticks
     private InputAction camLockInput;
+    private InputAction resetInput;
+    // top
+    InputAction accelerateInput; 
     
     // vars
-    private double lastPressTime;
     private InputState currState = InputState.ENABLED;
     private CameraState cam = CameraState.ORBIT;
     private bool whaleController;
@@ -73,13 +80,14 @@ public class ControllerInputManagerUI : MonoBehaviour {
         toggleUIInput = InputSystem.actions.FindAction("ToggleUI");
         // sticks
         camLockInput = InputSystem.actions.FindAction("CamLock");
+        resetInput = InputSystem.actions.FindAction("Reset");
+        // top
+        accelerateInput = InputSystem.actions.FindAction("Accelerate"); // TODO: implement feedback
         
         // sub
         CameraController.OnCamSwitch += UpdateCam;
         PopupManager.OnHelpPopup += SetStatePopup;
         TogglesManager.OnToggleUI += SetStateNoUI;
-        
-        lastPressTime = Time.time;
     }
 
     void Update() {
@@ -89,8 +97,6 @@ public class ControllerInputManagerUI : MonoBehaviour {
         }
         
         // process input
-        bool interaction;
-        
         // mid btns
         if (ButtonPressUtil.Pressed(openHelpInput) && currState != InputState.NOUI)  {
             if (helpBtn) {
@@ -127,13 +133,25 @@ public class ControllerInputManagerUI : MonoBehaviour {
         // cross
         // cams
         if (ButtonPressUtil.Pressed(cam1Input) && currState != InputState.POPUP) {
-            camController.changeToCam(1);
+            if (cam1Btn) {
+                cam1Btn.onClick.Invoke();
+            } else {
+                camController.changeToCam(1);
+            }
         }
         if (ButtonPressUtil.Pressed(cam2Input) && !whaleController && currState != InputState.POPUP) { // cam 2 disabled in free roam
-            camController.changeToCam(2);
+            if (cam2Btn) {
+                cam2Btn.onClick.Invoke();
+            } else {
+                camController.changeToCam(2);
+            }
         }
         if (ButtonPressUtil.Pressed(cam3Input) && currState != InputState.POPUP) {
-            camController.changeToCam(3);
+            if (cam3Btn) {
+                cam3Btn.onClick.Invoke();
+            } else {
+                camController.changeToCam(3);
+            }
         }
         // hide ui
         if (ButtonPressUtil.Pressed(toggleUIInput) && currState != InputState.POPUP) {
@@ -151,6 +169,11 @@ public class ControllerInputManagerUI : MonoBehaviour {
             if (cam == CameraState.FREE) {
                 camController.resetFreeCam();
             }
+        }
+        
+        // L stick
+        if (ButtonPressUtil.Pressed(resetInput) && currState != InputState.POPUP) {
+            whaleConnector.Reset();
         }
     }
 

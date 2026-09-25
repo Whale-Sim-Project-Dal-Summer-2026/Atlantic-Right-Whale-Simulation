@@ -295,10 +295,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1309690408596671325, guid: 872f9a361f2c03b42ac50a90ed5481df, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 1456679450263070887, guid: 872f9a361f2c03b42ac50a90ed5481df, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -426,10 +422,6 @@ PrefabInstance:
     - target: {fileID: 2483621184890041015, guid: 872f9a361f2c03b42ac50a90ed5481df, type: 3}
       propertyPath: m_Name
       value: PlaybackUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 2664028390671458319, guid: 872f9a361f2c03b42ac50a90ed5481df, type: 3}
-      propertyPath: sceneSwitcher
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3455109160771043345, guid: 872f9a361f2c03b42ac50a90ed5481df, type: 3}
       propertyPath: m_AnchorMax.y
@@ -598,10 +590,6 @@ PrefabInstance:
     - target: {fileID: 6013902382664675656, guid: 872f9a361f2c03b42ac50a90ed5481df, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6082220511697386684, guid: 872f9a361f2c03b42ac50a90ed5481df, type: 3}
-      propertyPath: whale
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6240547734351770449, guid: 872f9a361f2c03b42ac50a90ed5481df, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1737,6 +1725,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sci_Whale_Model
       objectReference: {fileID: 0}
+    - target: {fileID: 3180083265987640905, guid: c73aa056ceeda714bad75c52d0319a55, type: 3}
+      propertyPath: image
+      value: 
+      objectReference: {fileID: 21300000, guid: aa0676e890382b34dbf6dc19294c2340, type: 3}
     - target: {fileID: 8435254403895013602, guid: c73aa056ceeda714bad75c52d0319a55, type: 3}
       propertyPath: PauseTime
       value: 2500

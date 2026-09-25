@@ -41,6 +41,11 @@ public class PopupManager : MonoBehaviour {
             OnHelpPopup?.Invoke(on);
             if (on && scrubber) {
                 scrubber.Pause();
+            } else { // pause in free roam
+                WhaleConnector.PauseWhale();
+            }
+            if (!on && !scrubber) { // unpause in free roam on popup close
+                WhaleConnector.PlayWhale();
             }
             simUIManager.SetUIInteractivity(!on);
             camController.SetForceLock(on);

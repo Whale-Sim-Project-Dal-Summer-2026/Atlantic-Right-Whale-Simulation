@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6454711327911404320}
   - component: {fileID: 339207957768772415}
-  - component: {fileID: 4726672964631486046}
   m_Layer: 5
   m_Name: ToggleBtns
   m_TagString: Untagged
@@ -48,26 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Toggles
   toggles:
   - btn: {fileID: 5622373730220824561}
-    spriteRsrcPath: UI/Toggles/yesui
+    altSprite: {fileID: 21300000, guid: 79e32de43b876e64b87d0c2bbc3ee8f4, type: 3}
     on: 1
---- !u!114 &4726672964631486046
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 463158284528865238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cea32385d6acf484ebf2397f32dd828f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TogglesManager
-  toggles: {fileID: 339207957768772415}
-  toggleUIBtn: {fileID: 5622373730220824561}
-  toggleDragBtn: {fileID: 0}
-  toggleStressBtn: {fileID: 0}
-  togglePathBtn: {fileID: 0}
-  whaleTrail: {fileID: 0}
 --- !u!1 &9122529411013426640
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,7 +19,7 @@ public class SimulationUIManager : MonoBehaviour {
     public delegate void ToggleInteractivityEvent(bool on);
     public static event ToggleInteractivityEvent OnToggleInteractivity;
 
-    void Start() {
+    void Awake() {
         // sub
         Scrubber.OnCamSwitch += camController.changeToCam;
     }

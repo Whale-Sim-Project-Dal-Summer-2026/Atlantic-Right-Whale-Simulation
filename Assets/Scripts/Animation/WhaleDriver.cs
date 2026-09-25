@@ -234,11 +234,11 @@ public class WhaleDriver : MonoBehaviour
     // if button is pushed then pass the number to load a certain timestep
     updateWhaleState();
 
- 
     currentTimestep ++;
+
    
     // looping parameter
-    if (currentTimestep >= CSV_ResetTimeStep){
+    if (currentTimestep > CSV_ResetTimeStep){ // TODO: make sure removing equal didn't break anything
         currentTimestep = 0;
     }
     

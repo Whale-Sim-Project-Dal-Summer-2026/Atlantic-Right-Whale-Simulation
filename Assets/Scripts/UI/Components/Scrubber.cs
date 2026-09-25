@@ -29,10 +29,22 @@ public class Scrubber : MonoBehaviour {
     [SerializeField] private Button cam1Btn;
     [SerializeField] private Button cam2Btn;
     [SerializeField] private Button cam3Btn;
+    [SerializeField] private Sprite cam1OffSprite;
+    [SerializeField] private Sprite cam2OnSprite;
+    [SerializeField] private Sprite cam3OnSprite;
+    private Sprite cam1OnSprite;
+    private Sprite cam2OffSprite;
+    private Sprite cam3OffSprite;
+    private Image cam1Img;
+    private Image cam2Img;
+    private Image cam3Img;
     // playback btns
     [SerializeField] private Button restartBtn;
     [SerializeField] private Button bwdBtn;
     [SerializeField] private Button pausePlayBtn;
+    [SerializeField] private Sprite pauseSprite;
+    [SerializeField] private Sprite playSprite;
+    
     [SerializeField] private Button fwdBtn;
     // speed btns
     [SerializeField] private Button slowerBtn;
@@ -50,8 +62,6 @@ public class Scrubber : MonoBehaviour {
     private String[] speedsLabel = {"0.25", "0.5", "0.75", "1", "1.5", "2", "3", "4", "5"}; 
     private Color pinBtnColor;
     private Image pausePlayBtnImage;
-    private Sprite pauseSprite;
-    private Sprite playSprite;
     
     // states
     private bool paused;
@@ -81,10 +91,29 @@ public class Scrubber : MonoBehaviour {
         // pause/play btn setup
         if (pausePlayBtn) {
             pausePlayBtnImage = pausePlayBtn.GetComponent<Image>();
-            pauseSprite = Resources.Load<Sprite>("UI/Scrubber/play");
-            playSprite = Resources.Load<Sprite>("UI/Scrubber/pause");
+            if (pauseSprite == null) {
+                pauseSprite = pausePlayBtnImage.sprite;
+            }
+
+            if (playSprite == null) {
+                playSprite = pausePlayBtnImage.sprite;
+            }
         }
-    }
+
+        // get og cam btns
+        if (cam1Btn) {
+            cam1Img = cam1Btn.GetComponent<Image>();
+            cam1OnSprite = cam1Img.sprite;
+        }
+        if (cam2Btn) {
+            cam2Img = cam2Btn.GetComponent<Image>();
+            cam2OffSprite = cam2Img.sprite;
+        }
+        if (cam3Btn) {
+            cam3Img = cam3Btn.GetComponent<Image>();
+            cam3OffSprite = cam3Img.sprite;
+        }
+    } 
     
 
     void Start() {
@@ -101,16 +130,25 @@ public class Scrubber : MonoBehaviour {
         // cams btns
         if (cam1Btn) {
             cam1Btn.onClick.AddListener(() => {
+                cam1Img.sprite = cam1OnSprite;
+                cam2Img.sprite = cam2OffSprite;
+                cam3Img.sprite = cam3OffSprite;
                 OnCamSwitch?.Invoke(1);
             });
         }
         if (cam2Btn) {
             cam2Btn.onClick.AddListener(() => {
+                cam1Img.sprite = cam1OffSprite;
+                cam2Img.sprite = cam2OnSprite;
+                cam3Img.sprite = cam3OffSprite;
                 OnCamSwitch?.Invoke(2);
             });
         }
         if (cam3Btn) {
             cam3Btn.onClick.AddListener(() => {
+                cam1Img.sprite = cam1OffSprite;
+                cam2Img.sprite = cam2OffSprite;
+                cam3Img.sprite = cam3OnSprite;
                 OnCamSwitch?.Invoke(3);
             });
         }
@@ -145,9 +183,6 @@ public class Scrubber : MonoBehaviour {
             }
         }
     }
-    void OnDestroy() {
-        SetPause(false); 
-    }
     
     /**
      * Set pause.
@@ -165,14 +200,20 @@ public class Scrubber : MonoBehaviour {
             OnPlay?.Invoke();
         }
     }
-    public void Pause() { 
-        SetPause(true);
+    public void Pause() {
+        if (pausePlayBtn.interactable) { // TODO: make sure this and next 2 funcs aren't called by anything that can be called even if btns aren't on 
+            SetPause(true);
+        }
     }
-    public void Play() { 
-        SetPause(false);
+    public void Play() {
+        if (pausePlayBtn.interactable) {
+            SetPause(false);
+        }
     }
-    public void TogglePause() { 
-        SetPause(!paused);
+    public void TogglePause() {
+        if (pausePlayBtn.interactable) {
+            SetPause(!paused);
+        }
     }
 
     /**

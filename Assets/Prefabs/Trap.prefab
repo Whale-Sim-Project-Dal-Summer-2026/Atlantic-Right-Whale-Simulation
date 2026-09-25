@@ -334,7 +334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6426e986cb9dfcd4983b61b50081362f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ViewerItem
-  image: {fileID: 2800000, guid: 115d111ed07f479408e6b4f844f5aebe, type: 3}
+  image: {fileID: 21300000, guid: 724acb9983d9c25448cec7e8c679b251, type: 3}
   text: Fish harvester hauling in their wooden lobster trap
   collider: {fileID: 8133857305281644088}
 --- !u!4 &1844429886686013861 stripped

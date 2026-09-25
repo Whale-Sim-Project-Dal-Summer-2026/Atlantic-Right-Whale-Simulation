@@ -19,7 +19,6 @@ public class Popup : MonoBehaviour {
 
     // vars
     private bool open;
-    private bool invoked;
 
     void Awake() {
         // set up btns
@@ -28,18 +27,6 @@ public class Popup : MonoBehaviour {
         }
         for (int x = 0; x < closeBtns.Length; x++) {
             closeBtns[x].onClick.AddListener(() => SetPopupVisibility(false));
-        }
-    }
-
-    void Update() {
-        if (!popupObj.activeSelf && !invoked) { // if popup obj ever deactivated manually should set popup state to closed
-            open = false;
-            OnPopup?.Invoke(false, popupObj);
-            invoked = true;
-        }
-
-        if (popupObj.activeSelf) { // to prevent constant invoking
-            invoked = false;
         }
     }
 

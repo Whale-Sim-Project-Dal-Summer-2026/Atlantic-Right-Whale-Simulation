@@ -10,8 +10,6 @@ using UnityEngine.UI;
 public class TogglesManager : MonoBehaviour {
     // params
     // toggles
-    [Header("Scripts")] 
-    [SerializeField] private Toggles toggles;
     [Header("Toggles")]
     [SerializeField] private Button toggleUIBtn;
     [SerializeField] private Button toggleDragBtn;

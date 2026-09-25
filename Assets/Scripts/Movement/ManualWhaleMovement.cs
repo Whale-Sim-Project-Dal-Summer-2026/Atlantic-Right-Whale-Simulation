@@ -29,7 +29,6 @@ public class ManualWhaleController : MonoBehaviour{
     [SerializeField] ProcessingSettings settings;
     InputAction moveInput;
     InputAction accelerateInput;
-    InputAction deccelerateInput;
     InputAction openMouthInput;
 
     InputAction speedUpAction;
@@ -38,7 +37,6 @@ public class ManualWhaleController : MonoBehaviour{
 
     Vector2 lookDir;
     float accelerateForce;
-    float deccelerateForce;
 
     bool controllerConnected;
 
@@ -63,7 +61,6 @@ public class ManualWhaleController : MonoBehaviour{
        seaLevel = settings.SeaLevel; 
        moveInput = InputSystem.actions.FindAction("Move");
         accelerateInput = InputSystem.actions.FindAction("Accelerate");
-        deccelerateInput = InputSystem.actions.FindAction("Deccelerate");
         openMouthInput = InputSystem.actions.FindAction("OpenMouth");
         speedUpAction = InputSystem.actions.FindAction("SimulationSpeedUp");
 
@@ -94,7 +91,6 @@ public class ManualWhaleController : MonoBehaviour{
 
         lookDir = moveInput?.ReadValue<Vector2>() ?? Vector2.zero;
         accelerateForce = accelerateInput?.ReadValue<float>() ?? 0f;
-        deccelerateForce = deccelerateInput?.ReadValue<float>() ?? 0f;
 
         openMouth = openMouthInput?.ReadValue<float>() ?? 0.0f;
 
@@ -112,11 +108,8 @@ public class ManualWhaleController : MonoBehaviour{
 
     void updateSpeed(){
         float currAcceleartion = Mathf.Lerp(0,maxAcceleration,accelerateForce);
-        float currDecelleration = Mathf.Lerp(0,-maxAcceleration, deccelerateForce);
-
-        float deltaAcceleration = currAcceleartion + currDecelleration;
-
-        speed += deltaAcceleration * Time.deltaTime;
+        
+        speed += currAcceleartion * Time.deltaTime;
 
         speed = Mathf.Clamp(speed, 0, maxSpeed);
 
