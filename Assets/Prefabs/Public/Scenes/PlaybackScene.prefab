@@ -7436,13 +7436,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb4fe45720aa7437bbd501fc4a384d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
-  moveSpeedRef: 25
-  fastSpeedRef: 35
-  sensitivityRef: 1.5
-  orbitTargetRef: {fileID: 175428887609869843}
-  orbitDistanceRef: 20
-  orbitSensitivityRef: 1.5
-  POVTargetRef: {fileID: 2431680912876493395}
+  moveSpeedVal: 25
+  fastSpeedVal: 35
+  sensitivityVal: 1.25
+  targetOrbitVal: {fileID: 175428887609869843}
+  orbitDistanceVal: 20
+  orbitSensitivityVal: 1.25
+  targetPOVVal: {fileID: 2431680912876493395}
 --- !u!114 &3285324576650096068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9378,18 +9378,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6a5e28c9e5e43e4baac1c42313bce41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HelpPopup
-  helpPopup: {fileID: 5619759342736445272}
-  viewerPopup: {fileID: 2126352329122201418}
-  scrubber: {fileID: 1374031275678885881}
-  whaleConnector: {fileID: 4804789183229482207}
-  helpBtn: {fileID: 4113627131342384547}
-  closeHelpBtn: {fileID: 5747770138652395410}
-  scenariosBtn: {fileID: 2101007881721887097}
-  closeViewerBtn: {fileID: 5551703828658769463}
-  toggleUIBtn: {fileID: 713003131304208442}
-  cam1Btn: {fileID: 6356230622057283697}
-  cam2Btn: {fileID: 6320508029750803753}
-  cam3Btn: {fileID: 4908021097331458419}
 --- !u!114 &1391926132883343959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9449,6 +9437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f939a2d75a75471a9ca9f55b3b35a29c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StateManager
+  stateDebugVal: 1
 --- !u!114 &3383366239159214735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9461,20 +9450,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4a955a8be6947738facc3365c65ca48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
-  helpPopupRef: {fileID: 5619759342736445272}
-  viewerPopupRef: {fileID: 2126352329122201418}
-  scrubberRef: {fileID: 1374031275678885881}
-  whaleConnectorRef: {fileID: 4804789183229482207}
-  togglesManagerRef: {fileID: 4335136690849042682}
-  togglesRef: {fileID: 2123412073253285384}
-  helpBtnRef: {fileID: 4113627131342384547}
-  closeHelpBtnRef: {fileID: 4235586074530086181}
-  scenariosBtnRef: {fileID: 2101007881721887097}
-  closeViewerBtnRef: {fileID: 4323481350440906189}
-  toggleUIBtnRef: {fileID: 713003131304208442}
-  cam1BtnRef: {fileID: 6356230622057283697}
-  cam2BtnRef: {fileID: 6320508029750803753}
-  cam3BtnRef: {fileID: 4908021097331458419}
+  helpPopupVal: {fileID: 5619759342736445272}
+  viewerPopupVal: {fileID: 2126352329122201418}
+  scrubberVal: {fileID: 1374031275678885881}
+  whaleConnectorVal: {fileID: 4804789183229482207}
+  togglesManagerVal: {fileID: 4335136690849042682}
+  togglesVal: {fileID: 2123412073253285384}
+  helpBtnVal: {fileID: 4113627131342384547}
+  closeHelpBtnVal: {fileID: 4235586074530086181}
+  scenariosBtnVal: {fileID: 2101007881721887097}
+  closeViewerBtnVal: {fileID: 4323481350440906189}
+  toggleUIBtnVal: {fileID: 713003131304208442}
+  cam1BtnVal: {fileID: 6356230622057283697}
+  cam2BtnVal: {fileID: 6320508029750803753}
+  cam3BtnVal: {fileID: 4908021097331458419}
 --- !u!1 &7512909798413376310
 GameObject:
   m_ObjectHideFlags: 0

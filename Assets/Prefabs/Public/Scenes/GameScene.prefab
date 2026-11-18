@@ -638,6 +638,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f939a2d75a75471a9ca9f55b3b35a29c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StateManager
+  stateDebugVal: 1
 --- !u!114 &1241214576441159650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -650,20 +651,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4a955a8be6947738facc3365c65ca48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
-  helpPopupRef: {fileID: 1079667553052915841}
-  viewerPopupRef: {fileID: 4664211594025926903}
-  scrubberRef: {fileID: 0}
-  whaleConnectorRef: {fileID: 3704829746958961059}
-  togglesManagerRef: {fileID: 1260857296214246091}
-  togglesRef: {fileID: 1956766978426995893}
-  helpBtnRef: {fileID: 543256101825524553}
-  closeHelpBtnRef: {fileID: 979308848457124185}
-  scenariosBtnRef: {fileID: 4310473307311774456}
-  closeViewerBtnRef: {fileID: 6694172607962615630}
-  toggleUIBtnRef: {fileID: 5878431141251041403}
-  cam1BtnRef: {fileID: 0}
-  cam2BtnRef: {fileID: 0}
-  cam3BtnRef: {fileID: 0}
+  helpPopupVal: {fileID: 1079667553052915841}
+  viewerPopupVal: {fileID: 4664211594025926903}
+  scrubberVal: {fileID: 0}
+  whaleConnectorVal: {fileID: 3704829746958961059}
+  togglesManagerVal: {fileID: 1260857296214246091}
+  togglesVal: {fileID: 1956766978426995893}
+  helpBtnVal: {fileID: 543256101825524553}
+  closeHelpBtnVal: {fileID: 979308848457124185}
+  scenariosBtnVal: {fileID: 4310473307311774456}
+  closeViewerBtnVal: {fileID: 6694172607962615630}
+  toggleUIBtnVal: {fileID: 5878431141251041403}
+  cam1BtnVal: {fileID: 0}
+  cam2BtnVal: {fileID: 0}
+  cam3BtnVal: {fileID: 0}
 --- !u!1 &5458330875558375702
 GameObject:
   m_ObjectHideFlags: 0
@@ -817,13 +818,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb4fe45720aa7437bbd501fc4a384d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
-  moveSpeedRef: 25
-  fastSpeedRef: 35
-  sensitivityRef: 1.5
-  orbitTargetRef: {fileID: 3683016643448133876}
-  orbitDistanceRef: 20
-  orbitSensitivityRef: 1.5
-  POVTargetRef: {fileID: 1210513182332683444}
+  moveSpeedVal: 25
+  fastSpeedVal: 35
+  sensitivityVal: 1.25
+  targetOrbitVal: {fileID: 3683016643448133876}
+  orbitDistanceVal: 20
+  orbitSensitivityVal: 1.25
+  targetPOVVal: {fileID: 1210513182332683444}
 --- !u!114 &6165709203531233282
 MonoBehaviour:
   m_ObjectHideFlags: 0

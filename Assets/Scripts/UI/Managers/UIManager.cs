@@ -5,41 +5,42 @@
  */
 
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
     // scripts
     [Header("Scripts")]
-    [SerializeField] private Popup helpPopupRef;
+    [SerializeField] private Popup helpPopupVal;
     private static Popup helpPopup;
-    [SerializeField] private Popup viewerPopupRef;
+    [SerializeField] private Popup viewerPopupVal;
     private static Popup viewerPopup;
-    [SerializeField] private Scrubber scrubberRef;
+    [SerializeField] private Scrubber scrubberVal;
     private static Scrubber scrubber;
-    [SerializeField] private WhaleConnector whaleConnectorRef;
+    [SerializeField] private WhaleConnector whaleConnectorVal;
     private static WhaleConnector whaleConnector;
-    [SerializeField] private TogglesManager togglesManagerRef;
+    [SerializeField] private TogglesManager togglesManagerVal;
     private static TogglesManager togglesManager;
-    [SerializeField] private Toggles togglesRef;
+    [SerializeField] private Toggles togglesVal;
     private static Toggles toggles;
 
     // btns
     [Header("Buttons")] 
-    [SerializeField] private Button helpBtnRef;
+    [SerializeField] private Button helpBtnVal;
     private static Button helpBtn;
-    [SerializeField] private Button closeHelpBtnRef;
+    [SerializeField] private Button closeHelpBtnVal;
     private static Button closeHelpBtn;
-    [SerializeField] private Button scenariosBtnRef;
+    [SerializeField] private Button scenariosBtnVal;
     private static Button scenariosBtn;
-    [SerializeField] private Button closeViewerBtnRef;
+    [SerializeField] private Button closeViewerBtnVal;
     private static Button closeViewerBtn;
-    [SerializeField] private Button toggleUIBtnRef;
+    [SerializeField] private Button toggleUIBtnVal;
     private static Button toggleUIBtn;
-    [SerializeField] private Button cam1BtnRef;
+    [SerializeField] private Button cam1BtnVal;
     private static Button cam1Btn;
-    [SerializeField] private Button cam2BtnRef;
+    [SerializeField] private Button cam2BtnVal;
     private static Button cam2Btn;
-    [SerializeField] private Button cam3BtnRef;
+    [SerializeField] private Button cam3BtnVal;
     private static Button cam3Btn;
 
     // events
@@ -48,20 +49,20 @@ public class UIManager : MonoBehaviour {
     
     void Awake() {
         // transfer editor input to vars
-        helpPopup = helpPopupRef;
-        viewerPopup = viewerPopupRef;
-        scrubber = scrubberRef;
-        whaleConnector = whaleConnectorRef;
-        togglesManager = togglesManagerRef;
-        toggles = togglesRef;
-        helpBtn = helpBtnRef;
-        closeHelpBtn = closeHelpBtnRef;
-        scenariosBtn = scenariosBtnRef;
-        closeViewerBtn = closeViewerBtnRef;
-        toggleUIBtn = toggleUIBtnRef;
-        cam1Btn = cam1BtnRef;
-        cam2Btn = cam2BtnRef;
-        cam3Btn = cam3BtnRef;
+        helpPopup = helpPopupVal;
+        viewerPopup = viewerPopupVal;
+        scrubber = scrubberVal;
+        whaleConnector = whaleConnectorVal;
+        togglesManager = togglesManagerVal;
+        toggles = togglesVal;
+        helpBtn = helpBtnVal;
+        closeHelpBtn = closeHelpBtnVal;
+        scenariosBtn = scenariosBtnVal;
+        closeViewerBtn = closeViewerBtnVal;
+        toggleUIBtn = toggleUIBtnVal;
+        cam1Btn = cam1BtnVal;
+        cam2Btn = cam2BtnVal;
+        cam3Btn = cam3BtnVal;
 
         SetUpScenariosBtn();
     }
@@ -70,10 +71,6 @@ public class UIManager : MonoBehaviour {
         // sub
         IdleUI.OnIdle += IdleMode;
         Scrubber.OnCamSwitch += CameraManager.changeToCam;
-    }
-
-    private void Update() {
-        
     }
 
     private void OnDestroy() {

@@ -5,6 +5,7 @@
  */
 
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public enum StateInput { // TODO: nuke
     ENABLED, // all input valid
@@ -28,14 +29,24 @@ public enum StateIdle {
     OFF
 }
 
+public enum StateDebug {
+    ON,
+    OFF
+}
+
 public class StateManager : MonoBehaviour {
     // states
     private static StateInput stateInput = StateInput.ENABLED;
     private static StateUI stateUI = StateUI.SHOW;
     private static StateHelpPopup stateHelpPopup = StateHelpPopup.HIDE;
     private static StateIdle stateIdle = StateIdle.OFF;
+    [SerializeField] private StateDebug stateDebugVal = StateDebug.OFF;
+    private static StateDebug stateDebug;
     
     void Start() {
+        // transfer editor input to vars
+        stateDebug = stateDebugVal;
+        
         // sub
         PopupManager.OnHelpPopup += SetStatePopup; // TODO: nuke
         PopupManager.OnHelpPopup += SetStateHelpPopup;
@@ -70,12 +81,21 @@ public class StateManager : MonoBehaviour {
     // setters
     public static void SetStateUI(bool on) {
         stateUI = on ? StateUI.SHOW : StateUI.HIDE;
+        if (stateDebug == StateDebug.ON) {
+            print("stateUI set to " + (stateUI == StateUI.SHOW ? "SHOW" : "HIDE"));
+        }
     } 
     public void SetStateIdle(bool on) { 
         stateInput = !on ? StateInput.NOUI : StateInput.ENABLED;
+        if (stateDebug == StateDebug.ON) {
+            print("stateIdle set to " + (stateIdle == StateIdle.ON ? "ON" : "OFF"));
+        }
     }
     public static void SetStateHelpPopup(bool on) {
-        stateUI = on ? StateUI.SHOW : StateUI.HIDE;
+        stateHelpPopup = on ? StateHelpPopup.SHOW : StateHelpPopup.HIDE;
+        if (stateDebug == StateDebug.ON) {
+            print("stateHelpPopup set to " + (stateHelpPopup == StateHelpPopup.SHOW ? "SHOW" : "HIDE"));
+        }
     } 
     
     // getters
@@ -87,5 +107,8 @@ public class StateManager : MonoBehaviour {
     }
     public static StateIdle GetStateIdle() {
         return stateIdle;
+    }
+    public static StateDebug GetStateDebug() {
+        return stateDebug;
     }
 }

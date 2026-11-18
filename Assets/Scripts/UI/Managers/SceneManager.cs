@@ -39,9 +39,7 @@ public class SceneManager : MonoBehaviour
     bool changeScene(string scene)
     {
         if (currScene == scene) return false;
-
-        Debug.LogFormat("curr: {0}\nScene {1}", currScene, scene);
-
+        
         currScene = scene;
         UnityEngine.SceneManagement.SceneManager.LoadScene(scene);
         return true;

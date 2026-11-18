@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public enum StateCamera {
     ORBIT,
@@ -8,27 +9,27 @@ public enum StateCamera {
 
 public class CameraManager : MonoBehaviour{
     [Header("Free Cam")]
-    [SerializeField] private float moveSpeedRef = 25f;
+    [SerializeField] private float moveSpeedVal = 25f;
     private static float moveSpeed;
-    [SerializeField] private float fastSpeedRef = 35f;
+    [SerializeField] private float fastSpeedVal = 35f;
     private static float fastSpeed;
-    [SerializeField] private float sensitivityRef = 1.5f;
+    [SerializeField] private float sensitivityVal = 1.25f;
     private static float sensitivity;
 
 
     [Header("Orbit")]
-    [SerializeField] private Transform orbitTargetRef;
-    private static Transform orbitTarget;
+    [SerializeField] private Transform targetOrbitVal;
+    private static Transform targetOrbit;
 
-    [SerializeField] private float orbitDistanceRef = 20f;
+    [SerializeField] private float orbitDistanceVal = 20f;
     private static float orbitDistance;
 
-    [SerializeField] private float orbitSensitivityRef = 1.5f;
+    [SerializeField] private float orbitSensitivityVal = 1.25f;
     private static float orbitSensitivity;
 
     [Header("POV")]
-    [SerializeField] private GameObject POVTargetRef;
-    private static GameObject POVTarget;
+    [SerializeField] private GameObject targetPOVVal;
+    private static GameObject targetPOV;
 
     // input
     Vector2 moveInput;
@@ -51,13 +52,13 @@ public class CameraManager : MonoBehaviour{
 
     private void Awake() {
         // transfer editor input to vars
-        moveSpeed = moveSpeedRef;
-        fastSpeed = fastSpeedRef;
-        sensitivity = sensitivityRef;
-        orbitTarget = orbitTargetRef;
-        orbitDistance = orbitDistanceRef;
-        orbitSensitivity = orbitSensitivityRef;
-        POVTarget = POVTargetRef;
+        moveSpeed = moveSpeedVal;
+        fastSpeed = fastSpeedVal;
+        sensitivity = sensitivityVal;
+        targetOrbit = targetOrbitVal;
+        orbitDistance = orbitDistanceVal;
+        orbitSensitivity = orbitSensitivityVal;
+        targetPOV = targetPOVVal;
     }
 
     void Start(){
@@ -122,8 +123,8 @@ public class CameraManager : MonoBehaviour{
 
 
     private void UpdatePOVCam() {
-        transform.position = POVTarget.transform.position;
-        transform.rotation = Quaternion.LookRotation(POVTarget.transform.parent.rotation * Vector3.forward);
+        transform.position = targetPOV.transform.position;
+        transform.rotation = Quaternion.LookRotation(targetPOV.transform.parent.rotation * Vector3.forward);
     }
 
     private void UpdateFreeCam(){
@@ -143,7 +144,7 @@ public class CameraManager : MonoBehaviour{
     
     private void UpdateOrbit(){
         // If no target, do nothing
-        if (orbitTarget == null) return;
+        if (targetOrbit == null) return;
 
         // rotate with look input around the target
 
@@ -163,7 +164,7 @@ public class CameraManager : MonoBehaviour{
 
         Quaternion rot = Quaternion.Euler(pitch, yaw, 0f);
 
-        transform.position = orbitTarget.position - rot * Vector3.forward * orbitDistance;
+        transform.position = targetOrbit.position - rot * Vector3.forward * orbitDistance;
         
         if(rotationLocked) return;
         
