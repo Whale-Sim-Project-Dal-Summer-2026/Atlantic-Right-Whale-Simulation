@@ -11,19 +11,25 @@ public class IdleUI : MonoBehaviour {
     // params
     // idle mode params
     [Header("Idle Mode Parameters")]
-    [SerializeField] private GameObject idleUI;
-    [SerializeField] private float idleTime;
+    [SerializeField] private GameObject idleUIVal;
+    private static GameObject idleUI;
+    [SerializeField] private float idleTimeVal = 300;
+    private static float idleTime;
     
     // events
     public delegate void IdleEvent(bool on);
     public static event IdleEvent OnIdle;
     
     // vars
-    private float lastInput;
-    private double lastMouseInput;
-    private bool isIdle;
+    private static float lastInput;
+    private static double lastMouseInput;
+    private static bool isIdle;
     
     void Awake() {
+        // transfer editor input to vars
+        idleUI = idleUIVal;
+        idleTime = idleTimeVal;
+        
         lastInput = Time.unscaledTime;
         lastMouseInput = Mouse.current.lastUpdateTime;
     }
@@ -55,7 +61,7 @@ public class IdleUI : MonoBehaviour {
      * Check whether idle mode is on.
      * @return Whether the idle mode is on.
      */
-    private bool IsIdle(){
+    private static bool IsIdle(){
         return (Time.unscaledTime - lastInput) > idleTime;
     }
 
@@ -63,7 +69,8 @@ public class IdleUI : MonoBehaviour {
      * Enter idle mode by displaying the UI and invoking an event.
      * @param on - Whether idle mode is on or off.
      */
-    private void IdleMode(bool on) {
+    public static void IdleMode(bool on) {
+        isIdle = on;
         idleUI.SetActive(on);
         OnIdle?.Invoke(on);
     }

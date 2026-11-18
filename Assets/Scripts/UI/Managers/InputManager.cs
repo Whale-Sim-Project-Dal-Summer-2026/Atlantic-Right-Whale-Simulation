@@ -46,11 +46,11 @@ public class InputManager : MonoBehaviour {
     private static bool inputSpeedUp;
     
     // vars
-    private static StateInput input;
     private static StateCamera cam;
     private static StateUI ui;
     private static StateIdle idle;
     private static StateMode mode;
+    private static StateHelpPopup helpPopup;
 
     void Start() {
         // set up actions
@@ -77,14 +77,14 @@ public class InputManager : MonoBehaviour {
     void Update() {
         // fetch states
         cam = CameraManager.GetStateCamera();
-        input = StateManager.GetStateInput();
         ui = StateManager.GetStateUI();
         idle = StateManager.GetStateIdle();
+        helpPopup = StateManager.GetStateHelpPopup();
         
-        if (ButtonPressUtil.Pressed(actionOpenHelp) && input != StateInput.NOUI)  {
+        if (ButtonPressUtil.Pressed(actionOpenHelp))  {
             UIManager.OnHelp();
         }
-        if (ButtonPressUtil.Pressed(actionOpenMenu) && input != StateInput.POPUP && input != StateInput.NOUI) {
+        if (ButtonPressUtil.Pressed(actionOpenMenu)) {
             UIManager.OnScenarios();
         }
         
@@ -92,40 +92,58 @@ public class InputManager : MonoBehaviour {
             UIManager.OnBack();
         }
         
-        // TODO: refactor whaleController to SceneManager.mode
-        if (ButtonPressUtil.Pressed(actionPause) && mode != StateMode.FREESWIM && input != StateInput.POPUP)  { // paused disabled in free roam
+        if (ButtonPressUtil.Pressed(actionPause) && mode != StateMode.FREESWIM && helpPopup == StateHelpPopup.HIDE)  { // paused disabled in free swim
             UIManager.OnTogglePause();
         }
         
-        if (ButtonPressUtil.Pressed(actionCam1) && input != StateInput.POPUP) {
+        if (ButtonPressUtil.Pressed(actionCam1) && helpPopup == StateHelpPopup.HIDE) {
             UIManager.OnCameraStateChange(StateCamera.ORBIT);
         }
-        if (ButtonPressUtil.Pressed(actionCam2) && mode != StateMode.FREESWIM && input != StateInput.POPUP) { // cam 2 disabled in free roam
+        if (ButtonPressUtil.Pressed(actionCam2) && mode != StateMode.FREESWIM && helpPopup == StateHelpPopup.HIDE) { // cam 2 disabled in free swim
             UIManager.OnCameraStateChange(StateCamera.FREE);
         }
-        if (ButtonPressUtil.Pressed(actionCam3) && input != StateInput.POPUP) {
+        if (ButtonPressUtil.Pressed(actionCam3) && helpPopup == StateHelpPopup.HIDE) {
             UIManager.OnCameraStateChange(StateCamera.POV);
         }
         
-        if (ButtonPressUtil.Pressed(actionToggleUI) && input != StateInput.POPUP) {
-            UIManager.OnToggleUI(!(StateManager.GetStateUI() == StateUI.SHOW));
+        if (ButtonPressUtil.Pressed(actionToggleUI) && helpPopup == StateHelpPopup.HIDE) {
+            UIManager.OnToggleUI(!(ui == StateUI.SHOW));
         }
        
-        if (ButtonPressUtil.Pressed(actionCamLock) && mode != StateMode.FREESWIM && (cam == StateCamera.ORBIT || cam == StateCamera.FREE) && input != StateInput.POPUP) { // rot lock in cam 1
+        if (ButtonPressUtil.Pressed(actionCamLock) && mode != StateMode.FREESWIM && (cam == StateCamera.ORBIT || cam == StateCamera.FREE) && helpPopup == StateHelpPopup.HIDE) { // rot lock in cam 1
             UIManager.OnCamLock();
         }
         
-        if (ButtonPressUtil.Pressed(actionReset) && input != StateInput.POPUP) {
+        if (ButtonPressUtil.Pressed(actionReset) && helpPopup == StateHelpPopup.HIDE) {
             UIManager.OnReset();
         }
         
-        // TODO
-        inputMove = actionMove?.ReadValue<Vector2>() ?? Vector2.zero;
-        inputLook = actionLook?.ReadValue<Vector2>() ?? Vector2.zero;
-        inputUpDown = actionUpDown?.ReadValue<Vector2>() ?? Vector2.zero;
-        inputAccelerate = actionAccelerate?.ReadValue<float>() ?? 0f;
+        inputMove = Vector2.zero;
+        if (helpPopup == StateHelpPopup.HIDE) {
+            inputMove = actionMove?.ReadValue<Vector2>() ?? Vector2.zero;
+        }
+
+        inputLook = Vector2.zero;
+        if (helpPopup == StateHelpPopup.HIDE) {
+            inputLook = actionLook?.ReadValue<Vector2>() ?? Vector2.zero;
+        }
+
+        inputUpDown = Vector2.zero;
+        if (helpPopup == StateHelpPopup.HIDE) {
+            inputUpDown = actionUpDown?.ReadValue<Vector2>() ?? Vector2.zero;
+        }
+
+        inputAccelerate = 0.0f;
+        if (helpPopup == StateHelpPopup.HIDE) {
+            inputAccelerate = actionAccelerate?.ReadValue<float>() ?? 0.0f;
+        }
+
+        inputOpenMouth = 0.0f;
+        if (helpPopup == StateHelpPopup.HIDE) {
+            inputOpenMouth = actionOpenMouth?.ReadValue<float>() ?? 0.0f;
+        }
+
         inputSpeedUp = ButtonPressUtil.Pressed(actionSpeedUp); // TODO
-        inputOpenMouth = actionOpenMouth?.ReadValue<float>() ?? 0.0f;
     }
     
     // getters

@@ -19,13 +19,13 @@ public class ToggleItemInteractivity : MonoBehaviour {
         
         // add func to events
         UIManager.OnToggleInteractivity += SetInteractivity;
-        TogglesManager.OnToggleUI += SetColliderInteractivity;
+        UIManager.OnToggleInteractivity += SetColliderInteractivity;
     }
 
     private void OnDestroy() {
         // unsub
         UIManager.OnToggleInteractivity -= SetInteractivity;
-        TogglesManager.OnToggleUI -= SetColliderInteractivity;
+        UIManager.OnToggleInteractivity -= SetColliderInteractivity;
     }
 
     /**

@@ -7,13 +7,6 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public enum StateInput { // TODO: nuke
-    ENABLED, // all input valid
-    POPUP, // input disabled except back btn + popup btn
-    NOUI, // input disabled except toggle UI btn
-    IDLE // some input disabled
-}
-
 public enum StateUI {
     SHOW,
     HIDE
@@ -34,48 +27,35 @@ public enum StateDebug {
     OFF
 }
 
+public enum StateTutorial {
+    YES,
+    NO
+}
+
 public class StateManager : MonoBehaviour {
     // states
-    private static StateInput stateInput = StateInput.ENABLED;
     private static StateUI stateUI = StateUI.SHOW;
     private static StateHelpPopup stateHelpPopup = StateHelpPopup.HIDE;
     private static StateIdle stateIdle = StateIdle.OFF;
     [SerializeField] private StateDebug stateDebugVal = StateDebug.OFF;
     private static StateDebug stateDebug;
+    private static StateTutorial stateTutorial = StateTutorial.NO;
     
     void Start() {
         // transfer editor input to vars
         stateDebug = stateDebugVal;
         
         // sub
-        PopupManager.OnHelpPopup += SetStatePopup; // TODO: nuke
         PopupManager.OnHelpPopup += SetStateHelpPopup;
-        TogglesManager.OnToggleUI += SetStateNoUI; // TODO: nuke
         TogglesManager.OnToggleUI += SetStateUI;
-        IdleUI.OnIdle += SetStateIdle;
+        TutorialDisplay.OnTutorial += SetStateTutorial;
     }
     
     private void OnDestroy() {
         // unsub
-        PopupManager.OnHelpPopup -= SetStatePopup;
-        TogglesManager.OnToggleUI -= SetStateNoUI;
+        PopupManager.OnHelpPopup -= SetStateHelpPopup;
         TogglesManager.OnToggleUI -= SetStateUI;
-    }
-    
-    /**
-     * Sets the current state to InputState.NOUI.
-     * @param on - Whether the state should be in the no UI state or not.
-     */
-    private void SetStateNoUI(bool on) { // TODO: nuke
-        stateInput = !on ? StateInput.NOUI : StateInput.ENABLED;
-    }
-    
-    /**
-     * Sets the current state to InputState.POPUP.
-     * @param on - Whether the state should be in the popup state or not.
-     */
-    private void SetStatePopup(bool on) { // TODO: nuke
-        stateInput = on ? StateInput.POPUP : StateInput.ENABLED;
+        TutorialDisplay.OnTutorial -= SetStateTutorial;
     }
     
     // setters
@@ -85,8 +65,8 @@ public class StateManager : MonoBehaviour {
             print("stateUI set to " + (stateUI == StateUI.SHOW ? "SHOW" : "HIDE"));
         }
     } 
-    public void SetStateIdle(bool on) { 
-        stateInput = !on ? StateInput.NOUI : StateInput.ENABLED;
+    public static void SetStateIdle(bool on) { 
+        stateIdle = on ? StateIdle.ON : StateIdle.OFF;
         if (stateDebug == StateDebug.ON) {
             print("stateIdle set to " + (stateIdle == StateIdle.ON ? "ON" : "OFF"));
         }
@@ -98,17 +78,27 @@ public class StateManager : MonoBehaviour {
         }
     } 
     
+    public static void SetStateTutorial(bool on) {
+        stateTutorial = on ? StateTutorial.YES : StateTutorial.NO;
+        if (stateDebug == StateDebug.ON) {
+            print("stateTutorial set to " + (stateTutorial == StateTutorial.YES ? "YES" : "NO"));
+        }
+    } 
+    
     // getters
-    public static StateInput GetStateInput() { // TODO: nuke
-        return stateInput;
-    }
     public static StateUI GetStateUI() {
         return stateUI;
     }
     public static StateIdle GetStateIdle() {
         return stateIdle;
     }
+    public static StateHelpPopup GetStateHelpPopup() {
+        return stateHelpPopup;
+    }
     public static StateDebug GetStateDebug() {
         return stateDebug;
+    }
+    public static StateTutorial GetStateTutorial() {
+        return stateTutorial;
     }
 }

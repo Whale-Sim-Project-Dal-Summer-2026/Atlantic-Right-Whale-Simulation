@@ -29,7 +29,6 @@ public class TogglesManager : MonoBehaviour {
     private RectTransform toggleUIRect;
     private Vector3 ogToggleUIPos;
     private Vector3 newToggleUIPos;
-    private bool isUIOn = true;
 
     void Awake() {
         // get init pos
@@ -73,17 +72,8 @@ public class TogglesManager : MonoBehaviour {
      * @param on - Whether the UI should be visible or not.
      */
     private void SetUIVisibility(bool on) {
-        isUIOn = on;
         toggleUIRect.transform.localPosition = on ? ogToggleUIPos : newToggleUIPos;
         OnToggleUI?.Invoke(on);
-    }
-
-    /**
-     * Check whether the UI is visible
-     * @return Whether the UI is visible.
-     */
-    public bool IsUIVisible() {
-        return isUIOn;
     }
     
     /**

@@ -11,8 +11,8 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour {
     // scripts
     [Header("Scripts")]
-    [SerializeField] private Popup helpPopupVal;
-    private static Popup helpPopup;
+    [SerializeField] private Popup helpPopupVal; // TODO: nuke?
+    private static Popup helpPopup; // TODO: nuke?
     [SerializeField] private Popup viewerPopupVal;
     private static Popup viewerPopup;
     [SerializeField] private Scrubber scrubberVal;
@@ -84,7 +84,20 @@ public class UIManager : MonoBehaviour {
      * @param on - Whether idle mode is on or off.
      */
     private void IdleMode(bool on) {
-        if (toggleUIBtn && togglesManager.IsUIVisible() == on) {
+        if (StateManager.GetStateTutorial() == StateTutorial.YES) { // no idle in tut
+            if (on) {
+                IdleUI.IdleMode(false);
+            }
+            return; 
+        }
+
+        StateManager.SetStateIdle(on);
+
+        if (StateManager.GetStateHelpPopup() == StateHelpPopup.SHOW) {
+            OnHelp();
+        }
+        
+        if (toggleUIBtn && ((StateManager.GetStateUI() == StateUI.SHOW && on) || (StateManager.GetStateUI() == StateUI.HIDE && !on))) {
             toggleUIBtn.onClick.Invoke();
         }
 
@@ -96,6 +109,8 @@ public class UIManager : MonoBehaviour {
                 scrubber.SetEndOfPlaybackBehaviour(EndOfPlaybackBehaviour.Pause);
             }
             scrubber.gameObject.SetActive(!on);
+        } else {
+            WhaleConnector.PlayWhale();
         }
         
         toggleUIBtn.gameObject.SetActive(!on);
@@ -179,12 +194,12 @@ public class UIManager : MonoBehaviour {
     }
 
     public static void OnBack() {
-        if (StateManager.GetStateInput() != StateInput.POPUP && viewerPopup.IsOpen()) {
+        if (StateManager.GetStateHelpPopup() == StateHelpPopup.HIDE && viewerPopup.IsOpen()) {
             if (closeViewerBtn) {
                 closeViewerBtn.onClick.Invoke();
             }
         }
-        if (helpPopup.IsOpen()) {
+        if (StateManager.GetStateHelpPopup() == StateHelpPopup.SHOW) {
             if (closeHelpBtn) {
                 closeHelpBtn.onClick.Invoke();
             }

@@ -43,6 +43,7 @@ public class PopupManager : MonoBehaviour {
             if (!on && !scrubber) { // unpause in free roam on popup close
                 WhaleConnector.PlayWhale();
             }
+
             UIManager.SetUIInteractivity(!on);
         }
     }

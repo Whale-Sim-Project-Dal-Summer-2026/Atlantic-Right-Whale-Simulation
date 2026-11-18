@@ -36,7 +36,7 @@ public class WhaleConnector : MonoBehaviour {
         Scrubber.OnPlay += PlayWhale;
     }
 
-    void FixedUpdate() {
+    void Update() {
         UpdateTelemetry();
         UpdateTime();
         
@@ -48,11 +48,7 @@ public class WhaleConnector : MonoBehaviour {
         
         if (scrubber) {
             scrubber.UpdateTimelineProgress(percent);
-        } else {
-            if (percent >= 100) {
-                Reset();
-            }
-        }
+        } 
     }
 
     private void OnDestroy() {
