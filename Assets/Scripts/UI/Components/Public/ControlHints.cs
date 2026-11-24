@@ -25,7 +25,7 @@ public class ControlHints : MonoBehaviour {
     
     void Awake() {
         // add to event
-        CameraController.OnCamSwitch += UpdateControlHints;
+        CameraManager.OnCamSwitch += UpdateControlHints;
         
         // set up unstick btn
         if (unstickBtn) {
@@ -35,7 +35,7 @@ public class ControlHints : MonoBehaviour {
 
     private void OnDestroy() {
         // unsub
-        CameraController.OnCamSwitch -= UpdateControlHints;
+        CameraManager.OnCamSwitch -= UpdateControlHints;
     }
 
     /**

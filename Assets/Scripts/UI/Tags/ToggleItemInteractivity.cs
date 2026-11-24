@@ -18,14 +18,14 @@ public class ToggleItemInteractivity : MonoBehaviour {
         collider = GetComponent<Collider>();
         
         // add func to events
-        SimulationUIManager.OnToggleInteractivity += SetInteractivity;
-        TogglesManager.OnToggleUI += SetColliderInteractivity;
+        UIManager.OnToggleInteractivity += SetInteractivity;
+        UIManager.OnToggleInteractivity += SetColliderInteractivity;
     }
 
     private void OnDestroy() {
         // unsub
-        SimulationUIManager.OnToggleInteractivity -= SetInteractivity;
-        TogglesManager.OnToggleUI -= SetColliderInteractivity;
+        UIManager.OnToggleInteractivity -= SetInteractivity;
+        UIManager.OnToggleInteractivity -= SetColliderInteractivity;
     }
 
     /**

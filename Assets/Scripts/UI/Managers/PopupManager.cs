@@ -4,18 +4,14 @@
  * @author Mars Semenova
  */
 
-using System;
 using UnityEngine;
 
 public class PopupManager : MonoBehaviour {
     // params
     // help popup params
-    [Header("Help Popup Parameters")]
+    [Header("Help Popup Dependencies")]
     [SerializeField] private GameObject helpPopup;
     [SerializeField] private Scrubber scrubber;
-    [SerializeField] private SimulationUIManager simUIManager;
-    [SerializeField] private CameraController camController;
-    [SerializeField] private ManualWhaleController whaleController;
     
     // events
     public delegate void HelpPopupEvent(bool on); 
@@ -47,11 +43,8 @@ public class PopupManager : MonoBehaviour {
             if (!on && !scrubber) { // unpause in free roam on popup close
                 WhaleConnector.PlayWhale();
             }
-            simUIManager.SetUIInteractivity(!on);
-            camController.SetForceLock(on);
-            if (whaleController) {
-                whaleController.SetControlsStatus(!on);
-            } 
+
+            UIManager.SetUIInteractivity(!on);
         }
     }
 }

@@ -1,10 +1,4 @@
-using System;
-using AGXUnity.Utils;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.TextCore;
-
-
 
 public class ManualWhaleController : MonoBehaviour{
     
@@ -27,23 +21,11 @@ public class ManualWhaleController : MonoBehaviour{
     [SerializeField] AGXUnity.RigidBody rb;
     [SerializeField] GameObject WhaleEnd;
     [SerializeField] ProcessingSettings settings;
-    InputAction moveInput;
-    InputAction accelerateInput;
-    InputAction openMouthInput;
-
-    InputAction speedUpAction;
-
-
-
+    
     Vector2 lookDir;
     float accelerateForce;
-
-    bool controllerConnected;
-
     bool speedUpPressed;
-
     float currSpeedUp;
-
     float speedAcceleration;
     agx.Vec3 whaleStartPos;
     float timeOutOfWater = 0.0f;
@@ -53,19 +35,8 @@ public class ManualWhaleController : MonoBehaviour{
 
     private bool controlsEnabled = true;
 
-    void Awake(){
-        
-    }
-
     void Start() {
        seaLevel = settings.SeaLevel; 
-       moveInput = InputSystem.actions.FindAction("Move");
-        accelerateInput = InputSystem.actions.FindAction("Accelerate");
-        openMouthInput = InputSystem.actions.FindAction("OpenMouth");
-        speedUpAction = InputSystem.actions.FindAction("SimulationSpeedUp");
-
-        controllerConnected = Gamepad.current != null;
-
         whaleInput.rb = rb.GetInitialized<AGXUnity.RigidBody>();
         whaleStartPos = rb.Native.getPosition();
         speedAcceleration = 1f;
@@ -87,14 +58,10 @@ public class ManualWhaleController : MonoBehaviour{
 
 
     void readInputs(){
-        if(!controllerConnected) return;
-
-        lookDir = moveInput?.ReadValue<Vector2>() ?? Vector2.zero;
-        accelerateForce = accelerateInput?.ReadValue<float>() ?? 0f;
-
-        openMouth = openMouthInput?.ReadValue<float>() ?? 0.0f;
-
-        speedUpPressed = (speedUpAction?.ReadValue<float>() ?? 0.0f) == 1.0f; 
+        lookDir = InputManager.GetInputMove();
+        accelerateForce = InputManager.GetInputAccelerate();
+        openMouth = InputManager.GetInputOpenMouth();
+        speedUpPressed = false; 
     }
 
     float calculateSpeedUp(){

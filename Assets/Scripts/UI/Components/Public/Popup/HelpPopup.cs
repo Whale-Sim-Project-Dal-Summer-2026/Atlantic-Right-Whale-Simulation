@@ -33,13 +33,13 @@ public class HelpPopup : MonoBehaviour {
         followCamControls = controlsHelp.sprite;
         followCamHelp = helpText.text;
         
-        // add to event
-        CameraController.OnCamSwitch += UpdateControlsHelp;
+        // sub
+        CameraManager.OnCamSwitch += UpdateControlsHelp;
     }
 
     private void OnDestroy() {
         // unsub
-        CameraController.OnCamSwitch -= UpdateControlsHelp;
+        CameraManager.OnCamSwitch -= UpdateControlsHelp;
     }
 
     /**

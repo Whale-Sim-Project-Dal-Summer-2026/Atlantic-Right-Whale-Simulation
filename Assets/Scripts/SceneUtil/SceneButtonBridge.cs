@@ -3,26 +3,26 @@ using UnityEngine;
 public class SceneButtonBridge : MonoBehaviour
 {
     public void ClickNoGear() {
-        if (SceneSwitcher.Instance != null) {
-            SceneSwitcher.Instance.changeToNoGear();
+        if (SceneManager.Instance != null) {
+            SceneManager.Instance.changeToNoGear();
         }
     }
 
     public void ClickNoEntangle() {
-        if (SceneSwitcher.Instance != null) {
-            SceneSwitcher.Instance.changeToNoEntangle();
+        if (SceneManager.Instance != null) {
+            SceneManager.Instance.changeToNoEntangle();
         }
     }
 
     public void ClickEntangle() {
-        if (SceneSwitcher.Instance != null) {
-            SceneSwitcher.Instance.changeToEntangle();
+        if (SceneManager.Instance != null) {
+            SceneManager.Instance.changeToEntangle();
         }
     }
 
     public void ClickFreeSwim() {
-        if (SceneSwitcher.Instance != null) {
-            SceneSwitcher.Instance.changeToFreeSwim();
+        if (SceneManager.Instance != null) {
+            SceneManager.Instance.changeToFreeSwim();
         }
     }
 }

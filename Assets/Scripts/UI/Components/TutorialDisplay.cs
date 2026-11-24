@@ -21,6 +21,11 @@ public class TutorialDisplay : MonoBehaviour {
     private Button toggleUIBtn;
     private double lastMouseInput;
     private bool firstInput = false;
+    private bool tutLoaded = false;
+    
+    // events
+    public delegate void TutorialEvent(bool on);
+    public static event TutorialEvent OnTutorial;
     
     void Awake() {
         // get ref
@@ -32,11 +37,12 @@ public class TutorialDisplay : MonoBehaviour {
         lastMouseInput = Mouse.current.lastUpdateTime;
     }
 
-    void Start() {
-        ShowTutorial(true);
-    }
-
     private void Update() {
+        if (!tutLoaded) { // needed for invoke to work
+            ShowTutorial(true);
+            tutLoaded = true;
+        }
+        
         bool keyboardPress = Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame; // TODO: dupe code from idle mode, make a util func or smth
         bool controllerPress = Gamepad.current != null && Gamepad.current.wasUpdatedThisFrame;
         bool mouseInput = Mouse.current != null && Mouse.current.lastUpdateTime != lastMouseInput;
@@ -66,8 +72,7 @@ public class TutorialDisplay : MonoBehaviour {
                 scrubber.Play();
             }
             scrubber.gameObject.SetActive(!on);
-        }
-        else {
+        } else {
             if (on) {
                 WhaleConnector.PauseWhale();
             } else {
@@ -80,5 +85,7 @@ public class TutorialDisplay : MonoBehaviour {
         if (!on) {
            gameObject.SetActive(false);
         }
+        
+        OnTutorial?.Invoke(on);
     }
 }

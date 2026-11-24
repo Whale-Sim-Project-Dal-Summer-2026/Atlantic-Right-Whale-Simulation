@@ -531,16 +531,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Toggles
   toggles:
   - btn: {fileID: 1539156462864161650}
-    spriteRsrcPath: UI/Toggles/yesui
+    altSprite: {fileID: 0}
     on: 1
   - btn: {fileID: 2307528017884967321}
-    spriteRsrcPath: UI/Toggles/yesdrag
+    altSprite: {fileID: 0}
     on: 1
   - btn: {fileID: 2104779639293488797}
-    spriteRsrcPath: UI/Toggles/yesstress
+    altSprite: {fileID: 0}
     on: 1
   - btn: {fileID: 3133736925359506874}
-    spriteRsrcPath: UI/Toggles/yespath
+    altSprite: {fileID: 0}
     on: 1
 --- !u!114 &5763751431580151563
 MonoBehaviour:
@@ -554,7 +554,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cea32385d6acf484ebf2397f32dd828f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TogglesManager
-  toggles: {fileID: 7895986199699705847}
   toggleUIBtn: {fileID: 1539156462864161650}
   toggleDragBtn: {fileID: 2307528017884967321}
   toggleStressBtn: {fileID: 2104779639293488797}
